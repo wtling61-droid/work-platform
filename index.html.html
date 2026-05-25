@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>威廷工作平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --bg:          #F4F3EF;
+  --surface:     #FFFFFF;
+  --surface-2:   #EFEDE7;
+  --border:      #E0DDD5;
+  --border-s:    #C5C2B8;
+  --t1:          #1A1A17;
+  --t2:          #5A5854;
+  --t3:          #9A9890;
+  --g1:          #2A5218;
+  --g2:          #3A7022;
+  --g3:          #5A9A1A;
+  --g4:          #B8E080;
+  --g5:          #E8F5D4;
+  --a1:          #6E4008;
+  --a3:          #D4840A;
+  --a5:          #FEF0D8;
+  --b1:          #083870;
+  --b3:          #1870CC;
+  --b5:          #E0EFFF;
+  --p1:          #3A2890;
+  --p3:          #6A52D0;
+  --p5:          #EEEAFF;
+  --r1:          #701818;
+  --r3:          #D43030;
+  --r5:          #FFE4E4;
+  --sw:          196px;
+  --pw:          252px;
+  --hh:          50px;
+  --sh:          42px;
+  --rad:         10px;
+  --rad-s:       6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;min-height:100vh}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:var(--sw) 1fr var(--pw);grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
+
+/* ── HEADER ── */
+.hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--t1);text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--g3);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+.hdr-date{font-size:12px;color:var(--t3);margin-left:auto}
+.hdr-user{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t2);margin-left:12px}
+.av{width:28px;height:28px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--g1)}
+
+/* ── STATS BAR ── */
+.stats{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw) + 18px);gap:0;overflow-x:auto}
+.st{display:flex;align-items:center;gap:8px;padding:0 18px 0 0;margin-right:18px;border-right:1px solid var(--border);white-space:nowrap}
+.st:last-child{border-right:none}
+.st-n{font-size:20px;font-weight:600;color:var(--t1);line-height:1}
+.st-info{display:flex;flex-direction:column;gap:2px}
+.st-l{font-size:11px;color:var(--t3)}
+.tag{font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;display:inline-block}
+.tag-warn{background:var(--a5);color:var(--a1)}
+.tag-ok{background:var(--g5);color:var(--g1)}
+.tag-urg{background:var(--r5);color:var(--r1)}
+
+/* ── SIDEBAR ── */
+.nav{grid-row:3;background:var(--surface);border-right:1px solid var(--border);padding:14px 0;position:sticky;top:calc(var(--hh) + var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow-y:auto}
+.nav-sec{padding:0 10px;margin-bottom:2px}
+.nav-lbl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);padding:5px 8px 3px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left}
+.ni:hover{background:var(--surface-2);color:var(--t1)}
+.ni.on{background:var(--g5);color:var(--g1);font-weight:500}
+.ni i{font-size:16px;width:17px;flex-shrink:0}
+.ni-badge{margin-left:auto;background:var(--r3);color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.ndiv{height:1px;background:var(--border);margin:7px 10px}
+
+/* ── MAIN ── */
+.main{grid-row:3;padding:18px;overflow-y:auto;height:calc(100vh - var(--hh) - var(--sh))}
+.sec-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
+
+/* ── CARD GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:11px;margin-bottom:22px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:15px;cursor:pointer;transition:.15s}
+.card:hover{border-color:var(--border-s);transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.card.sel{border-color:var(--g3);border-width:1.5px}
+.c-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.c-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.ico-g{background:var(--g5);color:var(--g1)}
+.ico-b{background:var(--b5);color:var(--b1)}
+.ico-a{background:var(--a5);color:var(--a1)}
+.ico-p{background:var(--p5);color:var(--p1)}
+.cdot{width:7px;height:7px;border-radius:50%;margin-top:3px}
+.d-on{background:var(--g3)}
+.d-pd{background:var(--a3)}
+.d-id{background:var(--t3)}
+.c-title{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.c-desc{font-size:11px;color:var(--t3);margin-bottom:11px;line-height:1.4}
+.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px}
+.prog-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .5s ease}
+.pf-g{background:var(--g3)}
+.pf-b{background:var(--b3)}
+.pf-a{background:var(--a3)}
+.pf-p{background:var(--p3)}
+.c-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;padding:2px 7px;border-radius:4px}
+.bdg-on{background:var(--g5);color:var(--g1)}
+.bdg-pd{background:var(--a5);color:var(--a1)}
+.bdg-id{background:var(--surface-2);color:var(--t3)}
+.c-qbtn{font-size:11px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px}
+.c-qbtn:hover{color:var(--g1);background:var(--g5)}
+
+/* ── RECENT ── */
+.rec-list{display:flex;flex-direction:column}
+.rec-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--rad-s);cursor:pointer;transition:.12s}
+.rec-item:hover{background:var(--surface)}
+.rec-ico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.rec-title{font-size:13px;color:var(--t1);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-date{font-size:11px;color:var(--t3);white-space:nowrap}
+
+/* ── RIGHT PANEL ── */
+.panel{grid-row:3;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:calc(var(--hh) + var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow:hidden}
+.p-hdr{padding:14px 15px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.p-ico{width:23px;height:23px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.p-title{font-size:13px;font-weight:600;color:var(--t1)}
+.p-sec{padding:12px 15px;border-bottom:1px solid var(--border);flex-shrink:0}
+.p-sec-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:8px}
+
+/* Tasks */
+.task-list{display:flex;flex-direction:column;gap:1px}
+.task{display:flex;align-items:center;gap:7px;padding:5px 0;cursor:pointer}
+.t-chk{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s}
+.task.done .t-chk{background:var(--g3);border-color:var(--g3);color:#fff}
+.t-txt{font-size:12px;color:var(--t1);flex:1}
+.task.done .t-txt{color:var(--t3);text-decoration:line-through}
+.t-date{font-size:11px;color:var(--t3)}
+.t-date.urg{color:var(--r3);font-weight:500}
+.t-date.soon{color:var(--a3)}
+
+/* Quick links */
+.qlinks{display:flex;flex-direction:column;gap:3px}
+.qlink{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rad-s);font-size:12px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left}
+.qlink:hover{background:var(--surface-2);color:var(--t1)}
+.qlink i{font-size:14px;color:var(--t3);width:16px}
+
+/* Chat */
+.chat-area{flex:1;padding:12px 15px;display:flex;flex-direction:column;gap:7px;overflow-y:auto}
+.msg-from{font-size:10px;color:var(--t3);margin-bottom:2px}
+.msg{padding:8px 10px;border-radius:var(--rad-s);font-size:12px;line-height:1.5}
+.msg-ai{background:var(--surface-2);color:var(--t1)}
+.msg-user{background:var(--g5);color:var(--g1);align-self:flex-end;max-width:86%}
+
+/* Input */
+.p-inp{padding:10px 15px;border-top:1px solid var(--border);display:flex;gap:6px;flex-shrink:0}
+.p-inp input{flex:1;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s}
+.p-inp input:focus{border-color:var(--g3);background:var(--surface)}
+.send-btn{width:32px;height:32px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.12s;flex-shrink:0}
+.send-btn:hover{background:var(--g1)}
+
+/* Prompt library page */
+.prompt-page{display:none;padding:18px}
+.prompt-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pcat{padding:5px 12px;border-radius:16px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s}
+.pcat:hover,.pcat.on{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+.p-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.p-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px}
+.p-card-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.p-card-desc{font-size:11px;color:var(--t3);margin-bottom:10px;line-height:1.4}
+.p-card-btns{display:flex;gap:6px}
+.pbtn{font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:4px}
+.pbtn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+.pbtn.primary{background:var(--g3);border-color:var(--g3);color:#fff}
+.pbtn.primary:hover{background:var(--g1)}
+
+/* Mobile */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}
+  .nav,.panel{display:none}
+  .stats{padding-left:18px}
+  .main{height:auto}
+}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="layout" id="layout">
+
+<!-- HEADER -->
+<header class="hdr">
+  <a class="logo" href="#" onclick="showMain();return false">
+    <div class="logo-mark"><i class="ti ti-layout-dashboard"></i></div>
+    威廷工作平台
+  </a>
+  <span class="hdr-date" id="hdr-date"></span>
+  <div class="hdr-user">
+    <span>心輔組 · 輔仁高中</span>
+    <div class="av">威廷</div>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="stats">
+  <div class="st">
+    <span class="st-n" id="s-doc">3</span>
+    <div class="st-info"><span class="st-l">公文待處理</span><span class="tag tag-warn">待辦</span></div>
+  </div>
+  <div class="st">
+    <span class="st-n" id="s-sch">12</span>
+    <div class="st-info"><span class="st-l">獎學金待審</span><span class="tag tag-warn">審核中</span></div>
+  </div>
+  <div class="st">
+    <span class="st-n" id="s-case">5</span>
+    <div class="st-info"><span class="st-l">本月個案</span><span class="tag tag-ok">追蹤中</span></div>
+  </div>
+  <div class="st">
+    <span class="st-n" id="s-dead">2</span>
+    <div class="st-info"><span class="st-l">本週到期</span><span class="tag tag-urg">急</span></div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<nav class="nav" id="sidebar">
+  <div class="nav-sec">
+    <div class="nav-lbl">主要</div>
+    <button class="ni on" onclick="navTo(this,'main')"><i class="ti ti-layout-grid"></i>主控台</button>
+    <button class="ni" onclick="navTo(this,'main')"><i class="ti ti-checklist"></i>任務追蹤<span class="ni-badge">5</span></button>
+    <button class="ni" onclick="navTo(this,'main')"><i class="ti ti-archive"></i>存檔紀錄</button>
+  </div>
+  <div class="ndiv"></div>
+  <div class="nav-sec">
+    <div class="nav-lbl">業務</div>
+    <button class="ni" onclick="navTo(this,'main');selectCardById('doc')"><i class="ti ti-file-text"></i>公文工作流<span class="ni-badge">3</span></button>
+    <button class="ni" onclick="navTo(this,'main');selectCardById('sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge">12</span></button>
+    <button class="ni" onclick="navTo(this,'main');selectCardById('case')"><i class="ti ti-heart-handshake"></i>個案輔導</button>
+    <button class="ni" onclick="navTo(this,'main');selectCardById('report')"><i class="ti ti-chart-bar"></i>報表統計</button>
+  </div>
+  <div class="ndiv"></div>
+  <div class="nav-sec">
+    <div class="nav-lbl">工具</div>
+    <button class="ni" onclick="navTo(this,'prompt')"><i class="ti ti-template"></i>Prompt 模板庫</button>
+    <button class="ni" onclick="navTo(this,'main')"><i class="ti ti-settings"></i>設定</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="main-area">
+  <div class="sec-lbl">AI 助理 — 點選卡片切換右側工作區</div>
+
+  <div class="grid">
+    <!-- 公文工作流 -->
+    <div class="card" id="card-doc" onclick="selectCardById('doc')">
+      <div class="c-hdr">
+        <div class="c-ico ico-a"><i class="ti ti-file-text"></i></div>
+        <div class="cdot d-pd"></div>
+      </div>
+      <div class="c-title">公文工作流</div>
+      <div class="c-desc">啟動表、專案追蹤、草稿產出</div>
+      <div class="prog-meta"><span>進行中專案</span><span>3 件</span></div>
+      <div class="prog-track"><div class="prog-fill pf-a" style="width:45%"></div></div>
+      <div class="c-foot">
+        <span class="badge bdg-pd">● 待處理</span>
+        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/')"><i class="ti ti-external-link"></i>啟動表</button>
+      </div>
+    </div>
+
+    <!-- 獎助學金 -->
+    <div class="card sel" id="card-sch" onclick="selectCardById('sch')">
+      <div class="c-hdr">
+        <div class="c-ico ico-g"><i class="ti ti-report-money"></i></div>
+        <div class="cdot d-on"></div>
+      </div>
+      <div class="c-title">獎助學金助理</div>
+      <div class="c-desc">審核、彙整、通知信、追蹤撥款</div>
+      <div class="prog-meta"><span>審核進度</span><span>8 / 12</span></div>
+      <div class="prog-track"><div class="prog-fill pf-g" style="width:67%"></div></div>
+      <div class="c-foot">
+        <span class="badge bdg-on">● 進行中</span>
+        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/')"><i class="ti ti-table"></i>彙整表</button>
+      </div>
+    </div>
+
+    <!-- 個案輔導 -->
+    <div class="card" id="card-case" onclick="selectCardById('case')">
+      <div class="c-hdr">
+        <div class="c-ico ico-b"><i class="ti ti-heart-handshake"></i></div>
+        <div class="cdot d-on"></div>
+      </div>
+      <div class="c-title">個案輔導助理</div>
+      <div class="c-desc">會談紀錄、摘要、非個案晤談</div>
+      <div class="prog-meta"><span>本月個案</span><span>5 位</span></div>
+      <div class="prog-track"><div class="prog-fill pf-b" style="width:60%"></div></div>
+      <div class="c-foot">
+        <span class="badge bdg-on">● 追蹤中</span>
+        <button class="c-qbtn" onclick="event.stopPropagation()"><i class="ti ti-plus"></i>新增</button>
+      </div>
+    </div>
+
+    <!-- 報表統計 -->
+    <div class="card" id="card-report" onclick="selectCardById('report')">
+      <div class="c-hdr">
+        <div class="c-ico ico-p"><i class="ti ti-chart-bar"></i></div>
+        <div class="cdot d-id"></div>
+      </div>
+      <div class="c-title">報表統計助理</div>
+      <div class="c-desc">月報彙整、視覺化、摘要產出</div>
+      <div class="prog-meta"><span>上月報表</span><span>已完成</span></div>
+      <div class="prog-track"><div class="prog-fill pf-p" style="width:100%"></div></div>
+      <div class="c-foot">
+        <span class="badge bdg-id">● 閒置</span>
+        <button class="c-qbtn" onclick="event.stopPropagation()"><i class="ti ti-download"></i>匯出</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">最近存檔</div>
+  <div class="rec-list">
+    <div class="rec-item">
+      <div class="rec-ico ico-g"><i class="ti ti-file-check"></i></div>
+      <span class="rec-title">113學年度第一學期獎學金彙整</span>
+      <span class="rec-date">5/22</span>
+    </div>
+    <div class="rec-item">
+      <div class="rec-ico ico-b"><i class="ti ti-message-check"></i></div>
+      <span class="rec-title">個案會談紀錄 #A23（林○廷）</span>
+      <span class="rec-date">5/20</span>
+    </div>
+    <div class="rec-item">
+      <div class="rec-ico ico-a"><i class="ti ti-file-text"></i></div>
+      <span class="rec-title">急難救助申請簽呈草稿</span>
+      <span class="rec-date">5/19</span>
+    </div>
+    <div class="rec-item">
+      <div class="rec-ico ico-p"><i class="ti ti-chart-pie"></i></div>
+      <span class="rec-title">4 月份個案統計月報</span>
+      <span class="rec-date">5/02</span>
+    </div>
+  </div>
+</main>
+
+<!-- PROMPT LIBRARY PAGE -->
+<div class="prompt-page" id="prompt-page">
+  <div class="sec-lbl" style="margin-bottom:14px">Prompt 模板庫 — 點擊複製或直接開啟 Claude</div>
+  <div class="prompt-cats">
+    <div class="pcat on" onclick="filterPrompt(this,'all')">全部</div>
+    <div class="pcat" onclick="filterPrompt(this,'doc')">公文</div>
+    <div class="pcat" onclick="filterPrompt(this,'sch')">獎學金</div>
+    <div class="pcat" onclick="filterPrompt(this,'case')">個案輔導</div>
+    <div class="pcat" onclick="filterPrompt(this,'report')">報表</div>
+  </div>
+  <div class="p-cards" id="p-cards"></div>
+</div>
+
+<!-- RIGHT PANEL -->
+<aside class="panel">
+  <div class="p-hdr">
+    <div class="p-ico ico-g" id="p-ico"><i class="ti ti-report-money"></i></div>
+    <span class="p-title" id="p-title">獎助學金助理</span>
+  </div>
+
+  <div class="p-sec">
+    <div class="p-sec-lbl">本次任務</div>
+    <div class="task-list" id="task-list"></div>
+  </div>
+
+  <div class="p-sec">
+    <div class="p-sec-lbl">快速連結</div>
+    <div class="qlinks" id="qlinks"></div>
+  </div>
+
+  <div class="chat-area" id="chat-area"></div>
+
+  <div class="p-inp">
+    <input type="text" id="chat-inp" placeholder="輸入訊息或指令...">
+    <button class="send-btn" onclick="sendMsg()"><i class="ti ti-send"></i></button>
+  </div>
+</aside>
+
+</div><!-- end .layout -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── DATE ── */
+const now = new Date();
+const days = ['日','一','二','三','四','五','六'];
+document.getElementById('hdr-date').textContent =
+  `${now.getFullYear()} / ${String(now.getMonth()+1).padStart(2,'0')} / ${String(now.getDate()).padStart(2,'0')}（週${days[now.getDay()]}）`;
+
+/* ── DATA ── */
+const DATA = {
+  doc:{
+    title:'公文工作流',icon:'ti-file-text',ico:'ico-a',
+    tasks:[
+      {t:'心輔計畫案簽呈',d:'今天',u:true,done:false},
+      {t:'研習報名回函',d:'5/28',done:false},
+      {t:'上月公文歸檔',d:'完成',done:true},
+    ],
+    links:[
+      {i:'ti-forms',l:'Google 啟動表',url:'https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o'},
+      {i:'ti-table',l:'總追蹤 Sheet',url:'https://docs.google.com/spreadsheets/d/12W5Jg0nkOqIKsd_5qmeqNdA4bpNojm7-aFAMuEOKnDI'},
+      {i:'ti-folder',l:'Drive 資料夾',url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+      {i:'ti-template',l:'Prompt 模板庫',url:'#prompt'},
+    ],
+    chat:[
+      {from:'公文助理',type:'ai',t:'目前有 3 件進行中專案。心輔計畫案簽呈今日到期，建議優先處理。'},
+    ]
+  },
+  sch:{
+    title:'獎助學金助理',icon:'ti-report-money',ico:'ico-g',
+    tasks:[
+      {t:'匯出申請名單',d:'完成',done:true},
+      {t:'比對資格條件',d:'完成',done:true},
+      {t:'草擬補件通知信',d:'今天',u:true,done:false},
+      {t:'公文簽核送出',d:'5/30',done:false},
+    ],
+    links:[
+      {i:'ti-table',l:'獎學金彙整 Sheet',url:'https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/'},
+      {i:'ti-folder',l:'Drive 資料夾',url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+      {i:'ti-template',l:'通知信 Prompt 模板',url:'#prompt'},
+    ],
+    chat:[
+      {from:'獎學金助理',type:'ai',t:'已找到 12 位申請人，8 位符合資格，4 位需補件。建議先處理補件通知信。'},
+      {from:'',type:'user',t:'請草擬補件通知信'},
+    ]
+  },
+  case:{
+    title:'個案輔導助理',icon:'ti-heart-handshake',ico:'ico-b',
+    tasks:[
+      {t:'林○廷 追蹤晤談',d:'5/27',done:false},
+      {t:'月報個案統計',d:'5/31',done:false},
+      {t:'王○明 結案紀錄',d:'完成',done:true},
+      {t:'非個案紀錄（教師諮詢）',d:'5/25',done:true},
+    ],
+    links:[
+      {i:'ti-folder',l:'個案 Drive 資料夾',url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+      {i:'ti-template',l:'會談摘要 Prompt 模板',url:'#prompt'},
+      {i:'ti-note',l:'非個案快速記錄',url:'#'},
+    ],
+    chat:[
+      {from:'個案助理',type:'ai',t:'本月共 5 位追蹤個案。林○廷下次晤談為 5/27，請確認是否需要準備晤談資料。'},
+    ]
+  },
+  report:{
+    title:'報表統計助理',icon:'ti-chart-bar',ico:'ico-p',
+    tasks:[
+      {t:'5 月份個案統計',d:'5/31',done:false},
+      {t:'學期末彙整報告',d:'6/15',done:false},
+      {t:'4 月份報表',d:'完成',done:true},
+    ],
+    links:[
+      {i:'ti-table',l:'統計 Sheet',url:'https://docs.google.com/spreadsheets/d/12W5Jg0nkOqIKsd_5qmeqNdA4bpNojm7-aFAMuEOKnDI'},
+      {i:'ti-template',l:'報表摘要 Prompt 模板',url:'#prompt'},
+      {i:'ti-download',l:'匯出 PDF',url:'#'},
+    ],
+    chat:[
+      {from:'報表助理',type:'ai',t:'5 月份統計尚未建立。上月資料：個案晤談 18 次、獎學金核定 9 件、公文處理 7 件。'},
+    ]
+  }
+};
+
+/* ── PROMPT DATA ── */
+const PROMPTS = [
+  {cat:'doc',title:'計畫書草稿產出',desc:'上傳公文 PDF，自動產出計畫書草稿',prompt:`我是嘉義市私立輔仁高級中學輔導處組長，請根據以下資料幫我完成計畫書草稿：\n\n【學校基本資料】\n學校：嘉義市私立輔仁高級中學\n單位：輔導處\n承辦人：林威廷\n\n【計畫案資料】（請填入）\n計畫名稱：\n來文機關：\n補助金額：\n執行期程：\n\n請以正式公文格式產出，【待確認】標記需補充處。`},
+  {cat:'doc',title:'簽呈草稿',desc:'快速產出簽呈格式文件',prompt:`請幫我草擬一份簽呈，格式如下：\n\n主旨：\n說明：\n一、\n二、\n三、\n\n辦法：請 校長/主任 核示\n\n【背景資料】（請填入）\n事由：\n相關日期：\n需核示事項：`},
+  {cat:'sch',title:'補件通知信',desc:'產出獎學金補件通知格式',prompt:`請幫我草擬獎學金補件通知信，寄給以下學生：\n\n【填入資料】\n獎學金名稱：\n補件期限：\n需補文件：\n1.\n2.\n3.\n\n請以正式但親切的語氣撰寫，不超過 200 字。`},
+  {cat:'sch',title:'核定通知信',desc:'產出獎學金核定通知格式',prompt:`請幫我草擬獎學金核定通知信：\n\n【填入資料】\n獎學金名稱：\n核定金額：\n撥款方式：\n注意事項：\n\n語氣正式，格式簡潔。`},
+  {cat:'case',title:'會談摘要（含隱私規則）',desc:'產出符合隱私規範的會談摘要',prompt:`請根據以下資料產出會談摘要文字，供工作日誌使用：\n\n【隱私規則】\n• 姓名格式：姓○末字（例：林○廷）\n• 班級可保留\n• 主訴問題類別可寫，細節不出現\n• 晤談內容完全不記錄\n\n【填入資料】\n日期：\n學生姓名（我會先轉換成遮蔽格式）：\n班級：\n晤談類型：個案追蹤 / 初次晤談 / 危機處理\n主訴類別：學業 / 人際 / 家庭 / 情緒 / 其他\n\n輸出格式：「晤談[年級][班別][遮蔽姓名]（[主訴類別]）」`},
+  {cat:'case',title:'非個案晤談紀錄',desc:'教師諮詢、家長諮詢快速記錄',prompt:`請幫我將以下非個案晤談轉為簡短紀錄文字：\n\n【填入資料】\n日期：\n對象類型：教師 / 家長 / 一般學生\n諮詢主題：\n處理方式：\n後續追蹤：有 / 無\n\n請產出 50 字以內的紀錄文字，語氣客觀簡潔。`},
+  {cat:'report',title:'月報摘要產出',desc:'將統計數字轉為文字摘要段落',prompt:`請根據以下本月統計數據，產出一段約 150 字的月報摘要文字：\n\n【填入數據】\n個案晤談次數：\n新收個案：\n結案個案：\n非個案諮詢：\n獎學金辦理件數：\n公文處理件數：\n辦理活動或研習：\n\n語氣正式，適合做為月報呈報文字。`},
+];
+
+/* ── CARD SELECT ── */
+function selectCardById(key){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
+  const card = document.getElementById('card-'+key);
+  if(card) card.classList.add('sel');
+  updatePanel(key);
+}
+
+function updatePanel(key){
+  const d = DATA[key];
+  if(!d) return;
+  document.getElementById('p-title').textContent = d.title;
+  document.getElementById('p-ico').className = `p-ico ${d.ico}`;
+  document.getElementById('p-ico').innerHTML = `<i class="ti ${d.icon}"></i>`;
+
+  document.getElementById('task-list').innerHTML = d.tasks.map(t=>`
+    <div class="task ${t.done?'done':''}">
+      <div class="t-chk">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
+      <span class="t-txt">${t.t}</span>
+      <span class="t-date ${t.u?'urg':''}">${t.d}</span>
+    </div>`).join('');
+
+  document.getElementById('qlinks').innerHTML = d.links.map(l=>`
+    <button class="qlink" onclick="openLink('${l.url}')">
+      <i class="ti ${l.i}"></i>${l.l}
+    </button>`).join('');
+
+  const ca = document.getElementById('chat-area');
+  ca.innerHTML = d.chat.map(m=> m.type==='ai'
+    ? `<div class="msg-from">${m.from}</div><div class="msg msg-ai">${m.t}</div>`
+    : `<div class="msg msg-user">${m.t}</div>`).join('');
+  ca.scrollTop = ca.scrollHeight;
+}
+
+/* ── NAV ── */
+function navTo(el, page){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  if(page==='prompt'){
+    document.getElementById('main-area').style.display='none';
+    document.getElementById('prompt-page').style.display='block';
+    renderPrompts('all');
+  } else {
+    document.getElementById('main-area').style.display='block';
+    document.getElementById('prompt-page').style.display='none';
+  }
+}
+
+function showMain(){
+  document.getElementById('main-area').style.display='block';
+  document.getElementById('prompt-page').style.display='none';
+}
+
+/* ── PROMPTS ── */
+function renderPrompts(cat){
+  const list = cat==='all' ? PROMPTS : PROMPTS.filter(p=>p.cat===cat);
+  document.getElementById('p-cards').innerHTML = list.map((p,i)=>`
+    <div class="p-card">
+      <div class="p-card-title">${p.title}</div>
+      <div class="p-card-desc">${p.desc}</div>
+      <div class="p-card-btns">
+        <button class="pbtn" onclick="copyPrompt(${i})"><i class="ti ti-copy"></i>複製</button>
+        <button class="pbtn primary" onclick="openClaude(${i})"><i class="ti ti-external-link"></i>開啟 Claude</button>
+      </div>
+    </div>`).join('');
+}
+
+function filterPrompt(el, cat){
+  document.querySelectorAll('.pcat').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderPrompts(cat);
+}
+
+function copyPrompt(i){
+  const p = (document.getElementById('prompt-page').style.display==='block'
+    ? PROMPTS : PROMPTS)[i];
+  navigator.clipboard.writeText(p.prompt).then(()=>showToast('已複製 Prompt！'));
+}
+
+function openClaude(i){
+  showToast('即將開啟 Claude，Prompt 已複製');
+  const p = PROMPTS[i];
+  navigator.clipboard.writeText(p.prompt);
+  setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);
+}
+
+/* ── CHAT ── */
+function sendMsg(){
+  const inp = document.getElementById('chat-inp');
+  const txt = inp.value.trim();
+  if(!txt) return;
+  const ca = document.getElementById('chat-area');
+  ca.innerHTML += `<div class="msg msg-user">${txt}</div>`;
+  inp.value = '';
+  ca.scrollTop = ca.scrollHeight;
+}
+document.getElementById('chat-inp').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg()});
+
+/* ── UTILS ── */
+function openLink(url){
+  if(!url||url==='#'||url==='#prompt'){
+    if(url==='#prompt'){
+      navTo(document.querySelector('.ni[onclick*="prompt"]'),'prompt');
+    }
+    return;
+  }
+  window.open(url,'_blank');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ── INIT ── */
+updatePanel('sch');
+</script>
+</body>
+</html>

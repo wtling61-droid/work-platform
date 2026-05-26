@@ -30,6 +30,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .av{width:28px;height:28px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--g1)}
 .stats{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw)+18px);overflow-x:auto}
 .st{display:flex;align-items:center;gap:8px;padding:0 18px 0 0;margin-right:18px;border-right:1px solid var(--border);white-space:nowrap}
+.st:first-child{padding-left:4px}
 .st:last-child{border-right:none}
 .st-n{font-size:20px;font-weight:600;color:var(--t1);line-height:1}
 .st-info{display:flex;flex-direction:column;gap:2px}
@@ -179,6 +180,34 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .empty-state{text-align:center;padding:40px 20px;color:var(--t3)}
 .empty-state i{font-size:32px;margin-bottom:8px;display:block}
 @media(max-width:768px){.layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}.nav,.panel{display:none}.stats{padding-left:18px}.page{height:auto}}
+/* JOURNAL */
+.journal-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.journal-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.jcat{padding:4px 10px;border-radius:14px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.jcat:hover,.jcat.on{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+.journal-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:6px 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.journal-add-btn:hover{background:var(--g1)}
+.journal-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px;margin-bottom:18px;display:none}
+.journal-form.show{display:block}
+.journal-form textarea{width:100%;min-height:80px;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);resize:vertical;outline:none;background:var(--surface-2);line-height:1.6}
+.journal-form textarea:focus{border-color:var(--g3);background:var(--surface)}
+.journal-form-row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.journal-form select,.journal-form input[type=date]{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.journal-form select:focus,.journal-form input:focus{border-color:var(--g3)}
+.jf-ok{flex:1;height:30px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.jf-ok:hover{background:var(--g1)}
+.jf-cancel{height:30px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.journal-group{margin-bottom:20px}
+.journal-group-date{font-size:11px;font-weight:600;color:var(--t3);letter-spacing:.05em;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.journal-group-date::after{content:'';flex:1;height:1px;background:var(--border)}
+.journal-entry{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:5px;transition:.12s;position:relative}
+.journal-entry:hover{border-color:var(--border-s);box-shadow:0 1px 4px rgba(0,0,0,.05)}.journal-entry:hover .je-del{opacity:1}
+.je-cat{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.je-cat-doc{background:var(--a5);color:var(--a1)}.je-cat-sch{background:var(--g5);color:var(--g1)}.je-cat-case{background:var(--b5);color:var(--b1)}.je-cat-other{background:var(--surface-2);color:var(--t2)}
+.je-content{font-size:13px;color:var(--t1);flex:1;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.je-time{font-size:10px;color:var(--t3);white-space:nowrap;flex-shrink:0;margin-top:3px}
+.je-del{opacity:0;transition:.12s;border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 4px;border-radius:3px;flex-shrink:0}
+.je-del:hover{color:var(--r3);background:var(--r5)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -204,6 +233,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <button class="ni on" onclick="navTo(this,'dashboard')"><i class="ti ti-layout-grid"></i>主控台</button>
     <button class="ni" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務追蹤<span class="ni-badge" id="badge-all">0</span></button>
     <button class="ni" onclick="navTo(this,'archive')"><i class="ti ti-archive"></i>存檔紀錄</button>
+    <button class="ni" onclick="navTo(this,'journal')"><i class="ti ti-notebook"></i>工作日誌</button>
   </div>
   <div class="ndiv"></div>
   <div style="margin-bottom:4px">
@@ -277,6 +307,34 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="pcat" onclick="filterPrompt(this,'report')">統計報表</div>
   </div>
   <div class="p-cards" id="p-cards"></div>
+</div>
+<div class="page" id="page-journal">
+  <div class="journal-topbar">
+    <div class="sec-lbl" style="margin-bottom:0">工作日誌 — 每日業務記錄</div>
+    <button class="journal-add-btn" onclick="toggleJournalForm()"><i class="ti ti-plus"></i>新增記錄</button>
+  </div>
+  <div class="journal-form" id="journal-form">
+    <textarea id="j-content" placeholder="記錄今日業務內容...（可多行）"></textarea>
+    <div class="journal-form-row">
+      <select id="j-cat">
+        <option value="doc">公文計畫</option>
+        <option value="sch">獎助學金</option>
+        <option value="case">學生輔導</option>
+        <option value="other">其他</option>
+      </select>
+      <input type="date" id="j-date">
+      <button class="jf-ok" onclick="confirmAddJournal()">確認新增</button>
+      <button class="jf-cancel" onclick="toggleJournalForm(true)">取消</button>
+    </div>
+  </div>
+  <div class="journal-filter">
+    <div class="jcat on" onclick="filterJournal(this,'all')">全部</div>
+    <div class="jcat" onclick="filterJournal(this,'doc')">公文計畫</div>
+    <div class="jcat" onclick="filterJournal(this,'sch')">獎助學金</div>
+    <div class="jcat" onclick="filterJournal(this,'case')">學生輔導</div>
+    <div class="jcat" onclick="filterJournal(this,'other')">其他</div>
+  </div>
+  <div id="journal-list"></div>
 </div>
 
 <aside class="panel">
@@ -386,7 +444,7 @@ let curKey='sch', curCaseTab='formal', tasks={};
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all');
+  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal();
 }
 function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
 function clearAllData(){
@@ -721,11 +779,12 @@ function renderArchivePage(){
 function navTo(el,page){
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts'};
+  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal'};
   document.getElementById(map[page]||'page-dashboard').classList.add('active');
   if(page==='tasks')renderTaskPage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');
+  if(page==='journal')renderJournal(curJournalCat);
 }
 
 /* ══ PROMPTS ══ */
@@ -762,6 +821,84 @@ function sendMsg(){
 /* ══ UTILS ══ */
 function openLink(url){if(!url||url==='#')return;window.open(url,'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+
+/* ══ JOURNAL ══ */
+const J_CATS={doc:'公文計畫',sch:'獎助學金',case:'學生輔導',other:'其他'};
+let journal=[],curJournalCat='all';
+function initJournal(){
+  const s=localStorage.getItem('wp_journal_v1');
+  journal=s?JSON.parse(s):[];
+}
+function saveJournal(){localStorage.setItem('wp_journal_v1',JSON.stringify(journal));}
+function toggleJournalForm(forceClose){
+  const f=document.getElementById('journal-form');if(!f)return;
+  const show=forceClose?false:!f.classList.contains('show');
+  f.classList.toggle('show',show);
+  if(show){
+    const d=document.getElementById('j-date');
+    if(d&&!d.value){const n=new Date();d.value=n.toISOString().slice(0,10);}
+    setTimeout(()=>document.getElementById('j-content')?.focus(),50);
+  }
+}
+function confirmAddJournal(){
+  const txt=document.getElementById('j-content')?.value.trim();
+  if(!txt){showToast('請輸入記錄內容');return;}
+  const cat=document.getElementById('j-cat')?.value||'other';
+  const dateVal=document.getElementById('j-date')?.value;
+  const n=dateVal?new Date(dateVal+'T12:00:00'):new Date();
+  const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
+  const now=new Date();
+  const timeStr=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  journal.unshift({id:Date.now(),cat,date:dateStr,time:timeStr,content:txt});
+  saveJournal();
+  document.getElementById('j-content').value='';
+  toggleJournalForm(true);
+  renderJournal(curJournalCat);
+  showToast('記錄已新增');
+}
+function deleteJournalEntry(id){
+  journal=journal.filter(e=>e.id!==id);
+  saveJournal();renderJournal(curJournalCat);
+  showToast('記錄已刪除');
+}
+function filterJournal(el,cat){
+  document.querySelectorAll('.jcat').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  curJournalCat=cat;
+  renderJournal(cat);
+}
+function renderJournal(cat){
+  const el=document.getElementById('journal-list');if(!el)return;
+  const filtered=cat==='all'?journal:journal.filter(e=>e.cat===cat);
+  if(!filtered.length){
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-notebook"></i><p>還沒有工作日誌記錄，按右上角「新增記錄」開始</p></div>`;
+    return;
+  }
+  const groups={};
+  filtered.forEach(e=>{if(!groups[e.date])groups[e.date]=[];groups[e.date].push(e);});
+  const today=new Date();
+  const yd=new Date(today);yd.setDate(yd.getDate()-1);
+  const fmt=d=>{
+    const[m,day]=d.split('/').map(Number);
+    const t=new Date(today.getFullYear(),m-1,day);
+    if(t.toDateString()===today.toDateString())return'今天';
+    if(t.toDateString()===yd.toDateString())return'昨天';
+    return d;
+  };
+  el.innerHTML=Object.keys(groups).map(date=>{
+    const entries=groups[date];
+    return `<div class="journal-group">
+      <div class="journal-group-date">${fmt(date)} <span style="font-size:10px;color:var(--t3);font-weight:400;margin-left:4px">${entries.length} 則</span></div>
+      ${entries.map(e=>`<div class="journal-entry">
+        <span class="je-cat je-cat-${e.cat}">${J_CATS[e.cat]}</span>
+        <span class="je-content">${e.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+        <span class="je-time">${e.time}</span>
+        <button class="je-del" onclick="deleteJournalEntry(${e.id})" title="刪除"><i class="ti ti-x"></i></button>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
 
 init();
 </script>

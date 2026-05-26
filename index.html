@@ -17,21 +17,17 @@
   --b1:#083870;--b3:#1870CC;--b5:#E0EFFF;
   --p1:#3A2890;--p3:#6A52D0;--p5:#EEEAFF;
   --r1:#701818;--r3:#D43030;--r5:#FFE4E4;
-  --sw:196px;--pw:260px;--hh:50px;--sh:42px;--rad:10px;--rad-s:6px;
+  --sw:196px;--pw:262px;--hh:50px;--sh:42px;--rad:10px;--rad-s:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;min-height:100vh}
 .layout{display:grid;grid-template-columns:var(--sw) 1fr var(--pw);grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
-
-/* HEADER */
 .hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--t1);cursor:pointer}
 .logo-mark{width:28px;height:28px;background:var(--g3);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
 .hdr-date{font-size:12px;color:var(--t3);margin-left:auto}
 .hdr-user{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t2);margin-left:12px}
 .av{width:28px;height:28px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--g1)}
-
-/* STATS */
 .stats{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw)+18px);overflow-x:auto}
 .st{display:flex;align-items:center;gap:8px;padding:0 18px 0 0;margin-right:18px;border-right:1px solid var(--border);white-space:nowrap}
 .st:last-child{border-right:none}
@@ -39,26 +35,17 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .st-info{display:flex;flex-direction:column;gap:2px}
 .st-l{font-size:11px;color:var(--t3)}
 .tag{font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;display:inline-block}
-.tag-warn{background:var(--a5);color:var(--a1)}
-.tag-ok{background:var(--g5);color:var(--g1)}
-.tag-urg{background:var(--r5);color:var(--r1)}
-
-/* SIDEBAR */
+.tag-warn{background:var(--a5);color:var(--a1)}.tag-ok{background:var(--g5);color:var(--g1)}.tag-urg{background:var(--r5);color:var(--r1)}
 .nav{grid-column:1;grid-row:3;background:var(--surface);border-right:1px solid var(--border);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow-y:auto}
 .nav-lbl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);padding:5px 18px 3px}
-.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;margin:0 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left}
-.ni:hover{background:var(--surface-2);color:var(--t1)}
-.ni.on{background:var(--g5);color:var(--g1);font-weight:500}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;margin:0 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left;font-family:'Noto Sans TC',sans-serif}
+.ni:hover{background:var(--surface-2);color:var(--t1)}.ni.on{background:var(--g5);color:var(--g1);font-weight:500}
 .ni i{font-size:16px;width:17px;flex-shrink:0}
 .ni-badge{margin-left:auto;background:var(--r3);color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px}
 .ndiv{height:1px;background:var(--border);margin:7px 10px}
-
-/* PAGES */
 .page{grid-column:2;grid-row:3;display:none;padding:18px;overflow-y:auto;height:calc(100vh - var(--hh) - var(--sh))}
 .page.active{display:block}
 .sec-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
-
-/* CARD GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:11px;margin-bottom:22px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:15px;cursor:pointer;transition:.15s}
 .card:hover{border-color:var(--border-s);transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.06)}
@@ -66,143 +53,118 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .card.urg-card.sel{border-color:var(--r3)}
 .c-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
 .c-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.ico-g{background:var(--g5);color:var(--g1)}
-.ico-b{background:var(--b5);color:var(--b1)}
-.ico-a{background:var(--a5);color:var(--a1)}
-.ico-r{background:var(--r5);color:var(--r1)}
+.ico-g{background:var(--g5);color:var(--g1)}.ico-b{background:var(--b5);color:var(--b1)}.ico-a{background:var(--a5);color:var(--a1)}.ico-r{background:var(--r5);color:var(--r1)}
 .cdot{width:7px;height:7px;border-radius:50%;margin-top:3px}
 .d-on{background:var(--g3)}.d-pd{background:var(--a3)}.d-id{background:var(--t3)}.d-urg{background:var(--r3)}
 .c-title{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:2px}
 .c-desc{font-size:11px;color:var(--t3);margin-bottom:11px;line-height:1.4}
 .prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px}
 .prog-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;transition:width .5s ease}
+.prog-fill{height:100%;border-radius:2px;transition:width .5s}
 .pf-g{background:var(--g3)}.pf-b{background:var(--b3)}.pf-a{background:var(--a3)}.pf-r{background:var(--r3)}
 .c-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
 .badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;padding:2px 7px;border-radius:4px}
-.bdg-on{background:var(--g5);color:var(--g1)}.bdg-pd{background:var(--a5);color:var(--a1)}
-.bdg-id{background:var(--surface-2);color:var(--t3)}.bdg-urg{background:var(--r5);color:var(--r1)}
-.c-qbtn{font-size:11px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px}
+.bdg-on{background:var(--g5);color:var(--g1)}.bdg-pd{background:var(--a5);color:var(--a1)}.bdg-id{background:var(--surface-2);color:var(--t3)}.bdg-urg{background:var(--r5);color:var(--r1)}
+.c-qbtn{font-size:11px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px;font-family:'Noto Sans TC',sans-serif}
 .c-qbtn:hover{color:var(--g1);background:var(--g5)}
-
-/* RECENT */
 .rec-list{display:flex;flex-direction:column}
 .rec-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--rad-s);cursor:pointer;transition:.12s}
 .rec-item:hover{background:var(--surface)}
 .rec-ico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .rec-title{font-size:13px;color:var(--t1);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rec-date{font-size:11px;color:var(--t3);white-space:nowrap}
-
-/* RIGHT PANEL */
+/* PANEL */
 .panel{grid-column:3;grid-row:3;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow:hidden}
 .p-hdr{padding:12px 15px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
 .p-ico{width:23px;height:23px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px}
-.p-title{font-size:13px;font-weight:600;color:var(--t1)}
-
+.p-title{font-size:13px;font-weight:600;color:var(--t1);flex:1}
 /* TABS */
-.p-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--surface)}
-.p-tab{flex:1;padding:8px 6px;font-size:11px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;text-align:center}
-.p-tab:hover{color:var(--t1)}
-.p-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
-.p-tab-content{display:none;flex:1;flex-direction:column;overflow:hidden}
+.p-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
+.p-tab{padding:8px 6px;font-size:11px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
+.p-tab:hover{color:var(--t1)}.p-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
+.p-tab-content{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0}
 .p-tab-content.on{display:flex}
-
 /* TASKS */
-.p-sec{padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-y:auto;max-height:240px}
+.p-sec{padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-y:auto;max-height:230px}
 .p-sec-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:7px}
 .task-list{display:flex;flex-direction:column;gap:1px}
-.task{display:flex;align-items:center;gap:6px;padding:5px 3px;border-radius:4px;position:relative}
-.task:hover{background:var(--surface-2)}
-.task:hover .t-actions{opacity:1}
+.task{display:flex;align-items:center;gap:5px;padding:5px 3px;border-radius:4px;position:relative}
+.task:hover{background:var(--surface-2)}.task:hover .t-actions{opacity:1}
 .t-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s;cursor:pointer}
 .task.done .t-chk{background:var(--g3);border-color:var(--g3);color:#fff}
 .task.urgent:not(.done) .t-chk{border-color:var(--r3)}
-.t-txt{font-size:12px;color:var(--t1);flex:1;cursor:pointer}
-.t-txt:hover{color:var(--g1)}
+.src-tag{font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;flex-shrink:0}
+.src-cross{background:var(--a5);color:var(--a1)}.src-external{background:var(--b5);color:var(--b1)}
+.t-txt{font-size:12px;color:var(--t1);flex:1;cursor:pointer;line-height:1.3}
+.t-txt:hover:not(.nodbl){text-decoration:underline dotted var(--t3)}
 .task.done .t-txt{color:var(--t3);text-decoration:line-through}
-.task.done .t-txt:hover{color:var(--t3)}
-.t-date{font-size:10px;color:var(--t3);white-space:nowrap}
+.t-date{font-size:10px;color:var(--t3);white-space:nowrap;cursor:pointer}
+.t-date:hover:not(.nodbl){text-decoration:underline dotted var(--t3)}
 .t-date.urg{color:var(--r3);font-weight:500}
-.t-actions{opacity:0;transition:.12s;display:flex;gap:2px;flex-shrink:0}
+.t-actions{opacity:0;transition:.12s;display:flex;gap:1px;flex-shrink:0}
 .t-act-btn{border:none;background:none;cursor:pointer;color:var(--t3);font-size:12px;padding:1px 3px;border-radius:3px;line-height:1}
-.t-act-btn:hover{color:var(--r3);background:var(--r5)}
-.t-act-btn.urg-btn:hover{color:var(--a3);background:var(--a5)}
+.t-act-btn:hover{color:var(--r3);background:var(--r5)}.t-act-btn.urg-btn:hover{color:var(--a3);background:var(--a5)}
 .task.urgent:not(.done) .urg-active{color:var(--r3)}
-
-/* EDIT INLINE */
-.t-edit-input{flex:1;height:22px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface)}
-
+.t-edit-input{flex:1;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface);min-width:0}
+.t-date-input{width:58px;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 4px;font-size:11px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface)}
 /* ADD TASK */
-.add-task-btn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:5px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s}
+.add-task-btn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:5px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
 .add-task-btn:hover{color:var(--g1);border-color:var(--g3);background:var(--g5)}
 .add-task-form{display:none;margin-top:6px;gap:4px;flex-direction:column}
 .add-task-form.show{display:flex}
-.add-task-form input{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
-.add-task-form input:focus{border-color:var(--g3);background:var(--surface)}
+.add-task-form input,.add-task-form select{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.add-task-form input:focus,.add-task-form select:focus{border-color:var(--g3);background:var(--surface)}
 .atf-row{display:flex;gap:4px}
 .atf-ok{flex:1;height:26px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
 .atf-cancel{height:26px;padding:0 8px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
-
 /* QUICK LINKS */
 .qlinks{display:flex;flex-direction:column;gap:3px}
 .qlink{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rad-s);font-size:12px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
-.qlink:hover{background:var(--surface-2);color:var(--t1)}
-.qlink i{font-size:14px;color:var(--t3);width:16px}
-
+.qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:14px;color:var(--t3);width:16px}
 /* CHAT */
 .chat-area{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:7px;overflow-y:auto}
 .msg-from{font-size:10px;color:var(--t3);margin-bottom:2px}
 .msg{padding:8px 10px;border-radius:var(--rad-s);font-size:12px;line-height:1.5}
-.msg-ai{background:var(--surface-2);color:var(--t1)}
-.msg-user{background:var(--g5);color:var(--g1);align-self:flex-end;max-width:86%}
+.msg-ai{background:var(--surface-2);color:var(--t1)}.msg-user{background:var(--g5);color:var(--g1);align-self:flex-end;max-width:86%}
 .p-inp{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:6px;flex-shrink:0}
 .p-inp input{flex:1;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s}
 .p-inp input:focus{border-color:var(--g3);background:var(--surface)}
-.send-btn{width:32px;height:32px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.12s;flex-shrink:0}
+.send-btn{width:32px;height:32px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .send-btn:hover{background:var(--g1)}
-
-/* URGENT PANEL */
-.urg-panel{padding:10px 14px;flex:1;overflow-y:auto}
+/* TRANSFER */
+.transfer-scroll{flex:1;overflow-y:auto;padding:10px 14px}
+.tr-group{margin-bottom:12px}
+.tr-group-hdr{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;margin-bottom:5px}
+.tr-count{font-size:10px;padding:0 4px;border-radius:3px}
+.tr-empty{font-size:11px;color:var(--t3);padding:2px 0 5px;font-style:italic}
+/* URGENT */
+.urg-scroll{flex:1;overflow-y:auto;padding:10px 14px}
 .urg-group{margin-bottom:14px}
 .urg-group-lbl{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:6px}
-.urg-group-lbl i{font-size:13px}
-.urg-item{display:flex;align-items:center;gap:7px;padding:6px 8px;background:var(--r5);border:1px solid #FFCDD2;border-radius:var(--rad-s);margin-bottom:3px;cursor:pointer;transition:.12s}
-.urg-item:hover{background:#FFCDD2}
+.urg-item{display:flex;align-items:center;gap:7px;padding:6px 8px;background:var(--r5);border:1px solid #FFCDD2;border-radius:var(--rad-s);margin-bottom:3px}
 .urg-item-txt{font-size:12px;color:var(--r1);flex:1}
 .urg-item-date{font-size:10px;color:var(--r3);font-weight:500}
 .urg-resolve{border:none;background:none;cursor:pointer;color:var(--r3);font-size:13px;padding:1px 3px;transition:.12s}
 .urg-resolve:hover{color:var(--g1)}
-
 /* TASK PAGE */
 .task-page-group{margin-bottom:16px}
-.tp-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tp-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .tp-ico{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.tp-label{font-size:13px;font-weight:600;color:var(--t1)}
-.tp-count{font-size:11px;color:var(--t3)}
-.tpi{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px;cursor:pointer;transition:.12s;position:relative}
-.tpi:hover{border-color:var(--border-s)}
-.tpi:hover .tpi-del{opacity:1}
-.tpi-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s}
+.tpi{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px;transition:.12s;position:relative}
+.tpi:hover{border-color:var(--border-s)}.tpi:hover .tpi-del{opacity:1}
+.tpi-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .tpi.done .tpi-chk{background:var(--g3);border-color:var(--g3);color:#fff}
-.tpi-txt{font-size:13px;color:var(--t1);flex:1}
-.tpi.done .tpi-txt{color:var(--t3);text-decoration:line-through}
-.tpi-date{font-size:11px;color:var(--t3)}
-.tpi-date.urg{color:var(--r3);font-weight:500}
+.tpi-txt{font-size:13px;color:var(--t1);flex:1}.tpi.done .tpi-txt{color:var(--t3);text-decoration:line-through}
+.tpi-urg{font-size:10px;padding:1px 5px;border-radius:3px;background:var(--r5);color:var(--r1);font-weight:500;flex-shrink:0}
+.tpi-date{font-size:11px;color:var(--t3)}.tpi-date.urg{color:var(--r3);font-weight:500}
 .tpi-del{opacity:0;transition:.12s;border:none;background:none;cursor:pointer;color:var(--t3);font-size:14px;padding:0 3px}
 .tpi-del:hover{color:var(--r3)}
-.tpi-urg{font-size:10px;padding:1px 5px;border-radius:3px;background:var(--r5);color:var(--r1);font-weight:500}
-
 /* ARCHIVE */
 .archive-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px}
-.archive-item i{color:var(--g3);font-size:16px}
 .archive-txt{font-size:13px;color:var(--t2);flex:1}
+.archive-mod{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
 .archive-meta{font-size:11px;color:var(--t3)}
-.archive-mod{font-size:10px;padding:1px 6px;border-radius:3px}
-.empty-state{text-align:center;padding:40px 20px;color:var(--t3)}
-.empty-state i{font-size:32px;margin-bottom:8px;display:block}
-.empty-state p{font-size:13px}
-
-/* PROMPT LIBRARY */
+/* PROMPTS */
 .prompt-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .pcat{padding:5px 12px;border-radius:16px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s}
 .pcat:hover,.pcat.on{background:var(--g5);border-color:var(--g3);color:var(--g1)}
@@ -213,56 +175,29 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .p-card-btns{display:flex;gap:6px}
 .pbtn{font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:4px;font-family:'Noto Sans TC',sans-serif}
 .pbtn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
-.pbtn.primary{background:var(--g3);border-color:var(--g3);color:#fff}
-.pbtn.primary:hover{background:var(--g1)}
-
-@media(max-width:768px){
-  .layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}
-  .nav,.panel{display:none}
-  .stats{padding-left:18px}
-  .page{height:auto}
-}
+.pbtn.primary{background:var(--g3);border-color:var(--g3);color:#fff}.pbtn.primary:hover{background:var(--g1)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--t3)}
+.empty-state i{font-size:32px;margin-bottom:8px;display:block}
+@media(max-width:768px){.layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}.nav,.panel{display:none}.stats{padding-left:18px}.page{height:auto}}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 <div class="layout">
-
-<!-- HEADER -->
 <header class="hdr">
   <div class="logo" onclick="navTo(document.querySelector('.ni'),'dashboard')">
-    <div class="logo-mark"><i class="ti ti-layout-dashboard"></i></div>
-    威廷工作平台
+    <div class="logo-mark"><i class="ti ti-layout-dashboard"></i></div>威廷工作平台
   </div>
   <span class="hdr-date" id="hdr-date"></span>
-  <div class="hdr-user">
-    <span>心輔組 · 輔仁高中</span>
-    <div class="av">威廷</div>
-  </div>
+  <div class="hdr-user"><span>心輔組 · 輔仁高中</span><div class="av">威廷</div></div>
 </header>
-
-<!-- STATS BAR -->
 <div class="stats">
-  <div class="st">
-    <span class="st-n" id="s-doc">0</span>
-    <div class="st-info"><span class="st-l">公文計畫</span><span class="tag tag-warn">待辦</span></div>
-  </div>
-  <div class="st">
-    <span class="st-n" id="s-sch">0</span>
-    <div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div>
-  </div>
-  <div class="st">
-    <span class="st-n" id="s-case">0</span>
-    <div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div>
-  </div>
-  <div class="st">
-    <span class="st-n" id="s-urg">0</span>
-    <div class="st-info"><span class="st-l">緊急項目</span><span class="tag tag-urg">急</span></div>
-  </div>
+  <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文計畫</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
+  <div class="st"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">緊急項目</span><span class="tag tag-urg">急</span></div></div>
 </div>
-
-<!-- SIDEBAR -->
 <nav class="nav">
   <div style="margin-bottom:4px">
     <div class="nav-lbl">主要</div>
@@ -286,59 +221,42 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
 </nav>
 
-<!-- PAGE: 主控台 -->
+<!-- PAGES -->
 <main class="page active" id="page-dashboard">
   <div class="sec-lbl">助理模組 — 點選卡片切換右側工作區</div>
   <div class="grid">
     <div class="card" id="card-doc" onclick="selectCard('doc')">
       <div class="c-hdr"><div class="c-ico ico-a"><i class="ti ti-file-text"></i></div><div class="cdot d-pd"></div></div>
-      <div class="c-title">公文計畫</div>
-      <div class="c-desc">啟動表、專案追蹤、草稿產出</div>
+      <div class="c-title">公文計畫</div><div class="c-desc">啟動表、專案追蹤、草稿產出</div>
       <div class="prog-meta"><span>待辦</span><span id="prog-doc-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-a" id="prog-doc" style="width:0%"></div></div>
-      <div class="c-foot">
-        <span class="badge bdg-pd" id="bdg-doc">● 待辦</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o')"><i class="ti ti-external-link"></i>啟動表</button>
-      </div>
+      <div class="c-foot"><span class="badge bdg-pd" id="bdg-doc">● 待辦</span>
+        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o')"><i class="ti ti-external-link"></i>啟動表</button></div>
     </div>
-
     <div class="card" id="card-sch" onclick="selectCard('sch')">
       <div class="c-hdr"><div class="c-ico ico-g"><i class="ti ti-report-money"></i></div><div class="cdot d-on"></div></div>
-      <div class="c-title">獎助學金</div>
-      <div class="c-desc">收件、通知信、追蹤撥款</div>
+      <div class="c-title">獎助學金</div><div class="c-desc">收件、通知信、追蹤撥款</div>
       <div class="prog-meta"><span>待辦</span><span id="prog-sch-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-g" id="prog-sch" style="width:0%"></div></div>
-      <div class="c-foot">
-        <span class="badge bdg-on" id="bdg-sch">● 進行中</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/')"><i class="ti ti-table"></i>彙整表</button>
-      </div>
+      <div class="c-foot"><span class="badge bdg-on" id="bdg-sch">● 進行中</span>
+        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/')"><i class="ti ti-table"></i>彙整表</button></div>
     </div>
-
     <div class="card" id="card-case" onclick="selectCard('case')">
       <div class="c-hdr"><div class="c-ico ico-b"><i class="ti ti-heart-handshake"></i></div><div class="cdot d-on"></div></div>
-      <div class="c-title">學生輔導</div>
-      <div class="c-desc">個案晤談、非個案諮詢、統計</div>
+      <div class="c-title">學生輔導</div><div class="c-desc">個案晤談、非個案、學生異動</div>
       <div class="prog-meta"><span>待辦</span><span id="prog-case-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-b" id="prog-case" style="width:0%"></div></div>
-      <div class="c-foot">
-        <span class="badge bdg-on" id="bdg-case">● 追蹤中</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();showAddTaskFor('case','formal')"><i class="ti ti-plus"></i>新增</button>
-      </div>
+      <div class="c-foot"><span class="badge bdg-on" id="bdg-case">● 追蹤中</span>
+        <button class="c-qbtn" onclick="event.stopPropagation()"><i class="ti ti-plus"></i>新增</button></div>
     </div>
-
     <div class="card urg-card" id="card-urg" onclick="selectCard('urg')">
-      <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg" id="dot-urg"></div></div>
-      <div class="c-title">緊急項目</div>
-      <div class="c-desc">跨模組緊急任務一覽</div>
+      <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg"></div></div>
+      <div class="c-title">緊急項目</div><div class="c-desc">跨模組緊急任務一覽</div>
       <div class="prog-meta"><span>緊急待辦</span><span id="prog-urg-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
-      <div class="c-foot">
-        <span class="badge bdg-urg" id="bdg-urg">● 緊急</span>
-        <span style="font-size:11px;color:var(--t3)">各模組標記</span>
-      </div>
+      <div class="c-foot"><span class="badge bdg-urg">● 緊急</span><span style="font-size:11px;color:var(--t3)">各模組 ⚡ 標記</span></div>
     </div>
   </div>
-
   <div class="sec-lbl">最近存檔</div>
   <div class="rec-list">
     <div class="rec-item"><div class="rec-ico ico-g"><i class="ti ti-file-check"></i></div><span class="rec-title">113學年度第一學期獎學金彙整</span><span class="rec-date">5/22</span></div>
@@ -347,20 +265,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="rec-item"><div class="rec-ico ico-b"><i class="ti ti-chart-pie"></i></div><span class="rec-title">5月份學生輔導統計報表</span><span class="rec-date">5/02</span></div>
   </div>
 </main>
-
-<!-- PAGE: 任務追蹤 -->
-<div class="page" id="page-tasks">
-  <div class="sec-lbl" style="margin-bottom:16px">全部待辦任務</div>
-  <div id="task-page-content"></div>
-</div>
-
-<!-- PAGE: 存檔紀錄 -->
-<div class="page" id="page-archive">
-  <div class="sec-lbl" style="margin-bottom:16px">已完成任務</div>
-  <div id="archive-content"></div>
-</div>
-
-<!-- PAGE: Prompt 模板庫 -->
+<div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">全部待辦任務</div><div id="task-page-content"></div></div>
+<div class="page" id="page-archive"><div class="sec-lbl" style="margin-bottom:16px">已完成任務</div><div id="archive-content"></div></div>
 <div class="page" id="page-prompts">
   <div class="sec-lbl" style="margin-bottom:14px">Prompt 模板庫 — 一鍵複製或直接開啟 Claude</div>
   <div class="prompt-cats">
@@ -373,44 +279,45 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="p-cards" id="p-cards"></div>
 </div>
 
-<!-- RIGHT PANEL -->
-<aside class="panel" id="right-panel">
+<aside class="panel">
   <div class="p-hdr">
     <div class="p-ico ico-g" id="p-ico"><i class="ti ti-report-money"></i></div>
     <span class="p-title" id="p-title">獎助學金</span>
   </div>
-  <!-- panel body injected by JS -->
-  <div id="panel-body" style="display:flex;flex-direction:column;flex:1;overflow:hidden"></div>
+  <div id="panel-body" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0"></div>
 </aside>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
-/* ══ META ══ */
-const META = {
-  doc:  {label:'公文計畫',   icon:'ti-file-text',       ico:'ico-a', color:'#D4840A'},
-  sch:  {label:'獎助學金',   icon:'ti-report-money',    ico:'ico-g', color:'#5A9A1A'},
-  case: {label:'學生輔導',   icon:'ti-heart-handshake', ico:'ico-b', color:'#1870CC'},
-  urg:  {label:'緊急項目',   icon:'ti-alert-triangle',  ico:'ico-r', color:'#D43030'},
+const META={
+  doc:{label:'公文計畫',icon:'ti-file-text',ico:'ico-a',color:'#D4840A'},
+  sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#5A9A1A'},
+  case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#1870CC'},
+  urg:{label:'緊急項目',icon:'ti-alert-triangle',ico:'ico-r',color:'#D43030'},
 };
-
-const CASE_TABS = [
-  {key:'formal',   label:'個案晤談'},
-  {key:'informal', label:'非個案'},
-  {key:'stats',    label:'統計報表'},
+const CASE_TABS=[
+  {key:'formal',label:'個案晤談'},
+  {key:'informal',label:'非個案'},
+  {key:'transfer',label:'學生異動'},
+  {key:'stats',label:'統計報表'},
 ];
-
-const LINKS = {
+const TRANSFER_TYPES=[
+  {key:'out',   label:'轉出', color:'#D4840A'},
+  {key:'in',    label:'轉入', color:'#5A9A1A'},
+  {key:'leave', label:'休學', color:'#1870CC'},
+  {key:'trans', label:'轉銜', color:'#6A52D0'},
+];
+const SRC_LABELS={cross:'跨',external:'外'};
+const LINKS={
   doc:[
-    {i:'ti-forms',   l:'Google 啟動表',  url:'https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o'},
-    {i:'ti-table',   l:'總追蹤 Sheet',   url:'https://docs.google.com/spreadsheets/d/12W5Jg0nkOqIKsd_5qmeqNdA4bpNojm7-aFAMuEOKnDI'},
-    {i:'ti-folder',  l:'Drive 資料夾',   url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
-    {i:'ti-template',l:'公文 Prompt 模板',prompt:'doc'},
+    {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o'},
+    {i:'ti-table',   l:'總追蹤 Sheet',     url:'https://docs.google.com/spreadsheets/d/12W5Jg0nkOqIKsd_5qmeqNdA4bpNojm7-aFAMuEOKnDI'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+    {i:'ti-template',l:'公文 Prompt 模板', prompt:'doc'},
   ],
   sch:[
-    {i:'ti-table',   l:'獎學金彙整 Sheet',url:'https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/'},
-    {i:'ti-folder',  l:'Drive 資料夾',   url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+    {i:'ti-table',   l:'獎學金彙整 Sheet', url:'https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
     {i:'ti-template',l:'獎學金 Prompt 模板',prompt:'sch'},
   ],
   case:[
@@ -418,36 +325,42 @@ const LINKS = {
     {i:'ti-template',l:'學生輔導 Prompt 模板',prompt:'case'},
   ],
 };
-
-const CHAT_INTRO = {
-  doc:  '公文計畫任務如右側清單。如需草擬簽呈或計畫書，請使用下方 Prompt 模板。',
-  sch:  '獎助學金任務如右側清單。收件、通知信、撥款追蹤都在這裡管理。',
-  case: '學生輔導分三個分頁：個案晤談、非個案諮詢、統計報表，請切換分頁使用。',
+const CHAT_INTRO={
+  doc:'公文計畫任務如右側清單。如需草擬簽呈或計畫書，請使用 Prompt 模板。',
+  sch:'獎助學金任務如右側清單。收件、通知信、撥款追蹤都在這裡管理。',
+  case:'學生輔導分四個分頁：個案晤談、非個案、學生異動、統計報表，請切換分頁。',
 };
-
-const DEFAULT_TASKS = {
+const DEFAULT_TASKS={
   doc:[
-    {id:1, t:'心輔計畫案簽呈',   d:'今天', u:true,  done:false, type:''},
-    {id:2, t:'研習報名回函',      d:'5/28', u:false, done:false, type:''},
-    {id:3, t:'上月公文歸檔',      d:'完成', u:false, done:true,  type:'', completedAt:'5/20'},
+    {id:1,t:'心輔計畫案簽呈',d:'今天',u:true,done:false,src:''},
+    {id:2,t:'研習報名回函',  d:'5/28',u:false,done:false,src:'cross'},
+    {id:3,t:'上月公文歸檔',  d:'完成',u:false,done:true,src:'',completedAt:'5/20'},
   ],
   sch:[
-    {id:4, t:'收件：春暉獎學金申請', d:'5/30', u:false, done:false, type:''},
-    {id:5, t:'草擬補件通知信',      d:'今天', u:true,  done:false, type:''},
-    {id:6, t:'追蹤撥款：清寒補助',  d:'5/31', u:false, done:false, type:''},
-    {id:7, t:'追蹤撥款：教育部獎學金',d:'完成',u:false,done:true,  type:'', completedAt:'5/21'},
+    {id:4,t:'收件：春暉獎學金申請',     d:'5/30',u:false,done:false,src:''},
+    {id:5,t:'草擬補件通知信',           d:'今天',u:true, done:false,src:''},
+    {id:6,t:'追蹤撥款：清寒補助',       d:'5/31',u:false,done:false,src:''},
+    {id:7,t:'追蹤撥款：教育部獎學金',   d:'完成',u:false,done:true, src:'',completedAt:'5/21'},
   ],
   case:[
-    {id:8,  t:'個案晤談：林○廷',        d:'5/27', u:false, done:false, type:'formal'},
-    {id:9,  t:'個案晤談：王○明',        d:'5/29', u:false, done:false, type:'formal'},
-    {id:10, t:'非個案：教師諮詢（班輔）',d:'5/25', u:false, done:true,  type:'informal', completedAt:'5/25'},
-    {id:11, t:'非個案：家長諮詢',        d:'5/26', u:false, done:false, type:'informal'},
-    {id:12, t:'統計報表：5月份個案數',   d:'5/31', u:false, done:false, type:'stats'},
-    {id:13, t:'統計報表：學期末彙整',    d:'6/15', u:false, done:false, type:'stats'},
+    {id:8, t:'個案晤談：林○廷',            d:'5/27',u:false,done:false,type:'formal',  src:''},
+    {id:9, t:'個案晤談：王○明',            d:'5/29',u:false,done:false,type:'formal',  src:''},
+    {id:10,t:'非個案：教師諮詢（班輔）',   d:'完成', u:false,done:true, type:'informal',src:'',completedAt:'5/25'},
+    {id:11,t:'非個案：家長諮詢',           d:'5/26',u:false,done:false,type:'informal',src:''},
+    {id:12,t:'統計報表：5月份個案數',      d:'5/31',u:false,done:false,type:'stats',   src:''},
+    {id:13,t:'統計報表：學期末彙整',       d:'6/15',u:false,done:false,type:'stats',   src:''},
+    {id:20,t:'【轉出】○○生：確認轉出通知',       d:'待辦',u:false,done:false,type:'transfer',tt:'out',  src:''},
+    {id:21,t:'【轉出】○○生：備妥資料寄出',       d:'待辦',u:false,done:false,type:'transfer',tt:'out',  src:''},
+    {id:22,t:'【轉入】○○生：確認轉入通知',       d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
+    {id:23,t:'【轉入】○○生：發家長同意書',       d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
+    {id:24,t:'【轉入】○○生：發函索取原校資料',   d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
+    {id:25,t:'【轉入】○○生：收到資料後更新歸檔', d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
+    {id:26,t:'【休學】○○生：本學期關心電訪',     d:'學期末前',u:false,done:false,type:'transfer',tt:'leave',src:''},
+    {id:27,t:'【轉銜】召開轉銜評估會議',           d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
+    {id:28,t:'【轉銜】依決議名單通報至系統',       d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
   ],
 };
-
-const PROMPTS = [
+const PROMPTS=[
   {cat:'doc',title:'計畫書草稿產出',desc:'上傳公文 PDF，自動產出計畫書草稿',
    prompt:`我是嘉義市私立輔仁高級中學輔導處組長，請根據以下資料幫我完成計畫書草稿：\n\n【學校基本資料】\n學校：嘉義市私立輔仁高級中學\n單位：輔導處\n承辦人：林威廷\n\n【計畫案資料】（請填入）\n計畫名稱：\n來文機關：\n補助金額：\n執行期程：\n\n請以正式公文格式產出，用【待確認】標記需補充處。`},
   {cat:'doc',title:'簽呈草稿',desc:'快速產出簽呈格式文件',
@@ -462,291 +375,299 @@ const PROMPTS = [
    prompt:`請幫我將以下非個案晤談轉為簡短摘要文字：\n\n【填入資料】\n日期：\n對象類型：教師 / 家長 / 一般學生\n諮詢主題：\n處理方式：\n後續追蹤：有 / 無\n\n請產出 50 字以內的摘要文字，語氣客觀簡潔。`},
   {cat:'report',title:'月報摘要產出',desc:'將統計數字轉為文字摘要段落',
    prompt:`請根據以下本月統計數據，產出一段約 150 字的月報摘要文字：\n\n【填入數據】\n個案晤談次數：\n新收個案：\n結案個案：\n非個案諮詢：\n獎學金辦理件數：\n公文處理件數：\n辦理活動或研習：\n\n語氣正式，適合做為月報呈報文字。`},
-  {cat:'report',title:'個案統計報表',desc:'產出個案輔導統計分析',
-   prompt:`請根據以下數據產出個案輔導統計報表摘要：\n\n【填入數據】\n統計區間：\n個案總數：\n性別分布：男____人 女____人\n年級分布：高一____人 高二____人 高三____人\n主訴類別分布：學業____人 人際____人 家庭____人 情緒____人 其他____人\n平均晤談次數：\n結案數：\n\n請輸出約 200 字的文字摘要，並標示需特別關注的趨勢。`},
+  {cat:'report',title:'個案統計報表摘要',desc:'產出個案輔導統計分析',
+   prompt:`請根據以下數據產出個案輔導統計報表摘要：\n\n【填入數據】\n統計區間：\n個案總數：\n性別分布：男____人 女____人\n年級分布：高一____人 高二____人 高三____人\n主訴類別：學業____人 人際____人 家庭____人 情緒____人 其他____人\n平均晤談次數：\n結案數：\n\n請輸出約 200 字的文字摘要，並標示需特別關注的趨勢。`},
 ];
 
 /* ══ STATE ══ */
-let curKey = 'sch';
-let curCaseTab = 'formal';
-let tasks = {};
+let curKey='sch', curCaseTab='formal', tasks={};
 
 /* ══ INIT ══ */
 function init(){
-  const saved = localStorage.getItem('wp_tasks_v2');
-  tasks = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  updateDate();
-  updateStats();
-  selectCard('sch');
-  renderPrompts('all');
+  const saved=localStorage.getItem('wp_tasks_v3');
+  tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
+  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all');
 }
-
-function save(){ localStorage.setItem('wp_tasks_v2', JSON.stringify(tasks)); }
-
+function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
 function clearAllData(){
-  if(!confirm('確定要重置所有任務資料嗎？此動作不可復原。')) return;
-  localStorage.removeItem('wp_tasks_v2');
-  tasks = JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  save(); updateStats(); updatePanel(curKey); showToast('資料已重置');
+  if(!confirm('確定要重置所有任務資料嗎？此動作不可復原。'))return;
+  localStorage.removeItem('wp_tasks_v3');
+  tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
+  save();updateStats();updatePanel(curKey);showToast('資料已重置');
 }
 
 /* ══ DATE ══ */
 function updateDate(){
-  const n=new Date(), days=['日','一','二','三','四','五','六'];
-  document.getElementById('hdr-date').textContent=
-    `${n.getFullYear()} / ${String(n.getMonth()+1).padStart(2,'0')} / ${String(n.getDate()).padStart(2,'0')}（週${days[n.getDay()]}）`;
+  const n=new Date(),days=['日','一','二','三','四','五','六'];
+  document.getElementById('hdr-date').textContent=`${n.getFullYear()} / ${String(n.getMonth()+1).padStart(2,'0')} / ${String(n.getDate()).padStart(2,'0')}（週${days[n.getDay()]}）`;
 }
 
 /* ══ STATS ══ */
-function getUrgentAll(){
-  return ['doc','sch','case'].flatMap(k=>(tasks[k]||[]).filter(t=>!t.done&&t.u));
-}
-
+function getUrgentAll(){return ['doc','sch','case'].flatMap(k=>(tasks[k]||[]).filter(t=>!t.done&&t.u));}
 function updateStats(){
   ['doc','sch','case'].forEach(k=>{
     const pending=(tasks[k]||[]).filter(t=>!t.done).length;
-    const el=document.getElementById('s-'+k); if(el) el.textContent=pending;
-    const b=document.getElementById('badge-'+k);
-    if(b){b.textContent=pending;b.style.display=pending?'flex':'none';}
-    const total=(tasks[k]||[]).length, done=total-pending;
-    const pct=total?Math.round(done/total*100):0;
-    const pEl=document.getElementById('prog-'+k); if(pEl) pEl.style.width=pct+'%';
-    const pTxt=document.getElementById('prog-'+k+'-txt'); if(pTxt) pTxt.textContent=pending+' 件';
+    const el=document.getElementById('s-'+k);if(el)el.textContent=pending;
+    const b=document.getElementById('badge-'+k);if(b){b.textContent=pending;b.style.display=pending?'flex':'none';}
+    const total=(tasks[k]||[]).length,pct=total?Math.round((total-pending)/total*100):0;
+    const pEl=document.getElementById('prog-'+k);if(pEl)pEl.style.width=pct+'%';
+    const pTxt=document.getElementById('prog-'+k+'-txt');if(pTxt)pTxt.textContent=pending+' 件';
   });
-  const urgItems=getUrgentAll();
-  const urgCount=urgItems.length;
+  const urgCount=getUrgentAll().length;
   document.getElementById('s-urg').textContent=urgCount;
   document.getElementById('prog-urg-txt').textContent=urgCount+' 件';
-  const urgPEl=document.getElementById('prog-urg');
-  if(urgPEl) urgPEl.style.width=urgCount>0?'100%':'0%';
-  const bn=document.getElementById('badge-urg-nav');
-  if(bn){bn.textContent=urgCount;bn.style.display=urgCount?'flex':'none';}
-  const allPending=['doc','sch','case'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
-  const ba=document.getElementById('badge-all');
-  if(ba){ba.textContent=allPending;ba.style.display=allPending?'flex':'none';}
+  const pUrg=document.getElementById('prog-urg');if(pUrg)pUrg.style.width=urgCount?'100%':'0%';
+  const bn=document.getElementById('badge-urg-nav');if(bn){bn.textContent=urgCount;bn.style.display=urgCount?'flex':'none';}
+  const allP=['doc','sch','case'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
+  const ba=document.getElementById('badge-all');if(ba){ba.textContent=allP;ba.style.display=allP?'flex':'none';}
 }
 
-/* ══ CARD SELECT ══ */
+/* ══ CARD ══ */
 function selectCard(key){
   curKey=key;
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
-  const card=document.getElementById('card-'+key);
-  if(card) card.classList.add('sel');
+  const c=document.getElementById('card-'+key);if(c)c.classList.add('sel');
   updatePanel(key);
 }
 
-/* ══ PANEL RENDER ══ */
+/* ══ PANEL ══ */
 function updatePanel(key){
-  const meta=META[key]; if(!meta) return;
+  const meta=META[key];if(!meta)return;
   document.getElementById('p-title').textContent=meta.label;
   document.getElementById('p-ico').className='p-ico '+meta.ico;
   document.getElementById('p-ico').innerHTML=`<i class="ti ${meta.icon}"></i>`;
   const pb=document.getElementById('panel-body');
-  if(key==='urg')      pb.innerHTML=buildUrgPanel();
-  else if(key==='case') pb.innerHTML=buildCasePanel();
-  else                  pb.innerHTML=buildStdPanel(key);
-  if(key==='case') switchCaseTab(curCaseTab);
+  if(key==='urg')       pb.innerHTML=buildUrgPanel();
+  else if(key==='case') {pb.innerHTML=buildCasePanel(); renderCaseTab(curCaseTab);}
+  else                  {pb.innerHTML=buildStdPanel(key); renderTaskList(key);}
 }
 
-/* Standard panel */
+function taskHTML(t,key,ri){
+  const srcTag=t.src&&SRC_LABELS[t.src]?`<span class="src-tag src-${t.src}">${SRC_LABELS[t.src]}</span>`:'';
+  return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
+    <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
+    ${srcTag}
+    <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
+    <span class="t-date ${t.u&&!t.done?'urg':''}" ondblclick="editDate(this,'${key}',${ri})">${t.done&&t.completedAt?t.completedAt:t.d}</span>
+    <div class="t-actions">
+      <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${ri})"><i class="ti ti-bolt"></i></button>
+      <button class="t-act-btn" onclick="deleteTask('${key}',${ri})"><i class="ti ti-x"></i></button>
+    </div>
+  </div>`;
+}
+
+function renderTaskList(key,subType){
+  const listId=subType?`task-list-${subType}`:'task-list';
+  const el=document.getElementById(listId);if(!el)return;
+  const all=tasks[key]||[];
+  const filtered=subType?all.filter(t=>t.type===subType):all;
+  const pending=filtered.filter(t=>!t.done), done=filtered.filter(t=>t.done);
+  el.innerHTML=[...pending,...done].map(t=>taskHTML(t,key,all.indexOf(t))).join('');
+}
+
+function renderTransferTasks(){
+  const el=document.getElementById('transfer-groups');if(!el)return;
+  const all=tasks.case||[];
+  el.innerHTML=TRANSFER_TYPES.map(tt=>{
+    const items=all.filter(t=>t.type==='transfer'&&t.tt===tt.key);
+    const pending=items.filter(t=>!t.done), done=items.filter(t=>t.done);
+    const ordered=[...pending,...done];
+    return `<div class="tr-group">
+      <div class="tr-group-hdr" style="color:${tt.color}">
+        ${tt.label}
+        ${pending.length?`<span class="tr-count" style="background:${tt.color}22;color:${tt.color}">${pending.length}</span>`:''}
+      </div>
+      ${ordered.length?ordered.map(t=>taskHTML(t,'case',all.indexOf(t))).join(''):`<div class="tr-empty">目前無${tt.label}案件</div>`}
+    </div>`;
+  }).join('');
+}
+
+function renderCaseTab(tab){
+  curCaseTab=tab;
+  document.querySelectorAll('.p-tab').forEach(t=>t.classList.toggle('on',t.dataset.key===tab));
+  document.querySelectorAll('.p-tab-content').forEach(t=>t.classList.remove('on'));
+  const tc=document.getElementById('tab-'+tab);if(tc)tc.classList.add('on');
+  if(tab==='transfer') renderTransferTasks();
+  else renderTaskList('case',tab);
+}
+
+/* ══ PANEL BUILDERS ══ */
+function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
+  return `<div class="add-task-form" id="add-task-form-${id}">
+    <input type="text" id="new-task-txt-${id}" placeholder="${placeholder}" onkeydown="if(event.key==='Enter')${onConfirm}">
+    <div class="atf-row">
+      <input type="text" id="new-task-date-${id}" placeholder="期限" style="flex:2">
+      <select id="new-task-src-${id}" style="flex:1">
+        <option value="">內部</option><option value="cross">跨處室</option><option value="external">外部</option>
+      </select>
+    </div>
+    ${extraRow}
+    <div class="atf-row">
+      <button class="atf-ok" onclick="${onConfirm}">確認新增</button>
+      <button class="atf-cancel" onclick="${onCancel}">取消</button>
+    </div>
+  </div>
+  <button class="add-task-btn" id="add-task-btn-${id}" onclick="showForm('${id}')"><i class="ti ti-plus"></i>新增任務</button>`;
+}
+
 function buildStdPanel(key){
-  const links=(LINKS[key]||[]).map(l=>`
-    <button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}">
-      <i class="ti ${l.i}"></i>${l.l}
-    </button>`).join('');
+  const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
   return `
-    <div class="p-sec" style="overflow-y:auto;max-height:240px">
+    <div class="p-sec" style="overflow-y:auto;max-height:230px">
       <div class="p-sec-lbl">任務清單</div>
       <div class="task-list" id="task-list"></div>
-      <div class="add-task-form" id="add-task-form">
-        <input type="text" id="new-task-txt" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddTask()">
-        <div class="atf-row">
-          <input type="text" id="new-task-date" placeholder="期限（如 5/30 或 今天）" style="flex:1">
-        </div>
-        <div class="atf-row">
-          <button class="atf-ok" onclick="confirmAddTask()">確認新增</button>
-          <button class="atf-cancel" onclick="hideAddTask()">取消</button>
-        </div>
-      </div>
-      <button class="add-task-btn" id="add-task-btn" onclick="showAddTask()"><i class="ti ti-plus"></i>新增任務</button>
+      ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
     </div>
-    <div class="p-sec">
-      <div class="p-sec-lbl">快速連結</div>
-      <div class="qlinks">${links}</div>
-    </div>
+    <div class="p-sec"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${links}</div></div>
     <div class="chat-area" id="chat-area">
       <div class="msg-from">${META[key].label}助理</div>
       <div class="msg msg-ai">${CHAT_INTRO[key]||''}</div>
     </div>
     <div class="p-inp">
-      <input type="text" id="chat-inp" placeholder="輸入訊息或指令...">
+      <input type="text" id="chat-inp" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendMsg()">
       <button class="send-btn" onclick="sendMsg()"><i class="ti ti-send"></i></button>
     </div>`;
 }
 
-/* Case panel with tabs */
 function buildCasePanel(){
-  const tabsHtml=CASE_TABS.map(t=>`
-    <button class="p-tab ${t.key===curCaseTab?'on':''}" onclick="switchCaseTab('${t.key}')">${t.label}</button>`).join('');
-  const caseLinks=(LINKS.case||[]).map(l=>`
-    <button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}">
-      <i class="ti ${l.i}"></i>${l.l}
-    </button>`).join('');
-  return `
-    <div class="p-tabs">${tabsHtml}</div>
-    ${CASE_TABS.map(t=>`
+  const tabsHtml=CASE_TABS.map(t=>`<button class="p-tab ${t.key===curCaseTab?'on':''}" data-key="${t.key}" onclick="renderCaseTab('${t.key}')">${t.label}</button>`).join('');
+  const caseLinks=(LINKS.case||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
+  const stdTabs=CASE_TABS.filter(t=>t.key!=='transfer').map(t=>`
     <div class="p-tab-content ${t.key===curCaseTab?'on':''}" id="tab-${t.key}">
       <div class="p-sec" style="overflow-y:auto;flex:1">
-        <div class="p-sec-lbl">${t.label}任務</div>
         <div class="task-list" id="task-list-${t.key}"></div>
-        <div class="add-task-form" id="add-task-form-${t.key}">
-          <input type="text" id="new-task-txt-${t.key}" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddCaseTask('${t.key}')">
+        ${addFormHTML(t.key,`confirmAddCase('${t.key}')`,`hideForm('${t.key}')`, t.label+'任務名稱...')}
+      </div>
+    </div>`).join('');
+  return `
+    <div class="p-tabs">${tabsHtml}</div>
+    ${stdTabs}
+    <div class="p-tab-content ${curCaseTab==='transfer'?'on':''}" id="tab-transfer">
+      <div class="transfer-scroll">
+        <div id="transfer-groups"></div>
+        <div class="add-task-form" id="add-task-form-transfer">
+          <input type="text" id="new-task-txt-transfer" placeholder="學生姓名 + 動作..." onkeydown="if(event.key==='Enter')confirmAddTransfer()">
           <div class="atf-row">
-            <input type="text" id="new-task-date-${t.key}" placeholder="期限" style="flex:1">
+            <select id="new-task-tt" style="flex:1">
+              ${TRANSFER_TYPES.map(t=>`<option value="${t.key}">${t.label}</option>`).join('')}
+            </select>
+            <input type="text" id="new-task-date-transfer" placeholder="期限" style="flex:1">
           </div>
           <div class="atf-row">
-            <button class="atf-ok" onclick="confirmAddCaseTask('${t.key}')">確認新增</button>
-            <button class="atf-cancel" onclick="hideAddCaseTask('${t.key}')">取消</button>
+            <button class="atf-ok" onclick="confirmAddTransfer()">確認新增</button>
+            <button class="atf-cancel" onclick="hideForm('transfer')">取消</button>
           </div>
         </div>
-        <button class="add-task-btn" id="add-task-btn-${t.key}" onclick="showAddCaseTask('${t.key}')"><i class="ti ti-plus"></i>新增${t.label}任務</button>
+        <button class="add-task-btn" id="add-task-btn-transfer" onclick="showForm('transfer')"><i class="ti ti-plus"></i>新增異動任務</button>
       </div>
-    </div>`).join('')}
-    <div class="p-sec" style="flex-shrink:0">
-      <div class="p-sec-lbl">快速連結</div>
-      <div class="qlinks">${caseLinks}</div>
-    </div>`;
+    </div>
+    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${caseLinks}</div></div>`;
 }
 
-/* Urgent panel */
 function buildUrgPanel(){
   const urgItems=getUrgentAll();
-  if(!urgItems.length) return `<div class="empty-state" style="padding:30px 20px"><i class="ti ti-circle-check" style="font-size:28px;margin-bottom:8px;display:block;color:var(--g3)"></i><p style="font-size:13px;color:var(--t3)">目前沒有緊急項目</p></div>`;
+  if(!urgItems.length)return`<div class="urg-scroll"><div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有緊急項目</p></div></div>`;
   const groups={doc:[],sch:[],case:[]};
-  ['doc','sch','case'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i})}));
-  let html='<div class="urg-panel">';
+  ['doc','sch','case'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
+  let html='<div class="urg-scroll">';
   Object.entries(groups).forEach(([k,items])=>{
-    if(!items.length) return;
-    html+=`<div class="urg-group">
-      <div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
-      ${items.map(t=>`
-      <div class="urg-item">
-        <i class="ti ti-alert-triangle" style="font-size:13px;color:var(--r3);flex-shrink:0"></i>
-        <span class="urg-item-txt">${t.t}</span>
-        <span class="urg-item-date">${t.d}</span>
-        <button class="urg-resolve" onclick="resolveUrgent('${t.key}',${t.idx})" title="標記完成"><i class="ti ti-check"></i></button>
-      </div>`).join('')}
-    </div>`;
+    if(!items.length)return;
+    html+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
+    ${items.map(t=>`<div class="urg-item"><i class="ti ti-alert-triangle" style="font-size:13px;color:var(--r3);flex-shrink:0"></i>
+      <span class="urg-item-txt">${t.t}</span><span class="urg-item-date">${t.d}</span>
+      <button class="urg-resolve" onclick="resolveUrgent('${t.key}',${t.idx})" title="完成"><i class="ti ti-check"></i></button>
+    </div>`).join('')}</div>`;
   });
-  html+=`<div style="margin-top:12px;font-size:11px;color:var(--t3);text-align:center">在各模組任務列按 ⚡ 可標記緊急</div></div>`;
+  html+=`<div style="margin-top:8px;font-size:11px;color:var(--t3);text-align:center">在各模組任務列 hover 後按 ⚡ 標記緊急</div></div>`;
   return html;
 }
 
-/* ══ TASK RENDER ══ */
-function renderTaskList(key, subType){
-  const listId = subType ? `task-list-${subType}` : 'task-list';
-  const el = document.getElementById(listId); if(!el) return;
-  const allTasks = tasks[key]||[];
-  const filtered = subType ? allTasks.filter(t=>t.type===subType) : allTasks;
-  const pending = filtered.filter(t=>!t.done);
-  const done    = filtered.filter(t=>t.done);
-  const ordered = [...pending,...done];
-  el.innerHTML = ordered.map(t=>{
-    const realIdx = allTasks.indexOf(t);
-    return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
-      <div class="t-chk" onclick="toggleTask('${key}',${realIdx})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
-      <span class="t-txt" ondblclick="editTask(this,'${key}',${realIdx})">${t.t}</span>
-      <span class="t-date ${t.u&&!t.done?'urg':''}">${t.done&&t.completedAt?t.completedAt:t.d}</span>
-      <div class="t-actions">
-        <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${realIdx})" title="${t.u?'取消緊急':'標記緊急'}"><i class="ti ti-bolt"></i></button>
-        <button class="t-act-btn" onclick="deleteTask('${key}',${realIdx})" title="刪除"><i class="ti ti-x"></i></button>
-      </div>
-    </div>`;
-  }).join('');
+/* ══ FORM HELPERS ══ */
+function showForm(id){
+  const f=document.getElementById('add-task-form-'+id);if(f)f.classList.add('show');
+  const b=document.getElementById('add-task-btn-'+id);if(b)b.style.display='none';
+  const inp=document.getElementById('new-task-txt-'+id);if(inp)inp.focus();
+}
+function hideForm(id){
+  const f=document.getElementById('add-task-form-'+id);if(f)f.classList.remove('show');
+  const b=document.getElementById('add-task-btn-'+id);if(b)b.style.display='flex';
+  ['txt','date'].forEach(n=>{const el=document.getElementById(`new-task-${n}-${id}`);if(el)el.value='';});
 }
 
-function renderAllCaseTabs(){
-  CASE_TABS.forEach(t=>renderTaskList('case',t.key));
+/* ══ ADD TASK ══ */
+function confirmAdd(key){
+  const txt=document.getElementById('new-task-txt-'+key)?.value.trim();
+  if(!txt){showToast('請輸入任務名稱');return;}
+  const date=document.getElementById('new-task-date-'+key)?.value.trim()||'待定';
+  const src=document.getElementById('new-task-src-'+key)?.value||'';
+  tasks[key].unshift({id:Date.now(),t:txt,d:date,u:false,done:false,src:src});
+  save();updateStats();updatePanel(key);showToast('任務已新增');
+}
+function confirmAddCase(tab){
+  const txt=document.getElementById('new-task-txt-'+tab)?.value.trim();
+  if(!txt){showToast('請輸入任務名稱');return;}
+  const date=document.getElementById('new-task-date-'+tab)?.value.trim()||'待定';
+  const src=document.getElementById('new-task-src-'+tab)?.value||'';
+  tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:tab,src:src});
+  save();updateStats();updatePanel('case');showToast('任務已新增');
+}
+function confirmAddTransfer(){
+  const txt=document.getElementById('new-task-txt-transfer')?.value.trim();
+  if(!txt){showToast('請輸入任務名稱');return;}
+  const tt=document.getElementById('new-task-tt')?.value||'out';
+  const date=document.getElementById('new-task-date-transfer')?.value.trim()||'待辦';
+  tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:'transfer',tt:tt,src:''});
+  save();updateStats();curCaseTab='transfer';updatePanel('case');showToast('異動任務已新增');
 }
 
 /* ══ TASK OPS ══ */
 function toggleTask(key,idx){
-  const t=tasks[key][idx];
-  t.done=!t.done;
+  const t=tasks[key][idx];t.done=!t.done;
   if(t.done){const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;}
-  save(); refreshPanel(key); updateStats();
+  save();updateStats();updatePanel(key===curKey?key:curKey);
+  if(curKey==='urg')updatePanel('urg');
 }
-
 function toggleUrgent(key,idx){
   tasks[key][idx].u=!tasks[key][idx].u;
-  save(); refreshPanel(key); updateStats();
-  showToast(tasks[key][idx].u?'已標記為緊急':'已取消緊急');
+  save();updateStats();
+  if(curKey===key)updatePanel(key);
+  if(curKey==='urg')updatePanel('urg');
+  showToast(tasks[key][idx].u?'已標記緊急':'已取消緊急');
 }
-
 function resolveUrgent(key,idx){
-  const t=tasks[key][idx]; t.done=true; t.u=false;
-  const n=new Date(); t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
-  save(); updatePanel('urg'); updateStats(); showToast('已完成');
+  const t=tasks[key][idx];t.done=true;t.u=false;
+  const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  save();updateStats();updatePanel('urg');showToast('已完成');
 }
-
 function deleteTask(key,idx){
   tasks[key].splice(idx,1);
-  save(); refreshPanel(key); updateStats(); showToast('任務已刪除');
+  save();updateStats();
+  if(curKey===key)updatePanel(key);
+  showToast('任務已刪除');
 }
-
 function editTask(el,key,idx){
-  if(tasks[key][idx].done) return;
+  if(tasks[key][idx].done)return;
   const cur=tasks[key][idx].t;
-  el.outerHTML=`<input class="t-edit-input" value="${cur}" id="edit-inp-${idx}"
+  el.outerHTML=`<input class="t-edit-input" value="${cur.replace(/"/g,'&quot;')}" id="ei-${idx}"
     onblur="saveEdit('${key}',${idx},this.value)"
-    onkeydown="if(event.key==='Enter')this.blur();if(event.key==='Escape'){this.value='${cur}';this.blur()}">`;
-  document.getElementById('edit-inp-'+idx).focus();
+    onkeydown="if(event.key==='Enter')this.blur();if(event.key==='Escape'){this.value='${cur.replace(/'/g,"\\'")}';this.blur()}">`;
+  document.getElementById('ei-'+idx)?.focus();
 }
-
 function saveEdit(key,idx,val){
-  val=val.trim();
-  if(val) tasks[key][idx].t=val;
-  save(); refreshPanel(key);
+  val=val.trim();if(val)tasks[key][idx].t=val;
+  save();if(curKey===key)updatePanel(key);
 }
-
-function refreshPanel(key){
-  if(curKey===key){
-    if(key==='case') renderAllCaseTabs();
-    else renderTaskList(key);
-  }
-  if(curKey==='urg') updatePanel('urg');
+function editDate(el,key,idx){
+  if(tasks[key][idx].done)return;
+  const cur=tasks[key][idx].d;
+  el.outerHTML=`<input class="t-date-input" value="${cur}" id="di-${idx}"
+    onblur="saveDate('${key}',${idx},this.value)"
+    onkeydown="if(event.key==='Enter')this.blur();if(event.key==='Escape'){this.value='${cur}';this.blur()}">`;
+  document.getElementById('di-'+idx)?.focus();
 }
-
-/* ADD TASK - standard */
-function showAddTask(){ document.getElementById('add-task-form').classList.add('show'); document.getElementById('add-task-btn').style.display='none'; document.getElementById('new-task-txt').focus(); }
-function hideAddTask(){ document.getElementById('add-task-form').classList.remove('show'); document.getElementById('add-task-btn').style.display='flex'; document.getElementById('new-task-txt').value=''; document.getElementById('new-task-date').value=''; }
-function confirmAddTask(){
-  const txt=document.getElementById('new-task-txt').value.trim();
-  if(!txt){showToast('請輸入任務名稱');return;}
-  const date=document.getElementById('new-task-date').value.trim()||'待定';
-  tasks[curKey].unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:''});
-  save(); renderTaskList(curKey); updateStats(); hideAddTask(); showToast('任務已新增');
-}
-
-/* ADD TASK - case */
-function showAddCaseTask(tab){ document.getElementById('add-task-form-'+tab).classList.add('show'); document.getElementById('add-task-btn-'+tab).style.display='none'; document.getElementById('new-task-txt-'+tab).focus(); }
-function hideAddCaseTask(tab){ document.getElementById('add-task-form-'+tab).classList.remove('show'); document.getElementById('add-task-btn-'+tab).style.display='flex'; document.getElementById('new-task-txt-'+tab).value=''; document.getElementById('new-task-date-'+tab).value=''; }
-function confirmAddCaseTask(tab){
-  const txt=document.getElementById('new-task-txt-'+tab).value.trim();
-  if(!txt){showToast('請輸入任務名稱');return;}
-  const date=document.getElementById('new-task-date-'+tab).value.trim()||'待定';
-  tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:tab});
-  save(); renderTaskList('case',tab); updateStats(); hideAddCaseTask(tab); showToast('任務已新增');
-}
-function showAddTaskFor(key,tab){ selectCard(key); setTimeout(()=>{ if(tab) showAddCaseTask(tab); else showAddTask(); },100); }
-
-/* CASE TABS */
-function switchCaseTab(tab){
-  curCaseTab=tab;
-  document.querySelectorAll('.p-tab').forEach(t=>t.classList.toggle('on',t.textContent===CASE_TABS.find(ct=>ct.key===tab)?.label));
-  document.querySelectorAll('.p-tab-content').forEach(t=>t.classList.remove('on'));
-  const tc=document.getElementById('tab-'+tab); if(tc) tc.classList.add('on');
-  renderTaskList('case',tab);
+function saveDate(key,idx,val){
+  val=val.trim();if(val)tasks[key][idx].d=val;
+  save();if(curKey===key)updatePanel(key);
 }
 
 /* ══ TASK PAGE ══ */
@@ -756,101 +677,91 @@ function renderTaskPage(){
   keys.forEach(k=>{
     const meta=META[k];
     const pending=(tasks[k]||[]).filter(t=>!t.done);
-    if(!pending.length) return;
+    if(!pending.length)return;
     html+=`<div class="task-page-group">
-      <div class="tp-header">
-        <div class="tp-ico ${meta.ico}"><i class="ti ${meta.icon}"></i></div>
-        <span class="tp-label">${meta.label}</span>
-        <span class="tp-count">${pending.length} 件待辦</span>
-      </div>`;
-    pending.forEach(t=>{
-      const ri=tasks[k].indexOf(t);
-      html+=`<div class="tpi ${t.u?'urg-border':''}">
-        <div class="tpi-chk" onclick="tpToggle('${k}',${ri})" style="cursor:pointer"></div>
+      <div class="tp-hdr"><div class="tp-ico ${meta.ico}"><i class="ti ${meta.icon}"></i></div>
+        <span style="font-size:13px;font-weight:600;color:var(--t1)">${meta.label}</span>
+        <span style="font-size:11px;color:var(--t3)">${pending.length} 件待辦</span></div>
+      ${pending.map(t=>{const ri=(tasks[k]||[]).indexOf(t);return `
+      <div class="tpi">
+        <div class="tpi-chk" onclick="tpToggle('${k}',${ri})"></div>
         <span class="tpi-txt">${t.t}</span>
         ${t.u?'<span class="tpi-urg">緊急</span>':''}
         <span class="tpi-date ${t.u?'urg':''}">${t.d}</span>
         <button class="tpi-del" onclick="tpDelete('${k}',${ri})"><i class="ti ti-x"></i></button>
-      </div>`;
-    });
-    html+='</div>';
+      </div>`;}).join('')}
+    </div>`;
   });
-  if(!html) html=`<div class="empty-state"><i class="ti ti-circle-check"></i><p>目前沒有待辦任務，辛苦了！</p></div>`;
+  if(!html)html=`<div class="empty-state"><i class="ti ti-circle-check"></i><p>目前沒有待辦任務，辛苦了！</p></div>`;
   document.getElementById('task-page-content').innerHTML=html;
 }
-
 function tpToggle(key,idx){
-  const t=tasks[key][idx]; t.done=true; t.u=false;
-  const n=new Date(); t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
-  save(); renderTaskPage(); updateStats(); showToast('已完成');
+  const t=tasks[key][idx];t.done=true;t.u=false;
+  const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  save();renderTaskPage();updateStats();showToast('已完成');
 }
-function tpDelete(key,idx){ tasks[key].splice(idx,1); save(); renderTaskPage(); updateStats(); }
+function tpDelete(key,idx){tasks[key].splice(idx,1);save();renderTaskPage();updateStats();}
 
-/* ══ ARCHIVE PAGE ══ */
+/* ══ ARCHIVE ══ */
 function renderArchivePage(){
-  const keys=['doc','sch','case'];
   let items=[];
-  keys.forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
+  ['doc','sch','case'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
   items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
-  if(!items.length){ document.getElementById('archive-content').innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>還沒有已完成的任務</p></div>`; return; }
-  document.getElementById('archive-content').innerHTML=items.map(t=>`
-    <div class="archive-item">
-      <i class="ti ti-circle-check"></i>
-      <span class="archive-txt">${t.t}</span>
-      <span class="archive-mod ${META[t.key].ico}" style="background:${META[t.key].color}22;color:${META[t.key].color}">${META[t.key].label}</span>
-      <span class="archive-meta">${t.completedAt||t.d}</span>
-    </div>`).join('');
+  const el=document.getElementById('archive-content');
+  if(!items.length){el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>還沒有已完成的任務</p></div>`;return;}
+  el.innerHTML=items.map(t=>`<div class="archive-item">
+    <i class="ti ti-circle-check" style="color:var(--g3);font-size:16px"></i>
+    <span class="archive-txt">${t.t}</span>
+    <span class="archive-mod ${META[t.key].ico}" style="background:${META[t.key].color}22;color:${META[t.key].color}">${META[t.key].label}</span>
+    <span class="archive-meta">${t.completedAt||t.d}</span>
+  </div>`).join('');
 }
 
-/* ══ NAVIGATION ══ */
+/* ══ NAV ══ */
 function navTo(el,page){
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  if(el) el.classList.add('on');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts'};
   document.getElementById(map[page]||'page-dashboard').classList.add('active');
-  if(page==='tasks') renderTaskPage();
-  if(page==='archive') renderArchivePage();
-  if(page==='prompts') renderPrompts('all');
+  if(page==='tasks')renderTaskPage();
+  if(page==='archive')renderArchivePage();
+  if(page==='prompts')renderPrompts('all');
 }
 
 /* ══ PROMPTS ══ */
 function renderPrompts(cat){
   const list=cat==='all'?PROMPTS:PROMPTS.filter(p=>p.cat===cat);
-  document.getElementById('p-cards').innerHTML=list.map((p,i)=>`
-    <div class="p-card">
-      <div class="p-card-title">${p.title}</div>
-      <div class="p-card-desc">${p.desc}</div>
-      <div class="p-card-btns">
-        <button class="pbtn" onclick="copyPrompt(${PROMPTS.indexOf(p)})"><i class="ti ti-copy"></i>複製</button>
-        <button class="pbtn primary" onclick="openClaude(${PROMPTS.indexOf(p)})"><i class="ti ti-external-link"></i>開啟 Claude</button>
-      </div>
-    </div>`).join('');
+  document.getElementById('p-cards').innerHTML=list.map(p=>`<div class="p-card">
+    <div class="p-card-title">${p.title}</div>
+    <div class="p-card-desc">${p.desc}</div>
+    <div class="p-card-btns">
+      <button class="pbtn" onclick="copyPrompt(${PROMPTS.indexOf(p)})"><i class="ti ti-copy"></i>複製</button>
+      <button class="pbtn primary" onclick="openClaude(${PROMPTS.indexOf(p)})"><i class="ti ti-external-link"></i>開啟 Claude</button>
+    </div></div>`).join('');
 }
-function filterPrompt(el,cat){ document.querySelectorAll('.pcat').forEach(c=>c.classList.remove('on')); el.classList.add('on'); renderPrompts(cat); }
-function copyPrompt(i){ navigator.clipboard.writeText(PROMPTS[i].prompt).then(()=>showToast('Prompt 已複製！')); }
-function openClaude(i){ navigator.clipboard.writeText(PROMPTS[i].prompt); showToast('Prompt 已複製，正在開啟 Claude...'); setTimeout(()=>window.open('https://claude.ai/new','_blank'),400); }
+function filterPrompt(el,cat){document.querySelectorAll('.pcat').forEach(c=>c.classList.remove('on'));el.classList.add('on');renderPrompts(cat);}
+function copyPrompt(i){navigator.clipboard.writeText(PROMPTS[i].prompt).then(()=>showToast('Prompt 已複製！'));}
+function openClaude(i){navigator.clipboard.writeText(PROMPTS[i].prompt);showToast('Prompt 已複製，正在開啟 Claude...');setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);}
 function openPromptCategory(cat){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-prompts').classList.add('active');
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(n=>{if((n.getAttribute('onclick')||'').includes('prompts'))n.classList.add('on')});
+  document.querySelectorAll('.ni').forEach(n=>{if((n.getAttribute('onclick')||'').includes('prompts'))n.classList.add('on');});
   renderPrompts(cat);
   document.querySelectorAll('.pcat').forEach(c=>c.classList.toggle('on',(c.getAttribute('onclick')||'').includes(`'${cat}'`)));
 }
 
 /* ══ CHAT ══ */
 function sendMsg(){
-  const inp=document.getElementById('chat-inp'); if(!inp) return;
-  const txt=inp.value.trim(); if(!txt) return;
-  const ca=document.getElementById('chat-area'); if(!ca) return;
-  ca.innerHTML+=`<div class="msg msg-user">${txt}</div>`;
-  inp.value=''; ca.scrollTop=ca.scrollHeight;
+  const inp=document.getElementById('chat-inp');if(!inp)return;
+  const txt=inp.value.trim();if(!txt)return;
+  const ca=document.getElementById('chat-area');if(!ca)return;
+  ca.innerHTML+=`<div class="msg msg-user">${txt}</div>`;inp.value='';ca.scrollTop=ca.scrollHeight;
 }
 
 /* ══ UTILS ══ */
-function openLink(url){ if(!url||url==='#') return; window.open(url,'_blank'); }
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+function openLink(url){if(!url||url==='#')return;window.open(url,'_blank');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
 init();
 </script>

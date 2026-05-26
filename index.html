@@ -263,6 +263,67 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .exp-entry label{font-size:12px;color:var(--t1);flex:1;line-height:1.4;cursor:pointer}
 .exp-lines{font-size:10px;color:var(--t3);white-space:nowrap;margin-top:2px}
 .exp-empty-day{font-size:11px;color:var(--t3);font-style:italic;padding:2px 4px}
+/* NAV BADGE FIX */
+.ni-badge{margin-left:auto;margin-right:2px}
+/* SETTINGS PAGE */
+.settings-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:18px 20px;margin-bottom:16px}
+.settings-section-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.settings-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.settings-label{font-size:12px;color:var(--t2);min-width:80px;flex-shrink:0}
+.settings-input{height:32px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);flex:1;min-width:0}
+.settings-input:focus{border-color:var(--g3);background:var(--surface)}
+.settings-btn{height:32px;padding:0 14px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:5px;transition:.12s}
+.settings-btn.primary{background:var(--g3);border:none;color:#fff}.settings-btn.primary:hover{background:var(--g1)}
+.settings-btn.ghost{background:var(--surface-2);border:1px solid var(--border);color:var(--t2)}.settings-btn.ghost:hover{background:var(--border);color:var(--t1)}
+.settings-btn.danger{background:var(--r5);border:1px solid #FFCDD2;color:var(--r1)}.settings-btn.danger:hover{background:#FFCDD2}
+/* QUICK LINKS MANAGER */
+.ql-manage-list{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.ql-manage-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:var(--rad-s);font-size:12px}
+.ql-manage-item-label{flex:1;color:var(--t1)}
+.ql-manage-item-url{font-size:11px;color:var(--t3);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ql-manage-del{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 3px;border-radius:3px;transition:.12s}
+.ql-manage-del:hover{color:var(--r3);background:var(--r5)}
+.ql-add-row{display:flex;gap:6px;flex-wrap:wrap}
+.ql-add-row input{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.ql-add-row input:focus{border-color:var(--g3);background:var(--surface)}
+/* STATS PAGE */
+.stats-page-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
+.stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.stats-page-tab:hover{color:var(--t1)}.stats-page-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
+.stats-content{display:none}.stats-content.on{display:block}
+.stats-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.stats-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.stats-add-btn:hover{background:var(--g1)}
+.stats-export-grp{display:flex;gap:6px}
+.stats-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.stats-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
+.stats-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px 16px;margin-bottom:16px;display:none}
+.stats-form.show{display:block}
+.stats-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:10px}
+.stats-form .sf-label{font-size:11px;color:var(--t2);margin-bottom:3px;display:block}
+.stats-form input,.stats-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.stats-form input:focus,.stats-form select:focus{border-color:var(--g3);background:var(--surface)}
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:4px;margin-bottom:10px}
+.prob-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t2);cursor:pointer;padding:2px 0}
+.prob-item input[type=checkbox]{width:13px;height:13px;accent-color:var(--g3);flex-shrink:0;margin:0;cursor:pointer}
+.sf-actions{display:flex;gap:6px;margin-top:4px}
+.sf-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.sf-ok:hover{background:var(--g1)}
+.sf-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:20px}
+.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px}
+.chart-box.wide{grid-column:1/-1}
+.chart-box-title{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:10px}
+.data-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);overflow:hidden;margin-bottom:16px;overflow-x:auto}
+.data-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}
+.data-table th{background:var(--surface-2);color:var(--t3);font-weight:500;padding:7px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.data-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--t1);vertical-align:top;white-space:normal}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tbody tr:hover td{background:var(--surface-2)}
+.dt-del{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:0 2px;border-radius:3px;transition:.12s}
+.dt-del:hover{color:var(--r3);background:var(--r5)}
+.prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
+.stats-sub-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -299,8 +360,9 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="ndiv"></div>
   <div>
     <div class="nav-lbl">工具</div>
+    <button class="ni" onclick="navTo(this,'stats')"><i class="ti ti-chart-bar"></i>統計報表</button>
     <button class="ni" onclick="navTo(this,'prompts')"><i class="ti ti-template"></i>Prompt 模板庫</button>
-    <button class="ni" onclick="clearAllData()"><i class="ti ti-refresh"></i>重置資料</button>
+    <button class="ni" onclick="navTo(this,'settings')"><i class="ti ti-settings"></i>設定</button>
   </div>
 </nav>
 
@@ -339,6 +401,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
       <div class="c-foot"><span class="badge bdg-urg">● 緊急</span><span style="font-size:11px;color:var(--t3)">各模組 ⚡ 標記</span></div>
     </div>
+
   </div>
   <div class="sec-lbl">最近存檔</div>
   <div class="rec-list">
@@ -385,6 +448,145 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div id="journal-list"></div>
 </div>
 
+<!-- SETTINGS PAGE -->
+<div class="page" id="page-settings">
+  <div class="sec-lbl" style="margin-bottom:16px">設定</div>
+
+  <!-- 使用者資訊 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-user"></i>使用者資訊</div>
+    <div class="settings-row">
+      <span class="settings-label">顯示名稱</span>
+      <input class="settings-input" type="text" id="set-username" placeholder="例：威廷" style="max-width:200px">
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">單位</span>
+      <input class="settings-input" type="text" id="set-unit" placeholder="例：心輔組 · 輔仁高中" style="max-width:260px">
+    </div>
+    <div class="settings-row" style="margin-top:4px">
+      <button class="settings-btn primary" onclick="saveUserSettings()"><i class="ti ti-device-floppy"></i>儲存</button>
+    </div>
+  </div>
+
+  <!-- 快速連結管理 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-link"></i>自訂快速連結</div>
+    <div class="ql-manage-list" id="custom-links-list"></div>
+    <div class="ql-add-row">
+      <input type="text" id="ql-new-label" placeholder="名稱（如：彙整表）" style="flex:1;min-width:100px">
+      <input type="text" id="ql-new-url" placeholder="URL（https://...）" style="flex:2;min-width:160px">
+      <button class="settings-btn primary" onclick="addCustomLink()"><i class="ti ti-plus"></i>新增</button>
+    </div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px">自訂連結會顯示在各模組右側面板的快速連結區。</div>
+  </div>
+
+  <!-- 資料管理 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-database"></i>資料管理</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.6">資料儲存於瀏覽器 localStorage。換瀏覽器或清快取前請先匯出備份。</div>
+    <div class="data-io-row">
+      <button class="settings-btn ghost" onclick="exportAllData()"><i class="ti ti-download"></i>匯出備份（JSON）</button>
+      <button class="settings-btn ghost" onclick="document.getElementById('import-file-input').click()"><i class="ti ti-upload"></i>匯入備份</button>
+      <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="importAllData(this)">
+      <button class="settings-btn danger" onclick="clearAllData()"><i class="ti ti-refresh"></i>重置所有資料</button>
+    </div>
+  </div>
+
+  <!-- 關於 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-info-circle"></i>關於</div>
+    <div style="font-size:12px;color:var(--t2);line-height:1.8">
+      威廷工作平台 <span style="color:var(--t3)">v7</span><br>
+      單一 HTML · localStorage 儲存 · 無後端<br>
+      <a href="https://wtling61-droid.github.io/work-platform/" target="_blank" style="color:var(--g2)">🌐 https://wtling61-droid.github.io/work-platform/</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS PAGE -->
+<div class="page" id="page-stats">
+  <div class="sec-lbl" style="margin-bottom:16px">統計報表</div>
+  <div class="stats-page-tabs">
+    <button class="stats-page-tab on" onclick="switchStatsTab('cases',this)">個案統計</button>
+    <button class="stats-page-tab" onclick="switchStatsTab('services',this)">相關服務統計</button>
+  </div>
+
+  <!-- 個案統計 -->
+  <div class="stats-content on" id="stats-cases">
+    <div class="stats-toolbar">
+      <button class="stats-add-btn" onclick="toggleStatsForm('case-form')"><i class="ti ti-plus"></i>新增個案</button>
+      <div class="stats-export-grp">
+        <button class="stats-export-btn" onclick="exportCasesCSV()"><i class="ti ti-download"></i>CSV</button>
+        <button class="stats-export-btn" onclick="printCaseStats()"><i class="ti ti-printer"></i>列印報表</button>
+      </div>
+    </div>
+    <div class="stats-form" id="case-form">
+      <div class="stats-form-grid">
+        <div><span class="sf-label">個案編號</span><input type="text" id="cf-no" placeholder="例：115001"></div>
+        <div><span class="sf-label">性別</span><select id="cf-gender"><option>男</option><option>女</option></select></div>
+        <div><span class="sf-label">年段</span>
+          <select id="cf-grade"><option>高一</option><option>高二</option><option>高三</option><option>國一</option><option>國二</option><option>國三</option></select>
+        </div>
+        <div><span class="sf-label">個案來源</span>
+          <select id="cf-source"><option>學生主動求助</option><option>家長轉介</option><option>教師轉介</option><option>同儕轉介</option><option>輔導老師約談</option><option>線上預約管道</option><option>其他</option></select>
+        </div>
+        <div><span class="sf-label">輔導次數</span><input type="number" id="cf-sessions" min="1" value="1"></div>
+        <div><span class="sf-label">結案狀態</span><select id="cf-status"><option>輔導進行中</option><option>已結案</option></select></div>
+      </div>
+      <div class="stats-sub-lbl">個案問題（可複選）</div>
+      <div class="prob-grid" id="prob-checkboxes"></div>
+      <div class="sf-actions">
+        <button class="sf-ok" onclick="addCaseRecord()">確認新增</button>
+        <button class="sf-cancel" onclick="toggleStatsForm('case-form')">取消</button>
+      </div>
+    </div>
+    <div class="charts-grid" id="case-charts"></div>
+    <div class="stats-sub-lbl">個案清單</div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>輔導次數</th><th>個案問題</th><th>結案狀態</th><th></th></tr></thead>
+        <tbody id="case-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 相關服務統計 -->
+  <div class="stats-content" id="stats-services">
+    <div class="stats-toolbar">
+      <button class="stats-add-btn" onclick="toggleStatsForm('service-form')"><i class="ti ti-plus"></i>新增服務記錄</button>
+      <div class="stats-export-grp">
+        <button class="stats-export-btn" onclick="exportServicesCSV()"><i class="ti ti-download"></i>CSV</button>
+        <button class="stats-export-btn" onclick="printServiceStats()"><i class="ti ti-printer"></i>列印報表</button>
+      </div>
+    </div>
+    <div class="stats-form" id="service-form">
+      <div class="stats-form-grid">
+        <div><span class="sf-label">日期</span><input type="date" id="sf-date"></div>
+        <div><span class="sf-label">服務項目</span>
+          <select id="sf-type"><option>團體輔導</option><option>入班輔導</option><option>家長諮詢</option><option>教師諮詢</option><option>個案會議</option><option>心理測驗</option><option>安心服務</option><option>家庭處遇</option><option>資源連結</option><option>系統會談</option><option>學生諮詢</option><option>臨案協處</option><option>方案計畫</option><option>各項宣講</option><option>危機處理</option><option>轉銜輔導</option><option>其他</option></select>
+        </div>
+        <div><span class="sf-label">服務對象</span>
+          <select id="sf-target"><option>國一</option><option>國二</option><option>國三</option><option>高一</option><option>高二</option><option>高三</option><option>教職員</option><option>家長</option><option>專業人員</option></select>
+        </div>
+        <div><span class="sf-label">男性人次</span><input type="number" id="sf-male" min="0" value="0"></div>
+        <div><span class="sf-label">女性人次</span><input type="number" id="sf-female" min="0" value="0"></div>
+      </div>
+      <div class="sf-actions">
+        <button class="sf-ok" onclick="addServiceRecord()">確認新增</button>
+        <button class="sf-cancel" onclick="toggleStatsForm('service-form')">取消</button>
+      </div>
+    </div>
+    <div class="charts-grid" id="service-charts"></div>
+    <div id="service-summary-table"></div>
+    <div class="stats-sub-lbl">服務記錄明細</div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead><tr><th>日期</th><th>服務項目</th><th>服務對象</th><th>男性人次</th><th>女性人次</th><th>合計</th><th></th></tr></thead>
+        <tbody id="service-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 <aside class="panel">
   <div class="p-hdr">
     <div class="p-ico ico-g" id="p-ico"><i class="ti ti-report-money"></i></div>
@@ -517,6 +719,7 @@ let curKey='sch', curCaseTab='formal', tasks={};
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
+  initSettings(); initStats();
   updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
 }
 function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
@@ -865,12 +1068,14 @@ function renderArchivePage(){
 function navTo(el,page){
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal'};
+  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',settings:'page-settings',stats:'page-stats'};
   document.getElementById(map[page]||'page-dashboard').classList.add('active');
   if(page==='tasks')renderTaskPage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');
   if(page==='journal')renderJournal();
+  if(page==='settings')renderSettingsPage();
+  if(page==='stats')renderStatsPage();
 }
 
 /* ══ PROMPTS ══ */
@@ -1259,6 +1464,441 @@ table{width:100%;border-collapse:collapse;table-layout:fixed}
   closeExportModal();
 }
 
+
+/* ══ STATS DATA ══ */
+const CASE_SOURCES=['學生主動求助','家長轉介','教師轉介','同儕轉介','輔導老師約談','線上預約管道','其他'];
+const SERVICE_TYPES=['團體輔導','入班輔導','家長諮詢','教師諮詢','個案會議','心理測驗','安心服務','家庭處遇','資源連結','系統會談','學生諮詢','臨案協處','方案計畫','各項宣講','危機處理','轉銜輔導','其他'];
+const SERVICE_TARGETS=['國一','國二','國三','高一','高二','高三','教職員','家長','專業人員'];
+const CASE_GRADES=['高一','高二','高三','國一','國二','國三'];
+const PROBLEM_CATS=['人際困擾','師生關係','家庭困擾','自我探索','情緒困擾','生活壓力','創傷反應','自我傷害','性別議題','脆弱家庭','兒少保護議題','學習困擾','生涯輔導','偏差行為','網路沉迷','中輟／拒學','藥物濫用','精神疾患','其他'];
+
+let caseRecords=[], serviceRecords=[], chartInstances={};
+
+function initStats(){
+  const sc=localStorage.getItem('wp_cases_v1');
+  const ss=localStorage.getItem('wp_services_v1');
+  caseRecords=sc?JSON.parse(sc):[];
+  serviceRecords=ss?JSON.parse(ss):[];
+}
+function saveCases(){localStorage.setItem('wp_cases_v1',JSON.stringify(caseRecords));}
+function saveServices(){localStorage.setItem('wp_services_v1',JSON.stringify(serviceRecords));}
+
+function renderStatsPage(){
+  renderProbCheckboxes();
+  const sfDate=document.getElementById('sf-date');
+  if(sfDate&&!sfDate.value)sfDate.value=new Date().toISOString().slice(0,10);
+  if(!window.Chart){
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+    s.onload=()=>{renderCaseStatsContent();renderServiceStatsContent();};
+    document.head.appendChild(s);
+  } else {
+    renderCaseStatsContent();renderServiceStatsContent();
+  }
+}
+
+function switchStatsTab(tab,el){
+  document.querySelectorAll('.stats-page-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.stats-content').forEach(c=>c.classList.remove('on'));
+  const tc=document.getElementById('stats-'+tab);if(tc)tc.classList.add('on');
+}
+
+function toggleStatsForm(id){
+  const f=document.getElementById(id);if(f)f.classList.toggle('show');
+}
+
+function renderProbCheckboxes(){
+  const el=document.getElementById('prob-checkboxes');if(!el)return;
+  el.innerHTML=PROBLEM_CATS.map((p,i)=>`
+    <label class="prob-item">
+      <input type="checkbox" value="${i+1}"> ${i+1}. ${p}
+    </label>`).join('');
+}
+
+function addCaseRecord(){
+  const no=document.getElementById('cf-no')?.value.trim();
+  if(!no){showToast('請填寫個案編號');return;}
+  const gender=document.getElementById('cf-gender')?.value;
+  const grade=document.getElementById('cf-grade')?.value;
+  const source=document.getElementById('cf-source')?.value;
+  const sessions=parseInt(document.getElementById('cf-sessions')?.value)||1;
+  const status=document.getElementById('cf-status')?.value;
+  const problems=Array.from(document.querySelectorAll('#prob-checkboxes input:checked')).map(c=>parseInt(c.value));
+  caseRecords.push({id:Date.now(),no,gender,grade,source,sessions,problems,status});
+  saveCases();
+  document.getElementById('case-form').classList.remove('show');
+  document.getElementById('cf-no').value='';
+  document.getElementById('cf-sessions').value='1';
+  document.querySelectorAll('#prob-checkboxes input').forEach(c=>c.checked=false);
+  showToast('個案已新增');
+  renderCaseStatsContent();
+}
+
+function deleteCaseRecord(id){
+  if(!confirm('確定刪除此個案記錄？'))return;
+  caseRecords=caseRecords.filter(c=>c.id!==id);
+  saveCases();renderCaseStatsContent();showToast('已刪除');
+}
+
+function addServiceRecord(){
+  const date=document.getElementById('sf-date')?.value;
+  if(!date){showToast('請選擇日期');return;}
+  const type=document.getElementById('sf-type')?.value;
+  const target=document.getElementById('sf-target')?.value;
+  const male=parseInt(document.getElementById('sf-male')?.value)||0;
+  const female=parseInt(document.getElementById('sf-female')?.value)||0;
+  if(male+female===0){showToast('男女人次合計不能為 0');return;}
+  serviceRecords.push({id:Date.now(),date,type,target,male,female});
+  saveServices();
+  document.getElementById('service-form').classList.remove('show');
+  document.getElementById('sf-male').value='0';
+  document.getElementById('sf-female').value='0';
+  showToast('服務記錄已新增');
+  renderServiceStatsContent();
+}
+
+function deleteServiceRecord(id){
+  if(!confirm('確定刪除此服務記錄？'))return;
+  serviceRecords=serviceRecords.filter(s=>s.id!==id);
+  saveServices();renderServiceStatsContent();showToast('已刪除');
+}
+
+function renderCaseStatsContent(){
+  renderCaseTable();
+  if(window.Chart)renderCaseCharts();
+  else document.getElementById('case-charts').innerHTML='';
+}
+
+function renderServiceStatsContent(){
+  renderServiceTable();
+  renderServiceSummary();
+  if(window.Chart)renderServiceCharts();
+  else document.getElementById('service-charts').innerHTML='';
+}
+
+function renderCaseTable(){
+  const el=document.getElementById('case-table-body');if(!el)return;
+  if(!caseRecords.length){el.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:20px">尚無個案記錄，點上方「新增個案」開始建檔</td></tr>`;return;}
+  el.innerHTML=caseRecords.map(c=>`<tr>
+    <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
+    <td style="text-align:center">${c.sessions}</td>
+    <td>${(c.problems||[]).map(p=>`<span class="prob-badge">${PROBLEM_CATS[p-1]||p}</span>`).join('')}</td>
+    <td><span style="font-size:11px;padding:2px 7px;border-radius:3px;background:${c.status==='已結案'?'var(--surface-2)':'var(--g5)'};color:${c.status==='已結案'?'var(--t3)':'var(--g1)'}">${c.status}</span></td>
+    <td><button class="dt-del" onclick="deleteCaseRecord(${c.id})"><i class="ti ti-trash"></i></button></td>
+  </tr>`).join('');
+}
+
+function renderServiceTable(){
+  const el=document.getElementById('service-table-body');if(!el)return;
+  if(!serviceRecords.length){el.innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--t3);padding:20px">尚無服務記錄</td></tr>`;return;}
+  const sorted=[...serviceRecords].sort((a,b)=>b.date.localeCompare(a.date));
+  el.innerHTML=sorted.map(s=>`<tr>
+    <td>${s.date}</td><td>${s.type}</td><td>${s.target}</td>
+    <td style="text-align:center">${s.male}</td><td style="text-align:center">${s.female}</td>
+    <td style="text-align:center;font-weight:500">${s.male+s.female}</td>
+    <td><button class="dt-del" onclick="deleteServiceRecord(${s.id})"><i class="ti ti-trash"></i></button></td>
+  </tr>`).join('');
+}
+
+function renderServiceSummary(){
+  const el=document.getElementById('service-summary-table');if(!el)return;
+  const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
+  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  const rows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
+  if(!rows.length){el.innerHTML='';return;}
+  const gM=rows.reduce((s,r)=>s+r.male,0),gF=rows.reduce((s,r)=>s+r.female,0);
+  el.innerHTML=`<div class="stats-sub-lbl" style="margin-top:4px">服務項目彙整</div>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead><tr><th>服務項目</th><th style="text-align:center">男性人次</th><th style="text-align:center">女性人次</th><th style="text-align:center">合計人次</th></tr></thead>
+      <tbody>
+        ${rows.map(r=>`<tr><td>${r.type}</td><td style="text-align:center">${r.male}</td><td style="text-align:center">${r.female}</td><td style="text-align:center;font-weight:500">${r.total}</td></tr>`).join('')}
+        <tr style="font-weight:600"><td>合計</td><td style="text-align:center">${gM}</td><td style="text-align:center">${gF}</td><td style="text-align:center">${gM+gF}</td></tr>
+      </tbody>
+    </table>
+  </div><div class="stats-sub-lbl">服務記錄明細</div>`;
+}
+
+/* ══ CHARTS ══ */
+function destroyChart(key){if(chartInstances[key]){chartInstances[key].destroy();delete chartInstances[key];}}
+
+function getChartTextColor(){
+  return window.matchMedia('(prefers-color-scheme:dark)').matches?'#b0b0b0':'#5A5854';
+}
+
+function renderCaseCharts(){
+  const el=document.getElementById('case-charts');if(!el)return;
+  if(!caseRecords.length){
+    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">新增個案後自動顯示圖表</div>`;
+    return;
+  }
+  const tc=getChartTextColor();
+  const scaleOpts={y:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}},x:{ticks:{color:tc},grid:{display:false}}};
+  el.innerHTML=`
+    <div class="chart-box"><div class="chart-box-title">性別分布</div><canvas id="ch-gender"></canvas></div>
+    <div class="chart-box"><div class="chart-box-title">年段分布</div><canvas id="ch-grade"></canvas></div>
+    <div class="chart-box"><div class="chart-box-title">個案來源</div><canvas id="ch-source"></canvas></div>
+    <div class="chart-box"><div class="chart-box-title">結案狀態</div><canvas id="ch-status"></canvas></div>
+    <div class="chart-box wide"><div class="chart-box-title">問題類別頻率（可複選）</div><canvas id="ch-problems"></canvas></div>`;
+
+  // 性別
+  const gc={'男':0,'女':0};caseRecords.forEach(c=>{if(gc[c.gender]!==undefined)gc[c.gender]++;});
+  destroyChart('gender');
+  chartInstances.gender=new Chart(document.getElementById('ch-gender'),{type:'doughnut',
+    data:{labels:['男','女'],datasets:[{data:[gc['男'],gc['女']],backgroundColor:['#1870CC','#D4840A'],borderWidth:0}]},
+    options:{responsive:true,plugins:{legend:{labels:{color:tc,font:{size:11}}}}}});
+
+  // 年段
+  const grC={};CASE_GRADES.forEach(g=>{grC[g]=0;});caseRecords.forEach(c=>{if(grC[c.grade]!==undefined)grC[c.grade]++;});
+  destroyChart('grade');
+  chartInstances.grade=new Chart(document.getElementById('ch-grade'),{type:'bar',
+    data:{labels:CASE_GRADES,datasets:[{data:CASE_GRADES.map(g=>grC[g]),backgroundColor:'#5A9A1A',borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{display:false}},scales:scaleOpts}});
+
+  // 個案來源
+  const srcC={};CASE_SOURCES.forEach(s=>{srcC[s]=0;});caseRecords.forEach(c=>{if(srcC[c.source]!==undefined)srcC[c.source]++;});
+  destroyChart('source');
+  chartInstances.source=new Chart(document.getElementById('ch-source'),{type:'bar',
+    data:{labels:CASE_SOURCES,datasets:[{data:CASE_SOURCES.map(s=>srcC[s]),backgroundColor:'#6A52D0',borderRadius:4}]},
+    options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},
+      scales:{y:{ticks:{color:tc,font:{size:10}},grid:{display:false}},x:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}}}}});
+
+  // 結案狀態
+  const stC={'輔導進行中':0,'已結案':0};caseRecords.forEach(c=>{if(stC[c.status]!==undefined)stC[c.status]++;});
+  destroyChart('status');
+  chartInstances.status=new Chart(document.getElementById('ch-status'),{type:'doughnut',
+    data:{labels:['輔導進行中','已結案'],datasets:[{data:[stC['輔導進行中'],stC['已結案']],backgroundColor:['#3A7022','#9A9890'],borderWidth:0}]},
+    options:{responsive:true,plugins:{legend:{labels:{color:tc,font:{size:11}}}}}});
+
+  // 問題類別
+  const pC=Array(19).fill(0);
+  caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{if(p>=1&&p<=19)pC[p-1]++;}));
+  destroyChart('problems');
+  chartInstances.problems=new Chart(document.getElementById('ch-problems'),{type:'bar',
+    data:{labels:PROBLEM_CATS,datasets:[{data:pC,backgroundColor:'#1870CC',borderRadius:4}]},
+    options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},
+      scales:{y:{ticks:{color:tc,font:{size:11}},grid:{display:false}},x:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}}}}});
+}
+
+function renderServiceCharts(){
+  const el=document.getElementById('service-charts');if(!el)return;
+  if(!serviceRecords.length){
+    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">新增服務記錄後自動顯示圖表</div>`;
+    return;
+  }
+  const tc=getChartTextColor();
+  const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
+  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  const activeSvcs=SERVICE_TYPES.filter(t=>sum[t].male+sum[t].female>0);
+
+  const tgtSum={};SERVICE_TARGETS.forEach(t=>{tgtSum[t]=0;});
+  serviceRecords.forEach(s=>{if(tgtSum[s.target]!==undefined)tgtSum[s.target]+=(s.male+s.female);});
+  const activeTgts=SERVICE_TARGETS.filter(t=>tgtSum[t]>0);
+
+  const totalM=serviceRecords.reduce((s,r)=>s+r.male,0);
+  const totalF=serviceRecords.reduce((s,r)=>s+r.female,0);
+
+  el.innerHTML=`
+    <div class="chart-box wide"><div class="chart-box-title">各服務項目人次（男／女）</div><canvas id="ch-svc-type"></canvas></div>
+    <div class="chart-box"><div class="chart-box-title">服務對象總人次</div><canvas id="ch-svc-target"></canvas></div>
+    <div class="chart-box"><div class="chart-box-title">男女人次比例</div><canvas id="ch-svc-gender"></canvas></div>`;
+
+  destroyChart('svc-type');
+  chartInstances['svc-type']=new Chart(document.getElementById('ch-svc-type'),{type:'bar',
+    data:{labels:activeSvcs,datasets:[
+      {label:'男',data:activeSvcs.map(t=>sum[t].male),backgroundColor:'#1870CC',borderRadius:4},
+      {label:'女',data:activeSvcs.map(t=>sum[t].female),backgroundColor:'#D4840A',borderRadius:4}
+    ]},
+    options:{responsive:true,plugins:{legend:{labels:{color:tc,font:{size:11}}}},
+      scales:{y:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}},x:{ticks:{color:tc,font:{size:10}},grid:{display:false}}}}});
+
+  destroyChart('svc-target');
+  chartInstances['svc-target']=new Chart(document.getElementById('ch-svc-target'),{type:'bar',
+    data:{labels:activeTgts,datasets:[{data:activeTgts.map(t=>tgtSum[t]),backgroundColor:'#5A9A1A',borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{display:false}},
+      scales:{y:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}},x:{ticks:{color:tc,font:{size:11}},grid:{display:false}}}}});
+
+  destroyChart('svc-gender');
+  chartInstances['svc-gender']=new Chart(document.getElementById('ch-svc-gender'),{type:'doughnut',
+    data:{labels:['男','女'],datasets:[{data:[totalM,totalF],backgroundColor:['#1870CC','#D4840A'],borderWidth:0}]},
+    options:{responsive:true,plugins:{legend:{labels:{color:tc,font:{size:11}}}}}});
+}
+
+/* ══ STATS EXPORT ══ */
+function exportCasesCSV(){
+  if(!caseRecords.length){showToast('尚無個案資料');return;}
+  const headers=['個案編號','性別','年段','個案來源','輔導次數','個案問題','結案狀態'];
+  const rows=caseRecords.map(c=>[c.no,c.gender,c.grade,c.source,c.sessions,
+    (c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('；'),c.status]);
+  downloadCSV([headers,...rows],'個案統計');
+}
+
+function exportServicesCSV(){
+  if(!serviceRecords.length){showToast('尚無服務記錄');return;}
+  const headers=['日期','服務項目','服務對象','男性人次','女性人次','合計人次'];
+  const sorted=[...serviceRecords].sort((a,b)=>a.date.localeCompare(b.date));
+  const rows=sorted.map(s=>[s.date,s.type,s.target,s.male,s.female,s.male+s.female]);
+  downloadCSV([headers,...rows],'相關服務統計');
+}
+
+function downloadCSV(rows,name){
+  const csv='\uFEFF'+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download=`${name}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();showToast(name+' 已下載');
+}
+
+function printCaseStats(){
+  if(!caseRecords.length){showToast('尚無個案資料');return;}
+  const total=caseRecords.length;
+  const m=caseRecords.filter(c=>c.gender==='男').length;
+  const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
+  const rows=caseRecords.map(c=>`<tr>
+    <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
+    <td style="text-align:center">${c.sessions}</td>
+    <td>${(c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('、')}</td>
+    <td>${c.status}</td>
+  </tr>`).join('');
+  const html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>個案統計報表</title>
+  <style>@page{size:A4 landscape;margin:15mm 18mm}body{font-family:'標楷體','DFKai-SB',serif;font-size:10.5pt;color:#000}
+  h2{text-align:center;font-size:14pt;margin-bottom:3pt}
+  .meta{text-align:center;font-size:10pt;color:#555;margin-bottom:10pt}
+  .summary{display:flex;gap:16pt;margin-bottom:10pt;font-size:11pt}
+  .summary span{padding:2pt 8pt;background:#f0f0f0;border:1pt solid #ccc}
+  table{width:100%;border-collapse:collapse}th{background:#e8f5d4;padding:4pt 6pt;border:1pt solid #888;text-align:center}
+  td{padding:3pt 6pt;border:1pt solid #bbb;vertical-align:top}
+  .bar{padding:8px;text-align:center;margin-bottom:8px;font-family:sans-serif;font-size:12px;background:#f5f5f5;border-bottom:1px solid #ddd}
+  @media print{.bar{display:none}}</style></head><body>
+  <div class="bar"><button onclick="window.print()" style="padding:6px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">🖨 列印</button></div>
+  <h2>輔導個案統計報表</h2>
+  <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
+  <div class="summary"><span>總個案：${total} 人</span><span>男：${m} 人</span><span>女：${total-m} 人</span><span>輔導中：${ongoing}</span><span>已結案：${total-ongoing}</span></div>
+  <table><thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>輔導次數</th><th>個案問題</th><th>結案狀態</th></tr></thead>
+  <tbody>${rows}</tbody></table></body></html>`;
+  const win=window.open('','_blank','width=1000,height=700');
+  if(win){win.document.write(html);win.document.close();}
+}
+
+function printServiceStats(){
+  if(!serviceRecords.length){showToast('尚無服務記錄');return;}
+  const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
+  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  const rows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
+  const gM=rows.reduce((s,r)=>s+r.male,0),gF=rows.reduce((s,r)=>s+r.female,0);
+  const html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>相關服務統計報表</title>
+  <style>@page{size:A4 portrait;margin:15mm 22mm}body{font-family:'標楷體','DFKai-SB',serif;font-size:12pt;color:#000}
+  h2{text-align:center;font-size:14pt;margin-bottom:3pt}
+  .meta{text-align:center;font-size:10pt;color:#555;margin-bottom:10pt}
+  table{width:100%;border-collapse:collapse}th{background:#e8f5d4;padding:5pt 8pt;border:1pt solid #888;text-align:center}
+  td{padding:4pt 8pt;border:1pt solid #bbb}td:not(:first-child){text-align:center}
+  .total td{font-weight:bold;background:#f5f5f5}
+  .bar{padding:8px;text-align:center;margin-bottom:8px;font-family:sans-serif;font-size:12px;background:#f5f5f5;border-bottom:1px solid #ddd}
+  @media print{.bar{display:none}}</style></head><body>
+  <div class="bar"><button onclick="window.print()" style="padding:6px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">🖨 列印</button></div>
+  <h2>相關服務統計報表</h2>
+  <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
+  <table><thead><tr><th>服務項目</th><th>男性人次</th><th>女性人次</th><th>合計人次</th></tr></thead>
+  <tbody>
+    ${rows.map(r=>`<tr><td>${r.type}</td><td>${r.male}</td><td>${r.female}</td><td>${r.total}</td></tr>`).join('')}
+    <tr class="total"><td>合計</td><td>${gM}</td><td>${gF}</td><td>${gM+gF}</td></tr>
+  </tbody></table></body></html>`;
+  const win=window.open('','_blank','width=800,height=700');
+  if(win){win.document.write(html);win.document.close();}
+}
+
+/* ══ SETTINGS ══ */
+let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[]};
+
+function initSettings(){
+  const saved=localStorage.getItem('wp_settings_v1');
+  if(saved){try{settings=JSON.parse(saved);}catch(e){}}
+  applyUserSettings();
+}
+function saveSettings(){localStorage.setItem('wp_settings_v1',JSON.stringify(settings));}
+
+function applyUserSettings(){
+  const av=document.querySelector('.av');if(av)av.textContent=settings.username.slice(-2)||settings.username;
+  const unit=document.querySelector('.hdr-user span');if(unit)unit.textContent=settings.unit;
+}
+
+function saveUserSettings(){
+  const u=document.getElementById('set-username')?.value.trim();
+  const un=document.getElementById('set-unit')?.value.trim();
+  if(u)settings.username=u;
+  if(un)settings.unit=un;
+  saveSettings();applyUserSettings();showToast('設定已儲存');
+}
+
+function addCustomLink(){
+  const label=document.getElementById('ql-new-label')?.value.trim();
+  const url=document.getElementById('ql-new-url')?.value.trim();
+  if(!label||!url){showToast('請填寫名稱與 URL');return;}
+  if(!url.startsWith('http')){showToast('URL 請以 https:// 開頭');return;}
+  settings.customLinks.push({label,url,id:Date.now()});
+  saveSettings();renderCustomLinks();
+  document.getElementById('ql-new-label').value='';
+  document.getElementById('ql-new-url').value='';
+  showToast('連結已新增');
+}
+
+function deleteCustomLink(id){
+  settings.customLinks=settings.customLinks.filter(l=>l.id!==id);
+  saveSettings();renderCustomLinks();showToast('連結已刪除');
+}
+
+function renderCustomLinks(){
+  const el=document.getElementById('custom-links-list');if(!el)return;
+  if(!settings.customLinks.length){el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:4px 0">尚無自訂連結</div>`;return;}
+  el.innerHTML=settings.customLinks.map(l=>`
+    <div class="ql-manage-item">
+      <i class="ti ti-link" style="color:var(--t3);font-size:13px;flex-shrink:0"></i>
+      <span class="ql-manage-item-label">${l.label}</span>
+      <span class="ql-manage-item-url">${l.url}</span>
+      <button class="ql-manage-del" onclick="deleteCustomLink(${l.id})" title="刪除"><i class="ti ti-trash"></i></button>
+    </div>`).join('');
+}
+
+function renderSettingsPage(){
+  const u=document.getElementById('set-username');if(u)u.value=settings.username;
+  const un=document.getElementById('set-unit');if(un)un.value=settings.unit;
+  renderCustomLinks();
+}
+
+/* ══ DATA EXPORT / IMPORT ══ */
+function exportAllData(){
+  const data={
+    version:'v7',exportedAt:new Date().toISOString(),
+    wp_tasks_v3:tasks,wp_journal_v1:journal,
+    wp_settings_v1:settings,wp_cases_v1:caseRecords,wp_services_v1:serviceRecords,
+  };
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download=`威廷工作平台備份_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();showToast('備份已下載');
+}
+
+function importAllData(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!confirm(`確認匯入備份（${data.exportedAt||'未知日期'}）？\n這將覆蓋目前所有資料，無法復原。`)){input.value='';return;}
+      if(data.wp_tasks_v3){tasks=data.wp_tasks_v3;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
+      if(data.wp_journal_v1){journal=data.wp_journal_v1;localStorage.setItem('wp_journal_v1',JSON.stringify(journal));}
+      if(data.wp_settings_v1){settings=data.wp_settings_v1;saveSettings();applyUserSettings();}
+      if(data.wp_cases_v1){caseRecords=data.wp_cases_v1;saveCases();}
+      if(data.wp_services_v1){serviceRecords=data.wp_services_v1;saveServices();}
+      updateStats();updatePanel(curKey);
+      showToast('備份匯入成功！');input.value='';
+    }catch(err){showToast('匯入失敗：JSON 格式錯誤');input.value='';}
+  };
+  reader.readAsText(file);
+}
+
+/* ══ AI CARD ══ */
 
 init();
 </script>

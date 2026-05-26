@@ -17,11 +17,11 @@
   --b1:#083870;--b3:#1870CC;--b5:#E0EFFF;
   --p1:#3A2890;--p3:#6A52D0;--p5:#EEEAFF;
   --r1:#701818;--r3:#D43030;--r5:#FFE4E4;
-  --sw:196px;--pw:262px;--hh:50px;--sh:42px;--rad:10px;--rad-s:6px;
+  --sw:196px;--hh:50px;--sh:42px;--rad:10px;--rad-s:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;min-height:100vh}
-.layout{display:grid;grid-template-columns:var(--sw) 1fr var(--pw);grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
+.layout{display:grid;grid-template-columns:var(--sw) 2fr 1fr;grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
 .hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--t1);cursor:pointer}
 .logo-mark{width:28px;height:28px;background:var(--g3);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
@@ -181,35 +181,88 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .empty-state i{font-size:32px;margin-bottom:8px;display:block}
 @media(max-width:768px){.layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}.nav,.panel{display:none}.stats{padding-left:18px}.page{height:auto}}
 /* JOURNAL */
-.journal-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.journal-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.jcat{padding:4px 10px;border-radius:14px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
-.jcat:hover,.jcat.on{background:var(--g5);border-color:var(--g3);color:var(--g1)}
-.journal-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:6px 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.journal-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.journal-topbar-right{display:flex;align-items:center;gap:7px}
+.journal-vt{display:flex;border:1px solid var(--border);border-radius:var(--rad-s);overflow:hidden}
+.jvt{padding:4px 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.jvt:hover{background:var(--surface-2)}.jvt.on{background:var(--g5);color:var(--g1);font-weight:500}
+.journal-months{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.jmonth{padding:3px 10px;border-radius:14px;font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.jmonth:hover{background:var(--surface-2)}.jmonth.on{background:var(--g5);border-color:var(--g3);color:var(--g1);font-weight:500}
+.journal-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
 .journal-add-btn:hover{background:var(--g1)}
-.journal-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px;margin-bottom:18px;display:none}
+.journal-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.journal-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
+.journal-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px;margin-bottom:14px;display:none}
 .journal-form.show{display:block}
 .journal-form textarea{width:100%;min-height:80px;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);resize:vertical;outline:none;background:var(--surface-2);line-height:1.6}
 .journal-form textarea:focus{border-color:var(--g3);background:var(--surface)}
 .journal-form-row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
-.journal-form select,.journal-form input[type=date]{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
-.journal-form select:focus,.journal-form input:focus{border-color:var(--g3)}
+.journal-form input[type=date]{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.journal-form input[type=date]:focus{border-color:var(--g3)}
 .jf-ok{flex:1;height:30px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
 .jf-ok:hover{background:var(--g1)}
 .jf-cancel{height:30px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
-.journal-group{margin-bottom:20px}
-.journal-group-date{font-size:11px;font-weight:600;color:var(--t3);letter-spacing:.05em;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.journal-group{margin-bottom:18px}
+.journal-group-date{font-size:11px;font-weight:600;color:var(--t3);letter-spacing:.04em;margin-bottom:7px;display:flex;align-items:center;gap:8px}
 .journal-group-date::after{content:'';flex:1;height:1px;background:var(--border)}
-.journal-entry{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:5px;transition:.12s;position:relative}
-.journal-entry:hover{border-color:var(--border-s);box-shadow:0 1px 4px rgba(0,0,0,.05)}.journal-entry:hover .je-del{opacity:1}
-.je-cat{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;white-space:nowrap}
-.je-cat-doc{background:var(--a5);color:var(--a1)}.je-cat-sch{background:var(--g5);color:var(--g1)}.je-cat-case{background:var(--b5);color:var(--b1)}.je-cat-other{background:var(--surface-2);color:var(--t2)}
+.journal-entry{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px;transition:.12s;position:relative}
+.journal-entry:hover{border-color:var(--border-s)}.journal-entry:hover .je-actions{opacity:1}
+.journal-entry.je-auto-entry{background:var(--surface-2);border-style:dashed}
 .je-content{font-size:13px;color:var(--t1);flex:1;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.je-auto-entry .je-content{color:var(--t2);font-size:12px}
 .je-time{font-size:10px;color:var(--t3);white-space:nowrap;flex-shrink:0;margin-top:3px}
-.je-del{opacity:0;transition:.12s;border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 4px;border-radius:3px;flex-shrink:0}
-.je-del:hover{color:var(--r3);background:var(--r5)}
+.je-actions{opacity:0;transition:.12s;display:flex;gap:2px;flex-shrink:0}
+.je-action-btn{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 4px;border-radius:3px}
+.je-action-btn:hover{color:var(--t1);background:var(--surface-2)}
+.je-action-btn.del:hover{color:var(--r3);background:var(--r5)}
+.je-edit-area{flex:1;min-height:52px;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;resize:vertical;outline:none;background:var(--surface);line-height:1.55}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* DATE SPECIAL BTNS */
+.atf-special-btn{height:26px;padding:0 8px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);color:var(--t2);font-size:11px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap;transition:.12s;flex-shrink:0}
+.atf-special-btn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+/* TASK NOTES */
+.t-note-btn{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:12px;padding:1px 3px;border-radius:3px;transition:.12s;flex-shrink:0;opacity:0}
+.task:hover .t-note-btn,.t-note-btn.has-note{opacity:1}
+.t-note-btn.has-note{color:var(--a3)}
+.t-note-btn:hover{color:var(--a3)!important;background:var(--a5)}
+.t-note-row{padding:2px 3px 4px 23px;display:none}
+.t-note-row.show{display:block}
+.t-note-input{width:100%;min-height:38px;border:1px solid var(--border);border-radius:3px;padding:4px 7px;font-size:11px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);resize:vertical;outline:none;background:var(--surface-2);line-height:1.4}
+.t-note-input:focus{border-color:var(--g3);background:var(--surface)}
+/* EXPORT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--surface);border-radius:var(--rad);width:100%;max-width:580px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-hdr-title{font-size:14px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:7px}
+.modal-close{border:none;background:none;cursor:pointer;color:var(--t3);font-size:18px;padding:2px 4px;border-radius:4px;line-height:1}
+.modal-close:hover{color:var(--t1);background:var(--surface-2)}
+.modal-body{flex:1;overflow-y:auto;padding:16px 18px}
+.modal-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.modal-lbl{font-size:12px;color:var(--t2);white-space:nowrap;min-width:44px}
+.modal-inp{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 9px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.modal-inp:focus{border-color:var(--g3)}
+.modal-ftr{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
+.mftr-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
+.mftr-btn:hover{background:var(--border)}
+.mftr-btn.primary{background:var(--g3);color:#fff;border-color:var(--g3)}
+.mftr-btn.primary:hover{background:var(--g1)}
+.week-btns{display:flex;gap:6px;flex-wrap:wrap}
+.week-btn{padding:4px 10px;border-radius:14px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.week-btn:hover{background:var(--surface-2)}.week-btn.on{background:var(--g5);border-color:var(--g3);color:var(--g1);font-weight:500}
+.exp-day{margin-bottom:12px;background:var(--surface-2);border-radius:var(--rad-s);padding:8px 10px}
+.exp-day-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.exp-day-name{font-size:12px;font-weight:600;color:var(--t1)}
+.exp-lc{font-size:11px;padding:1px 7px;border-radius:10px;background:var(--g5);color:var(--g1);font-weight:500}
+.exp-lc.warn{background:var(--r5);color:var(--r3)}
+.exp-warn{font-size:11px;color:var(--r3)}
+.exp-entry{display:flex;align-items:flex-start;gap:6px;padding:3px 4px;border-radius:3px}
+.exp-entry:hover{background:var(--surface)}
+.exp-entry input[type=checkbox]{flex-shrink:0;margin-top:2px;accent-color:var(--g3);cursor:pointer}
+.exp-entry label{font-size:12px;color:var(--t1);flex:1;line-height:1.4;cursor:pointer}
+.exp-lines{font-size:10px;color:var(--t3);white-space:nowrap;margin-top:2px}
+.exp-empty-day{font-size:11px;color:var(--t3);font-style:italic;padding:2px 4px}
 </style>
 </head>
 <body>
@@ -310,31 +363,27 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 </div>
 <div class="page" id="page-journal">
   <div class="journal-topbar">
-    <div class="sec-lbl" style="margin-bottom:0">工作日誌 — 每日業務記錄</div>
-    <button class="journal-add-btn" onclick="toggleJournalForm()"><i class="ti ti-plus"></i>新增記錄</button>
+    <div class="sec-lbl" style="margin-bottom:0">工作日誌</div>
+    <div class="journal-topbar-right">
+      <div class="journal-vt" id="journal-vt">
+        <button class="jvt on" id="jvt-month" onclick="setJournalView('month')">本月</button>
+        <button class="jvt" id="jvt-week" onclick="setJournalView('week')">本週</button>
+      </div>
+      <button class="journal-export-btn" onclick="exportJournal()"><i class="ti ti-printer"></i>列印/匯出</button>
+      <button class="journal-add-btn" onclick="toggleJournalForm()"><i class="ti ti-plus"></i>新增記錄</button>
+    </div>
   </div>
+  <div class="journal-months" id="journal-months"></div>
   <div class="journal-form" id="journal-form">
-    <textarea id="j-content" placeholder="記錄今日業務內容...（可多行）"></textarea>
+    <textarea id="j-content" placeholder="記錄今日業務內容...（Shift+Enter 換行）"></textarea>
     <div class="journal-form-row">
-      <select id="j-cat">
-        <option value="doc">公文計畫</option>
-        <option value="sch">獎助學金</option>
-        <option value="case">學生輔導</option>
-        <option value="other">其他</option>
-      </select>
       <input type="date" id="j-date">
       <button class="jf-ok" onclick="confirmAddJournal()">確認新增</button>
       <button class="jf-cancel" onclick="toggleJournalForm(true)">取消</button>
     </div>
   </div>
-  <div class="journal-filter">
-    <div class="jcat on" onclick="filterJournal(this,'all')">全部</div>
-    <div class="jcat" onclick="filterJournal(this,'doc')">公文計畫</div>
-    <div class="jcat" onclick="filterJournal(this,'sch')">獎助學金</div>
-    <div class="jcat" onclick="filterJournal(this,'case')">學生輔導</div>
-    <div class="jcat" onclick="filterJournal(this,'other')">其他</div>
-  </div>
   <div id="journal-list"></div>
+</div>
 </div>
 
 <aside class="panel">
@@ -344,6 +393,31 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
   <div id="panel-body" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0"></div>
 </aside>
+</div>
+<div id="export-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeExportModal()">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <span class="modal-hdr-title"><i class="ti ti-printer"></i>匯出工作日誌（學校格式）</span>
+      <button class="modal-close" onclick="closeExportModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <span class="modal-lbl">選擇週</span>
+        <div class="week-btns" id="export-week-btns"></div>
+      </div>
+      <div class="modal-row">
+        <span class="modal-lbl">週次</span>
+        <input class="modal-inp" type="text" id="export-week-num" placeholder="例：第21週" style="width:120px">
+        <span style="font-size:11px;color:var(--t3)">（印在週一及週四標題列）</span>
+      </div>
+      <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">取消勾選可排除不需印出的記錄。每格上限 9 行（每行約 20 字），超過標紅提示。</div>
+      <div id="export-preview"></div>
+    </div>
+    <div class="modal-ftr">
+      <button class="mftr-btn" onclick="closeExportModal()">取消</button>
+      <button class="mftr-btn primary" onclick="doExport()"><i class="ti ti-printer"></i>　產出並列印</button>
+    </div>
+  </div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
@@ -444,7 +518,7 @@ let curKey='sch', curCaseTab='formal', tasks={};
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal();
+  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
 }
 function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
 function clearAllData(){
@@ -502,15 +576,20 @@ function updatePanel(key){
 
 function taskHTML(t,key,ri){
   const srcTag=t.src&&SRC_LABELS[t.src]?`<span class="src-tag src-${t.src}">${SRC_LABELS[t.src]}</span>`:'';
+  const dateUrgClass=!t.done&&(t.u||isDateUrgentDisplay(t.d))?'urg':'';
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
     <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
     ${srcTag}
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
-    <span class="t-date ${t.u&&!t.done?'urg':''}" ondblclick="editDate(this,'${key}',${ri})">${t.done&&t.completedAt?t.completedAt:t.d}</span>
+    <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('${key}',${ri})" title="備註"><i class="ti ti-notes"></i></button>
+    <span class="t-date ${dateUrgClass}" ondblclick="editDate(this,'${key}',${ri})">${fmtTaskDate(t.d,t.done,t.completedAt)}</span>
     <div class="t-actions">
       <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${ri})"><i class="ti ti-bolt"></i></button>
       <button class="t-act-btn" onclick="deleteTask('${key}',${ri})"><i class="ti ti-x"></i></button>
     </div>
+  </div>
+  <div class="t-note-row${t.note?' show':''}" id="note-row-${t.id}">
+    <textarea class="t-note-input" placeholder="備註（Tab 或點擊其他地方儲存）..." onblur="saveNote('${key}',${ri},this.value)">${t.note||''}</textarea>
   </div>`;
 }
 
@@ -554,7 +633,11 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
   return `<div class="add-task-form" id="add-task-form-${id}">
     <input type="text" id="new-task-txt-${id}" placeholder="${placeholder}" onkeydown="if(event.key==='Enter')${onConfirm}">
     <div class="atf-row">
-      <input type="text" id="new-task-date-${id}" placeholder="期限" style="flex:2">
+      <input type="date" id="new-task-date-${id}" style="flex:1;min-width:0">
+      <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','今天')">今天</button>
+      <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','待定')">待定</button>
+    </div>
+    <div class="atf-row">
       <select id="new-task-src-${id}" style="flex:1">
         <option value="">內部</option><option value="cross">跨處室</option><option value="external">外部</option>
       </select>
@@ -609,7 +692,7 @@ function buildCasePanel(){
             <select id="new-task-tt" style="flex:1">
               ${TRANSFER_TYPES.map(t=>`<option value="${t.key}">${t.label}</option>`).join('')}
             </select>
-            <input type="text" id="new-task-date-transfer" placeholder="期限" style="flex:1">
+            <input type="date" id="new-task-date-transfer" style="flex:1;min-width:0"><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待辦')">待辦</button><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待定')">待定</button>
           </div>
           <div class="atf-row">
             <button class="atf-ok" onclick="confirmAddTransfer()">確認新增</button>
@@ -649,14 +732,14 @@ function showForm(id){
 function hideForm(id){
   const f=document.getElementById('add-task-form-'+id);if(f)f.classList.remove('show');
   const b=document.getElementById('add-task-btn-'+id);if(b)b.style.display='flex';
-  ['txt','date'].forEach(n=>{const el=document.getElementById(`new-task-${n}-${id}`);if(el)el.value='';});
+  ['txt','date'].forEach(n=>{const el=document.getElementById(`new-task-${n}-${id}`);if(el){el.value='';if(el.dataset&&'special' in el.dataset)delete el.dataset.special;}});
 }
 
 /* ══ ADD TASK ══ */
 function confirmAdd(key){
   const txt=document.getElementById('new-task-txt-'+key)?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
-  const date=document.getElementById('new-task-date-'+key)?.value.trim()||'待定';
+  const date=getTaskDate(key);
   const src=document.getElementById('new-task-src-'+key)?.value||'';
   tasks[key].unshift({id:Date.now(),t:txt,d:date,u:false,done:false,src:src});
   save();updateStats();updatePanel(key);showToast('任務已新增');
@@ -664,7 +747,7 @@ function confirmAdd(key){
 function confirmAddCase(tab){
   const txt=document.getElementById('new-task-txt-'+tab)?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
-  const date=document.getElementById('new-task-date-'+tab)?.value.trim()||'待定';
+  const date=getTaskDate(tab);
   const src=document.getElementById('new-task-src-'+tab)?.value||'';
   tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:tab,src:src});
   save();updateStats();updatePanel('case');showToast('任務已新增');
@@ -673,7 +756,7 @@ function confirmAddTransfer(){
   const txt=document.getElementById('new-task-txt-transfer')?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const tt=document.getElementById('new-task-tt')?.value||'out';
-  const date=document.getElementById('new-task-date-transfer')?.value.trim()||'待辦';
+  const date=getTaskDate('transfer')||'待辦';
   tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:'transfer',tt:tt,src:''});
   save();updateStats();curCaseTab='transfer';updatePanel('case');showToast('異動任務已新增');
 }
@@ -681,7 +764,10 @@ function confirmAddTransfer(){
 /* ══ TASK OPS ══ */
 function toggleTask(key,idx){
   const t=tasks[key][idx];t.done=!t.done;
-  if(t.done){const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;}
+  if(t.done){
+    const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;
+    addAutoJournalEntry(`✓ ${t.t}`);
+  }
   save();updateStats();updatePanel(key===curKey?key:curKey);
   if(curKey==='urg')updatePanel('urg');
 }
@@ -695,6 +781,7 @@ function toggleUrgent(key,idx){
 function resolveUrgent(key,idx){
   const t=tasks[key][idx];t.done=true;t.u=false;
   const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  addAutoJournalEntry(`✓ ${t.t}`);
   save();updateStats();updatePanel('urg');showToast('已完成');
 }
 function deleteTask(key,idx){
@@ -718,13 +805,15 @@ function saveEdit(key,idx,val){
 function editDate(el,key,idx){
   if(tasks[key][idx].done)return;
   const cur=tasks[key][idx].d;
-  el.outerHTML=`<input class="t-date-input" value="${cur}" id="di-${idx}"
-    onblur="saveDate('${key}',${idx},this.value)"
-    onkeydown="if(event.key==='Enter')this.blur();if(event.key==='Escape'){this.value='${cur}';this.blur()}">`;
+  const isoVal=/^\d{4}-\d{2}-\d{2}$/.test(cur)?cur:'';
+  el.outerHTML=`<input class="t-date-input" type="date" value="${isoVal}" id="di-${idx}"
+    onblur="saveDate('${key}',${idx},this.value||'待定')"
+    onkeydown="if(event.key==='Escape')this.blur()">`;
   document.getElementById('di-'+idx)?.focus();
 }
 function saveDate(key,idx,val){
-  val=val.trim();if(val)tasks[key][idx].d=val;
+  val=(val||'待定').trim()||'待定';
+  tasks[key][idx].d=val;
   save();if(curKey===key)updatePanel(key);
 }
 
@@ -756,6 +845,7 @@ function renderTaskPage(){
 function tpToggle(key,idx){
   const t=tasks[key][idx];t.done=true;t.u=false;
   const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  addAutoJournalEntry(`✓ ${t.t}`);
   save();renderTaskPage();updateStats();showToast('已完成');
 }
 function tpDelete(key,idx){tasks[key].splice(idx,1);save();renderTaskPage();updateStats();}
@@ -784,7 +874,7 @@ function navTo(el,page){
   if(page==='tasks')renderTaskPage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');
-  if(page==='journal')renderJournal(curJournalCat);
+  if(page==='journal')renderJournal();
 }
 
 /* ══ PROMPTS ══ */
@@ -824,81 +914,355 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 
 
 /* ══ JOURNAL ══ */
-const J_CATS={doc:'公文計畫',sch:'獎助學金',case:'學生輔導',other:'其他'};
-let journal=[],curJournalCat='all';
+let journal=[],curJournalView='month',curJournalMonth='';
+
 function initJournal(){
   const s=localStorage.getItem('wp_journal_v1');
   journal=s?JSON.parse(s):[];
+  // migrate old entries without isoDate
+  journal.forEach(e=>{
+    if(!e.isoDate&&e.date){
+      const[m,d]=e.date.split('/').map(Number);
+      e.isoDate=`2026-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    }
+  });
+  const n=new Date();
+  curJournalMonth=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
 }
+
 function saveJournal(){localStorage.setItem('wp_journal_v1',JSON.stringify(journal));}
+
+/* called automatically when a task is toggled done */
+function addAutoJournalEntry(text){
+  const n=new Date();
+  const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
+  const isoDate=n.toISOString().slice(0,10);
+  const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+  journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:text,auto:true});
+  saveJournal();
+}
+
 function toggleJournalForm(forceClose){
   const f=document.getElementById('journal-form');if(!f)return;
   const show=forceClose?false:!f.classList.contains('show');
   f.classList.toggle('show',show);
   if(show){
     const d=document.getElementById('j-date');
-    if(d&&!d.value){const n=new Date();d.value=n.toISOString().slice(0,10);}
+    if(d&&!d.value)d.value=new Date().toISOString().slice(0,10);
     setTimeout(()=>document.getElementById('j-content')?.focus(),50);
   }
 }
+
 function confirmAddJournal(){
   const txt=document.getElementById('j-content')?.value.trim();
   if(!txt){showToast('請輸入記錄內容');return;}
-  const cat=document.getElementById('j-cat')?.value||'other';
-  const dateVal=document.getElementById('j-date')?.value;
-  const n=dateVal?new Date(dateVal+'T12:00:00'):new Date();
-  const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
+  const dateVal=document.getElementById('j-date')?.value||new Date().toISOString().slice(0,10);
+  const d=new Date(dateVal+'T12:00:00');
+  const dateStr=`${d.getMonth()+1}/${d.getDate()}`;
   const now=new Date();
   const timeStr=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  journal.unshift({id:Date.now(),cat,date:dateStr,time:timeStr,content:txt});
+  journal.unshift({id:Date.now(),date:dateStr,isoDate:dateVal,time:timeStr,content:txt,auto:false});
   saveJournal();
   document.getElementById('j-content').value='';
   toggleJournalForm(true);
-  renderJournal(curJournalCat);
+  curJournalMonth=dateVal.slice(0,7);
+  curJournalView='month';
+  document.querySelectorAll('.jvt').forEach(b=>b.classList.toggle('on',b.id==='jvt-month'));
+  const vt=document.getElementById('journal-vt');
+  const n=new Date(),curYM=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
+  if(vt)vt.style.display=curJournalMonth===curYM?'flex':'none';
+  renderJournalMonths();renderJournal();
   showToast('記錄已新增');
 }
+
 function deleteJournalEntry(id){
+  if(!confirm('確定刪除這則記錄？'))return;
   journal=journal.filter(e=>e.id!==id);
-  saveJournal();renderJournal(curJournalCat);
+  saveJournal();renderJournalMonths();renderJournal();
   showToast('記錄已刪除');
 }
-function filterJournal(el,cat){
-  document.querySelectorAll('.jcat').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  curJournalCat=cat;
-  renderJournal(cat);
+
+function editJournalEntry(id){
+  const el=document.getElementById('je-content-'+id);if(!el)return;
+  const cur=el.textContent;
+  el.outerHTML=`<textarea class="je-edit-area" id="je-edit-${id}"
+    onblur="saveJournalEdit(${id},this.value)"
+    onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();this.blur()}if(event.key==='Escape')this.blur()"
+    >${cur}</textarea>`;
+  const ta=document.getElementById('je-edit-'+id);
+  if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}
 }
-function renderJournal(cat){
+
+function saveJournalEdit(id,val){
+  const trimmed=val.trim();
+  const idx=journal.findIndex(e=>e.id===id);
+  if(idx>=0&&trimmed)journal[idx].content=trimmed;
+  saveJournal();renderJournal();
+}
+
+function setJournalView(view){
+  curJournalView=view;
+  document.querySelectorAll('.jvt').forEach(b=>b.classList.toggle('on',b.id==='jvt-'+view));
+  renderJournal();
+}
+
+function selectJournalMonth(ym){
+  curJournalMonth=ym;
+  const n=new Date();
+  const curYM=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
+  const vt=document.getElementById('journal-vt');
+  if(vt)vt.style.display=ym===curYM?'flex':'none';
+  if(ym!==curYM){curJournalView='month';document.querySelectorAll('.jvt').forEach(b=>b.classList.toggle('on',b.id==='jvt-month'));}
+  renderJournalMonths();renderJournal();
+}
+
+function renderJournalMonths(){
+  const el=document.getElementById('journal-months');if(!el)return;
+  const n=new Date();
+  const curYM=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
+  const ymSet=new Set(journal.map(e=>e.isoDate?e.isoDate.slice(0,7):'').filter(Boolean));
+  ymSet.add(curYM);
+  const ymList=[...ymSet].sort().reverse();
+  el.innerHTML=ymList.map(ym=>{
+    const[y,m]=ym.split('-');
+    const label=ym===curYM?`${parseInt(m)}月（本月）`:`${parseInt(m)}月`;
+    return `<button class="jmonth ${ym===curJournalMonth?'on':''}" onclick="selectJournalMonth('${ym}')">${label}</button>`;
+  }).join('');
+}
+
+function getWeekBounds(){
+  const n=new Date();const day=n.getDay();
+  const mon=new Date(n);mon.setDate(n.getDate()-(day===0?6:day-1));mon.setHours(0,0,0,0);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);sun.setHours(23,59,59,999);
+  return{from:mon,to:sun};
+}
+
+function renderJournal(){
   const el=document.getElementById('journal-list');if(!el)return;
-  const filtered=cat==='all'?journal:journal.filter(e=>e.cat===cat);
+  let filtered=journal.filter(e=>e.isoDate&&e.isoDate.slice(0,7)===curJournalMonth);
+  if(curJournalView==='week'){
+    const{from,to}=getWeekBounds();
+    filtered=filtered.filter(e=>{const d=new Date(e.isoDate+'T12:00:00');return d>=from&&d<=to;});
+  }
   if(!filtered.length){
-    el.innerHTML=`<div class="empty-state"><i class="ti ti-notebook"></i><p>還沒有工作日誌記錄，按右上角「新增記錄」開始</p></div>`;
+    const msg=curJournalView==='week'?'本週尚無日誌記錄':'本月尚無日誌記錄，點「新增記錄」開始';
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-notebook"></i><p>${msg}</p></div>`;
     return;
   }
-  const groups={};
-  filtered.forEach(e=>{if(!groups[e.date])groups[e.date]=[];groups[e.date].push(e);});
-  const today=new Date();
-  const yd=new Date(today);yd.setDate(yd.getDate()-1);
-  const fmt=d=>{
-    const[m,day]=d.split('/').map(Number);
-    const t=new Date(today.getFullYear(),m-1,day);
-    if(t.toDateString()===today.toDateString())return'今天';
-    if(t.toDateString()===yd.toDateString())return'昨天';
-    return d;
+  const today=new Date();const yd=new Date(today);yd.setDate(yd.getDate()-1);
+  const days=['日','一','二','三','四','五','六'];
+  const fmtDate=iso=>{
+    const d=new Date(iso+'T12:00:00');
+    const mm=d.getMonth()+1,dd=d.getDate();
+    const suffix=d.toDateString()===today.toDateString()?'今天':d.toDateString()===yd.toDateString()?'昨天':'';
+    return suffix?`${mm}/${dd} 週${days[d.getDay()]}（${suffix}）`:`${mm}/${dd} 週${days[d.getDay()]}`;
   };
-  el.innerHTML=Object.keys(groups).map(date=>{
-    const entries=groups[date];
+  const sortedDates=[...new Set(filtered.map(e=>e.isoDate))].sort().reverse();
+  el.innerHTML=sortedDates.map(iso=>{
+    const entries=filtered.filter(e=>e.isoDate===iso);
     return `<div class="journal-group">
-      <div class="journal-group-date">${fmt(date)} <span style="font-size:10px;color:var(--t3);font-weight:400;margin-left:4px">${entries.length} 則</span></div>
-      ${entries.map(e=>`<div class="journal-entry">
-        <span class="je-cat je-cat-${e.cat}">${J_CATS[e.cat]}</span>
-        <span class="je-content">${e.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+      <div class="journal-group-date">${fmtDate(iso)}<span style="font-size:10px;color:var(--t3);font-weight:400;margin-left:6px">${entries.length} 則</span></div>
+      ${entries.map(e=>`<div class="journal-entry ${e.auto?'je-auto-entry':''}">
+        ${e.auto?'<i class="ti ti-check" style="font-size:11px;color:var(--g3);flex-shrink:0;margin-top:3px"></i>':''}
+        <span class="je-content" id="je-content-${e.id}">${e.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
         <span class="je-time">${e.time}</span>
-        <button class="je-del" onclick="deleteJournalEntry(${e.id})" title="刪除"><i class="ti ti-x"></i></button>
+        <div class="je-actions">
+          ${!e.auto?`<button class="je-action-btn" onclick="editJournalEntry(${e.id})" title="編輯"><i class="ti ti-pencil"></i></button>`:''}
+          <button class="je-action-btn del" onclick="deleteJournalEntry(${e.id})" title="刪除"><i class="ti ti-x"></i></button>
+        </div>
       </div>`).join('')}
     </div>`;
   }).join('');
 }
+
+function exportJournal(){
+  exportCheckState={};
+  document.getElementById('export-modal').style.display='flex';
+  renderExportWeeks();
+}
+function closeExportModal(){document.getElementById('export-modal').style.display='none';}
+
+/* ══ DATE HELPERS ══ */
+function setSpecialDate(id,val){
+  const el=document.getElementById('new-task-date-'+id);if(!el)return;
+  if(val==='今天'){el.value=new Date().toISOString().slice(0,10);delete el.dataset.special;}
+  else{el.value='';el.dataset.special=val;}
+}
+function getTaskDate(id){
+  const el=document.getElementById('new-task-date-'+id);if(!el)return'待定';
+  if(el.value)return el.value;
+  return el.dataset.special||'待定';
+}
+function fmtTaskDate(d,done,completedAt){
+  if(done&&completedAt)return completedAt;
+  if(!d)return'待定';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(d)){const dt=new Date(d+'T12:00:00');return`${dt.getMonth()+1}/${dt.getDate()}`;}
+  return d;
+}
+function isDateUrgentDisplay(d){
+  if(!d||d==='待定'||d==='待辦'||d==='完成'||d==='學期末前')return false;
+  if(/^\d{4}-\d{2}-\d{2}$/.test(d)){return new Date(d+'T23:59:59')<new Date();}
+  return false;
+}
+
+/* ══ TASK NOTES ══ */
+function toggleNote(key,idx){
+  const t=(tasks[key]||[])[idx];if(!t)return;
+  const row=document.getElementById('note-row-'+t.id);if(!row)return;
+  const showing=row.classList.toggle('show');
+  if(showing)row.querySelector('textarea')?.focus();
+}
+function saveNote(key,idx,val){
+  if((tasks[key]||[])[idx]===undefined)return;
+  tasks[key][idx].note=(val||'').trim();
+  save();
+}
+
+/* ══ EXPORT ══ */
+let exportCheckState={},exportWeeks=[],exportSelIdx=0;
+
+function getWeeksInMonth(ym){
+  const[y,m]=ym.split('-').map(Number);
+  const weeks=[],first=new Date(y,m-1,1),last=new Date(y,m,0);
+  const dow=first.getDay();
+  let mon=new Date(y,m-1,1+(dow===0?-6:1-dow));
+  while(mon<=last){
+    const fri=new Date(mon);fri.setDate(mon.getDate()+4);
+    const inM=[0,1,2,3,4].some(i=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d.getMonth()===m-1;});
+    if(inM)weeks.push({mon:new Date(mon),fri:new Date(fri)});
+    mon=new Date(mon);mon.setDate(mon.getDate()+7);
+  }
+  return weeks;
+}
+
+function estimateLines(text){
+  if(!text)return 0;
+  return text.split('\n').reduce((s,l)=>s+Math.max(1,Math.ceil(l.length/20)),0);
+}
+
+function renderExportWeeks(){
+  exportWeeks=getWeeksInMonth(curJournalMonth);
+  const container=document.getElementById('export-week-btns');
+  if(!exportWeeks.length){container.innerHTML='<span style="font-size:12px;color:var(--t3)">本月無資料</span>';return;}
+  const today=new Date();
+  exportSelIdx=exportWeeks.length-1;
+  exportWeeks.forEach((w,i)=>{if(today>=w.mon&&today<=w.fri)exportSelIdx=i;});
+  container.innerHTML=exportWeeks.map((w,i)=>{
+    const lb=`${w.mon.getMonth()+1}/${w.mon.getDate()}-${w.fri.getMonth()+1}/${w.fri.getDate()}`;
+    return `<button class="week-btn${i===exportSelIdx?' on':''}" onclick="selectExportWeek(${i})">${lb}</button>`;
+  }).join('');
+  renderExportPreview();
+}
+
+function selectExportWeek(idx){
+  exportSelIdx=idx;
+  document.querySelectorAll('.week-btn').forEach((b,i)=>b.classList.toggle('on',i===idx));
+  renderExportPreview();
+}
+
+function renderExportPreview(){
+  const w=exportWeeks[exportSelIdx];
+  if(!w){document.getElementById('export-preview').innerHTML='';return;}
+  const dayNames=['一','二','三','四','五'];
+  const days=Array.from({length:5},(_,i)=>{const d=new Date(w.mon);d.setDate(w.mon.getDate()+i);return d;});
+  let html='';
+  days.forEach((d,i)=>{
+    const iso=d.toISOString().slice(0,10);
+    const de=journal.filter(e=>e.isoDate===iso);
+    de.forEach(e=>{if(exportCheckState[e.id]===undefined)exportCheckState[e.id]=true;});
+    const chk=de.filter(e=>exportCheckState[e.id]!==false);
+    const lines=chk.reduce((s,e)=>s+estimateLines(e.content),0);
+    const warn=lines>9;
+    html+=`<div class="exp-day">
+      <div class="exp-day-hdr">
+        <span class="exp-day-name">星期${dayNames[i]}　${d.getMonth()+1}/${d.getDate()}</span>
+        <span class="exp-lc${warn?' warn':''}">${lines} / 9 行</span>
+        ${warn?'<span class="exp-warn">⚠ 超過上限，請取消勾選部分記錄</span>':''}
+      </div>`;
+    if(!de.length){html+=`<div class="exp-empty-day">（本日無記錄）</div>`;}
+    else{de.forEach(e=>{
+      const l=estimateLines(e.content);
+      const checked=exportCheckState[e.id]!==false;
+      html+=`<div class="exp-entry">
+        <input type="checkbox" id="ec-${e.id}" ${checked?'checked':''} onchange="toggleExpEntry(${e.id})">
+        <label for="ec-${e.id}">${e.content.replace(/</g,'&lt;')}</label>
+        <span class="exp-lines">${l}行</span>
+      </div>`;
+    });}
+    html+='</div>';
+  });
+  document.getElementById('export-preview').innerHTML=html;
+}
+
+function toggleExpEntry(id){exportCheckState[id]=!exportCheckState[id];renderExportPreview();}
+
+function doExport(){
+  const w=exportWeeks[exportSelIdx];
+  if(!w){showToast('請先選擇週次');return;}
+  const weekNum=document.getElementById('export-week-num')?.value.trim()||'';
+  const dayNames=['一','二','三','四','五'];
+  const rocY=y=>y-1911;
+  const days=Array.from({length:5},(_,i)=>{
+    const d=new Date(w.mon);d.setDate(w.mon.getDate()+i);
+    const iso=d.toISOString().slice(0,10);
+    const entries=journal.filter(e=>e.isoDate===iso&&exportCheckState[e.id]!==false);
+    return{d,entries};
+  });
+  function dayHdr(i,showWk){
+    const{d}=days[i];
+    const roc=rocY(d.getFullYear());
+    const mm=String(d.getMonth()+1).padStart(2,'0');
+    const dd=String(d.getDate()).padStart(2,'0');
+    const wk=showWk&&weekNum?`　　　　　${weekNum}`:'';
+    return `民國 ${roc} 年 ${mm} 月 ${dd} 日（星期${dayNames[i]}）${wk}`;
+  }
+  function dayBody(i){
+    const{entries}=days[i];
+    if(!entries.length)return'';
+    return entries.map((e,n)=>`${n+1}. ${e.content}`).join('\n')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  }
+  function mkRows(from,to,wkIdx){
+    let r='';
+    for(let i=from;i<=to;i++){
+      r+=`<tr><td class="dh">${dayHdr(i,i===wkIdx)}</td></tr><tr><td class="dc"><div class="di">${dayBody(i)}</div></td></tr>`;
+    }
+    return r;
+  }
+  const printHTML=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>心輔組長工作日誌</title>
+<style>
+@page{size:A4 portrait;margin:18mm 22mm 15mm 22mm}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'標楷體','DFKai-SB','BiauKai',serif;font-size:12pt;line-height:1.5;color:#000}
+.title{font-size:14pt;font-weight:bold;text-align:center;margin-bottom:5pt;letter-spacing:.1em}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+.dh{border:1.5pt solid #000;padding:3pt 6pt;font-size:12pt;height:20pt;vertical-align:middle}
+.dc{border:1.5pt solid #000;border-top:none;height:170pt;vertical-align:top;padding:0;overflow:hidden}
+.di{height:162pt;overflow:hidden;padding:4pt 6pt;font-size:12pt;line-height:1.5;white-space:pre-wrap;word-break:break-all}
+.sig-hdr td{border:1.5pt solid #000;text-align:center;padding:4pt;font-size:12pt;height:22pt;vertical-align:middle}
+.sig-body td{border:1.5pt solid #000;border-top:none;height:184pt}
+.pb{page-break-after:always;height:0;overflow:hidden}
+.bar{padding:10px;text-align:center;margin-bottom:12px;background:#f5f5f5;border-bottom:1px solid #ddd;font-family:sans-serif}
+@media print{.bar{display:none}}
+</style></head><body>
+<div class="bar">
+  <button onclick="window.print()" style="padding:7px 22px;background:#5A9A1A;color:#fff;border:none;border-radius:5px;font-size:13px;cursor:pointer;font-family:sans-serif">🖨 列印 / 另存 PDF</button>
+  <span style="margin-left:12px;font-size:12px;color:#666">建議 Chrome，列印邊距設為「無」</span>
+</div>
+<div class="title">天主教輔仁高級中學　心輔組長工 作 日 誌</div>
+<table style="margin-top:4pt">${mkRows(0,2,0)}</table>
+<div class="pb"></div>
+<table>${mkRows(3,4,3)}</table>
+<table style="margin-top:18pt">
+  <tr class="sig-hdr"><td>填　表　人</td><td>處　室　主　任</td><td>校　　　長</td></tr>
+  <tr class="sig-body"><td></td><td></td><td></td></tr>
+</table>
+</body></html>`;
+  const win=window.open('','_blank','width=900,height=750');
+  if(win){win.document.write(printHTML);win.document.close();}
+  closeExportModal();
+}
+
 
 init();
 </script>

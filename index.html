@@ -574,14 +574,14 @@ function updatePanel(key){
 }
 
 function taskHTML(t,key,ri){
-  const srcTag=t.src&&SRC_LABELS[t.src]?`<span class="src-tag src-${t.src}">${SRC_LABELS[t.src]}</span>`:'';
+  const srcTag=t.src==='cross'?`<span class="src-tag src-cross">跨</span>`:'';
   const dateUrgClass=!t.done&&(t.u||isDateUrgentDisplay(t.d))?'urg':'';
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
     <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
-    ${srcTag}
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
-    <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('${key}',${ri})" title="備註"><i class="ti ti-notes"></i></button>
+    ${srcTag}
     <span class="t-date ${dateUrgClass}" ondblclick="editDate(this,'${key}',${ri})">${fmtTaskDate(t.d,t.done,t.completedAt)}</span>
+    <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('${key}',${ri})" title="備註"><i class="ti ti-notes"></i></button>
     <div class="t-actions">
       <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${ri})"><i class="ti ti-bolt"></i></button>
       <button class="t-act-btn" onclick="deleteTask('${key}',${ri})"><i class="ti ti-x"></i></button>
@@ -636,11 +636,7 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
       <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','今天')">今天</button>
       <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','待定')">待定</button>
     </div>
-    <div class="atf-row">
-      <select id="new-task-src-${id}" style="flex:1">
-        <option value="">內部</option><option value="cross">跨處室</option><option value="external">外部</option>
-      </select>
-    </div>
+    ${id==='doc'?`<div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`:''}
     ${extraRow}
     <div class="atf-row">
       <button class="atf-ok" onclick="${onConfirm}">確認新增</button>
@@ -732,6 +728,7 @@ function hideForm(id){
   const f=document.getElementById('add-task-form-'+id);if(f)f.classList.remove('show');
   const b=document.getElementById('add-task-btn-'+id);if(b)b.style.display='flex';
   ['txt','date'].forEach(n=>{const el=document.getElementById(`new-task-${n}-${id}`);if(el){el.value='';if(el.dataset&&'special' in el.dataset)delete el.dataset.special;}});
+  const chk=document.getElementById('new-task-src-'+id);if(chk&&chk.type==='checkbox')chk.checked=false;
 }
 
 /* ══ ADD TASK ══ */
@@ -739,7 +736,7 @@ function confirmAdd(key){
   const txt=document.getElementById('new-task-txt-'+key)?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const date=getTaskDate(key);
-  const src=document.getElementById('new-task-src-'+key)?.value||'';
+  const src=key==='doc'?(document.getElementById('new-task-src-'+key)?.checked?'cross':''):'';
   tasks[key].unshift({id:Date.now(),t:txt,d:date,u:false,done:false,src:src});
   save();updateStats();updatePanel(key);showToast('任務已新增');
 }
@@ -747,7 +744,7 @@ function confirmAddCase(tab){
   const txt=document.getElementById('new-task-txt-'+tab)?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const date=getTaskDate(tab);
-  const src=document.getElementById('new-task-src-'+tab)?.value||'';
+  const src='';
   tasks.case.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,type:tab,src:src});
   save();updateStats();updatePanel('case');showToast('任務已新增');
 }

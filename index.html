@@ -165,6 +165,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .archive-txt{font-size:13px;color:var(--t2);flex:1}
 .archive-mod{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
 .archive-meta{font-size:11px;color:var(--t3)}
+.archive-filter-btn{height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.archive-filter-btn:hover{background:var(--surface-2);color:var(--t1)}
+.archive-filter-btn.on{background:var(--g3);border-color:var(--g3);color:#fff}
+.archive-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
+.arc-btn{height:24px;padding:0 8px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:3px;transition:.12s;color:var(--t2)}
+.arc-btn:hover{background:var(--surface-2);color:var(--t1)}
+.arc-btn.restore:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+.arc-btn.del:hover{background:var(--r5);border-color:#FFCDD2;color:var(--r1)}
 /* PROMPTS */
 .prompt-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .pcat{padding:5px 12px;border-radius:16px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s}
@@ -193,6 +201,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .journal-add-btn:hover{background:var(--g1)}
 .journal-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
 .journal-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
+.journal-search-wrap{position:relative;display:flex;align-items:center}
+.journal-search-input{height:30px;width:180px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 28px 0 28px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);transition:.15s}
+.journal-search-input:focus{border-color:var(--g3);background:var(--surface);width:220px}
+.journal-search-ico{position:absolute;left:8px;font-size:13px;color:var(--t3);pointer-events:none}
+.journal-search-clear{position:absolute;right:6px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;display:none;padding:0 2px;line-height:1}
+.journal-search-clear:hover{color:var(--t1)}
+.journal-search-highlight{background:#FFF176;border-radius:2px;padding:0 1px}
 .journal-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px;margin-bottom:14px;display:none}
 .journal-form.show{display:block}
 .journal-form textarea{width:100%;min-height:80px;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);resize:vertical;outline:none;background:var(--surface-2);line-height:1.6}
@@ -286,7 +301,49 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .ql-add-row{display:flex;gap:6px;flex-wrap:wrap}
 .ql-add-row input{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
 .ql-add-row input:focus{border-color:var(--g3);background:var(--surface)}
-/* STATS PAGE */
+/* TEACHING JOURNAL */
+.tj-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.tj-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.tj-add-btn:hover{background:var(--g1)}
+.tj-export-grp{display:flex;gap:6px}
+.tj-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.tj-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
+.tj-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px 16px;margin-bottom:16px;display:none}
+.tj-form.show{display:block}
+.tj-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:8px}
+.tj-form-full{margin-bottom:8px}
+.tj-label{font-size:11px;color:var(--t2);margin-bottom:3px;display:block}
+.tj-form input,.tj-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.tj-form input:focus,.tj-form select:focus{border-color:var(--g3);background:var(--surface)}
+.tj-form textarea{width:100%;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);resize:vertical;min-height:64px;line-height:1.6;box-sizing:border-box}
+.tj-form textarea:focus{border-color:var(--g3);background:var(--surface)}
+.tj-form-actions{display:flex;gap:6px;margin-top:4px}
+.tj-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.tj-ok:hover{background:var(--g1)}
+.tj-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.tj-filter-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tj-filter-select{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);outline:none;cursor:pointer}
+.tj-filter-select:focus{border-color:var(--g3)}
+.tj-list{display:flex;flex-direction:column;gap:8px}
+.tj-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px 16px;transition:.12s}
+.tj-card.tj-card-pending-border{border-color:#FFE08A;background:linear-gradient(to bottom,#FFFDF0,var(--surface))}
+.tj-card.tj-card-pending-border:hover{border-color:#F0C040}
+.tj-card-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.tj-card-date{font-size:13px;font-weight:600;color:var(--t1)}
+.tj-card-class{font-size:12px;padding:1px 8px;border-radius:3px;background:var(--g5);color:var(--g1);font-weight:500}
+.tj-card-period{font-size:12px;color:var(--t3)}
+.tj-card-pending{font-size:10px;padding:1px 7px;border-radius:3px;background:#FFF3CD;color:#856404;font-weight:500;border:1px solid #FFE08A}
+.tj-card-actions{margin-left:auto;display:flex;gap:4px}
+.tj-action-btn{border:none;background:none;cursor:pointer;font-size:13px;color:var(--t3);padding:2px 4px;border-radius:3px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.tj-action-btn:hover{color:var(--t1);background:var(--surface-2)}
+.tj-action-btn.del:hover{color:var(--r3);background:var(--r5)}
+.tj-field{margin-bottom:6px}
+.tj-field-label{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.tj-field-content{font-size:13px;color:var(--t1);line-height:1.65;white-space:pre-wrap}
+.tj-edit-area{width:100%;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface);resize:vertical;line-height:1.6;box-sizing:border-box}
+.tj-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 0;color:var(--t3);gap:8px}
+.tj-empty i{font-size:28px}
+.tj-empty p{font-size:13px}
 .stats-page-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
 .stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:'Noto Sans TC',sans-serif}
 .stats-page-tab:hover{color:var(--t1)}.stats-page-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
@@ -348,6 +405,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <button class="ni" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務追蹤<span class="ni-badge" id="badge-all">0</span></button>
     <button class="ni" onclick="navTo(this,'archive')"><i class="ti ti-archive"></i>存檔紀錄</button>
     <button class="ni" onclick="navTo(this,'journal')"><i class="ti ti-notebook"></i>工作日誌</button>
+    <button class="ni" onclick="navTo(this,'teaching')"><i class="ti ti-school"></i>教學日誌</button>
   </div>
   <div class="ndiv"></div>
   <div style="margin-bottom:4px">
@@ -412,7 +470,19 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
 </main>
 <div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">全部待辦任務</div><div id="task-page-content"></div></div>
-<div class="page" id="page-archive"><div class="sec-lbl" style="margin-bottom:16px">已完成任務</div><div id="archive-content"></div></div>
+<div class="page" id="page-archive">
+  <div class="sec-lbl" style="margin-bottom:14px">已完成任務</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;gap:5px;flex-wrap:wrap" id="archive-filter-grp">
+      <button class="archive-filter-btn on" onclick="setArchiveFilter('all',this)">全部</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文計畫</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('sch',this)">獎助學金</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('case',this)">學生輔導</button>
+    </div>
+    <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
+  </div>
+  <div id="archive-content"></div>
+</div>
 <div class="page" id="page-prompts">
   <div class="sec-lbl" style="margin-bottom:14px">Prompt 模板庫 — 一鍵複製或直接開啟 Claude</div>
   <div class="prompt-cats">
@@ -428,6 +498,11 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="journal-topbar">
     <div class="sec-lbl" style="margin-bottom:0">工作日誌</div>
     <div class="journal-topbar-right">
+      <div class="journal-search-wrap">
+        <i class="ti ti-search journal-search-ico"></i>
+        <input class="journal-search-input" id="journal-search" type="text" placeholder="搜尋日誌內容..." oninput="debouncedJournalSearch(this)">
+        <button class="journal-search-clear" id="journal-search-clear" onclick="clearJournalSearch()"><i class="ti ti-x"></i></button>
+      </div>
       <div class="journal-vt" id="journal-vt">
         <button class="jvt on" id="jvt-month" onclick="setJournalView('month')">本月</button>
         <button class="jvt" id="jvt-week" onclick="setJournalView('week')">本週</button>
@@ -492,6 +567,33 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
   </div>
 
+  <!-- AI 助理設定 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-robot"></i>AI 助理設定</div>
+    <div class="settings-row">
+      <span class="settings-label">啟用 AI</span>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="set-ai-enabled" style="width:16px;height:16px;accent-color:var(--g3)">
+        <span style="font-size:12px;color:var(--t2)">啟用 AI 功能（統計摘要、月報輔助）</span>
+      </label>
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">API Key</span>
+      <input class="settings-input" type="password" id="set-api-key" placeholder="sk-ant-api03-..." style="max-width:320px">
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">模型</span>
+      <select class="settings-input" id="set-ai-model" style="max-width:230px">
+        <option value="claude-haiku-4-5-20251001">Haiku（省費，推薦）</option>
+        <option value="claude-sonnet-4-6">Sonnet（較強）</option>
+      </select>
+    </div>
+    <div class="settings-row" style="margin-top:4px">
+      <button class="settings-btn primary" onclick="saveUserSettings()"><i class="ti ti-device-floppy"></i>儲存</button>
+    </div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.7">API Key 僅存於本機瀏覽器，不會上傳。取得 Key：<a href="https://console.anthropic.com/" target="_blank" style="color:var(--g2)">console.anthropic.com</a><br>Haiku 每次約 NT$0.05，Sonnet 約 NT$0.15。未填 Key 時可改用「開啟 Claude.ai」路徑。</div>
+  </div>
+
   <!-- 關於 -->
   <div class="settings-section">
     <div class="settings-section-title"><i class="ti ti-info-circle"></i>關於</div>
@@ -501,6 +603,75 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <a href="https://wtling61-droid.github.io/work-platform/" target="_blank" style="color:var(--g2)">🌐 https://wtling61-droid.github.io/work-platform/</a>
     </div>
   </div>
+</div>
+
+<!-- TEACHING JOURNAL PAGE -->
+<div class="page" id="page-teaching">
+  <div class="sec-lbl" style="margin-bottom:14px">教學日誌</div>
+  <div class="tj-toolbar">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <button class="tj-add-btn" onclick="toggleTJForm()"><i class="ti ti-plus"></i>新增記錄</button>
+      <div class="tj-filter-wrap">
+        <span style="font-size:12px;color:var(--t2)">年段</span>
+        <select class="tj-filter-select" id="tj-grade-filter" onchange="renderTeachingPage()">
+          <option value="">全部</option>
+          <option>高一</option><option>高二</option><option>高三</option>
+          <option>國一</option><option>國二</option><option>國三</option>
+        </select>
+        <span style="font-size:12px;color:var(--t2)">班</span>
+        <select class="tj-filter-select" id="tj-class-filter" onchange="renderTeachingPage()">
+          <option value="">全部</option>
+          <option>忠</option><option>孝</option><option>仁</option><option>愛</option>
+          <option>信</option><option>義</option><option>和</option><option>平</option>
+        </select>
+        <span id="tj-count" style="font-size:11px;color:var(--t3)"></span>
+      </div>
+    </div>
+    <div class="tj-export-grp">
+      <button class="tj-export-btn" onclick="exportTeachingCSV()"><i class="ti ti-download"></i>CSV</button>
+      <button class="tj-export-btn" onclick="printTeachingJournal()"><i class="ti ti-printer"></i>列印</button>
+    </div>
+  </div>
+
+  <!-- 新增表單 -->
+  <div class="tj-form" id="tj-form">
+    <div class="tj-form-grid">
+      <div><span class="tj-label">日期</span><input type="date" id="tj-date"></div>
+      <div><span class="tj-label">節次</span>
+        <select id="tj-period">
+          <option>早自習</option><option>第1節</option><option>第2節</option>
+          <option>第3節</option><option>第4節</option><option>午休</option>
+          <option>第5節</option><option>第6節</option><option>第7節</option><option>第8節</option>
+        </select>
+      </div>
+      <div><span class="tj-label">年段</span>
+        <select id="tj-grade">
+          <option>高一</option><option>高二</option><option>高三</option>
+          <option>國一</option><option>國二</option><option>國三</option>
+        </select>
+      </div>
+      <div><span class="tj-label">班級</span>
+        <select id="tj-class">
+          <option>忠</option><option>孝</option><option>仁</option><option>愛</option>
+          <option>信</option><option>義</option><option>和</option><option>平</option>
+        </select>
+      </div>
+    </div>
+    <div class="tj-form-full">
+      <span class="tj-label">教學進度 <span style="color:var(--t3);font-weight:400">（可課後填寫）</span></span>
+      <textarea id="tj-progress" placeholder="本節上課內容、進度、使用教材..."></textarea>
+    </div>
+    <div class="tj-form-full">
+      <span class="tj-label">課堂狀況 <span style="color:var(--t3);font-weight:400">（可課後填寫）</span></span>
+      <textarea id="tj-situation" placeholder="學生反應、課堂氣氛、特殊狀況..."></textarea>
+    </div>
+    <div class="tj-form-actions">
+      <button class="tj-ok" onclick="confirmAddTeaching()">確認</button>
+      <button class="tj-cancel" onclick="toggleTJForm()">取消</button>
+    </div>
+  </div>
+
+  <div class="tj-list" id="tj-list"></div>
 </div>
 
 <!-- STATS PAGE -->
@@ -516,6 +687,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('case-form')"><i class="ti ti-plus"></i>新增個案</button>
       <div class="stats-export-grp">
+        <button class="stats-export-btn" onclick="aiCaseSummary()"><i class="ti ti-robot"></i>AI 摘要</button>
         <button class="stats-export-btn" onclick="exportCasesCSV()"><i class="ti ti-download"></i>CSV</button>
         <button class="stats-export-btn" onclick="printCaseStats()"><i class="ti ti-printer"></i>列印報表</button>
       </div>
@@ -544,7 +716,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-sub-lbl">個案清單</div>
     <div class="data-table-wrap">
       <table class="data-table">
-        <thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>輔導次數</th><th>個案問題</th><th>結案狀態</th><th></th></tr></thead>
+        <thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th><th></th></tr></thead>
         <tbody id="case-table-body"></tbody>
       </table>
     </div>
@@ -555,6 +727,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('service-form')"><i class="ti ti-plus"></i>新增服務記錄</button>
       <div class="stats-export-grp">
+        <button class="stats-export-btn" onclick="aiServiceSummary()"><i class="ti ti-robot"></i>AI 摘要</button>
         <button class="stats-export-btn" onclick="exportServicesCSV()"><i class="ti ti-download"></i>CSV</button>
         <button class="stats-export-btn" onclick="printServiceStats()"><i class="ti ti-printer"></i>列印報表</button>
       </div>
@@ -578,7 +751,6 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
     <div class="charts-grid" id="service-charts"></div>
     <div id="service-summary-table"></div>
-    <div class="stats-sub-lbl">服務記錄明細</div>
     <div class="data-table-wrap">
       <table class="data-table">
         <thead><tr><th>日期</th><th>服務項目</th><th>服務對象</th><th>男性人次</th><th>女性人次</th><th>合計</th><th></th></tr></thead>
@@ -719,18 +891,26 @@ let curKey='sch', curCaseTab='formal', tasks={};
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  initSettings(); initStats();
+  initSettings(); initStats(); initTeaching();
   updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
 }
 function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
 function clearAllData(){
-  if(!confirm('確定要重置所有任務資料嗎？此動作不可復原。'))return;
-  localStorage.removeItem('wp_tasks_v3');
+  if(!confirm('確定要重置所有資料嗎？任務、日誌、個案、服務記錄、教學日誌都會清除。此動作不可復原。'))return;
+  ['wp_tasks_v3','wp_journal_v1','wp_cases_v1','wp_services_v1','wp_teaching_v1'].forEach(k=>localStorage.removeItem(k));
   tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  save();updateStats();updatePanel(curKey);showToast('資料已重置');
+  journal=[];caseRecords=[];serviceRecords=[];teachingRecords=[];
+  save();saveJournal();saveCases();saveServices();saveTeaching();
+  updateStats();updatePanel(curKey);showToast('所有資料已重置');
 }
 
 /* ══ DATE ══ */
+function localISO(d){
+  d=d||new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),ms);};}
+const debouncedJournalSearch=debounce(function(input){onJournalSearch(input);},150);
 function updateDate(){
   const n=new Date(),days=['日','一','二','三','四','五','六'];
   document.getElementById('hdr-date').textContent=`${n.getFullYear()} / ${String(n.getMonth()+1).padStart(2,'0')} / ${String(n.getDate()).padStart(2,'0')}（週${days[n.getDay()]}）`;
@@ -861,10 +1041,11 @@ function buildStdPanel(key){
     <div class="chat-area" id="chat-area">
       <div class="msg-from">${META[key].label}助理</div>
       <div class="msg msg-ai">${CHAT_INTRO[key]||''}</div>
+      <div class="msg msg-ai" style="font-size:11px;color:var(--g1);background:var(--g5)"><i class="ti ti-notebook" style="margin-right:4px"></i>下方輸入的文字送出後，會自動存入今天的工作日誌。</div>
     </div>
     <div class="p-inp">
-      <input type="text" id="chat-inp" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendMsg()">
-      <button class="send-btn" onclick="sendMsg()"><i class="ti ti-send"></i></button>
+      <input type="text" id="chat-inp" placeholder="輸入備忘或記錄..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="send-btn" onclick="sendMsg()" title="送出並存入日誌"><i class="ti ti-notebook"></i></button>
     </div>`;
 }
 
@@ -1050,30 +1231,67 @@ function tpToggle(key,idx){
 function tpDelete(key,idx){tasks[key].splice(idx,1);save();renderTaskPage();updateStats();}
 
 /* ══ ARCHIVE ══ */
+let curArchiveFilter='all';
+
+function setArchiveFilter(key,btn){
+  curArchiveFilter=key;
+  document.querySelectorAll('.archive-filter-btn').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderArchivePage();
+}
+
 function renderArchivePage(){
   let items=[];
   ['doc','sch','case'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
   items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
+  const filtered=curArchiveFilter==='all'?items:items.filter(i=>i.key===curArchiveFilter);
+  const countEl=document.getElementById('archive-count');
+  if(countEl)countEl.textContent=`共 ${filtered.length} 件`;
   const el=document.getElementById('archive-content');
-  if(!items.length){el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>還沒有已完成的任務</p></div>`;return;}
-  el.innerHTML=items.map(t=>`<div class="archive-item">
-    <i class="ti ti-circle-check" style="color:var(--g3);font-size:16px"></i>
+  if(!el)return;
+  if(!filtered.length){
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>${curArchiveFilter==='all'?'還沒有已完成的任務':'此分類沒有已完成的任務'}</p></div>`;
+    return;
+  }
+  el.innerHTML=filtered.map(t=>`<div class="archive-item">
+    <i class="ti ti-circle-check" style="color:var(--g3);font-size:16px;flex-shrink:0"></i>
     <span class="archive-txt">${t.t}</span>
-    <span class="archive-mod ${META[t.key].ico}" style="background:${META[t.key].color}22;color:${META[t.key].color}">${META[t.key].label}</span>
-    <span class="archive-meta">${t.completedAt||t.d}</span>
+    <span class="archive-mod ${META[t.key].ico}" style="background:${META[t.key].color}22;color:${META[t.key].color};flex-shrink:0">${META[t.key].label}</span>
+    <span class="archive-meta" style="flex-shrink:0">${t.completedAt||t.d}</span>
+    <div class="archive-actions">
+      <button class="arc-btn restore" onclick="restoreTask('${t.key}',${t.id})" title="還原為待辦"><i class="ti ti-arrow-back-up"></i>還原</button>
+      <button class="arc-btn del" onclick="deleteArchivedTask('${t.key}',${t.id})" title="永久刪除"><i class="ti ti-trash"></i>刪除</button>
+    </div>
   </div>`).join('');
+}
+
+function restoreTask(key,id){
+  const arr=tasks[key]||[];
+  const t=arr.find(t=>t.id===id);
+  if(!t)return;
+  t.done=false;delete t.completedAt;
+  save();updateStats();renderArchivePage();
+  showToast('已還原為待辦');
+}
+
+function deleteArchivedTask(key,id){
+  if(!confirm('確定永久刪除這筆已完成任務？此動作無法復原。'))return;
+  tasks[key]=(tasks[key]||[]).filter(t=>t.id!==id);
+  save();updateStats();renderArchivePage();
+  showToast('已永久刪除');
 }
 
 /* ══ NAV ══ */
 function navTo(el,page){
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',settings:'page-settings',stats:'page-stats'};
+  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats'};
   document.getElementById(map[page]||'page-dashboard').classList.add('active');
   if(page==='tasks')renderTaskPage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');
   if(page==='journal')renderJournal();
+  if(page==='teaching')renderTeachingPage();
   if(page==='settings')renderSettingsPage();
   if(page==='stats')renderStatsPage();
 }
@@ -1105,8 +1323,21 @@ function openPromptCategory(cat){
 function sendMsg(){
   const inp=document.getElementById('chat-inp');if(!inp)return;
   const txt=inp.value.trim();if(!txt)return;
-  const ca=document.getElementById('chat-area');if(!ca)return;
-  ca.innerHTML+=`<div class="msg msg-user">${txt}</div>`;inp.value='';ca.scrollTop=ca.scrollHeight;
+  // 存進工作日誌
+  const n=new Date();
+  const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
+  const isoDate=localISO(n);
+  const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+  journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:txt,auto:false});
+  saveJournal();
+  // chat 區顯示確認
+  const ca=document.getElementById('chat-area');
+  if(ca){
+    ca.innerHTML+=`<div class="msg msg-user">${txt.replace(/</g,'&lt;')}</div>`;
+    ca.innerHTML+=`<div class="msg msg-ai" style="font-size:11px;color:var(--t3)"><i class="ti ti-notebook" style="margin-right:4px"></i>已存入工作日誌</div>`;
+    ca.scrollTop=ca.scrollHeight;
+  }
+  inp.value='';
 }
 
 /* ══ UTILS ══ */
@@ -1124,7 +1355,8 @@ function initJournal(){
   journal.forEach(e=>{
     if(!e.isoDate&&e.date){
       const[m,d]=e.date.split('/').map(Number);
-      e.isoDate=`2026-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const curY=new Date().getFullYear();
+      e.isoDate=`${curY}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     }
   });
   const n=new Date();
@@ -1137,7 +1369,7 @@ function saveJournal(){localStorage.setItem('wp_journal_v1',JSON.stringify(journ
 function addAutoJournalEntry(text){
   const n=new Date();
   const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
-  const isoDate=n.toISOString().slice(0,10);
+  const isoDate=localISO(n);
   const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
   journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:text,auto:true});
   saveJournal();
@@ -1149,7 +1381,7 @@ function toggleJournalForm(forceClose){
   f.classList.toggle('show',show);
   if(show){
     const d=document.getElementById('j-date');
-    if(d&&!d.value)d.value=new Date().toISOString().slice(0,10);
+    if(d&&!d.value)d.value=localISO();
     setTimeout(()=>document.getElementById('j-content')?.focus(),50);
   }
 }
@@ -1157,7 +1389,7 @@ function toggleJournalForm(forceClose){
 function confirmAddJournal(){
   const txt=document.getElementById('j-content')?.value.trim();
   if(!txt){showToast('請輸入記錄內容');return;}
-  const dateVal=document.getElementById('j-date')?.value||new Date().toISOString().slice(0,10);
+  const dateVal=document.getElementById('j-date')?.value||localISO();
   const d=new Date(dateVal+'T12:00:00');
   const dateStr=`${d.getMonth()+1}/${d.getDate()}`;
   const now=new Date();
@@ -1240,32 +1472,56 @@ function getWeekBounds(){
 
 function renderJournal(){
   const el=document.getElementById('journal-list');if(!el)return;
-  let filtered=journal.filter(e=>e.isoDate&&e.isoDate.slice(0,7)===curJournalMonth);
-  if(curJournalView==='week'){
-    const{from,to}=getWeekBounds();
-    filtered=filtered.filter(e=>{const d=new Date(e.isoDate+'T12:00:00');return d>=from&&d<=to;});
+  const kw=(document.getElementById('journal-search')?.value||'').trim();
+  const isSearch=kw.length>0;
+
+  let filtered;
+  if(isSearch){
+    // 搜尋模式：跨所有月份，不受月份/週切換限制
+    filtered=journal.filter(e=>e.content&&e.content.toLowerCase().includes(kw.toLowerCase()));
+  } else {
+    filtered=journal.filter(e=>e.isoDate&&e.isoDate.slice(0,7)===curJournalMonth);
+    if(curJournalView==='week'){
+      const{from,to}=getWeekBounds();
+      filtered=filtered.filter(e=>{const d=new Date(e.isoDate+'T12:00:00');return d>=from&&d<=to;});
+    }
   }
+
   if(!filtered.length){
-    const msg=curJournalView==='week'?'本週尚無日誌記錄':'本月尚無日誌記錄，點「新增記錄」開始';
+    const msg=isSearch?`找不到包含「${kw}」的記錄`:curJournalView==='week'?'本週尚無日誌記錄':'本月尚無日誌記錄，點「新增記錄」開始';
     el.innerHTML=`<div class="empty-state"><i class="ti ti-notebook"></i><p>${msg}</p></div>`;
     return;
   }
+
   const today=new Date();const yd=new Date(today);yd.setDate(yd.getDate()-1);
   const days=['日','一','二','三','四','五','六'];
   const fmtDate=iso=>{
     const d=new Date(iso+'T12:00:00');
     const mm=d.getMonth()+1,dd=d.getDate();
+    const y=d.getFullYear();
     const suffix=d.toDateString()===today.toDateString()?'今天':d.toDateString()===yd.toDateString()?'昨天':'';
-    return suffix?`${mm}/${dd} 週${days[d.getDay()]}（${suffix}）`:`${mm}/${dd} 週${days[d.getDay()]}`;
+    const yearPfx=isSearch&&y!==today.getFullYear()?`${y}/`:'';
+    return suffix?`${yearPfx}${mm}/${dd} 週${days[d.getDay()]}（${suffix}）`:`${yearPfx}${mm}/${dd} 週${days[d.getDay()]}`;
   };
+
+  // 關鍵字高亮
+  const highlight=txt=>{
+    if(!kw)return txt.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const safe=txt.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const safeKw=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    return safe.replace(new RegExp(safeKw,'gi'),m=>`<mark class="journal-search-highlight">${m}</mark>`);
+  };
+
+  const resultNote=isSearch?`<div style="font-size:11px;color:var(--t3);margin-bottom:10px;padding:4px 0">找到 ${filtered.length} 則包含「<strong style="color:var(--g1)">${kw}</strong>」的記錄</div>`:'';
+
   const sortedDates=[...new Set(filtered.map(e=>e.isoDate))].sort().reverse();
-  el.innerHTML=sortedDates.map(iso=>{
+  el.innerHTML=resultNote+sortedDates.map(iso=>{
     const entries=filtered.filter(e=>e.isoDate===iso);
     return `<div class="journal-group">
       <div class="journal-group-date">${fmtDate(iso)}<span style="font-size:10px;color:var(--t3);font-weight:400;margin-left:6px">${entries.length} 則</span></div>
       ${entries.map(e=>`<div class="journal-entry ${e.auto?'je-auto-entry':''}">
         ${e.auto?'<i class="ti ti-check" style="font-size:11px;color:var(--g3);flex-shrink:0;margin-top:3px"></i>':''}
-        <span class="je-content" id="je-content-${e.id}">${e.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>
+        <span class="je-content" id="je-content-${e.id}">${highlight(e.content)}</span>
         <span class="je-time">${e.time}</span>
         <div class="je-actions">
           ${!e.auto?`<button class="je-action-btn" onclick="editJournalEntry(${e.id})" title="編輯"><i class="ti ti-pencil"></i></button>`:''}
@@ -1274,6 +1530,27 @@ function renderJournal(){
       </div>`).join('')}
     </div>`;
   }).join('');
+}
+
+function onJournalSearch(input){
+  const hasVal=input.value.length>0;
+  const clearBtn=document.getElementById('journal-search-clear');
+  if(clearBtn)clearBtn.style.display=hasVal?'block':'none';
+  // 搜尋時暫時鎖定月份/週切換 UI 視覺提示
+  const vt=document.getElementById('journal-vt');
+  if(vt)vt.style.opacity=hasVal?'0.4':'1';
+  renderJournal();
+}
+
+function clearJournalSearch(){
+  const input=document.getElementById('journal-search');
+  if(input)input.value='';
+  const clearBtn=document.getElementById('journal-search-clear');
+  if(clearBtn)clearBtn.style.display='none';
+  const vt=document.getElementById('journal-vt');
+  if(vt)vt.style.opacity='1';
+  renderJournal();
+  document.getElementById('journal-search')?.focus();
 }
 
 function exportJournal(){
@@ -1286,7 +1563,7 @@ function closeExportModal(){document.getElementById('export-modal').style.displa
 /* ══ DATE HELPERS ══ */
 function setSpecialDate(id,val){
   const el=document.getElementById('new-task-date-'+id);if(!el)return;
-  if(val==='今天'){el.value=new Date().toISOString().slice(0,10);delete el.dataset.special;}
+  if(val==='今天'){el.value=localISO();delete el.dataset.special;}
   else{el.value='';el.dataset.special=val;}
 }
 function getTaskDate(id){
@@ -1368,7 +1645,7 @@ function renderExportPreview(){
   const days=Array.from({length:5},(_,i)=>{const d=new Date(w.mon);d.setDate(w.mon.getDate()+i);return d;});
   let html='';
   days.forEach((d,i)=>{
-    const iso=d.toISOString().slice(0,10);
+    const iso=localISO(d);
     const de=journal.filter(e=>e.isoDate===iso);
     de.forEach(e=>{if(exportCheckState[e.id]===undefined)exportCheckState[e.id]=true;});
     const chk=de.filter(e=>exportCheckState[e.id]!==false);
@@ -1384,7 +1661,7 @@ function renderExportPreview(){
     else{de.forEach(e=>{
       const l=estimateLines(e.content);
       const checked=exportCheckState[e.id]!==false;
-      html+=`<div class="exp-entry">
+      html+=`<div class="exp-entry" data-eid="${e.id}">
         <input type="checkbox" id="ec-${e.id}" ${checked?'checked':''} onchange="toggleExpEntry(${e.id})">
         <label for="ec-${e.id}">${e.content.replace(/</g,'&lt;')}</label>
         <span class="exp-lines">${l}行</span>
@@ -1395,7 +1672,41 @@ function renderExportPreview(){
   document.getElementById('export-preview').innerHTML=html;
 }
 
-function toggleExpEntry(id){exportCheckState[id]=!exportCheckState[id];renderExportPreview();}
+function toggleExpEntry(id){
+  exportCheckState[id]=!exportCheckState[id];
+  // 只更新行數統計，不重建整個 HTML
+  const cb=document.getElementById('ec-'+id);
+  if(cb)cb.checked=exportCheckState[id];
+  // 重新計算該天的行數顯示
+  const entry=document.querySelector('[data-eid="'+id+'"]');
+  if(entry){
+    const dayEl=entry.closest('.exp-day');
+    if(dayEl)recalcExpDayLines(dayEl);
+  }
+}
+
+function recalcExpDayLines(dayEl){
+  const checkboxes=dayEl.querySelectorAll('input[type=checkbox]');
+  let lines=0;
+  checkboxes.forEach(cb=>{
+    if(cb.checked){
+      const eid=parseInt(cb.id.replace('ec-',''));
+      const e=journal.find(e=>e.id===eid);
+      if(e)lines+=estimateLines(e.content);
+    }
+  });
+  const lcEl=dayEl.querySelector('.exp-lc');
+  const warnEl=dayEl.querySelector('.exp-warn');
+  if(lcEl){
+    lcEl.textContent=lines+' / 9 行';
+    lcEl.className='exp-lc'+(lines>9?' warn':'');
+  }
+  if(lines>9&&!warnEl){
+    lcEl?.insertAdjacentHTML('afterend','<span class="exp-warn">⚠ 超過上限，請取消勾選部分記錄</span>');
+  } else if(lines<=9&&warnEl){
+    warnEl.remove();
+  }
+}
 
 function doExport(){
   const w=exportWeeks[exportSelIdx];
@@ -1405,7 +1716,7 @@ function doExport(){
   const rocY=y=>y-1911;
   const days=Array.from({length:5},(_,i)=>{
     const d=new Date(w.mon);d.setDate(w.mon.getDate()+i);
-    const iso=d.toISOString().slice(0,10);
+    const iso=localISO(d);
     const entries=journal.filter(e=>e.isoDate===iso&&exportCheckState[e.id]!==false);
     return{d,entries};
   });
@@ -1465,6 +1776,225 @@ table{width:100%;border-collapse:collapse;table-layout:fixed}
 }
 
 
+/* ══ TEACHING JOURNAL ══ */
+let teachingRecords=[];
+
+function initTeaching(){
+  const s=localStorage.getItem('wp_teaching_v1');
+  teachingRecords=s?JSON.parse(s):[];
+}
+function saveTeaching(){localStorage.setItem('wp_teaching_v1',JSON.stringify(teachingRecords));}
+
+function toggleTJForm(forceClose){
+  const f=document.getElementById('tj-form');if(!f)return;
+  if(forceClose){f.classList.remove('show');return;}
+  f.classList.toggle('show');
+  if(f.classList.contains('show')){
+    const d=document.getElementById('tj-date');
+    if(d&&!d.value)d.value=localISO();
+  }
+}
+
+function confirmAddTeaching(){
+  const date=document.getElementById('tj-date')?.value;
+  const period=document.getElementById('tj-period')?.value;
+  const grade=document.getElementById('tj-grade')?.value;
+  const classSuffix=document.getElementById('tj-class')?.value;
+  const progress=document.getElementById('tj-progress')?.value.trim();
+  const situation=document.getElementById('tj-situation')?.value.trim();
+  if(!date){showToast('請選擇日期');return;}
+  const className=grade+classSuffix;
+  teachingRecords.push({id:Date.now(),date,period,className,progress,situation});
+  saveTeaching();
+  toggleTJForm(true);
+  ['tj-progress','tj-situation'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  showToast('教學記錄已建立');
+  renderTeachingPage();
+}
+
+function renderTeachingPage(){
+  const filterGrade=document.getElementById('tj-grade-filter')?.value||'';
+  const filterClass=document.getElementById('tj-class-filter')?.value||'';
+  const SORT_PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
+  let records=[...teachingRecords].sort((a,b)=>{
+    const dc=b.date.localeCompare(a.date);if(dc!==0)return dc;
+    return SORT_PERIODS.indexOf(a.period)-SORT_PERIODS.indexOf(b.period);
+  });
+  if(filterGrade)records=records.filter(r=>(r.className||'').startsWith(filterGrade));
+  if(filterClass)records=records.filter(r=>(r.className||'').endsWith(filterClass));
+  const countEl=document.getElementById('tj-count');
+  if(countEl)countEl.textContent=`共 ${records.length} 筆`;
+  const el=document.getElementById('tj-list');if(!el)return;
+  const emptyMsg=(filterGrade||filterClass)?`「${filterGrade}${filterClass}」尚無記錄`:'尚無教學記錄，點上方「新增記錄」開始';
+  if(!records.length){
+    el.innerHTML=`<div class="tj-empty"><i class="ti ti-school"></i><p>${emptyMsg}</p></div>`;
+    return;
+  }
+  const PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
+  const GRADES=['高一','高二','高三','國一','國二','國三'];
+  const CLASSES=['忠','孝','仁','愛','信','義','和','平'];
+
+  el.innerHTML=records.map(r=>{
+    const isPending=!r.progress&&!r.situation;
+    const cls='tj-card'+(isPending?' tj-card-pending-border':'');
+    const safeP=(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const safeS=(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return '<div class="'+cls+'" id="tj-card-'+r.id+'">'
+      +'<div class="tj-card-hdr">'
+      +'<span class="tj-card-date">'+fmtTJDate(r.date)+'</span>'
+      +'<span class="tj-card-class">'+r.className+'</span>'
+      +(r.period?'<span class="tj-card-period">'+r.period+'</span>':'')
+      +(isPending?'<span class="tj-card-pending">待補記錄</span>':'')
+      +'<div class="tj-card-actions">'
+      +'<button class="tj-action-btn" onclick="copyTJRecord('+r.id+')" title="複製"><i class="ti ti-copy"></i></button>'
+      +'<button class="tj-action-btn" onclick="toggleTJEdit('+r.id+')" title="編輯"><i class="ti ti-pencil"></i></button>'
+      +'<button class="tj-action-btn del" onclick="deleteTJRecord('+r.id+')" title="刪除"><i class="ti ti-trash"></i></button>'
+      +'</div></div>'
+      +'<div id="tj-view-'+r.id+'">'
+      +(r.progress?'<div class="tj-field"><div class="tj-field-label">教學進度</div><div class="tj-field-content">'+safeP+'</div></div>':'')
+      +(r.situation?'<div class="tj-field"><div class="tj-field-label">課堂狀況</div><div class="tj-field-content">'+safeS+'</div></div>':'')
+      +(isPending?'<div style="font-size:12px;color:var(--t3);font-style:italic">尚未填寫，點鉛筆補記</div>':'')
+      +'</div>'
+      +'<div id="tj-edit-'+r.id+'" style="display:none"></div>'
+      +'</div>';
+  }).join('');
+}
+
+function fmtTJDate(iso){
+  if(!iso)return'';
+  const d=new Date(iso+'T12:00:00');
+  const days=['日','一','二','三','四','五','六'];
+  const y=d.getFullYear(),m=d.getMonth()+1,dd=d.getDate();
+  const today=new Date();
+  const isThisYear=y===today.getFullYear();
+  return`${isThisYear?'':(y+'/')}${m}/${dd} 週${days[d.getDay()]}`;
+}
+
+
+function toggleTJEdit(id){
+  const view=document.getElementById('tj-view-'+id);
+  const editBox=document.getElementById('tj-edit-'+id);
+  if(!view||!editBox)return;
+  const isEditing=editBox.style.display!=='none';
+  if(isEditing){
+    view.style.display='block';
+    editBox.style.display='none';
+    editBox.innerHTML='';
+    return;
+  }
+  // 找到記錄
+  const r=teachingRecords.find(r=>r.id===id);if(!r)return;
+  const PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
+  const GRADES=['高一','高二','高三','國一','國二','國三'];
+  const CLASSES=['忠','孝','仁','愛','信','義','和','平'];
+  const periodOpts=PERIODS.map(p=>'<option'+(p===r.period?' selected':'')+'>'+p+'</option>').join('');
+  const gradeOpts=GRADES.map(g=>'<option'+((r.className||'').startsWith(g)?' selected':'')+'>'+g+'</option>').join('');
+  const classOpts=CLASSES.map(c=>'<option'+((r.className||'').endsWith(c)?' selected':'')+'>'+c+'</option>').join('');
+  const safeP=(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const safeS=(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const inputStyle='height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:\'Noto Sans TC\',sans-serif;width:100%;outline:none;background:var(--surface-2)';
+  editBox.innerHTML=
+    '<div class="tj-form-grid" style="margin-bottom:8px">'
+    +'<div><span class="tj-label">日期</span><input type="date" id="tje-date-'+id+'" value="'+r.date+'" style="'+inputStyle+'"></div>'
+    +'<div><span class="tj-label">節次</span><select id="tje-period-'+id+'" style="'+inputStyle+'">'+periodOpts+'</select></div>'
+    +'<div><span class="tj-label">年段</span><select id="tje-grade-'+id+'" style="'+inputStyle+'">'+gradeOpts+'</select></div>'
+    +'<div><span class="tj-label">班級</span><select id="tje-class-'+id+'" style="'+inputStyle+'">'+classOpts+'</select></div>'
+    +'</div>'
+    +'<div style="margin-bottom:6px"><span class="tj-label">教學進度</span><textarea class="tj-edit-area" id="tje-progress-'+id+'" rows="3">'+safeP+'</textarea></div>'
+    +'<div style="margin-bottom:8px"><span class="tj-label">課堂狀況</span><textarea class="tj-edit-area" id="tje-situation-'+id+'" rows="3">'+safeS+'</textarea></div>'
+    +'<div style="display:flex;gap:6px">'
+    +'<button class="tj-ok" onclick="saveTJEdit('+id+')">儲存</button>'
+    +'<button class="tj-cancel" onclick="toggleTJEdit('+id+')">取消</button>'
+    +'</div>';
+  view.style.display='none';
+  editBox.style.display='block';
+}
+
+function saveTJEdit(id){
+  const r=teachingRecords.find(r=>r.id===id);if(!r)return;
+  const date=document.getElementById(`tje-date-${id}`)?.value;
+  const period=document.getElementById(`tje-period-${id}`)?.value;
+  const grade=document.getElementById(`tje-grade-${id}`)?.value;
+  const classSuffix=document.getElementById(`tje-class-${id}`)?.value;
+  const progress=document.getElementById(`tje-progress-${id}`)?.value.trim();
+  const situation=document.getElementById(`tje-situation-${id}`)?.value.trim();
+  if(!date){showToast('日期為必填');return;}
+  const className=grade+classSuffix;
+  Object.assign(r,{date,period,className,progress,situation});
+  saveTeaching();showToast('已儲存');renderTeachingPage();
+}
+
+function copyTJRecord(id){
+  const r=teachingRecords.find(r=>r.id===id);if(!r)return;
+  // 展開表單
+  const f=document.getElementById('tj-form');
+  if(f)f.classList.add('show');
+  // 填入來源資料（日期預設今天，其餘複製）
+  const dateEl=document.getElementById('tj-date');
+  if(dateEl)dateEl.value=localISO();
+  // 節次
+  const periodEl=document.getElementById('tj-period');
+  if(periodEl)periodEl.value=r.period||'第1節';
+  // 年段
+  const grade=r.className?.slice(0,-1)||'高一';
+  const gradeEl=document.getElementById('tj-grade');
+  if(gradeEl)gradeEl.value=grade;
+  // 班別
+  const cls=r.className?.slice(-1)||'忠';
+  const classEl=document.getElementById('tj-class');
+  if(classEl)classEl.value=cls;
+  // 進度與狀況
+  const progEl=document.getElementById('tj-progress');
+  if(progEl)progEl.value=r.progress||'';
+  const sitEl=document.getElementById('tj-situation');
+  if(sitEl)sitEl.value=r.situation||'';
+  // 捲動到表單
+  f?.scrollIntoView({behavior:'smooth',block:'start'});
+  showToast('已複製，請調整日期與班級後確認');
+}
+
+function deleteTJRecord(id){
+  if(!confirm('確定刪除此教學記錄？'))return;
+  teachingRecords=teachingRecords.filter(r=>r.id!==id);
+  saveTeaching();showToast('已刪除');renderTeachingPage();
+}
+
+function exportTeachingCSV(){
+  if(!teachingRecords.length){showToast('尚無教學記錄');return;}
+  const headers=['日期','節次／時間','班級','教學進度','課堂狀況'];
+  const sorted=[...teachingRecords].sort((a,b)=>a.date.localeCompare(b.date));
+  const rows=sorted.map(r=>[r.date,r.period||'',r.className,r.progress||'',r.situation||'']);
+  downloadCSV([headers,...rows],'教學日誌');
+}
+
+function printTeachingJournal(){
+  if(!teachingRecords.length){showToast('尚無教學記錄');return;}
+  const sorted=[...teachingRecords].sort((a,b)=>a.date.localeCompare(b.date));
+  const rows=sorted.map(r=>`<tr>
+    <td style="white-space:nowrap">${r.date}</td>
+    <td style="white-space:nowrap">${r.period||''}</td>
+    <td style="white-space:nowrap">${r.className}</td>
+    <td style="white-space:pre-wrap">${(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</td>
+    <td style="white-space:pre-wrap">${(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</td>
+  </tr>`).join('');
+  const html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>教學日誌</title>
+  <style>@page{size:A4 landscape;margin:15mm 18mm}body{font-family:'標楷體','DFKai-SB',serif;font-size:11pt}
+  h2{text-align:center;font-size:14pt;margin-bottom:3pt}.meta{text-align:center;font-size:10pt;color:#555;margin-bottom:10pt}
+  table{width:100%;border-collapse:collapse}th{background:#e8f5d4;padding:5pt 7pt;border:1pt solid #888;text-align:center}
+  td{padding:4pt 7pt;border:1pt solid #bbb;vertical-align:top}
+  .bar{padding:8px;text-align:center;margin-bottom:8px;font-family:sans-serif;font-size:12px;background:#f5f5f5;border-bottom:1px solid #ddd}
+  @media print{.bar{display:none}}</style></head><body>
+  <div class="bar"><button onclick="window.print()" style="padding:6px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">🖨 列印</button></div>
+  <h2>教學日誌</h2>
+  <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}　共 ${sorted.length} 筆</div>
+  <table><thead><tr><th>日期</th><th>節次／時間</th><th>班級</th><th>教學進度</th><th>課堂狀況</th></tr></thead>
+  <tbody>${rows}</tbody></table></body></html>`;
+  const win=window.open('','_blank','width=1000,height=700');
+  if(win){win.document.write(html);win.document.close();}
+}
+
 /* ══ STATS DATA ══ */
 const CASE_SOURCES=['學生主動求助','家長轉介','教師轉介','同儕轉介','輔導老師約談','線上預約管道','其他'];
 const SERVICE_TYPES=['團體輔導','入班輔導','家長諮詢','教師諮詢','個案會議','心理測驗','安心服務','家庭處遇','資源連結','系統會談','學生諮詢','臨案協處','方案計畫','各項宣講','危機處理','轉銜輔導','其他'];
@@ -1486,7 +2016,7 @@ function saveServices(){localStorage.setItem('wp_services_v1',JSON.stringify(ser
 function renderStatsPage(){
   renderProbCheckboxes();
   const sfDate=document.getElementById('sf-date');
-  if(sfDate&&!sfDate.value)sfDate.value=new Date().toISOString().slice(0,10);
+  if(sfDate&&!sfDate.value)sfDate.value=localISO();
   if(!window.Chart){
     const s=document.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
@@ -1582,8 +2112,8 @@ function renderCaseTable(){
   if(!caseRecords.length){el.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:20px">尚無個案記錄，點上方「新增個案」開始建檔</td></tr>`;return;}
   el.innerHTML=caseRecords.map(c=>`<tr>
     <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
-    <td style="text-align:center">${c.sessions}</td>
     <td>${(c.problems||[]).map(p=>`<span class="prob-badge">${PROBLEM_CATS[p-1]||p}</span>`).join('')}</td>
+    <td style="text-align:center">${c.sessions}</td>
     <td><span style="font-size:11px;padding:2px 7px;border-radius:3px;background:${c.status==='已結案'?'var(--surface-2)':'var(--g5)'};color:${c.status==='已結案'?'var(--t3)':'var(--g1)'}">${c.status}</span></td>
     <td><button class="dt-del" onclick="deleteCaseRecord(${c.id})"><i class="ti ti-trash"></i></button></td>
   </tr>`).join('');
@@ -1728,9 +2258,9 @@ function renderServiceCharts(){
 /* ══ STATS EXPORT ══ */
 function exportCasesCSV(){
   if(!caseRecords.length){showToast('尚無個案資料');return;}
-  const headers=['個案編號','性別','年段','個案來源','輔導次數','個案問題','結案狀態'];
-  const rows=caseRecords.map(c=>[c.no,c.gender,c.grade,c.source,c.sessions,
-    (c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('；'),c.status]);
+  const headers=['個案編號','性別','年段','個案來源','個案問題','輔導次數','結案狀態'];
+  const rows=caseRecords.map(c=>[c.no,c.gender,c.grade,c.source,
+    (c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('；'),c.sessions,c.status]);
   downloadCSV([headers,...rows],'個案統計');
 }
 
@@ -1746,7 +2276,7 @@ function downloadCSV(rows,name){
   const csv='\uFEFF'+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
-  a.download=`${name}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.download=`${name}_${localISO()}.csv`;
   a.click();showToast(name+' 已下載');
 }
 
@@ -1757,8 +2287,8 @@ function printCaseStats(){
   const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
   const rows=caseRecords.map(c=>`<tr>
     <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
-    <td style="text-align:center">${c.sessions}</td>
     <td>${(c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('、')}</td>
+    <td style="text-align:center">${c.sessions}</td>
     <td>${c.status}</td>
   </tr>`).join('');
   const html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>個案統計報表</title>
@@ -1775,7 +2305,7 @@ function printCaseStats(){
   <h2>輔導個案統計報表</h2>
   <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
   <div class="summary"><span>總個案：${total} 人</span><span>男：${m} 人</span><span>女：${total-m} 人</span><span>輔導中：${ongoing}</span><span>已結案：${total-ongoing}</span></div>
-  <table><thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>輔導次數</th><th>個案問題</th><th>結案狀態</th></tr></thead>
+  <table><thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th></tr></thead>
   <tbody>${rows}</tbody></table></body></html>`;
   const win=window.open('','_blank','width=1000,height=700');
   if(win){win.document.write(html);win.document.close();}
@@ -1809,7 +2339,7 @@ function printServiceStats(){
 }
 
 /* ══ SETTINGS ══ */
-let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[]};
+let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001'};
 
 function initSettings(){
   const saved=localStorage.getItem('wp_settings_v1');
@@ -1828,6 +2358,10 @@ function saveUserSettings(){
   const un=document.getElementById('set-unit')?.value.trim();
   if(u)settings.username=u;
   if(un)settings.unit=un;
+  settings.aiEnabled=document.getElementById('set-ai-enabled')?.checked||false;
+  const key=document.getElementById('set-api-key')?.value.trim();
+  if(key)settings.apiKey=key;
+  settings.aiModel=document.getElementById('set-ai-model')?.value||'claude-haiku-4-5-20251001';
   saveSettings();applyUserSettings();showToast('設定已儲存');
 }
 
@@ -1863,6 +2397,9 @@ function renderCustomLinks(){
 function renderSettingsPage(){
   const u=document.getElementById('set-username');if(u)u.value=settings.username;
   const un=document.getElementById('set-unit');if(un)un.value=settings.unit;
+  const aiEn=document.getElementById('set-ai-enabled');if(aiEn)aiEn.checked=!!settings.aiEnabled;
+  const aiKey=document.getElementById('set-api-key');if(aiKey)aiKey.value=settings.apiKey||'';
+  const aiMod=document.getElementById('set-ai-model');if(aiMod)aiMod.value=settings.aiModel||'claude-haiku-4-5-20251001';
   renderCustomLinks();
 }
 
@@ -1872,10 +2409,11 @@ function exportAllData(){
     version:'v7',exportedAt:new Date().toISOString(),
     wp_tasks_v3:tasks,wp_journal_v1:journal,
     wp_settings_v1:settings,wp_cases_v1:caseRecords,wp_services_v1:serviceRecords,
+    wp_teaching_v1:teachingRecords,
   };
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
-  a.download=`威廷工作平台備份_${new Date().toISOString().slice(0,10)}.json`;
+  a.download=`威廷工作平台備份_${localISO()}.json`;
   a.click();showToast('備份已下載');
 }
 
@@ -1891,11 +2429,127 @@ function importAllData(input){
       if(data.wp_settings_v1){settings=data.wp_settings_v1;saveSettings();applyUserSettings();}
       if(data.wp_cases_v1){caseRecords=data.wp_cases_v1;saveCases();}
       if(data.wp_services_v1){serviceRecords=data.wp_services_v1;saveServices();}
+      if(data.wp_teaching_v1){teachingRecords=data.wp_teaching_v1;saveTeaching();}
       updateStats();updatePanel(curKey);
       showToast('備份匯入成功！');input.value='';
     }catch(err){showToast('匯入失敗：JSON 格式錯誤');input.value='';}
   };
   reader.readAsText(file);
+}
+
+/* ══ AI CORE ══ */
+async function callAI(systemPrompt, userMsg){
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':settings.apiKey,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true',
+    },
+    body:JSON.stringify({
+      model:settings.aiModel||'claude-haiku-4-5-20251001',
+      max_tokens:1000,
+      system:systemPrompt,
+      messages:[{role:'user',content:userMsg}],
+    }),
+  });
+  const data=await resp.json();
+  if(data.error)throw new Error(data.error.message);
+  return data.content[0].text;
+}
+
+function showAIResult(title,text){
+  const win=window.open('','_blank','width=700,height=560');
+  if(!win)return;
+  const safe=text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  win.document.write(`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>${title}</title>
+  <style>body{font-family:'Noto Sans TC',sans-serif;padding:28px 36px;line-height:1.8;color:#1A1A17;font-size:14px}
+  h2{font-size:16px;margin-bottom:16px;color:#2A5218}
+  .content{background:#f9f9f7;border:1px solid #e0ddd5;border-radius:8px;padding:18px 22px;margin-bottom:16px}
+  .bar{margin-bottom:14px;display:flex;gap:8px}
+  button{padding:7px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:13px;font-family:'Noto Sans TC',sans-serif}
+  button.copy{background:#1870CC}</style></head><body>
+  <h2><i>✨</i> ${title}</h2>
+  <div class="bar">
+    <button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('txt').innerText).then(()=>this.textContent='已複製！')">複製文字</button>
+    <button onclick="window.print()">列印</button>
+  </div>
+  <div class="content" id="txt">${safe}</div>
+  </body></html>`);
+  win.document.close();
+}
+
+async function aiCaseSummary(){
+  if(!caseRecords.length){showToast('尚無個案資料');return;}
+  if(!settings.aiEnabled||!settings.apiKey){
+    // 非 API 路徑：帶資料開 Claude.ai
+    const total=caseRecords.length;
+    const m=caseRecords.filter(c=>c.gender==='男').length;
+    const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
+    const gradeMap={};caseRecords.forEach(c=>{gradeMap[c.grade]=(gradeMap[c.grade]||0)+1;});
+    const gradeStr=Object.entries(gradeMap).map(([g,n])=>`${g} ${n}人`).join('、');
+    const probCount={};caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{const name=PROBLEM_CATS[p-1];if(name)probCount[name]=(probCount[name]||0)+1;}));
+    const topProbs=Object.entries(probCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>`${n}(${c})`).join('、');
+    const prompt=`請根據以下數據產出個案輔導統計報表摘要（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n請用繁體中文，語氣正式，適合作為報告摘要。`;
+    navigator.clipboard.writeText(prompt).catch(()=>{});
+    showToast('Prompt 已複製，正在開啟 Claude.ai...');
+    setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);
+    return;
+  }
+  // API 路徑
+  const btn=event.currentTarget;
+  const origHTML=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';
+  btn.disabled=true;
+  try{
+    const total=caseRecords.length;
+    const m=caseRecords.filter(c=>c.gender==='男').length;
+    const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
+    const gradeMap={};caseRecords.forEach(c=>{gradeMap[c.grade]=(gradeMap[c.grade]||0)+1;});
+    const gradeStr=Object.entries(gradeMap).map(([g,n])=>`${g} ${n}人`).join('、');
+    const probCount={};caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{const name=PROBLEM_CATS[p-1];if(name)probCount[name]=(probCount[name]||0)+1;}));
+    const topProbs=Object.entries(probCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>`${n}(${c})`).join('、');
+    const sys='你是學校心輔組的行政助理，擅長產出正式的統計摘要文字，用繁體中文回答。';
+    const msg=`請根據以下數據產出個案輔導統計報表摘要（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n語氣正式，適合作為對上呈報的摘要段落。`;
+    const result=await callAI(sys,msg);
+    showAIResult('個案統計摘要',result);
+  }catch(err){
+    showToast('AI 呼叫失敗：'+err.message);
+  }finally{
+    btn.innerHTML=origHTML;btn.disabled=false;
+  }
+}
+
+async function aiServiceSummary(){
+  if(!serviceRecords.length){showToast('尚無服務記錄');return;}
+  const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
+  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  const activeRows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
+  const gM=activeRows.reduce((s,r)=>s+r.male,0),gF=activeRows.reduce((s,r)=>s+r.female,0);
+  const dataStr=activeRows.map(r=>`${r.type}：男${r.male}人次 女${r.female}人次 共${r.total}人次`).join('\n');
+
+  if(!settings.aiEnabled||!settings.apiKey){
+    const prompt=`請根據以下相關服務統計資料，產出約150字的服務統計摘要（繁體中文，正式語氣）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
+    navigator.clipboard.writeText(prompt).catch(()=>{});
+    showToast('Prompt 已複製，正在開啟 Claude.ai...');
+    setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);
+    return;
+  }
+  const btn=event.currentTarget;
+  const origHTML=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';
+  btn.disabled=true;
+  try{
+    const sys='你是學校心輔組的行政助理，擅長產出正式的統計摘要文字，用繁體中文回答。';
+    const msg=`請根據以下相關服務統計資料，產出約150字的服務統計摘要（繁體中文，正式語氣，適合呈報）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
+    const result=await callAI(sys,msg);
+    showAIResult('相關服務統計摘要',result);
+  }catch(err){
+    showToast('AI 呼叫失敗：'+err.message);
+  }finally{
+    btn.innerHTML=origHTML;btn.disabled=false;
+  }
 }
 
 /* ══ AI CARD ══ */

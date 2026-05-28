@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 :root{
   --bg:#EEF0EA;--surface:#F4F6F0;--surface-2:#E4E8DE;
@@ -394,6 +395,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .dt-del:hover{color:var(--r3);background:var(--r5)}
 .prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
 .stats-sub-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
+/* GOOGLE */
+.google-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;border:1.5px solid var(--border-s);background:var(--surface);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;transition:.15s;font-family:'Noto Sans TC',sans-serif;margin-left:8px;white-space:nowrap}
+.google-btn:hover{border-color:var(--g3);color:var(--g1)}
+.google-btn.connected{background:var(--g5);border-color:var(--g3);color:var(--g1)}
+.google-btn.syncing{opacity:.7;cursor:wait}
+.atf-drive-row{display:flex;align-items:center;gap:6px;padding:4px 0 2px}
+.atf-drive-lbl{font-size:12px;color:var(--t2);cursor:pointer;display:flex;align-items:center;gap:5px;user-select:none}
 </style>
 </head>
 <body>
@@ -404,6 +412,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
   <span class="hdr-date" id="hdr-date"></span>
   <div class="hdr-user"><span>心輔組 · 輔仁高中</span><div class="av">威廷</div></div>
+  <button class="google-btn" id="google-btn" onclick="googleSignIn()"><i class="ti ti-brand-google-drive"></i>登入同步</button>
 </header>
 <div class="stats">
   <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文計畫</span><span class="tag tag-warn">待辦</span></div></div>
@@ -619,11 +628,34 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.7">API Key 僅存於本機瀏覽器，不會上傳。取得 Key：<a href="https://console.anthropic.com/" target="_blank" style="color:var(--g2)">console.anthropic.com</a><br>Haiku 每次約 NT$0.05，Sonnet 約 NT$0.15。未填 Key 時可改用「開啟 Claude.ai」路徑。</div>
   </div>
 
+  <!-- 雲端同步 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-brand-google-drive"></i>雲端同步</div>
+    <div class="settings-row">
+      <span class="settings-label">Google 帳號</span>
+      <div id="set-google-status" style="font-size:12px;color:var(--t3)">尚未登入</div>
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">試算表 ID</span>
+      <input class="settings-input" type="text" id="set-sheets-id" placeholder="貼上 Google Sheets ID..." style="max-width:360px">
+    </div>
+    <div class="settings-row" style="margin-top:4px;gap:8px">
+      <button class="settings-btn primary" onclick="saveGoogleSettings()"><i class="ti ti-device-floppy"></i>儲存</button>
+      <button class="settings-btn" onclick="manualSync()"><i class="ti ti-refresh"></i>手動同步</button>
+    </div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.8">
+      1. 新建一個 Google 試算表（空白即可）<br>
+      2. 複製網址中的 ID：spreadsheets/d/<strong>這一段</strong>/edit<br>
+      3. 貼到上方欄位並儲存<br>
+      4. 點右上角「登入同步」授權，即可開始雲端同步
+    </div>
+  </div>
+
   <!-- 關於 -->
   <div class="settings-section">
     <div class="settings-section-title"><i class="ti ti-info-circle"></i>關於</div>
     <div style="font-size:12px;color:var(--t2);line-height:1.8">
-      威廷工作平台 <span style="color:var(--t3)">v7</span><br>
+      威廷工作平台 <span style="color:var(--t3)">v9</span><br>
       單一 HTML · localStorage 儲存 · 無後端<br>
       <a href="https://wtling61-droid.github.io/work-platform/" target="_blank" style="color:var(--g2)">🌐 https://wtling61-droid.github.io/work-platform/</a>
     </div>
@@ -938,8 +970,14 @@ function init(){
   if(!tasks.assign)tasks.assign=[];
   initSettings(); initStats(); initTeaching();
   updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
+  // Google 初始化（等 GIS 腳本載入後執行）
+  if(window.google?.accounts?.oauth2)initGoogle();
+  else window.addEventListener('load',()=>{setTimeout(initGoogle,500);});
 }
-function save(){localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));}
+function save(){
+  localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));
+  if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
+}
 function clearAllData(){
   if(!confirm('確定要重置所有資料嗎？任務、日誌、個案、服務記錄、教學日誌都會清除。此動作不可復原。'))return;
   ['wp_tasks_v3','wp_journal_v1','wp_cases_v1','wp_services_v1','wp_teaching_v1'].forEach(k=>localStorage.removeItem(k));
@@ -1082,6 +1120,7 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
       <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','待定')">待定</button>
     </div>
     ${id==='doc'?`<div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`:''}
+    ${['doc','sch'].includes(id)?`<div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-${id}" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>`:''}
     ${extraRow}
     <div class="atf-row">
       <button class="atf-ok" onclick="${onConfirm}">確認新增</button>
@@ -1162,6 +1201,7 @@ function buildAssignPanel(){
           <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','今天')">今天</button>
           <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','待定')">待定</button>
         </div>
+        <div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-assign" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>
         <div class="atf-row">
           <button class="atf-ok" onclick="confirmAddAssign()">確認新增</button>
           <button class="atf-cancel" onclick="hideForm('assign')">取消</button>
@@ -1214,13 +1254,23 @@ function renderAssignTasks(){
   }).join('');
 }
 
-function confirmAddAssign(){
+async function confirmAddAssign(){
   const txt=document.getElementById('new-task-txt-assign')?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const date=getTaskDate('assign');
   const asrc=document.getElementById('new-task-asrc')?.value||'boss';
-  tasks.assign.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,asrc:asrc});
+  const wantDrive=document.getElementById('new-task-drive-assign')?.checked||false;
+  const task={id:Date.now(),t:txt,d:date,u:false,done:false,asrc:asrc};
+  tasks.assign.unshift(task);
   save();updateStats();updatePanel('assign');showToast('交辦任務已新增');
+  if(wantDrive&&gToken){
+    showToast('正在建立 Drive 資料夾...');
+    const result=await createDriveFolder(txt,'assign');
+    if(result){task.driveUrl=result.url;save();updatePanel('assign');showToast('Drive 資料夾已建立 ✓');}
+    else showToast('Drive 資料夾建立失敗，可手動貼上連結');
+  } else if(wantDrive&&!gToken){
+    showToast('請先登入 Google 才能建立 Drive 資料夾');
+  }
 }
 
 function buildUrgPanel(){
@@ -1255,13 +1305,23 @@ function hideForm(id){
 }
 
 /* ══ ADD TASK ══ */
-function confirmAdd(key){
+async function confirmAdd(key){
   const txt=document.getElementById('new-task-txt-'+key)?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const date=getTaskDate(key);
   const src=key==='doc'?(document.getElementById('new-task-src-'+key)?.checked?'cross':''):'';
-  tasks[key].unshift({id:Date.now(),t:txt,d:date,u:false,done:false,src:src});
+  const wantDrive=document.getElementById('new-task-drive-'+key)?.checked||false;
+  const task={id:Date.now(),t:txt,d:date,u:false,done:false,src:src};
+  tasks[key].unshift(task);
   save();updateStats();updatePanel(key);showToast('任務已新增');
+  if(wantDrive&&gToken){
+    showToast('正在建立 Drive 資料夾...');
+    const result=await createDriveFolder(txt,key);
+    if(result){task.driveUrl=result.url;save();updatePanel(key);showToast('Drive 資料夾已建立 ✓');}
+    else showToast('Drive 資料夾建立失敗，可手動貼上連結');
+  } else if(wantDrive&&!gToken){
+    showToast('請先登入 Google 才能建立 Drive 資料夾');
+  }
 }
 function confirmAddCase(tab){
   const txt=document.getElementById('new-task-txt-'+tab)?.value.trim();
@@ -2497,7 +2557,7 @@ function printServiceStats(){
 }
 
 /* ══ SETTINGS ══ */
-let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001'};
+let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001',sheetsId:'',drivePlatformFolderId:'',driveModuleFolders:{}};
 
 function initSettings(){
   const saved=localStorage.getItem('wp_settings_v1');
@@ -2558,6 +2618,8 @@ function renderSettingsPage(){
   const aiEn=document.getElementById('set-ai-enabled');if(aiEn)aiEn.checked=!!settings.aiEnabled;
   const aiKey=document.getElementById('set-api-key');if(aiKey)aiKey.value=settings.apiKey||'';
   const aiMod=document.getElementById('set-ai-model');if(aiMod)aiMod.value=settings.aiModel||'claude-haiku-4-5-20251001';
+  const sid=document.getElementById('set-sheets-id');if(sid)sid.value=settings.sheetsId||'';
+  updateGoogleUI();
   renderCustomLinks();
 }
 
@@ -2711,6 +2773,185 @@ async function aiServiceSummary(){
 }
 
 /* ══ AI CARD ══ */
+
+/* ══ GOOGLE INTEGRATION ══ */
+const GOOGLE_CLIENT_ID='1026871571491-9ai2l51iffktdm1ail3c6c0g7fu853ff.apps.googleusercontent.com';
+const GOOGLE_SCOPES='https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
+let gToken=null;
+let gTokenClient=null;
+let isSyncing=false;
+
+function initGoogle(){
+  if(!window.google?.accounts?.oauth2)return;
+  gTokenClient=google.accounts.oauth2.initTokenClient({
+    client_id:GOOGLE_CLIENT_ID,
+    scope:GOOGLE_SCOPES,
+    callback:onGoogleToken,
+  });
+  updateGoogleUI();
+}
+
+function googleSignIn(){
+  if(!window.google?.accounts?.oauth2){showToast('Google 服務尚未載入，請稍候再試');return;}
+  if(!gTokenClient)initGoogle();
+  gTokenClient.requestAccessToken({prompt:gToken?'':'select_account'});
+}
+
+function googleSignOut(){
+  if(gToken){google.accounts.oauth2.revoke(gToken.access_token,()=>{});gToken=null;}
+  updateGoogleUI();showToast('已登出 Google');
+}
+
+function onGoogleToken(resp){
+  if(resp.error){showToast('Google 登入失敗：'+resp.error);return;}
+  gToken=resp;
+  gToken.expiry=Date.now()+3500*1000; // ~58 min
+  updateGoogleUI();
+  showToast('Google 登入成功！正在同步資料...');
+  loadFromSheets();
+}
+
+function isTokenValid(){return gToken&&Date.now()<gToken.expiry;}
+
+function updateGoogleUI(){
+  const btn=document.getElementById('google-btn');
+  const statusEl=document.getElementById('set-google-status');
+  if(btn){
+    if(isTokenValid()){
+      btn.innerHTML='<i class="ti ti-brand-google-drive"></i>已同步';
+      btn.className='google-btn connected';
+      btn.onclick=googleSignOut;
+    }else{
+      btn.innerHTML='<i class="ti ti-brand-google-drive"></i>登入同步';
+      btn.className='google-btn';
+      btn.onclick=googleSignIn;
+    }
+  }
+  if(statusEl){statusEl.textContent=isTokenValid()?'已登入（授權有效 ~1小時）':'尚未登入';}
+}
+
+const debouncedSheetsSync=debounce(syncToSheets,2000);
+
+async function syncToSheets(){
+  if(!isTokenValid()||!settings.sheetsId||isSyncing)return;
+  isSyncing=true;
+  const btn=document.getElementById('google-btn');
+  if(btn)btn.className='google-btn connected syncing';
+  try{
+    const rows=[
+      ['tasks',     JSON.stringify(tasks)],
+      ['journal',   JSON.stringify(journal)],
+      ['cases',     JSON.stringify(caseRecords)],
+      ['services',  JSON.stringify(serviceRecords)],
+      ['teaching',  JSON.stringify(teachingRecords)],
+      ['syncedAt',  new Date().toISOString()],
+    ];
+    await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}/values/sync!A1:B${rows.length}?valueInputOption=RAW`,{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+gToken.access_token,'Content-Type':'application/json'},
+      body:JSON.stringify({values:rows}),
+    });
+  }catch(e){console.warn('Sheets sync error:',e);}
+  finally{isSyncing=false;if(btn&&isTokenValid())btn.className='google-btn connected';}
+}
+
+async function loadFromSheets(){
+  if(!isTokenValid()||!settings.sheetsId)return;
+  try{
+    // 確保 sync sheet 存在
+    const metaResp=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}`,{
+      headers:{'Authorization':'Bearer '+gToken.access_token},
+    });
+    const meta=await metaResp.json();
+    if(meta.error){showToast('無法存取試算表，請確認 ID 正確且已分享給自己');return;}
+    const hasSync=(meta.sheets||[]).some(s=>s.properties.title==='sync');
+    if(!hasSync){
+      // 建立 sync sheet
+      await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}:batchUpdate`,{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+gToken.access_token,'Content-Type':'application/json'},
+        body:JSON.stringify({requests:[{addSheet:{properties:{title:'sync'}}}]}),
+      });
+      await syncToSheets();
+      showToast('✓ 雲端備份已建立（首次同步完成）');
+      return;
+    }
+    const dataResp=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}/values/sync!A1:B10`,{
+      headers:{'Authorization':'Bearer '+gToken.access_token},
+    });
+    const data=await dataResp.json();
+    if(!data.values||!data.values.length){await syncToSheets();showToast('✓ 首次同步完成');return;}
+    const map={};data.values.forEach(([k,v])=>{try{map[k]=JSON.parse(v);}catch(e){map[k]=v;}});
+    let changed=false;
+    if(map.tasks){tasks=map.tasks;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));changed=true;}
+    if(map.journal){journal=map.journal;saveJournal();changed=true;}
+    if(map.cases){caseRecords=map.cases;saveCases();changed=true;}
+    if(map.services){serviceRecords=map.services;saveServices();changed=true;}
+    if(map.teaching){teachingRecords=map.teaching;saveTeaching();changed=true;}
+    if(changed){updateStats();updatePanel(curKey);renderJournalMonths();}
+    showToast('✓ 雲端資料同步完成');
+  }catch(e){console.warn('loadFromSheets error:',e);showToast('雲端載入失敗，請確認試算表 ID');}
+}
+
+async function manualSync(){
+  if(!isTokenValid()){showToast('請先登入 Google');return;}
+  if(!settings.sheetsId){showToast('請先填入試算表 ID');return;}
+  showToast('同步中...');
+  await syncToSheets();
+  showToast('✓ 手動同步完成');
+}
+
+function saveGoogleSettings(){
+  const id=document.getElementById('set-sheets-id')?.value.trim();
+  if(id)settings.sheetsId=id;
+  saveSettings();showToast('Google 設定已儲存');
+}
+
+/* ══ DRIVE FOLDER ══ */
+async function getOrCreateFolder(name,parentId){
+  try{
+    let q=`name='${name.replace(/'/g,"\\'")}' and mimeType='application/vnd.google-apps.folder' and trashed=false`;
+    if(parentId)q+=` and '${parentId}' in parents`;
+    const sr=await fetch(`https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id)`,{
+      headers:{'Authorization':'Bearer '+gToken.access_token},
+    });
+    const sd=await sr.json();
+    if(sd.files?.length)return sd.files[0].id;
+    const body={name,mimeType:'application/vnd.google-apps.folder'};
+    if(parentId)body.parents=[parentId];
+    const cr=await fetch('https://www.googleapis.com/drive/v3/files',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+gToken.access_token,'Content-Type':'application/json'},
+      body:JSON.stringify(body),
+    });
+    const cd=await cr.json();
+    return cd.id||null;
+  }catch(e){console.warn('Folder error:',e);return null;}
+}
+
+async function createDriveFolder(taskName,moduleKey){
+  if(!isTokenValid()){showToast('請先登入 Google');return null;}
+  // 根資料夾
+  let rootId=settings.drivePlatformFolderId;
+  if(!rootId){
+    rootId=await getOrCreateFolder('威廷工作平台',null);
+    if(!rootId)return null;
+    settings.drivePlatformFolderId=rootId;saveSettings();
+  }
+  // 模組資料夾
+  const moduleLabel=META[moduleKey]?.label||moduleKey;
+  if(!settings.driveModuleFolders)settings.driveModuleFolders={};
+  let moduleId=settings.driveModuleFolders[moduleKey];
+  if(!moduleId){
+    moduleId=await getOrCreateFolder(moduleLabel,rootId);
+    if(!moduleId)return null;
+    settings.driveModuleFolders[moduleKey]=moduleId;saveSettings();
+  }
+  // 任務資料夾
+  const taskId=await getOrCreateFolder(taskName,moduleId);
+  if(!taskId)return null;
+  return{id:taskId,url:`https://drive.google.com/drive/folders/${taskId}`};
+}
 
 init();
 </script>

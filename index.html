@@ -973,6 +973,7 @@ function init(){
   // Google 初始化（等 GIS 腳本載入後執行）
   if(window.google?.accounts?.oauth2)initGoogle();
   else window.addEventListener('load',()=>{setTimeout(initGoogle,500);});
+  restoreToken();
 }
 function save(){
   localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));
@@ -2805,13 +2806,25 @@ function googleSignOut(){
 function onGoogleToken(resp){
   if(resp.error){showToast('Google 登入失敗：'+resp.error);return;}
   gToken=resp;
-  gToken.expiry=Date.now()+3500*1000; // ~58 min
+  gToken.expiry=Date.now()+3500*1000;
+  // 存到 sessionStorage，重整同一分頁不需重新登入
+  try{sessionStorage.setItem('wp_gtoken',JSON.stringify({access_token:gToken.access_token,expiry:gToken.expiry}));}catch(e){}
   updateGoogleUI();
   showToast('Google 登入成功！正在同步資料...');
   loadFromSheets();
 }
 
 function isTokenValid(){return gToken&&Date.now()<gToken.expiry;}
+
+function restoreToken(){
+  try{
+    const saved=sessionStorage.getItem('wp_gtoken');
+    if(!saved)return;
+    const t=JSON.parse(saved);
+    if(t.expiry&&Date.now()<t.expiry){gToken=t;updateGoogleUI();}
+    else sessionStorage.removeItem('wp_gtoken');
+  }catch(e){}
+}
 
 function updateGoogleUI(){
   const btn=document.getElementById('google-btn');
@@ -2846,12 +2859,22 @@ async function syncToSheets(){
       ['teaching',  JSON.stringify(teachingRecords)],
       ['syncedAt',  new Date().toISOString()],
     ];
-    await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}/values/sync!A1:B${rows.length}?valueInputOption=RAW`,{
+    const resp=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}/values/sync!A1:B${rows.length}?valueInputOption=RAW`,{
       method:'PUT',
       headers:{'Authorization':'Bearer '+gToken.access_token,'Content-Type':'application/json'},
       body:JSON.stringify({values:rows}),
     });
-  }catch(e){console.warn('Sheets sync error:',e);}
+    const result=await resp.json();
+    if(result.error){
+      console.error('Sheets sync error:',result.error);
+      showToast('同步失敗：'+result.error.message);
+    } else {
+      showToast('✓ 同步完成');
+    }
+  }catch(e){
+    console.warn('Sheets sync error:',e);
+    showToast('同步連線失敗，請確認網路');
+  }
   finally{isSyncing=false;if(btn&&isTokenValid())btn.className='google-btn connected';}
 }
 
@@ -2895,10 +2918,9 @@ async function loadFromSheets(){
 
 async function manualSync(){
   if(!isTokenValid()){showToast('請先登入 Google');return;}
-  if(!settings.sheetsId){showToast('請先填入試算表 ID');return;}
+  if(!settings.sheetsId){showToast('請先填入試算表 ID 並儲存');return;}
   showToast('同步中...');
   await syncToSheets();
-  showToast('✓ 手動同步完成');
 }
 
 function saveGoogleSettings(){

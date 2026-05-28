@@ -2804,14 +2804,30 @@ function googleSignOut(){
 }
 
 function onGoogleToken(resp){
-  if(resp.error){showToast('Google 登入失敗：'+resp.error);return;}
+  if(resp.error){
+    // 靜默續期失敗時不顯示錯誤，讓使用者手動重新登入即可
+    if(resp.error==='user_cancel'||resp.error==='access_denied')return;
+    showToast('Google 登入失敗：'+resp.error);
+    return;
+  }
   gToken=resp;
   gToken.expiry=Date.now()+3500*1000;
-  // 存到 sessionStorage，重整同一分頁不需重新登入
   try{sessionStorage.setItem('wp_gtoken',JSON.stringify({access_token:gToken.access_token,expiry:gToken.expiry}));}catch(e){}
   updateGoogleUI();
+  // 在 token 到期前 5 分鐘自動靜默續期
+  scheduleTokenRefresh();
   showToast('Google 登入成功！正在同步資料...');
   loadFromSheets();
+}
+
+function scheduleTokenRefresh(){
+  if(!gToken)return;
+  const remaining=gToken.expiry-Date.now()-5*60*1000; // 到期前 5 分鐘
+  if(remaining>0){
+    setTimeout(()=>{
+      if(gTokenClient)gTokenClient.requestAccessToken({prompt:''});
+    },remaining);
+  }
 }
 
 function isTokenValid(){return gToken&&Date.now()<gToken.expiry;}
@@ -2821,7 +2837,11 @@ function restoreToken(){
     const saved=sessionStorage.getItem('wp_gtoken');
     if(!saved)return;
     const t=JSON.parse(saved);
-    if(t.expiry&&Date.now()<t.expiry){gToken=t;updateGoogleUI();}
+    if(t.expiry&&Date.now()<t.expiry){
+      gToken=t;
+      updateGoogleUI();
+      scheduleTokenRefresh();
+    }
     else sessionStorage.removeItem('wp_gtoken');
   }catch(e){}
 }

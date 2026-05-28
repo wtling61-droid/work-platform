@@ -9,25 +9,29 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 :root{
-  --bg:#F4F3EF;--surface:#FFFFFF;--surface-2:#EFEDE7;
-  --border:#E0DDD5;--border-s:#C5C2B8;
-  --t1:#1A1A17;--t2:#5A5854;--t3:#9A9890;
-  --g1:#2A5218;--g2:#3A7022;--g3:#5A9A1A;--g4:#B8E080;--g5:#E8F5D4;
-  --a1:#6E4008;--a3:#D4840A;--a5:#FEF0D8;
-  --b1:#083870;--b3:#1870CC;--b5:#E0EFFF;
+  --bg:#EEF0EA;--surface:#F4F6F0;--surface-2:#E4E8DE;
+  --border:#CDD3C4;--border-s:#B0BAA8;
+  --t1:#252B20;--t2:#6A7560;--t3:#92A082;
+  --g1:#2D5A27;--g2:#4A7C3F;--g3:#6A9A52;--g4:#A8C898;--g5:#E4EED8;
+  --a1:#7A4E18;--a3:#C47C2A;--a5:#F5E8CC;
+  --b1:#2A3D5A;--b3:#4A6080;--b5:#DCE8F5;
   --p1:#3A2890;--p3:#6A52D0;--p5:#EEEAFF;
-  --r1:#701818;--r3:#D43030;--r5:#FFE4E4;
-  --sw:196px;--hh:50px;--sh:42px;--rad:10px;--rad-s:6px;
+  --r1:#6B2A2A;--r3:#B84444;--r5:#F5E0DC;
+  --sw:206px;--hh:54px;--sh:46px;--rad:11px;--rad-s:7px;
+  --doc-hbg:#F5E8CC;--doc-hbd:#C47C2A;
+  --sch-hbg:#E4EED8;--sch-hbd:#4A7C3F;
+  --case-hbg:#DCE8F5;--case-hbd:#4A6080;
+  --urg-hbg:#F5E0DC;--urg-hbd:#B84444;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;min-height:100vh}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:15px;line-height:1.6;min-height:100vh}
 .layout{display:grid;grid-template-columns:var(--sw) 2fr 1fr;grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
 .hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--t1);cursor:pointer}
-.logo-mark{width:28px;height:28px;background:var(--g3);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
-.hdr-date{font-size:12px;color:var(--t3);margin-left:auto}
-.hdr-user{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t2);margin-left:12px}
-.av{width:28px;height:28px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--g1)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:var(--t1);cursor:pointer}
+.logo-mark{width:32px;height:32px;background:var(--g3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px}
+.hdr-date{font-size:13px;color:var(--t3);margin-left:auto}
+.hdr-user{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--t2);margin-left:12px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--g1)}
 .stats{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw)+18px);overflow-x:auto}
 .st{display:flex;align-items:center;gap:8px;padding:0 18px 0 0;margin-right:18px;border-right:1px solid var(--border);white-space:nowrap}
 .st:first-child{padding-left:4px}
@@ -35,38 +39,39 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .st-n{font-size:20px;font-weight:600;color:var(--t1);line-height:1}
 .st-info{display:flex;flex-direction:column;gap:2px}
 .st-l{font-size:11px;color:var(--t3)}
-.tag{font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;display:inline-block}
+.tag{font-size:11px;font-weight:500;padding:1px 5px;border-radius:3px;display:inline-block}
 .tag-warn{background:var(--a5);color:var(--a1)}.tag-ok{background:var(--g5);color:var(--g1)}.tag-urg{background:var(--r5);color:var(--r1)}
 .nav{grid-column:1;grid-row:3;background:var(--surface);border-right:1px solid var(--border);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow-y:auto}
 .nav-lbl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);padding:5px 18px 3px}
-.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;margin:0 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left;font-family:'Noto Sans TC',sans-serif}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 11px;margin:0 8px;border-radius:var(--rad-s);font-size:14px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left;font-family:'Noto Sans TC',sans-serif}
 .ni:hover{background:var(--surface-2);color:var(--t1)}.ni.on{background:var(--g5);color:var(--g1);font-weight:500}
-.ni i{font-size:16px;width:17px;flex-shrink:0}
+.ni i{font-size:18px;width:19px;flex-shrink:0}
 .ni-badge{margin-left:auto;background:var(--r3);color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px}
 .ndiv{height:1px;background:var(--border);margin:7px 10px}
 .page{grid-column:2;grid-row:3;display:none;padding:18px;overflow-y:auto;height:calc(100vh - var(--hh) - var(--sh))}
 .page.active{display:block}
 .sec-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:11px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:11px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:22px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:15px;cursor:pointer;transition:.15s}
 .card:hover{border-color:var(--border-s);transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .card.sel{border-color:var(--g3);border-width:1.5px}
 .card.urg-card.sel{border-color:var(--r3)}
 .c-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
-.c-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.ico-g{background:var(--g5);color:var(--g1)}.ico-b{background:var(--b5);color:var(--b1)}.ico-a{background:var(--a5);color:var(--a1)}.ico-r{background:var(--r5);color:var(--r1)}
-.cdot{width:7px;height:7px;border-radius:50%;margin-top:3px}
-.d-on{background:var(--g3)}.d-pd{background:var(--a3)}.d-id{background:var(--t3)}.d-urg{background:var(--r3)}
-.c-title{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:2px}
-.c-desc{font-size:11px;color:var(--t3);margin-bottom:11px;line-height:1.4}
-.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px}
+.c-ico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.ico-g{background:var(--g5);color:var(--g1)}.ico-b{background:var(--b5);color:var(--b1)}.ico-a{background:var(--a5);color:var(--a1)}.ico-r{background:var(--r5);color:var(--r1)}.ico-p{background:var(--p5);color:var(--p1)}
+.cdot{width:8px;height:8px;border-radius:50%;margin-top:3px}
+.d-on{background:var(--g3)}.d-pd{background:var(--a3)}.d-id{background:var(--t3)}.d-urg{background:var(--r3)}.d-asgn{background:var(--p3)}
+.c-title{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.c-desc{font-size:12px;color:var(--t3);margin-bottom:11px;line-height:1.4}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--t3);margin-bottom:4px}
 .prog-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;border-radius:2px;transition:width .5s}
-.pf-g{background:var(--g3)}.pf-b{background:var(--b3)}.pf-a{background:var(--a3)}.pf-r{background:var(--r3)}
+.pf-g{background:var(--g3)}.pf-b{background:var(--b3)}.pf-a{background:var(--a3)}.pf-r{background:var(--r3)}.pf-p{background:var(--p3)}
 .c-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;padding:2px 7px;border-radius:4px}
-.bdg-on{background:var(--g5);color:var(--g1)}.bdg-pd{background:var(--a5);color:var(--a1)}.bdg-id{background:var(--surface-2);color:var(--t3)}.bdg-urg{background:var(--r5);color:var(--r1)}
-.c-qbtn{font-size:11px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px;font-family:'Noto Sans TC',sans-serif}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:500;padding:2px 8px;border-radius:4px}
+.bdg-on{background:var(--g5);color:var(--g1)}.bdg-pd{background:var(--a5);color:var(--a1)}.bdg-id{background:var(--surface-2);color:var(--t3)}.bdg-urg{background:var(--r5);color:var(--r1)}.bdg-asgn{background:var(--p5);color:var(--p1)}
+.c-qbtn{font-size:12px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px;font-family:'Noto Sans TC',sans-serif}
 .c-qbtn:hover{color:var(--g1);background:var(--g5)}
 .rec-list{display:flex;flex-direction:column}
 .rec-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--rad-s);cursor:pointer;transition:.12s}
@@ -76,30 +81,30 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .rec-date{font-size:11px;color:var(--t3);white-space:nowrap}
 /* PANEL */
 .panel{grid-column:3;grid-row:3;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow:hidden}
-.p-hdr{padding:12px 15px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
-.p-ico{width:23px;height:23px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px}
-.p-title{font-size:13px;font-weight:600;color:var(--t1);flex:1}
+.p-hdr{padding:13px 16px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.p-ico{width:27px;height:27px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.p-title{font-size:14px;font-weight:600;color:var(--t1);flex:1}
 /* TABS */
 .p-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
-.p-tab{padding:8px 6px;font-size:11px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
+.p-tab{padding:9px 7px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
 .p-tab:hover{color:var(--t1)}.p-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
 .p-tab-content{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0}
 .p-tab-content.on{display:flex}
 /* TASKS */
 .p-sec{padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-y:auto;max-height:230px}
-.p-sec-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:7px}
+.p-sec-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:7px}
 .task-list{display:flex;flex-direction:column;gap:1px}
-.task{display:flex;align-items:center;gap:5px;padding:5px 3px;border-radius:4px;position:relative}
+.task{display:flex;align-items:center;gap:5px;padding:6px 3px;border-radius:4px;position:relative}
 .task:hover{background:var(--surface-2)}.task:hover .t-actions{opacity:1}
 .t-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s;cursor:pointer}
 .task.done .t-chk{background:var(--g3);border-color:var(--g3);color:#fff}
 .task.urgent:not(.done) .t-chk{border-color:var(--r3)}
 .src-tag{font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;flex-shrink:0}
 .src-cross{background:var(--a5);color:var(--a1)}.src-external{background:var(--b5);color:var(--b1)}
-.t-txt{font-size:12px;color:var(--t1);flex:1;cursor:pointer;line-height:1.3}
+.t-txt{font-size:13px;color:var(--t1);flex:1;cursor:pointer;line-height:1.3}
 .t-txt:hover:not(.nodbl){text-decoration:underline dotted var(--t3)}
 .task.done .t-txt{color:var(--t3);text-decoration:line-through}
-.t-date{font-size:10px;color:var(--t3);white-space:nowrap;cursor:pointer}
+.t-date{font-size:11px;color:var(--t3);white-space:nowrap;cursor:pointer}
 .t-date:hover:not(.nodbl){text-decoration:underline dotted var(--t3)}
 .t-date.urg{color:var(--r3);font-weight:500}
 .t-actions{opacity:0;transition:.12s;display:flex;gap:1px;flex-shrink:0}
@@ -109,23 +114,23 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .t-edit-input{flex:1;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface);min-width:0}
 .t-date-input{width:58px;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 4px;font-size:11px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface)}
 /* ADD TASK */
-.add-task-btn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:5px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.add-task-btn{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:6px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
 .add-task-btn:hover{color:var(--g1);border-color:var(--g3);background:var(--g5)}
 .add-task-form{display:none;margin-top:6px;gap:4px;flex-direction:column}
 .add-task-form.show{display:flex}
-.add-task-form input,.add-task-form select{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.add-task-form input,.add-task-form select{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
 .add-task-form input:focus,.add-task-form select:focus{border-color:var(--g3);background:var(--surface)}
 .atf-row{display:flex;gap:4px}
 .atf-ok{flex:1;height:26px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
 .atf-cancel{height:26px;padding:0 8px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
 /* QUICK LINKS */
 .qlinks{display:flex;flex-direction:column;gap:3px}
-.qlink{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rad-s);font-size:12px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
-.qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:14px;color:var(--t3);width:16px}
+.qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
+.qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:16px;color:var(--t3);width:17px}
 /* CHAT */
 .chat-area{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:7px;overflow-y:auto}
-.msg-from{font-size:10px;color:var(--t3);margin-bottom:2px}
-.msg{padding:8px 10px;border-radius:var(--rad-s);font-size:12px;line-height:1.5}
+.msg-from{font-size:11px;color:var(--t3);margin-bottom:2px}
+.msg{padding:9px 11px;border-radius:var(--rad-s);font-size:13px;line-height:1.55}
 .msg-ai{background:var(--surface-2);color:var(--t1)}.msg-user{background:var(--g5);color:var(--g1);align-self:flex-end;max-width:86%}
 .p-inp{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:6px;flex-shrink:0}
 .p-inp input{flex:1;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s}
@@ -155,16 +160,16 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tpi:hover{border-color:var(--border-s)}.tpi:hover .tpi-del{opacity:1}
 .tpi-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .tpi.done .tpi-chk{background:var(--g3);border-color:var(--g3);color:#fff}
-.tpi-txt{font-size:13px;color:var(--t1);flex:1}.tpi.done .tpi-txt{color:var(--t3);text-decoration:line-through}
-.tpi-urg{font-size:10px;padding:1px 5px;border-radius:3px;background:var(--r5);color:var(--r1);font-weight:500;flex-shrink:0}
-.tpi-date{font-size:11px;color:var(--t3)}.tpi-date.urg{color:var(--r3);font-weight:500}
+.tpi-txt{font-size:14px;color:var(--t1);flex:1}.tpi.done .tpi-txt{color:var(--t3);text-decoration:line-through}
+.tpi-urg{font-size:11px;padding:1px 5px;border-radius:3px;background:var(--r5);color:var(--r1);font-weight:500;flex-shrink:0}
+.tpi-date{font-size:12px;color:var(--t3)}.tpi-date.urg{color:var(--r3);font-weight:500}
 .tpi-del{opacity:0;transition:.12s;border:none;background:none;cursor:pointer;color:var(--t3);font-size:14px;padding:0 3px}
 .tpi-del:hover{color:var(--r3)}
 /* ARCHIVE */
 .archive-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px}
-.archive-txt{font-size:13px;color:var(--t2);flex:1}
-.archive-mod{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
-.archive-meta{font-size:11px;color:var(--t3)}
+.archive-txt{font-size:14px;color:var(--t2);flex:1}
+.archive-mod{font-size:11px;padding:1px 6px;border-radius:3px;flex-shrink:0}
+.archive-meta{font-size:12px;color:var(--t3)}
 .archive-filter-btn{height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
 .archive-filter-btn:hover{background:var(--surface-2);color:var(--t1)}
 .archive-filter-btn.on{background:var(--g3);border-color:var(--g3);color:#fff}
@@ -238,7 +243,15 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .atf-special-btn{height:26px;padding:0 8px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);color:var(--t2);font-size:11px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap;transition:.12s;flex-shrink:0}
 .atf-special-btn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
 /* TASK NOTES */
-.t-note-btn{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:12px;padding:1px 3px;border-radius:3px;transition:.12s;flex-shrink:0;opacity:0}
+.t-drive-btn{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:12px;padding:1px 3px;border-radius:3px;transition:.12s;flex-shrink:0;opacity:0}
+.task:hover .t-drive-btn,.t-drive-btn.has-drive{opacity:1}
+.t-drive-btn.has-drive{color:var(--b3)}
+.t-drive-btn:hover{color:var(--b3)!important;background:var(--b5)}
+.drive-input-row{display:flex;gap:4px;margin-top:3px;padding:4px 6px;background:var(--b5);border-radius:var(--rad-s)}
+.drive-input-row input{flex:1;height:26px;border:1px solid var(--border);border-radius:4px;padding:0 7px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface)}
+.drive-input-row button{height:26px;padding:0 9px;border-radius:4px;border:none;cursor:pointer;font-size:12px;font-family:'Noto Sans TC',sans-serif}
+.drive-save-btn{background:var(--b3);color:#fff}
+.drive-clear-btn{background:var(--surface-2);color:var(--t2)}
 .task:hover .t-note-btn,.t-note-btn.has-note{opacity:1}
 .t-note-btn.has-note{color:var(--a3)}
 .t-note-btn:hover{color:var(--a3)!important;background:var(--a5)}
@@ -397,6 +410,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="st"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">緊急項目</span><span class="tag tag-urg">急</span></div></div>
+  <div class="st"><span class="st-n" id="s-assign">0</span><div class="st-info"><span class="st-l">交辦追蹤</span><span class="tag tag-warn">待辦</span></div></div>
 </div>
 <nav class="nav">
   <div style="margin-bottom:4px">
@@ -414,6 +428,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge" id="badge-sch">0</span></button>
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('case')"><i class="ti ti-heart-handshake"></i>學生輔導<span class="ni-badge" id="badge-case">0</span></button>
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('urg')"><i class="ti ti-alert-triangle"></i>緊急項目<span class="ni-badge" id="badge-urg-nav">0</span></button>
+    <button class="ni" onclick="navTo(this,'dashboard');selectCard('assign')"><i class="ti ti-clipboard-list"></i>交辦追蹤<span class="ni-badge" id="badge-assign-nav">0</span></button>
   </div>
   <div class="ndiv"></div>
   <div>
@@ -452,6 +467,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div class="c-foot"><span class="badge bdg-on" id="bdg-case">● 追蹤中</span>
         <button class="c-qbtn" onclick="event.stopPropagation()"><i class="ti ti-plus"></i>新增</button></div>
     </div>
+  </div>
+  <div class="grid-2">
     <div class="card urg-card" id="card-urg" onclick="selectCard('urg')">
       <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg"></div></div>
       <div class="c-title">緊急項目</div><div class="c-desc">跨模組緊急任務一覽</div>
@@ -459,7 +476,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
       <div class="c-foot"><span class="badge bdg-urg">● 緊急</span><span style="font-size:11px;color:var(--t3)">各模組 ⚡ 標記</span></div>
     </div>
-
+    <div class="card" id="card-assign" onclick="selectCard('assign')">
+      <div class="c-hdr"><div class="c-ico ico-p"><i class="ti ti-clipboard-list"></i></div><div class="cdot d-asgn"></div></div>
+      <div class="c-title">交辦追蹤</div><div class="c-desc">長官交辦、跨處室協調、外界來的</div>
+      <div class="prog-meta"><span>待辦</span><span id="prog-assign-txt">0 件</span></div>
+      <div class="prog-track"><div class="prog-fill pf-p" id="prog-assign" style="width:0%"></div></div>
+      <div class="c-foot"><span class="badge bdg-asgn" id="bdg-assign">● 追蹤中</span>
+        <button class="c-qbtn" onclick="event.stopPropagation();showForm('assign')"><i class="ti ti-plus"></i>新增</button></div>
+    </div>
   </div>
   <div class="sec-lbl">最近存檔</div>
   <div class="rec-list">
@@ -478,6 +502,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文計畫</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('sch',this)">獎助學金</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('case',this)">學生輔導</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('assign',this)">交辦追蹤</button>
     </div>
     <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
   </div>
@@ -795,10 +820,11 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 <div class="toast" id="toast"></div>
 <script>
 const META={
-  doc:{label:'公文計畫',icon:'ti-file-text',ico:'ico-a',color:'#D4840A'},
-  sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#5A9A1A'},
-  case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#1870CC'},
-  urg:{label:'緊急項目',icon:'ti-alert-triangle',ico:'ico-r',color:'#D43030'},
+  doc:{label:'公文計畫',icon:'ti-file-text',ico:'ico-a',color:'#C47C2A'},
+  sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#6A9A52'},
+  case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#4A6080'},
+  urg:{label:'緊急項目',icon:'ti-alert-triangle',ico:'ico-r',color:'#B84444'},
+  assign:{label:'交辦追蹤',icon:'ti-clipboard-list',ico:'ico-p',color:'#6A52D0'},
 };
 const CASE_TABS=[
   {key:'formal',label:'個案晤談'},
@@ -813,6 +839,12 @@ const TRANSFER_TYPES=[
   {key:'trans', label:'轉銜', color:'#6A52D0'},
 ];
 const SRC_LABELS={cross:'跨',external:'外'};
+const ASSIGN_SRCS=[
+  {key:'boss', label:'長官交辦', color:'#C47C2A', bg:'#F5E8CC'},
+  {key:'cross',label:'跨處室',   color:'#4A6080', bg:'#DCE8F5'},
+  {key:'ext',  label:'外界',     color:'#6A52D0', bg:'#EEEAFF'},
+  {key:'self', label:'自發',     color:'#4A7C3F', bg:'#E4EED8'},
+];
 const LINKS={
   doc:[
     {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o'},
@@ -864,6 +896,10 @@ const DEFAULT_TASKS={
     {id:27,t:'【轉銜】召開轉銜評估會議',           d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
     {id:28,t:'【轉銜】依決議名單通報至系統',       d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
   ],
+  assign:[
+    {id:30,t:'確認校安通報系統操作流程',d:'5/31',u:false,done:false,asrc:'boss'},
+    {id:31,t:'與教務處確認輔導課程時數',d:'6/5', u:false,done:false,asrc:'cross'},
+  ],
 };
 const PROMPTS=[
   {cat:'doc',title:'計畫書草稿產出',desc:'上傳公文 PDF，自動產出計畫書草稿',
@@ -884,6 +920,14 @@ const PROMPTS=[
    prompt:`請根據以下數據產出個案輔導統計報表摘要：\n\n【填入數據】\n統計區間：\n個案總數：\n性別分布：男____人 女____人\n年級分布：高一____人 高二____人 高三____人\n主訴類別：學業____人 人際____人 家庭____人 情緒____人 其他____人\n平均晤談次數：\n結案數：\n\n請輸出約 200 字的文字摘要，並標示需特別關注的趨勢。`},
 ];
 
+const MODULE_HDR={
+  doc:{bg:'#F5E8CC',bd:'#C47C2A'},
+  sch:{bg:'#E4EED8',bd:'#4A7C3F'},
+  case:{bg:'#DCE8F5',bd:'#4A6080'},
+  urg:{bg:'#F5E0DC',bd:'#B84444'},
+  assign:{bg:'#EEEAFF',bd:'#6A52D0'},
+};
+
 /* ══ STATE ══ */
 let curKey='sch', curCaseTab='formal', tasks={};
 
@@ -891,6 +935,7 @@ let curKey='sch', curCaseTab='formal', tasks={};
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
+  if(!tasks.assign)tasks.assign=[];
   initSettings(); initStats(); initTeaching();
   updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
 }
@@ -917,9 +962,9 @@ function updateDate(){
 }
 
 /* ══ STATS ══ */
-function getUrgentAll(){return ['doc','sch','case'].flatMap(k=>(tasks[k]||[]).filter(t=>!t.done&&t.u));}
+function getUrgentAll(){return ['doc','sch','case','assign'].flatMap(k=>(tasks[k]||[]).filter(t=>!t.done&&t.u));}
 function updateStats(){
-  ['doc','sch','case'].forEach(k=>{
+  ['doc','sch','case','assign'].forEach(k=>{
     const pending=(tasks[k]||[]).filter(t=>!t.done).length;
     const el=document.getElementById('s-'+k);if(el)el.textContent=pending;
     const b=document.getElementById('badge-'+k);if(b){b.textContent=pending;b.style.display=pending?'flex':'none';}
@@ -932,7 +977,9 @@ function updateStats(){
   document.getElementById('prog-urg-txt').textContent=urgCount+' 件';
   const pUrg=document.getElementById('prog-urg');if(pUrg)pUrg.style.width=urgCount?'100%':'0%';
   const bn=document.getElementById('badge-urg-nav');if(bn){bn.textContent=urgCount;bn.style.display=urgCount?'flex':'none';}
-  const allP=['doc','sch','case'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
+  const assignPending=(tasks.assign||[]).filter(t=>!t.done).length;
+  const ban=document.getElementById('badge-assign-nav');if(ban){ban.textContent=assignPending;ban.style.display=assignPending?'flex':'none';}
+  const allP=['doc','sch','case','assign'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
   const ba=document.getElementById('badge-all');if(ba){ba.textContent=allP;ba.style.display=allP?'flex':'none';}
 }
 
@@ -950,20 +997,34 @@ function updatePanel(key){
   document.getElementById('p-title').textContent=meta.label;
   document.getElementById('p-ico').className='p-ico '+meta.ico;
   document.getElementById('p-ico').innerHTML=`<i class="ti ${meta.icon}"></i>`;
+  const ph=document.querySelector('.p-hdr');
+  if(ph&&MODULE_HDR[key]){
+    ph.style.background=MODULE_HDR[key].bg;
+    ph.style.borderBottom=`2px solid ${MODULE_HDR[key].bd}`;
+  }
   const pb=document.getElementById('panel-body');
   if(key==='urg')       pb.innerHTML=buildUrgPanel();
   else if(key==='case') {pb.innerHTML=buildCasePanel(); renderCaseTab(curCaseTab);}
+  else if(key==='assign'){pb.innerHTML=buildAssignPanel(); renderAssignTasks();}
   else                  {pb.innerHTML=buildStdPanel(key); renderTaskList(key);}
 }
 
 function taskHTML(t,key,ri){
   const srcTag=t.src==='cross'?`<span class="src-tag src-cross">跨</span>`:'';
   const dateUrgClass=!t.done&&(t.u||isDateUrgentDisplay(t.d))?'urg':'';
+  const hasDrive=['doc','sch','assign'].includes(key);
+  const driveBtn=hasDrive?`<button class="t-drive-btn ${t.driveUrl?'has-drive':''}" onclick="toggleDriveInput('${key}',${ri})" title="${t.driveUrl?'開啟 Drive 資料夾':'設定 Drive 連結'}"><i class="ti ti-brand-google-drive"></i></button>`:'';
+  const driveRow=hasDrive?`<div class="drive-input-row" id="drive-row-${t.id}" style="display:none">
+    <input type="text" id="drive-inp-${t.id}" placeholder="貼上 Google Drive 資料夾網址..." value="${t.driveUrl||''}">
+    <button class="drive-save-btn" onclick="saveDriveUrl('${key}',${ri})">儲存</button>
+    ${t.driveUrl?`<button class="drive-clear-btn" onclick="clearDriveUrl('${key}',${ri})">清除</button>`:''}
+  </div>`:'';
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
     <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
     ${srcTag}
     <span class="t-date ${dateUrgClass}" ondblclick="editDate(this,'${key}',${ri})">${fmtTaskDate(t.d,t.done,t.completedAt)}</span>
+    ${driveBtn}
     <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('${key}',${ri})" title="備註"><i class="ti ti-notes"></i></button>
     <div class="t-actions">
       <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${ri})"><i class="ti ti-bolt"></i></button>
@@ -972,7 +1033,8 @@ function taskHTML(t,key,ri){
   </div>
   <div class="t-note-row${t.note?' show':''}" id="note-row-${t.id}">
     <textarea class="t-note-input" placeholder="備註（Tab 或點擊其他地方儲存）..." onblur="saveNote('${key}',${ri},this.value)">${t.note||''}</textarea>
-  </div>`;
+  </div>
+  ${driveRow}`;
 }
 
 function renderTaskList(key,subType){
@@ -1084,14 +1146,91 @@ function buildCasePanel(){
     <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${caseLinks}</div></div>`;
 }
 
+function buildAssignPanel(){
+  const srcOpts=ASSIGN_SRCS.map(s=>`<option value="${s.key}">${s.label}</option>`).join('');
+  return `
+    <div class="p-sec" style="overflow-y:auto;flex:1">
+      <div class="p-sec-lbl">交辦任務</div>
+      <div class="task-list" id="task-list-assign"></div>
+      <div class="add-task-form" id="add-task-form-assign">
+        <input type="text" id="new-task-txt-assign" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddAssign()">
+        <div class="atf-row">
+          <select id="new-task-asrc" style="flex:1">${srcOpts}</select>
+        </div>
+        <div class="atf-row">
+          <input type="date" id="new-task-date-assign" style="flex:1;min-width:0">
+          <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','今天')">今天</button>
+          <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','待定')">待定</button>
+        </div>
+        <div class="atf-row">
+          <button class="atf-ok" onclick="confirmAddAssign()">確認新增</button>
+          <button class="atf-cancel" onclick="hideForm('assign')">取消</button>
+        </div>
+      </div>
+      <button class="add-task-btn" id="add-task-btn-assign" onclick="showForm('assign')"><i class="ti ti-plus"></i>新增交辦任務</button>
+    </div>
+    <div class="chat-area" id="chat-area">
+      <div class="msg-from">交辦追蹤助理</div>
+      <div class="msg msg-ai">記錄長官交辦、跨處室協調或外界交辦的非例行任務，方便持續追蹤。</div>
+      <div class="msg msg-ai" style="font-size:11px;color:var(--g1);background:var(--g5)"><i class="ti ti-notebook" style="margin-right:4px"></i>下方輸入的文字送出後，會自動存入今天的工作日誌。</div>
+    </div>
+    <div class="p-inp">
+      <input type="text" id="chat-inp" placeholder="輸入備忘或記錄..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="send-btn" onclick="sendMsg()" title="送出並存入日誌"><i class="ti ti-notebook"></i></button>
+    </div>`;
+}
+
+function renderAssignTasks(){
+  const el=document.getElementById('task-list-assign');if(!el)return;
+  const all=tasks.assign||[];
+  const pending=all.filter(t=>!t.done), done=all.filter(t=>t.done);
+  el.innerHTML=[...pending,...done].map(t=>{
+    const s=ASSIGN_SRCS.find(s=>s.key===t.asrc)||ASSIGN_SRCS[0];
+    const srcTag=`<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;background:${s.bg};color:${s.color};flex-shrink:0">${s.label}</span>`;
+    const dateUrgClass=!t.done&&(t.u||isDateUrgentDisplay(t.d))?'urg':'';
+    const idx=all.indexOf(t);
+    const driveBtn=`<button class="t-drive-btn ${t.driveUrl?'has-drive':''}" onclick="toggleDriveInput('assign',${idx})" title="${t.driveUrl?'開啟 Drive 資料夾':'設定 Drive 連結'}"><i class="ti ti-brand-google-drive"></i></button>`;
+    const driveRow=`<div class="drive-input-row" id="drive-row-${t.id}" style="display:none">
+      <input type="text" id="drive-inp-${t.id}" placeholder="貼上 Google Drive 資料夾網址..." value="${t.driveUrl||''}">
+      <button class="drive-save-btn" onclick="saveDriveUrl('assign',${idx})">儲存</button>
+      ${t.driveUrl?`<button class="drive-clear-btn" onclick="clearDriveUrl('assign',${idx})">清除</button>`:''}
+    </div>`;
+    return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
+      <div class="t-chk" onclick="toggleTask('assign',${idx})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
+      <span class="t-txt" ondblclick="editTask(this,'assign',${idx})">${t.t}</span>
+      ${srcTag}
+      <span class="t-date ${dateUrgClass}" ondblclick="editDate(this,'assign',${idx})">${fmtTaskDate(t.d,t.done,t.completedAt)}</span>
+      ${driveBtn}
+      <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('assign',${idx})" title="備註"><i class="ti ti-notes"></i></button>
+      <div class="t-actions">
+        <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('assign',${idx})"><i class="ti ti-bolt"></i></button>
+        <button class="t-act-btn" onclick="deleteTask('assign',${idx})"><i class="ti ti-x"></i></button>
+      </div>
+    </div>
+    <div class="t-note-row${t.note?' show':''}" id="note-row-${t.id}">
+      <textarea class="t-note-input" placeholder="備註..." onblur="saveNote('assign',${idx},this.value)">${t.note||''}</textarea>
+    </div>
+    ${driveRow}`;
+  }).join('');
+}
+
+function confirmAddAssign(){
+  const txt=document.getElementById('new-task-txt-assign')?.value.trim();
+  if(!txt){showToast('請輸入任務名稱');return;}
+  const date=getTaskDate('assign');
+  const asrc=document.getElementById('new-task-asrc')?.value||'boss';
+  tasks.assign.unshift({id:Date.now(),t:txt,d:date,u:false,done:false,asrc:asrc});
+  save();updateStats();updatePanel('assign');showToast('交辦任務已新增');
+}
+
 function buildUrgPanel(){
   const urgItems=getUrgentAll();
   if(!urgItems.length)return`<div class="urg-scroll"><div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有緊急項目</p></div></div>`;
-  const groups={doc:[],sch:[],case:[]};
-  ['doc','sch','case'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
+  const groups={doc:[],sch:[],case:[],assign:[]};
+  ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
   let html='<div class="urg-scroll">';
   Object.entries(groups).forEach(([k,items])=>{
-    if(!items.length)return;
+    if(!items.length||k==='urg')return;
     html+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
     ${items.map(t=>`<div class="urg-item"><i class="ti ti-alert-triangle" style="font-size:13px;color:var(--r3);flex-shrink:0"></i>
       <span class="urg-item-txt">${t.t}</span><span class="urg-item-date">${t.d}</span>
@@ -1199,7 +1338,7 @@ function saveDate(key,idx,val){
 
 /* ══ TASK PAGE ══ */
 function renderTaskPage(){
-  const keys=['doc','sch','case'];
+  const keys=['doc','sch','case','assign'];
   let html='';
   keys.forEach(k=>{
     const meta=META[k];
@@ -1242,7 +1381,7 @@ function setArchiveFilter(key,btn){
 
 function renderArchivePage(){
   let items=[];
-  ['doc','sch','case'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
+  ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
   items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
   const filtered=curArchiveFilter==='all'?items:items.filter(i=>i.key===curArchiveFilter);
   const countEl=document.getElementById('archive-count');
@@ -1594,6 +1733,25 @@ function saveNote(key,idx,val){
   if((tasks[key]||[])[idx]===undefined)return;
   tasks[key][idx].note=(val||'').trim();
   save();
+}
+function toggleDriveInput(key,ri){
+  const t=tasks[key]?.[ri];if(!t)return;
+  if(t.driveUrl){window.open(t.driveUrl,'_blank');return;}
+  const row=document.getElementById('drive-row-'+t.id);
+  if(!row)return;
+  const visible=row.style.display!=='none';
+  row.style.display=visible?'none':'flex';
+  if(!visible)setTimeout(()=>document.getElementById('drive-inp-'+t.id)?.focus(),50);
+}
+function saveDriveUrl(key,ri){
+  const t=tasks[key]?.[ri];if(!t)return;
+  const val=document.getElementById('drive-inp-'+t.id)?.value.trim();
+  if(!val){showToast('請貼上 Drive 網址');return;}
+  t.driveUrl=val;save();updatePanel(key);showToast('Drive 連結已儲存');
+}
+function clearDriveUrl(key,ri){
+  const t=tasks[key]?.[ri];if(!t)return;
+  t.driveUrl='';save();updatePanel(key);showToast('Drive 連結已清除');
 }
 
 /* ══ EXPORT ══ */

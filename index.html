@@ -2919,8 +2919,8 @@ async function loadFromSheets(){
 async function manualSync(){
   if(!isTokenValid()){showToast('請先登入 Google');return;}
   if(!settings.sheetsId){showToast('請先填入試算表 ID 並儲存');return;}
-  showToast('同步中...');
-  await syncToSheets();
+  showToast('從雲端載入中...');
+  await loadFromSheets();
 }
 
 function saveGoogleSettings(){

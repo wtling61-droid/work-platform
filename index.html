@@ -486,7 +486,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div class="prog-meta"><span>待辦</span><span id="prog-doc-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-a" id="prog-doc" style="width:0%"></div></div>
       <div class="c-foot"><span class="badge bdg-pd" id="bdg-doc">● 待辦</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o')"><i class="ti ti-external-link"></i>啟動表</button></div>
+        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/d/e/1FAIpQLSd52jixThDQ6PnDvLStM43C-ZH5t-I-ZkOimvcj0VFX0FbCFQ/viewform')"><i class="ti ti-external-link"></i>啟動表</button></div>
     </div>
     <div class="card" id="card-sch" onclick="selectCard('sch')">
       <div class="c-hdr"><div class="c-ico ico-g"><i class="ti ti-report-money"></i></div><div class="cdot d-on"></div></div>
@@ -911,8 +911,8 @@ const ASSIGN_SRCS=[
 ];
 const LINKS={
   doc:[
-    {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/1Y0k9KZw0FdbGn9eb7mhJtwf9UVuH9Icc-ZIxE-hqi2o'},
-    {i:'ti-table',   l:'總追蹤 Sheet',     url:'https://docs.google.com/spreadsheets/d/12W5Jg0nkOqIKsd_5qmeqNdA4bpNojm7-aFAMuEOKnDI'},
+    {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/e/1FAIpQLSd52jixThDQ6PnDvLStM43C-ZH5t-I-ZkOimvcj0VFX0FbCFQ/viewform'},
+    {i:'ti-table',   l:'總追蹤 Sheet',     url:'https://docs.google.com/spreadsheets/d/1pfVkt_XKLPsylyw9ncu6FMnIXolsn6mSzjeEbDj0aV4/edit'},
     {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
     {i:'ti-template',l:'公文 Prompt 模板', prompt:'doc'},
   ],
@@ -1491,6 +1491,7 @@ function resolveUrgent(key,idx){
   save();updateStats();updatePanel('urg');showToast('已完成');
 }
 function deleteTask(key,idx){
+  tasks[key].splice(idx,1);
   save();updateStats();
   if(curKey===key)updatePanel(key);
   showToast('任務已刪除');
@@ -2691,11 +2692,21 @@ function printServiceStats(){
 }
 
 /* ══ SETTINGS ══ */
-let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001',sheetsId:'',drivePlatformFolderId:'',driveModuleFolders:{}};
+let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001',sheetsId:'',drivePlatformFolderId:'1LGmNEdHkT6ukNdRv_c_xnswXh6A8Snzl',driveModuleFolders:{}};
 
+const CORRECT_DRIVE_FOLDER='1LGmNEdHkT6ukNdRv_c_xnswXh6A8Snzl';
+const CORRECT_MODULE_FOLDERS={doc:'1iC54xVxm6l6H8_lNMNYLxmTYKNG0TKP4',sch:'1rJkXf3iI_Di6gGUEgoU4S33SXxfdzFFR',case:'1vjpUkFC3qFvxSFpZQcEiN7wwyGhQYk_W',urg:'11NFbKmVOWY77aguuqYifanZwNyDbImVh',assign:'1KYaCwPQhjK3_LZYLqHPxg3OikdELIXki'};
 function initSettings(){
   const saved=localStorage.getItem('wp_settings_v1');
   if(saved){try{settings=JSON.parse(saved);}catch(e){}}
+  // 自動修正 Drive 資料夾（從舊工作流遷移，強制同步正確資料夾）
+  let needSave=false;
+  if(settings.drivePlatformFolderId!==CORRECT_DRIVE_FOLDER){settings.drivePlatformFolderId=CORRECT_DRIVE_FOLDER;needSave=true;}
+  Object.entries(CORRECT_MODULE_FOLDERS).forEach(([k,id])=>{
+    if(!settings.driveModuleFolders)settings.driveModuleFolders={};
+    if(settings.driveModuleFolders[k]!==id){settings.driveModuleFolders[k]=id;needSave=true;}
+  });
+  if(needSave)saveSettings();
   applyUserSettings();
 }
 function saveSettings(){localStorage.setItem('wp_settings_v1',JSON.stringify(settings));}

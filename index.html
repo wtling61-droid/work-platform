@@ -131,16 +131,6 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .qlinks{display:flex;flex-direction:column;gap:3px}
 .qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
 .qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:16px;color:var(--t3);width:17px}
-/* CHAT */
-.chat-area{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:7px;overflow-y:auto}
-.msg-from{font-size:11px;color:var(--t3);margin-bottom:2px}
-.msg{padding:9px 11px;border-radius:var(--rad-s);font-size:13px;line-height:1.55}
-.msg-ai{background:var(--surface-2);color:var(--t1)}.msg-user{background:var(--g5);color:var(--g1);align-self:flex-end;max-width:86%}
-.p-inp{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:6px;flex-shrink:0}
-.p-inp input{flex:1;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s}
-.p-inp input:focus{border-color:var(--g3);background:var(--surface)}
-.send-btn{width:32px;height:32px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.send-btn:hover{background:var(--g1)}
 /* TRANSFER */
 .transfer-scroll{flex:1;overflow-y:auto;padding:10px 14px}
 .tr-group{margin-bottom:12px}
@@ -220,7 +210,21 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .pbtn.primary{background:var(--g3);border-color:var(--g3);color:#fff}.pbtn.primary:hover{background:var(--g1)}
 .empty-state{text-align:center;padding:40px 20px;color:var(--t3)}
 .empty-state i{font-size:32px;margin-bottom:8px;display:block}
-@media(max-width:768px){.layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}.nav,.panel{display:none}.stats{padding-left:18px}.page{height:auto}}
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;grid-template-rows:var(--hh) var(--sh) 1fr}
+  .nav,.panel{display:none}
+  .stats{padding-left:18px}
+  .page{height:auto;padding-bottom:70px}
+}
+/* ── 手機底部導覽列 ── */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:58px;background:var(--surface);border-top:1px solid var(--border);z-index:200;padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0px)}
+.mob-nav-inner{display:flex;align-items:stretch;height:100%;gap:2px}
+.mob-ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;cursor:pointer;font-size:10px;color:var(--t3);padding:4px 2px;border-radius:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif;position:relative}
+.mob-ni:active{background:var(--surface-2)}
+.mob-ni.on{color:var(--g1)}
+.mob-ni i{font-size:20px;display:block}
+.mob-ni .mob-badge{position:absolute;top:4px;right:calc(50% - 14px);background:var(--r3);color:#fff;font-size:9px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:none;align-items:center;justify-content:center;padding:0 3px}
+@media(max-width:768px){.mob-nav{display:flex}}
 /* JOURNAL */
 .journal-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
 .journal-topbar-right{display:flex;align-items:center;gap:7px}
@@ -423,7 +427,35 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .dt-del:hover{color:var(--r3);background:var(--r5)}
 .prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
 .stats-sub-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
-/* GOOGLE */
+/* SEMESTER SWITCH */
+.sem-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px}
+.sem-modal{background:var(--surface);border-radius:var(--rad);width:100%;max-width:620px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.sem-step{display:none;flex-direction:column;flex:1;overflow:hidden}
+.sem-step.on{display:flex}
+.sem-step-body{flex:1;overflow-y:auto;padding:16px 20px}
+.sem-task-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface-2);border-radius:var(--rad-s);margin-bottom:4px}
+.sem-task-item label{flex:1;font-size:13px;color:var(--t1);cursor:pointer}
+.sem-task-mod{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
+.sem-tpl-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px;cursor:pointer;transition:.12s}
+.sem-tpl-item:hover{border-color:var(--g3);background:var(--g5)}
+.sem-tpl-item.sel{border-color:var(--g3);background:var(--g5)}
+.sem-tpl-item input[type=checkbox]{accent-color:var(--g3);width:14px;height:14px;flex-shrink:0}
+.sem-tpl-item label{font-size:13px;color:var(--t1);flex:1;cursor:pointer}
+.sem-tpl-tag{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
+.sem-notice-box{background:var(--a5);border-left:3px solid var(--a3);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--a1);margin-bottom:12px}
+.sem-step-ftr{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
+.sem-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
+.sem-btn:hover{background:var(--border)}
+.sem-btn.primary{background:var(--g3);color:#fff;border-color:var(--g3)}.sem-btn.primary:hover{background:var(--g1)}
+.sem-tag-g{background:var(--g5);color:var(--g1)}.sem-tag-a{background:var(--a5);color:var(--a1)}.sem-tag-b{background:var(--b5);color:var(--b1)}.sem-tag-r{background:var(--r5);color:var(--r1)}.sem-tag-p{background:var(--p5);color:var(--p1)}
+.sem-remind-banner{position:fixed;top:calc(var(--hh)+var(--sh)+10px);right:16px;background:var(--a5);border:1.5px solid var(--a3);border-radius:var(--rad);padding:12px 16px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,.12);max-width:280px;display:none}
+.sem-remind-banner.show{display:block}
+.sem-remind-title{font-size:13px;font-weight:600;color:var(--a1);margin-bottom:4px}
+.sem-remind-desc{font-size:12px;color:var(--a1);margin-bottom:10px;line-height:1.5}
+.sem-remind-btns{display:flex;gap:6px}
+.sem-remind-btn{height:28px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:none}
+.sem-remind-btn.primary{background:var(--a3);color:#fff}
+.sem-remind-btn.ghost{background:var(--surface);border:1px solid var(--border);color:var(--t2)}
 .google-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;border:1.5px solid var(--border-s);background:var(--surface);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;transition:.15s;font-family:'Noto Sans TC',sans-serif;margin-left:8px;white-space:nowrap}
 .google-btn:hover{border-color:var(--g3);color:var(--g1)}
 .google-btn.connected{background:var(--g5);border-color:var(--g3);color:var(--g1)}
@@ -522,12 +554,12 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <button class="c-qbtn" onclick="event.stopPropagation();showForm('assign')"><i class="ti ti-plus"></i>新增</button></div>
     </div>
   </div>
+  <div id="dash-custom-links" style="display:none;margin-bottom:16px">
+    <div class="sec-lbl" style="margin-bottom:8px">快速連結</div>
+    <div id="dash-custom-links-body" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+  </div>
   <div class="sec-lbl">最近存檔</div>
-  <div class="rec-list">
-    <div class="rec-item"><div class="rec-ico ico-g"><i class="ti ti-file-check"></i></div><span class="rec-title">113學年度第一學期獎學金彙整</span><span class="rec-date">5/22</span></div>
-    <div class="rec-item"><div class="rec-ico ico-b"><i class="ti ti-message-check"></i></div><span class="rec-title">個案晤談摘要 #A23（林○廷）</span><span class="rec-date">5/20</span></div>
-    <div class="rec-item"><div class="rec-ico ico-a"><i class="ti ti-file-text"></i></div><span class="rec-title">急難救助申請簽呈草稿</span><span class="rec-date">5/19</span></div>
-    <div class="rec-item"><div class="rec-ico ico-b"><i class="ti ti-chart-pie"></i></div><span class="rec-title">5月份學生輔導統計報表</span><span class="rec-date">5/02</span></div>
+  <div class="rec-list" id="rec-list">
   </div>
 </main>
 <div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">全部待辦任務</div><div id="task-page-content"></div></div>
@@ -539,6 +571,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文計畫</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('sch',this)">獎助學金</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('case',this)">學生輔導</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('urg',this)">要事備查</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('assign',this)">交辦追蹤</button>
     </div>
     <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
@@ -679,11 +712,34 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
   </div>
 
+  <!-- 學期切換 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-calendar-stats"></i>學期切換</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.7">切換學期時，可手動選擇哪些舊任務保留、哪些歸檔，並載入新學期初始任務清單。</div>
+    <div style="margin-bottom:14px">
+      <button class="settings-btn primary" onclick="openSemModal()"><i class="ti ti-calendar-stats"></i>開始學期切換精靈</button>
+    </div>
+    <div style="font-size:12px;font-weight:600;color:var(--t1);margin-bottom:8px">學期任務模板清單</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:10px">切換學期時可勾選載入的預設任務，在此管理（新增或刪除）</div>
+    <div id="sem-tpl-manage-list" style="margin-bottom:10px"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <input type="text" id="sem-tpl-new-name" placeholder="任務名稱..." style="flex:1;min-width:140px;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)">
+      <select id="sem-tpl-new-mod" style="height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface-2)">
+        <option value="doc">公文計畫</option>
+        <option value="sch">獎助學金</option>
+        <option value="case">學生輔導</option>
+        <option value="urg">要事備查</option>
+        <option value="assign">交辦追蹤</option>
+      </select>
+      <button class="settings-btn primary" onclick="addSemTemplate()"><i class="ti ti-plus"></i>新增</button>
+    </div>
+  </div>
+
   <!-- 關於 -->
   <div class="settings-section">
     <div class="settings-section-title"><i class="ti ti-info-circle"></i>關於</div>
     <div style="font-size:12px;color:var(--t2);line-height:1.8">
-      威廷工作平台 <span style="color:var(--t3)">v9</span><br>
+      威廷工作平台 <span style="color:var(--t3)">v12</span><br>
       單一 HTML · localStorage 儲存 · 無後端<br>
       <a href="https://wtling61-droid.github.io/work-platform/" target="_blank" style="color:var(--g2)">🌐 https://wtling61-droid.github.io/work-platform/</a>
     </div>
@@ -881,7 +937,74 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
   </div>
 </div>
+<!-- 學期切換彈窗 -->
+<div id="sem-modal" class="sem-modal-overlay" style="display:none" onclick="if(event.target===this)closeSemModal()">
+  <div class="sem-modal">
+    <div class="modal-hdr">
+      <span class="modal-hdr-title"><i class="ti ti-calendar-stats"></i>學期切換精靈</span>
+      <button class="modal-close" onclick="closeSemModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="sem-step on" id="sem-step-1">
+      <div class="sem-step-body">
+        <div class="sem-notice-box">以下是目前所有<strong>未完成任務</strong>，請勾選要帶入新學期繼續追蹤的項目（未勾選的會歸檔）。</div>
+        <div id="sem-task-list"></div>
+      </div>
+      <div class="sem-step-ftr">
+        <button class="sem-btn" onclick="closeSemModal()">取消</button>
+        <button class="sem-btn primary" onclick="semStep(2)">下一步：選擇新學期任務 →</button>
+      </div>
+    </div>
+    <div class="sem-step" id="sem-step-2">
+      <div class="sem-step-body">
+        <div class="sem-notice-box">勾選要在新學期自動建立的初始任務（可在設定頁「學期任務模板」管理清單）。</div>
+        <div id="sem-tpl-list"></div>
+      </div>
+      <div class="sem-step-ftr">
+        <button class="sem-btn" onclick="semStep(1)">← 上一步</button>
+        <button class="sem-btn primary" onclick="semStep(3)">下一步：確認 →</button>
+      </div>
+    </div>
+    <div class="sem-step" id="sem-step-3">
+      <div class="sem-step-body" id="sem-confirm-body" style="font-size:13px;line-height:1.8;color:var(--t1)"></div>
+      <div class="sem-step-ftr">
+        <button class="sem-btn" onclick="semStep(2)">← 上一步</button>
+        <button class="sem-btn primary" onclick="executeSemSwitch()"><i class="ti ti-calendar-stats"></i> 執行學期切換</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 學期提醒 Banner -->
+<div class="sem-remind-banner" id="sem-remind-banner">
+  <div class="sem-remind-title">🎯 新學期快到了</div>
+  <div class="sem-remind-desc" id="sem-remind-desc">建議執行學期切換，整理舊任務並載入新學期清單。</div>
+  <div class="sem-remind-btns">
+    <button class="sem-remind-btn primary" onclick="document.getElementById('sem-remind-banner').classList.remove('show');openSemModal()">立即切換</button>
+    <button class="sem-remind-btn ghost" onclick="dismissSemRemind()">稍後再說</button>
+  </div>
+</div>
+<script id="sem-script"></script>
 <div class="toast" id="toast"></div>
+<!-- 手機底部導覽列 -->
+<nav class="mob-nav">
+  <div class="mob-nav-inner">
+    <button class="mob-ni on" id="mob-ni-dashboard" onclick="mobNavTo(this,'dashboard')">
+      <i class="ti ti-layout-grid"></i><span>主控台</span>
+    </button>
+    <button class="mob-ni" id="mob-ni-tasks" onclick="mobNavTo(this,'tasks')">
+      <i class="ti ti-checklist"></i><span>任務</span>
+      <span class="mob-badge" id="mob-badge-all"></span>
+    </button>
+    <button class="mob-ni" id="mob-ni-journal" onclick="mobNavTo(this,'journal')">
+      <i class="ti ti-notebook"></i><span>日誌</span>
+    </button>
+    <button class="mob-ni" id="mob-ni-stats" onclick="mobNavTo(this,'stats')">
+      <i class="ti ti-chart-bar"></i><span>統計</span>
+    </button>
+    <button class="mob-ni" id="mob-ni-settings" onclick="mobNavTo(this,'settings')">
+      <i class="ti ti-settings"></i><span>設定</span>
+    </button>
+  </div>
+</nav>
 <script>
 const META={
   doc:{label:'公文計畫',icon:'ti-file-text',ico:'ico-a',color:'#C47C2A'},
@@ -913,57 +1036,31 @@ const LINKS={
   doc:[
     {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/e/1FAIpQLSd52jixThDQ6PnDvLStM43C-ZH5t-I-ZkOimvcj0VFX0FbCFQ/viewform'},
     {i:'ti-table',   l:'總追蹤 Sheet',     url:'https://docs.google.com/spreadsheets/d/1pfVkt_XKLPsylyw9ncu6FMnIXolsn6mSzjeEbDj0aV4/edit'},
-    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1iC54xVxm6l6H8_lNMNYLxmTYKNG0TKP4'},
     {i:'ti-template',l:'公文 Prompt 模板', prompt:'doc'},
   ],
   sch:[
     {i:'ti-table',   l:'獎學金彙整 Sheet', url:'https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/'},
-    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1rJkXf3iI_Di6gGUEgoU4S33SXxfdzFFR'},
     {i:'ti-template',l:'獎學金 Prompt 模板',prompt:'sch'},
   ],
   case:[
-    {i:'ti-folder',  l:'個案 Drive 資料夾',url:'https://drive.google.com/drive/folders/1UpcTm8VRMDAcXJSN_tu683VIOsvKD3ny'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1vjpUkFC3qFvxSFpZQcEiN7wwyGhQYk_W'},
     {i:'ti-template',l:'學生輔導 Prompt 模板',prompt:'case'},
   ],
-};
-const CHAT_INTRO={
-  doc:'公文計畫任務如右側清單。如需草擬簽呈或計畫書，請使用 Prompt 模板。',
-  sch:'獎助學金任務如右側清單。收件、通知信、撥款追蹤都在這裡管理。',
-  case:'學生輔導分四個分頁：個案晤談、非個案、學生異動、統計報表，請切換分頁。',
-};
-const DEFAULT_TASKS={
-  doc:[
-    {id:1,t:'心輔計畫案簽呈',d:'今天',u:true,done:false,src:''},
-    {id:2,t:'研習報名回函',  d:'5/28',u:false,done:false,src:'cross'},
-    {id:3,t:'上月公文歸檔',  d:'完成',u:false,done:true,src:'',completedAt:'5/20'},
-  ],
-  sch:[
-    {id:4,t:'收件：春暉獎學金申請',     d:'5/30',u:false,done:false,src:''},
-    {id:5,t:'草擬補件通知信',           d:'今天',u:true, done:false,src:''},
-    {id:6,t:'追蹤撥款：清寒補助',       d:'5/31',u:false,done:false,src:''},
-    {id:7,t:'追蹤撥款：教育部獎學金',   d:'完成',u:false,done:true, src:'',completedAt:'5/21'},
-  ],
-  case:[
-    {id:8, t:'個案晤談：林○廷',            d:'5/27',u:false,done:false,type:'formal',  src:''},
-    {id:9, t:'個案晤談：王○明',            d:'5/29',u:false,done:false,type:'formal',  src:''},
-    {id:10,t:'非個案：教師諮詢（班輔）',   d:'完成', u:false,done:true, type:'informal',src:'',completedAt:'5/25'},
-    {id:11,t:'非個案：家長諮詢',           d:'5/26',u:false,done:false,type:'informal',src:''},
-    {id:12,t:'統計報表：5月份個案數',      d:'5/31',u:false,done:false,type:'stats',   src:''},
-    {id:13,t:'統計報表：學期末彙整',       d:'6/15',u:false,done:false,type:'stats',   src:''},
-    {id:20,t:'【轉出】○○生：確認轉出通知',       d:'待辦',u:false,done:false,type:'transfer',tt:'out',  src:''},
-    {id:21,t:'【轉出】○○生：備妥資料寄出',       d:'待辦',u:false,done:false,type:'transfer',tt:'out',  src:''},
-    {id:22,t:'【轉入】○○生：確認轉入通知',       d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
-    {id:23,t:'【轉入】○○生：發家長同意書',       d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
-    {id:24,t:'【轉入】○○生：發函索取原校資料',   d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
-    {id:25,t:'【轉入】○○生：收到資料後更新歸檔', d:'待辦',u:false,done:false,type:'transfer',tt:'in',   src:''},
-    {id:26,t:'【休學】○○生：本學期關心電訪',     d:'學期末前',u:false,done:false,type:'transfer',tt:'leave',src:''},
-    {id:27,t:'【轉銜】召開轉銜評估會議',           d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
-    {id:28,t:'【轉銜】依決議名單通報至系統',       d:'待辦',u:false,done:false,type:'transfer',tt:'trans',src:''},
+  urg:[
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/11NFbKmVOWY77aguuqYifanZwNyDbImVh'},
   ],
   assign:[
-    {id:30,t:'確認校安通報系統操作流程',d:'5/31',u:false,done:false,asrc:'boss'},
-    {id:31,t:'與教務處確認輔導課程時數',d:'6/5', u:false,done:false,asrc:'cross'},
+    {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1KYaCwPQhjK3_LZYLqHPxg3OikdELIXki'},
   ],
+};
+const DEFAULT_TASKS={
+  doc:[],
+  sch:[],
+  case:[],
+  urg:[],
+  assign:[],
 };
 const PROMPTS=[
   {cat:'doc',title:'計畫書草稿產出',desc:'上傳公文 PDF，自動產出計畫書草稿',
@@ -1001,14 +1098,16 @@ function init(){
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
   if(!tasks.assign)tasks.assign=[];
   initSettings(); initStats(); initTeaching();
-  updateDate(); updateStats(); selectCard('sch'); renderPrompts('all'); initJournal(); renderJournalMonths();
+  updateDate(); updateStats(); renderRecentArchive(); selectCard('doc'); renderPrompts('all'); initJournal(); renderJournalMonths();
   // Google 初始化（等 GIS 腳本載入後執行）
   if(window.google?.accounts?.oauth2)initGoogle();
   else window.addEventListener('load',()=>{setTimeout(initGoogle,500);});
   restoreToken();
+  checkSemReminder();
 }
 function save(){
   localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));
+  renderRecentArchive();
   if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
 }
 function clearAllData(){
@@ -1052,9 +1151,27 @@ function updateStats(){
   const ban=document.getElementById('badge-assign-nav');if(ban){ban.textContent=assignPending;ban.style.display=assignPending?'flex':'none';}
   const allP=['doc','sch','case','assign'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
   const ba=document.getElementById('badge-all');if(ba){ba.textContent=allP;ba.style.display=allP?'flex':'none';}
+  syncMobBadge();
 }
 
-/* ══ CARD ══ */
+/* ══ RECENT ARCHIVE ══ */
+function renderRecentArchive(){
+  const el=document.getElementById('rec-list');if(!el)return;
+  let items=[];
+  ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done&&t.completedAt).forEach(t=>items.push({...t,key:k})));
+  items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
+  items=items.slice(0,5);
+  if(!items.length){
+    el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:8px 2px">尚無完成記錄</div>`;
+    return;
+  }
+  el.innerHTML=items.map(t=>`<div class="rec-item">
+    <div class="rec-ico ${META[t.key].ico}"><i class="ti ${META[t.key].icon}"></i></div>
+    <span class="rec-title">${t.t}</span>
+    <span class="rec-date">${t.completedAt}</span>
+  </div>`).join('');
+}
+
 function selectCard(key){
   curKey=key;
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
@@ -1158,7 +1275,7 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
       <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','待定')">待定</button>
     </div>
     ${id==='doc'?`<div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`:''}
-    ${['doc','sch'].includes(id)?`<div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-${id}" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>`:''}
+    ${['doc','sch','urg'].includes(id)?`<div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-${id}" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>`:''}
     ${extraRow}
     <div class="atf-row">
       <button class="atf-ok" onclick="${onConfirm}">確認新增</button>
@@ -1171,20 +1288,18 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
 function buildStdPanel(key){
   const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
   return `
-    <div class="p-sec" style="overflow-y:auto;max-height:230px">
+    <div class="p-sec" style="overflow-y:auto;flex:1">
       <div class="p-sec-lbl">任務清單</div>
       <div class="task-list" id="task-list"></div>
       ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
     </div>
-    <div class="p-sec"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${links}</div></div>
-    <div class="chat-area" id="chat-area">
-      <div class="msg-from">${META[key].label}助理</div>
-      <div class="msg msg-ai">${CHAT_INTRO[key]||''}</div>
-      <div class="msg msg-ai" style="font-size:11px;color:var(--g1);background:var(--g5)"><i class="ti ti-notebook" style="margin-right:4px"></i>下方輸入的文字送出後，會自動存入今天的工作日誌。</div>
-    </div>
-    <div class="p-inp">
-      <input type="text" id="chat-inp" placeholder="輸入備忘或記錄..." onkeydown="if(event.key==='Enter')sendMsg()">
-      <button class="send-btn" onclick="sendMsg()" title="送出並存入日誌"><i class="ti ti-notebook"></i></button>
+    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${links}</div></div>
+    <div class="p-sec" style="flex-shrink:0;padding:8px 14px">
+      <div class="p-sec-lbl">日誌快記</div>
+      <div style="display:flex;gap:6px">
+        <input type="text" id="quick-journal-inp-${key}" placeholder="快速記錄到工作日誌..." style="flex:1;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s" onfocus="this.style.borderColor='var(--g3)';this.style.background='var(--surface)'" onblur="this.style.borderColor='var(--border)';this.style.background='var(--surface-2)'" onkeydown="if(event.key==='Enter')quickJournal('${key}')">
+        <button style="width:30px;height:30px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" onclick="quickJournal('${key}')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+      </div>
     </div>`;
 }
 
@@ -1255,14 +1370,13 @@ function buildAssignPanel(){
       </div>
       <button class="add-task-btn" id="add-task-btn-assign" onclick="showForm('assign')"><i class="ti ti-plus"></i>新增交辦任務</button>
     </div>
-    <div class="chat-area" id="chat-area">
-      <div class="msg-from">交辦追蹤助理</div>
-      <div class="msg msg-ai">記錄長官交辦、跨處室協調或外界交辦的非例行任務，方便持續追蹤。</div>
-      <div class="msg msg-ai" style="font-size:11px;color:var(--g1);background:var(--g5)"><i class="ti ti-notebook" style="margin-right:4px"></i>下方輸入的文字送出後，會自動存入今天的工作日誌。</div>
-    </div>
-    <div class="p-inp">
-      <input type="text" id="chat-inp" placeholder="輸入備忘或記錄..." onkeydown="if(event.key==='Enter')sendMsg()">
-      <button class="send-btn" onclick="sendMsg()" title="送出並存入日誌"><i class="ti ti-notebook"></i></button>
+    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${(LINKS.assign||[]).map(l=>`<button class="qlink" onclick=" openLink('${l.url||'#'}')"><i class="ti ${l.i}"></i>${l.l}</button>`).join('')}</div></div>
+    <div class="p-sec" style="flex-shrink:0;padding:8px 14px">
+      <div class="p-sec-lbl">日誌快記</div>
+      <div style="display:flex;gap:6px">
+        <input type="text" id="quick-journal-inp-assign" placeholder="快速記錄到工作日誌..." style="flex:1;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s" onfocus="this.style.borderColor='var(--g3)';this.style.background='var(--surface)'" onblur="this.style.borderColor='var(--border)';this.style.background='var(--surface-2)'" onkeydown="if(event.key==='Enter')quickJournal('assign')">
+        <button style="width:30px;height:30px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" onclick="quickJournal('assign')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+      </div>
     </div>`;
 }
 
@@ -1387,26 +1501,75 @@ function deleteHistory(key,idx,hIdx){
   });
   showToast('記錄已刪除');
 }
+async function confirmAddUrg(){
+  const txt=document.getElementById('new-task-txt-urg')?.value.trim();
+  if(!txt){showToast('請輸入任務名稱');return;}
+  const date=getTaskDate('urg');
+  const createdAt=document.getElementById('new-task-created-urg')?.value||localISO();
+  const wantDrive=document.getElementById('new-task-drive-urg')?.checked||false;
+  const task={id:Date.now(),t:txt,d:date,createdAt,u:true,done:false,src:''};
+  tasks.urg.unshift(task);
+  addAutoJournalEntry(`受理：${txt}`);
+  save();updateStats();updatePanel('urg');showToast('要事已新增');
+  if(wantDrive&&gToken){
+    showToast('正在建立 Drive 資料夾...');
+    const result=await createDriveFolder(txt,'urg');
+    if(result){task.driveUrl=result.url;save();updatePanel('urg');showToast('Drive 資料夾已建立 ✓');}
+    else showToast('Drive 資料夾建立失敗，可手動貼上連結');
+  } else if(wantDrive&&!gToken){
+    showToast('請先登入 Google 才能建立 Drive 資料夾');
+  }
+}
 function buildUrgPanel(){
-  const urgItems=getUrgentAll();
-  if(!urgItems.length)return`<div class="urg-scroll"><div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有要事備查</p></div></div>`;
-  const groups={doc:[],sch:[],case:[],assign:[]};
-  ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
-  let html='<div class="urg-scroll">';
-  Object.entries(groups).forEach(([k,items])=>{
-    if(!items.length||k==='urg')return;
-    html+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
-    ${items.map(t=>`<div class="urg-item">
+  const urgLinks=(LINKS.urg||[]).map(l=>`<button class="qlink" onclick=" openLink('${l.url||'#'}')"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
+  const urgLinksHtml=urgLinks?`<div style="padding:8px 14px 0;flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${urgLinks}</div></div>`:'';
+
+  // 原生要事任務（tasks.urg）- 使用真實 index 避免 filter 後 index 錯位
+  const nativeTasks=(tasks.urg||[]).map((t,ri)=>({...t,ri})).filter(t=>!t.done);
+  const nativeHtml=nativeTasks.map(t=>`
+    <div class="urg-item">
       <div class="urg-item-row">
         <span style="font-size:13px;color:var(--r3);flex-shrink:0">★</span>
         <span class="urg-item-txt">${t.t}</span>
-        <span class="urg-item-date">${t.d}</span>
-        <button class="urg-hist-btn" id="hist-btn-${t.key}-${t.idx}" onclick="toggleHistory('${t.key}',${t.idx})"><i class="ti ti-history"></i> 歷程${(t.history&&t.history.length)?'('+t.history.length+')':''}</button>
-        <button class="urg-resolve" onclick="resolveUrgent('${t.key}',${t.idx})" title="完成"><i class="ti ti-check"></i></button>
+        <span class="urg-item-date">${t.d||''}</span>
+        <button class="urg-hist-btn" id="hist-btn-urg-${t.ri}" onclick="toggleHistory('urg',${t.ri})"><i class="ti ti-history"></i> 歷程${(t.history&&t.history.length)?'('+t.history.length+')':''}</button>
+        <button class="urg-resolve" onclick="resolveUrgent('urg',${t.ri})" title="完成"><i class="ti ti-check"></i></button>
+        <button class="urg-resolve" onclick="deleteTask('urg',${t.ri})" title="刪除" style="color:var(--t3)"><i class="ti ti-x"></i></button>
       </div>
-      ${buildHistTimeline(t,t.key,t.idx)}
-    </div>`).join('')}</div>`;
-  });
+      ${buildHistTimeline(t,'urg',t.ri)}
+    </div>`).join('');
+
+  const addForm=addFormHTML('urg',"confirmAddUrg()","hideForm('urg')",'要事名稱...');
+  const nativeSection=`<div style="padding:8px 14px;border-bottom:1px solid var(--border);flex-shrink:0">
+    <div class="p-sec-lbl">直接建立要事</div>
+    <div class="task-list">${nativeHtml}</div>
+    ${addForm}
+  </div>`;
+
+  // ★ 聚合（其他模組標記）
+  const groups={doc:[],sch:[],case:[],assign:[]};
+  ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
+  const hasAggregated=Object.values(groups).some(a=>a.length);
+
+  let html=urgLinksHtml+nativeSection+'<div class="urg-scroll">';
+  if(hasAggregated){
+    Object.entries(groups).forEach(([k,items])=>{
+      if(!items.length)return;
+      html+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
+      ${items.map(t=>`<div class="urg-item">
+        <div class="urg-item-row">
+          <span style="font-size:13px;color:var(--r3);flex-shrink:0">★</span>
+          <span class="urg-item-txt">${t.t}</span>
+          <span class="urg-item-date">${t.d}</span>
+          <button class="urg-hist-btn" id="hist-btn-${t.key}-${t.idx}" onclick="toggleHistory('${t.key}',${t.idx})"><i class="ti ti-history"></i> 歷程${(t.history&&t.history.length)?'('+t.history.length+')':''}</button>
+          <button class="urg-resolve" onclick="resolveUrgent('${t.key}',${t.idx})" title="完成"><i class="ti ti-check"></i></button>
+        </div>
+        ${buildHistTimeline(t,t.key,t.idx)}
+      </div>`).join('')}</div>`;
+    });
+  } else if(!nativeTasks.length){
+    html+=`<div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有要事備查</p></div>`;
+  }
   html+=`<div style="margin-top:8px;font-size:11px;color:var(--t3);text-align:center">在各模組任務列 hover 後按 ★ 標記要事</div></div>`;
   return html;
 }
@@ -1525,7 +1688,7 @@ function saveDate(key,idx,val){
 
 /* ══ TASK PAGE ══ */
 function renderTaskPage(){
-  const keys=['doc','sch','case','assign'];
+  const keys=['doc','sch','case','urg','assign'];
   let html='';
   keys.forEach(k=>{
     const meta=META[k];
@@ -1568,7 +1731,7 @@ function setArchiveFilter(key,btn){
 
 function renderArchivePage(){
   let items=[];
-  ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
+  ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
   items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
   const filtered=curArchiveFilter==='all'?items:items.filter(i=>i.key===curArchiveFilter);
   const countEl=document.getElementById('archive-count');
@@ -1646,27 +1809,33 @@ function openPromptCategory(cat){
 }
 
 /* ══ CHAT ══ */
-function sendMsg(){
-  const inp=document.getElementById('chat-inp');if(!inp)return;
+function quickJournal(key){
+  const inp=document.getElementById('quick-journal-inp-'+key);if(!inp)return;
   const txt=inp.value.trim();if(!txt)return;
-  // 存進工作日誌
   const n=new Date();
   const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
   const isoDate=localISO(n);
   const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
   journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:txt,auto:false});
   saveJournal();
-  // chat 區顯示確認
-  const ca=document.getElementById('chat-area');
-  if(ca){
-    ca.innerHTML+=`<div class="msg msg-user">${txt.replace(/</g,'&lt;')}</div>`;
-    ca.innerHTML+=`<div class="msg msg-ai" style="font-size:11px;color:var(--t3)"><i class="ti ti-notebook" style="margin-right:4px"></i>已存入工作日誌</div>`;
-    ca.scrollTop=ca.scrollHeight;
-  }
   inp.value='';
+  showToast('已存入工作日誌');
+}
+// sendMsg 保留相容（不再掛 UI，防呼叫報錯）
+function sendMsg(){}
+
+/* ══ MOBILE NAV ══ */
+function mobNavTo(el,page){
+  document.querySelectorAll('.mob-ni').forEach(n=>n.classList.remove('on'));
+  if(el)el.classList.add('on');
+  navTo(null,page);
+}
+function syncMobBadge(){
+  const allP=['doc','sch','case','assign'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
+  const mb=document.getElementById('mob-badge-all');
+  if(mb){mb.textContent=allP;mb.style.display=allP?'flex':'none';}
 }
 
-/* ══ UTILS ══ */
 function openLink(url){if(!url||url==='#')return;window.open(url,'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
@@ -2374,6 +2543,12 @@ function renderStatsPage(){
     const s=document.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
     s.onload=()=>{renderCaseStatsContent();renderServiceStatsContent();};
+    s.onerror=()=>{
+      const el=document.getElementById('stats-case')||document.getElementById('stats-service');
+      const msg='<div style="text-align:center;padding:32px;color:var(--t3);font-size:13px"><i class="ti ti-wifi-off" style="font-size:32px;display:block;margin-bottom:8px"></i>圖表需要網路才能載入<br>請確認連線後重新整理頁面</div>';
+      if(document.getElementById('stats-case'))document.getElementById('stats-case').innerHTML=msg;
+      if(document.getElementById('stats-service'))document.getElementById('stats-service').innerHTML=msg;
+    };
     document.head.appendChild(s);
   } else {
     renderCaseStatsContent();renderServiceStatsContent();
@@ -2692,7 +2867,7 @@ function printServiceStats(){
 }
 
 /* ══ SETTINGS ══ */
-let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001',sheetsId:'',drivePlatformFolderId:'1LGmNEdHkT6ukNdRv_c_xnswXh6A8Snzl',driveModuleFolders:{}};
+let settings={username:'威廷',unit:'心輔組 · 輔仁高中',customLinks:[],aiEnabled:false,apiKey:'',aiModel:'claude-haiku-4-5-20251001',sheetsId:'',drivePlatformFolderId:'1LGmNEdHkT6ukNdRv_c_xnswXh6A8Snzl',driveModuleFolders:{doc:'1iC54xVxm6l6H8_lNMNYLxmTYKNG0TKP4',sch:'1rJkXf3iI_Di6gGUEgoU4S33SXxfdzFFR',case:'1vjpUkFC3qFvxSFpZQcEiN7wwyGhQYk_W',urg:'11NFbKmVOWY77aguuqYifanZwNyDbImVh',assign:'1KYaCwPQhjK3_LZYLqHPxg3OikdELIXki'}};
 
 const CORRECT_DRIVE_FOLDER='1LGmNEdHkT6ukNdRv_c_xnswXh6A8Snzl';
 const CORRECT_MODULE_FOLDERS={doc:'1iC54xVxm6l6H8_lNMNYLxmTYKNG0TKP4',sch:'1rJkXf3iI_Di6gGUEgoU4S33SXxfdzFFR',case:'1vjpUkFC3qFvxSFpZQcEiN7wwyGhQYk_W',urg:'11NFbKmVOWY77aguuqYifanZwNyDbImVh',assign:'1KYaCwPQhjK3_LZYLqHPxg3OikdELIXki'};
@@ -2707,13 +2882,35 @@ function initSettings(){
     if(settings.driveModuleFolders[k]!==id){settings.driveModuleFolders[k]=id;needSave=true;}
   });
   if(needSave)saveSettings();
+  // 一次性清除舊 driveUrl（舊工作流遺留，清除後可在正確位置重建）
+  if(!settings.driveUrlsCleared_v1){
+    ['doc','sch','case','urg','assign'].forEach(k=>{
+      if(tasks&&tasks[k])tasks[k].forEach(t=>{if(t.driveUrl)delete t.driveUrl;});
+    });
+    settings.driveUrlsCleared_v1=true;
+    saveSettings();
+    save(); // 同步將清除結果寫入 localStorage
+  }
   applyUserSettings();
 }
 function saveSettings(){localStorage.setItem('wp_settings_v1',JSON.stringify(settings));}
 
+function renderDashboardLinks(){
+  const container=document.getElementById('dash-custom-links');
+  const body=document.getElementById('dash-custom-links-body');
+  if(!container||!body)return;
+  const links=settings.customLinks||[];
+  if(!links.length){container.style.display='none';return;}
+  container.style.display='block';
+  body.innerHTML=links.map(l=>`
+    <button onclick="openLink('${l.url||'#'}')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s" onmouseover="this.style.borderColor='var(--g3)';this.style.background='var(--g5)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--surface)'">
+      <i class="ti ti-link" style="color:var(--g3);font-size:13px"></i>${l.label}
+    </button>`).join('');
+}
 function applyUserSettings(){
   const av=document.querySelector('.av');if(av)av.textContent=settings.username.slice(-2)||settings.username;
   const unit=document.querySelector('.hdr-user span');if(unit)unit.textContent=settings.unit;
+  renderDashboardLinks();
 }
 
 function saveUserSettings(){
@@ -2734,7 +2931,7 @@ function addCustomLink(){
   if(!label||!url){showToast('請填寫名稱與 URL');return;}
   if(!url.startsWith('http')){showToast('URL 請以 https:// 開頭');return;}
   settings.customLinks.push({label,url,id:Date.now()});
-  saveSettings();renderCustomLinks();
+  saveSettings();renderCustomLinks();renderDashboardLinks();
   document.getElementById('ql-new-label').value='';
   document.getElementById('ql-new-url').value='';
   showToast('連結已新增');
@@ -2742,7 +2939,7 @@ function addCustomLink(){
 
 function deleteCustomLink(id){
   settings.customLinks=settings.customLinks.filter(l=>l.id!==id);
-  saveSettings();renderCustomLinks();showToast('連結已刪除');
+  saveSettings();renderCustomLinks();renderDashboardLinks();showToast('連結已刪除');
 }
 
 function renderCustomLinks(){
@@ -2766,6 +2963,7 @@ function renderSettingsPage(){
   const sid=document.getElementById('set-sheets-id');if(sid)sid.value=settings.sheetsId||'';
   updateGoogleUI();
   renderCustomLinks();
+  renderSemTplManage();
 }
 
 /* ══ DATA EXPORT / IMPORT ══ */
@@ -2956,7 +3154,7 @@ function onGoogleToken(resp){
   }
   gToken=resp;
   gToken.expiry=Date.now()+3500*1000;
-  try{sessionStorage.setItem('wp_gtoken',JSON.stringify({access_token:gToken.access_token,expiry:gToken.expiry}));}catch(e){}
+  try{localStorage.setItem('wp_gtoken',JSON.stringify({access_token:gToken.access_token,expiry:gToken.expiry}));}catch(e){}
   updateGoogleUI();
   // 在 token 到期前 5 分鐘自動靜默續期
   scheduleTokenRefresh();
@@ -2978,7 +3176,7 @@ function isTokenValid(){return gToken&&Date.now()<gToken.expiry;}
 
 function restoreToken(){
   try{
-    const saved=sessionStorage.getItem('wp_gtoken');
+    const saved=localStorage.getItem('wp_gtoken');
     if(!saved)return;
     const t=JSON.parse(saved);
     if(t.expiry&&Date.now()<t.expiry){
@@ -2986,7 +3184,7 @@ function restoreToken(){
       updateGoogleUI();
       scheduleTokenRefresh();
     }
-    else sessionStorage.removeItem('wp_gtoken');
+    else localStorage.removeItem('wp_gtoken');
   }catch(e){}
 }
 
@@ -3117,26 +3315,227 @@ async function getOrCreateFolder(name,parentId){
 
 async function createDriveFolder(taskName,moduleKey){
   if(!isTokenValid()){showToast('請先登入 Google');return null;}
-  // 根資料夾
-  let rootId=settings.drivePlatformFolderId;
-  if(!rootId){
-    rootId=await getOrCreateFolder('威廷工作平台',null);
-    if(!rootId)return null;
-    settings.drivePlatformFolderId=rootId;saveSettings();
-  }
-  // 模組資料夾
-  const moduleLabel=META[moduleKey]?.label||moduleKey;
-  if(!settings.driveModuleFolders)settings.driveModuleFolders={};
-  let moduleId=settings.driveModuleFolders[moduleKey];
-  if(!moduleId){
-    moduleId=await getOrCreateFolder(moduleLabel,rootId);
-    if(!moduleId)return null;
-    settings.driveModuleFolders[moduleKey]=moduleId;saveSettings();
-  }
-  // 任務資料夾
+  // 根資料夾與模組資料夾：直接使用固定 ID，不依賴 settings
+  const rootId=CORRECT_DRIVE_FOLDER;
+  const moduleId=CORRECT_MODULE_FOLDERS[moduleKey];
+  if(!moduleId){showToast('找不到對應模組資料夾');return null;}
+  // 任務資料夾（建在正確的模組子資料夾內）
   const taskId=await getOrCreateFolder(taskName,moduleId);
   if(!taskId)return null;
   return{id:taskId,url:`https://drive.google.com/drive/folders/${taskId}`};
+}
+
+/* ══ SEMESTER SWITCH ══ */
+const DEFAULT_SEM_TEMPLATES=[
+  {id:1,t:'統計報表：學期初個案數',mod:'case'},
+  {id:2,t:'統計報表：本學期彙整',mod:'case'},
+  {id:3,t:'【休學追蹤】本學期關心電訪',mod:'case'},
+  {id:4,t:'【轉銜】召開轉銜評估會議',mod:'case'},
+  {id:5,t:'【轉銜】依決議名單通報至系統',mod:'case'},
+  {id:6,t:'學期初獎助學金彙整',mod:'sch'},
+  {id:7,t:'學期末統計報表彙整',mod:'sch'},
+  {id:8,t:'學期計畫書簽呈',mod:'doc'},
+];
+
+let semKeepIds=new Set(); // step1 勾選的保留任務 id
+let semTplChecked=new Set(); // step2 勾選的模板 id
+let curSemStep=1;
+
+function getSemTemplates(){
+  const saved=settings.semTemplates;
+  return Array.isArray(saved)&&saved.length?saved:DEFAULT_SEM_TEMPLATES;
+}
+
+function openSemModal(){
+  curSemStep=1;
+  semKeepIds=new Set();
+  semTplChecked=new Set();
+  renderSemStep1();
+  semStep(1);
+  document.getElementById('sem-modal').style.display='flex';
+}
+function closeSemModal(){
+  document.getElementById('sem-modal').style.display='none';
+}
+function semStep(n){
+  curSemStep=n;
+  document.querySelectorAll('.sem-step').forEach(s=>s.classList.remove('on'));
+  const el=document.getElementById('sem-step-'+n);
+  if(el)el.classList.add('on');
+  if(n===2)renderSemStep2();
+  if(n===3)renderSemConfirm();
+}
+
+function renderSemStep1(){
+  const el=document.getElementById('sem-task-list');if(!el)return;
+  let items=[];
+  ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>!t.done).forEach(t=>items.push({...t,key:k})));
+  if(!items.length){
+    el.innerHTML=`<div style="text-align:center;padding:24px;color:var(--t3);font-size:13px">目前沒有未完成任務</div>`;
+    return;
+  }
+  const modTagClass={doc:'sem-tag-a',sch:'sem-tag-g',case:'sem-tag-b',urg:'sem-tag-r',assign:'sem-tag-p'};
+  el.innerHTML=`<div style="display:flex;gap:8px;margin-bottom:10px">
+    <button class="sem-btn" onclick="semSelectAll(true)">全選</button>
+    <button class="sem-btn" onclick="semSelectAll(false)">全不選</button>
+  </div>`+items.map(t=>`
+    <div class="sem-task-item">
+      <input type="checkbox" id="semk-${t.id}" value="${t.id}" style="width:15px;height:15px;accent-color:var(--g3);flex-shrink:0;cursor:pointer" onchange="semToggleKeep(${t.id},this.checked)">
+      <label for="semk-${t.id}" style="flex:1;cursor:pointer">${t.t}</label>
+      <span class="sem-task-mod ${modTagClass[t.key]||''}">${META[t.key]?.label||t.key}</span>
+      <span style="font-size:11px;color:var(--t3);min-width:40px;text-align:right">${t.d||''}</span>
+    </div>`).join('');
+}
+
+function semSelectAll(checked){
+  document.querySelectorAll('#sem-task-list input[type=checkbox]').forEach(cb=>{
+    cb.checked=checked;
+    semToggleKeep(parseInt(cb.value),checked);
+  });
+}
+function semToggleKeep(id,checked){
+  if(checked)semKeepIds.add(id);
+  else semKeepIds.delete(id);
+}
+
+function renderSemStep2(){
+  const el=document.getElementById('sem-tpl-list');if(!el)return;
+  const tpls=getSemTemplates();
+  const modTagClass={doc:'sem-tag-a',sch:'sem-tag-g',case:'sem-tag-b',urg:'sem-tag-r',assign:'sem-tag-p'};
+  if(!tpls.length){
+    el.innerHTML=`<div style="text-align:center;padding:24px;color:var(--t3);font-size:13px">尚無模板，請至設定頁新增</div>`;
+    return;
+  }
+  el.innerHTML=`<div style="display:flex;gap:8px;margin-bottom:10px">
+    <button class="sem-btn" onclick="semTplSelectAll(true)">全選</button>
+    <button class="sem-btn" onclick="semTplSelectAll(false)">全不選</button>
+  </div>`+tpls.map(t=>`
+    <div class="sem-tpl-item ${semTplChecked.has(t.id)?'sel':''}" onclick="semTplToggle(${t.id})">
+      <input type="checkbox" id="semt-${t.id}" ${semTplChecked.has(t.id)?'checked':''} style="width:14px;height:14px;accent-color:var(--g3);flex-shrink:0;pointer-events:none">
+      <label for="semt-${t.id}" style="flex:1;pointer-events:none">${t.t}</label>
+      <span class="sem-tpl-tag ${modTagClass[t.mod]||''}">${META[t.mod]?.label||t.mod}</span>
+    </div>`).join('');
+}
+
+function semTplToggle(id){
+  if(semTplChecked.has(id))semTplChecked.delete(id);
+  else semTplChecked.add(id);
+  renderSemStep2();
+}
+function semTplSelectAll(checked){
+  const tpls=getSemTemplates();
+  tpls.forEach(t=>{if(checked)semTplChecked.add(t.id);else semTplChecked.delete(t.id);});
+  renderSemStep2();
+}
+
+function renderSemConfirm(){
+  const el=document.getElementById('sem-confirm-body');if(!el)return;
+  let items=[];
+  ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>!t.done).forEach(t=>items.push({...t,key:k})));
+  const archiveCount=items.filter(t=>!semKeepIds.has(t.id)).length;
+  const keepCount=semKeepIds.size;
+  const newCount=semTplChecked.size;
+  el.innerHTML=`
+    <div style="margin-bottom:14px;padding:14px;background:var(--surface-2);border-radius:var(--rad-s)">
+      <div style="font-size:14px;font-weight:600;margin-bottom:10px">即將執行以下操作：</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div>📦 <strong>${archiveCount}</strong> 筆舊任務 → 歸檔（可在存檔紀錄查閱）</div>
+        <div>✅ <strong>${keepCount}</strong> 筆舊任務 → 保留（帶入新學期繼續追蹤）</div>
+        <div>🆕 <strong>${newCount}</strong> 筆新學期預設任務 → 自動建立</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--t3)">此操作<strong>不會</strong>清除工作日誌、個案統計、服務記錄、教學日誌。</div>`;
+}
+
+function executeSemSwitch(){
+  // 1. 歸檔未勾選的待辦任務（mark done）
+  let archivedCount=0;
+  const now=new Date();
+  const dateStr=`${now.getMonth()+1}/${now.getDate()}`;
+  ['doc','sch','case','urg','assign'].forEach(k=>{
+    (tasks[k]||[]).filter(t=>!t.done).forEach(t=>{
+      if(!semKeepIds.has(t.id)){
+        t.done=true;
+        t.completedAt=dateStr;
+        archivedCount++;
+      }
+    });
+  });
+  // 2. 新增模板任務
+  const tpls=getSemTemplates();
+  let newCount=0;
+  semTplChecked.forEach(id=>{
+    const tpl=tpls.find(t=>t.id===id);
+    if(!tpl)return;
+    const mod=tpl.mod;
+    if(!tasks[mod])tasks[mod]=[];
+    tasks[mod].unshift({id:Date.now()+Math.floor(Math.random()*1000),t:tpl.t,d:'待定',createdAt:localISO(),u:false,done:false,src:''});
+    newCount++;
+  });
+  // 3. 記錄學期切換時間
+  settings.lastSemSwitch=localISO();
+  settings.semRemindDismissed=false;
+  saveSettings();
+  save();
+  updateStats();
+  updatePanel(curKey);
+  renderRecentArchive();
+  closeSemModal();
+  showToast(`學期切換完成！歸檔 ${archivedCount} 筆，新增 ${newCount} 筆`);
+}
+
+/* 設定頁模板管理 */
+function renderSemTplManage(){
+  const el=document.getElementById('sem-tpl-manage-list');if(!el)return;
+  const tpls=getSemTemplates();
+  const modTagClass={doc:'sem-tag-a',sch:'sem-tag-g',case:'sem-tag-b',urg:'sem-tag-r',assign:'sem-tag-p'};
+  if(!tpls.length){el.innerHTML=`<div style="font-size:12px;color:var(--t3)">尚無模板</div>`;return;}
+  el.innerHTML=tpls.map(t=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface-2);border-radius:var(--rad-s);margin-bottom:3px">
+      <span style="flex:1;font-size:12px;color:var(--t1)">${t.t}</span>
+      <span class="sem-tpl-tag ${modTagClass[t.mod]||''}" style="font-size:10px;padding:1px 6px;border-radius:3px">${META[t.mod]?.label||t.mod}</span>
+      <button onclick="deleteSemTemplate(${t.id})" style="border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 3px;border-radius:3px;transition:.12s" onmouseover="this.style.color='var(--r3)'" onmouseout="this.style.color='var(--t3)'"><i class="ti ti-x"></i></button>
+    </div>`).join('');
+}
+function addSemTemplate(){
+  const name=document.getElementById('sem-tpl-new-name')?.value.trim();
+  const mod=document.getElementById('sem-tpl-new-mod')?.value||'doc';
+  if(!name){showToast('請輸入任務名稱');return;}
+  if(!settings.semTemplates)settings.semTemplates=[...DEFAULT_SEM_TEMPLATES];
+  settings.semTemplates.push({id:Date.now(),t:name,mod});
+  saveSettings();
+  document.getElementById('sem-tpl-new-name').value='';
+  renderSemTplManage();
+  showToast('模板已新增');
+}
+function deleteSemTemplate(id){
+  if(!settings.semTemplates)settings.semTemplates=[...DEFAULT_SEM_TEMPLATES];
+  settings.semTemplates=settings.semTemplates.filter(t=>t.id!==id);
+  saveSettings();renderSemTplManage();showToast('模板已刪除');
+}
+
+/* 學期提醒 */
+const SEM_REMIND_DATES=[
+  {month:1,day:25,label:'寒假即將開始，新學期快到了'},
+  {month:7,day:25,label:'暑假即將開始，新學期快到了'},
+];
+function checkSemReminder(){
+  if(settings.semRemindDismissed)return;
+  const n=new Date();
+  const m=n.getMonth()+1,d=n.getDate();
+  const hit=SEM_REMIND_DATES.find(r=>r.month===m&&d>=r.day&&d<=r.day+7);
+  if(!hit)return;
+  // 一學期只提醒一次
+  const key=`${n.getFullYear()}-${hit.month}`;
+  if(settings.semRemindShown===key)return;
+  settings.semRemindShown=key;saveSettings();
+  const desc=document.getElementById('sem-remind-desc');
+  if(desc)desc.textContent=hit.label+'，建議執行學期切換整理。';
+  setTimeout(()=>document.getElementById('sem-remind-banner').classList.add('show'),1500);
+}
+function dismissSemRemind(){
+  document.getElementById('sem-remind-banner').classList.remove('show');
+  settings.semRemindDismissed=true;saveSettings();
 }
 
 init();

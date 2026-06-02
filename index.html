@@ -474,6 +474,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="hdr-user"><span>心輔組 · 輔仁高中</span><div class="av">威廷</div></div>
   <button class="google-btn" id="google-btn" onclick="googleSignIn()"><i class="ti ti-brand-google-drive"></i>登入同步</button>
 </header>
+<!-- 未登入警示橫條 -->
+<div id="login-warn-bar" style="display:none;background:#C47C2A;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 16px;letter-spacing:.03em;cursor:pointer;z-index:100;flex-shrink:0" onclick="googleSignIn()">
+  ⚠ 尚未登入 Google，資料僅存本機，點此登入同步
+</div>
 <div class="stats">
   <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文計畫</span><span class="tag tag-warn">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
@@ -485,7 +489,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div style="margin-bottom:4px">
     <div class="nav-lbl">主要</div>
     <button class="ni on" onclick="navTo(this,'dashboard')"><i class="ti ti-layout-grid"></i>主控台</button>
-    <button class="ni" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務追蹤<span class="ni-badge" id="badge-all">0</span></button>
+    <button class="ni" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務總覽<span class="ni-badge" id="badge-all">0</span></button>
     <button class="ni" onclick="navTo(this,'archive')"><i class="ti ti-archive"></i>存檔紀錄</button>
     <button class="ni" onclick="navTo(this,'journal')"><i class="ti ti-notebook"></i>工作日誌</button>
     <button class="ni" onclick="navTo(this,'teaching')"><i class="ti ti-school"></i>教學日誌</button>
@@ -538,13 +542,6 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
   </div>
   <div class="grid-2">
-    <div class="card urg-card" id="card-urg" onclick="selectCard('urg')">
-      <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg"></div></div>
-      <div class="c-title">要事備查</div><div class="c-desc">重要事項與處理歷程</div>
-      <div class="prog-meta"><span>要事待辦</span><span id="prog-urg-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-urg">★ 要事</span><span style="font-size:11px;color:var(--t3)">各模組 ★ 標記要事</span></div>
-    </div>
     <div class="card" id="card-assign" onclick="selectCard('assign')">
       <div class="c-hdr"><div class="c-ico ico-p"><i class="ti ti-clipboard-list"></i></div><div class="cdot d-asgn"></div></div>
       <div class="c-title">交辦追蹤</div><div class="c-desc">長官交辦、跨處室協調、外界來的</div>
@@ -552,6 +549,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div class="prog-track"><div class="prog-fill pf-p" id="prog-assign" style="width:0%"></div></div>
       <div class="c-foot"><span class="badge bdg-asgn" id="bdg-assign">● 追蹤中</span>
         <button class="c-qbtn" onclick="event.stopPropagation();showForm('assign')"><i class="ti ti-plus"></i>新增</button></div>
+    </div>
+    <div class="card urg-card" id="card-urg" onclick="selectCard('urg')">
+      <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg"></div></div>
+      <div class="c-title">要事備查</div><div class="c-desc">重要事項與處理歷程</div>
+      <div class="prog-meta"><span>要事待辦</span><span id="prog-urg-txt">0 件</span></div>
+      <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
+      <div class="c-foot"><span class="badge bdg-urg">★ 要事</span><span style="font-size:11px;color:var(--t3)">各模組 ★ 標記要事</span></div>
     </div>
   </div>
   <div id="dash-custom-links" style="display:none;margin-bottom:16px">
@@ -562,7 +566,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="rec-list" id="rec-list">
   </div>
 </main>
-<div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">全部待辦任務</div><div id="task-page-content"></div></div>
+<div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">任務總覽 — 全部待辦</div><div id="task-page-content"></div></div>
 <div class="page" id="page-archive">
   <div class="sec-lbl" style="margin-bottom:14px">已完成任務</div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
@@ -1108,7 +1112,11 @@ function init(){
 function save(){
   localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));
   renderRecentArchive();
-  if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
+  if(isTokenValid&&isTokenValid()&&settings.sheetsId){
+    debouncedSheetsSync();
+  }else{
+    // 未登入時靜默，不每次都 toast（太干擾），靠橫條提示即可
+  }
 }
 function clearAllData(){
   if(!confirm('確定要重置所有資料嗎？任務、日誌、個案、服務記錄、教學日誌都會清除。此動作不可復原。'))return;
@@ -1837,7 +1845,13 @@ function syncMobBadge(){
 }
 
 function openLink(url){if(!url||url==='#')return;window.open(url,'_blank');}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=type==='warn'?'#C47C2A':'';
+  t.classList.add('show');
+  setTimeout(()=>{t.classList.remove('show');t.style.background='';},2200);
+}
 
 
 /* ══ JOURNAL ══ */
@@ -2297,7 +2311,10 @@ function initTeaching(){
   const s=localStorage.getItem('wp_teaching_v1');
   teachingRecords=s?JSON.parse(s):[];
 }
-function saveTeaching(){localStorage.setItem('wp_teaching_v1',JSON.stringify(teachingRecords));}
+function saveTeaching(){
+  localStorage.setItem('wp_teaching_v1',JSON.stringify(teachingRecords));
+  if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
+}
 
 function toggleTJForm(forceClose){
   const f=document.getElementById('tj-form');if(!f)return;
@@ -3191,18 +3208,23 @@ function restoreToken(){
 function updateGoogleUI(){
   const btn=document.getElementById('google-btn');
   const statusEl=document.getElementById('set-google-status');
+  const warnBar=document.getElementById('login-warn-bar');
+  const loggedIn=isTokenValid();
   if(btn){
-    if(isTokenValid()){
+    if(loggedIn){
       btn.innerHTML='<i class="ti ti-brand-google-drive"></i>已同步';
       btn.className='google-btn connected';
       btn.onclick=googleSignOut;
+      btn.style.background='';btn.style.borderColor='';btn.style.color='';
     }else{
       btn.innerHTML='<i class="ti ti-brand-google-drive"></i>登入同步';
       btn.className='google-btn';
       btn.onclick=googleSignIn;
+      btn.style.background='#C47C2A';btn.style.borderColor='#C47C2A';btn.style.color='#fff';
     }
   }
-  if(statusEl){statusEl.textContent=isTokenValid()?'已登入（授權有效 ~1小時）':'尚未登入';}
+  if(warnBar)warnBar.style.display=loggedIn?'none':'block';
+  if(statusEl){statusEl.textContent=loggedIn?'已登入（授權有效 ~1小時）':'尚未登入';}
 }
 
 const debouncedSheetsSync=debounce(syncToSheets,2000);

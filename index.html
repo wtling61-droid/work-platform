@@ -479,7 +479,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   ⚠ 尚未登入 Google，資料僅存本機，點此登入同步
 </div>
 <div class="stats">
-  <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文計畫</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文留辦</span><span class="tag tag-warn">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
   <div class="st"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">要事備查</span><span class="tag tag-urg">★</span></div></div>
@@ -497,7 +497,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="ndiv"></div>
   <div style="margin-bottom:4px">
     <div class="nav-lbl">業務</div>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('doc')"><i class="ti ti-file-text"></i>公文計畫<span class="ni-badge" id="badge-doc">0</span></button>
+    <button class="ni" onclick="navTo(this,'dashboard');selectCard('doc')"><i class="ti ti-file-text"></i>公文留辦<span class="ni-badge" id="badge-doc">0</span></button>
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge" id="badge-sch">0</span></button>
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('case')"><i class="ti ti-heart-handshake"></i>學生輔導<span class="ni-badge" id="badge-case">0</span></button>
     <button class="ni" onclick="navTo(this,'dashboard');selectCard('urg')"><i class="ti ti-alert-triangle"></i>要事備查<span class="ni-badge" id="badge-urg-nav">0</span></button>
@@ -518,7 +518,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="grid">
     <div class="card" id="card-doc" onclick="selectCard('doc')">
       <div class="c-hdr"><div class="c-ico ico-a"><i class="ti ti-file-text"></i></div><div class="cdot d-pd"></div></div>
-      <div class="c-title">公文計畫</div><div class="c-desc">啟動表、專案追蹤、草稿產出</div>
+      <div class="c-title">公文留辦</div><div class="c-desc">重要公文、計畫案、限期填報留辦</div>
       <div class="prog-meta"><span>待辦</span><span id="prog-doc-txt">0 件</span></div>
       <div class="prog-track"><div class="prog-fill pf-a" id="prog-doc" style="width:0%"></div></div>
       <div class="c-foot"><span class="badge bdg-pd" id="bdg-doc">● 待辦</span>
@@ -572,7 +572,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
     <div style="display:flex;gap:5px;flex-wrap:wrap" id="archive-filter-grp">
       <button class="archive-filter-btn on" onclick="setArchiveFilter('all',this)">全部</button>
-      <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文計畫</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文留辦</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('sch',this)">獎助學金</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('case',this)">學生輔導</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('urg',this)">要事備查</button>
@@ -586,7 +586,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <div class="sec-lbl" style="margin-bottom:14px">Prompt 模板庫 — 一鍵複製或直接開啟 Claude</div>
   <div class="prompt-cats">
     <div class="pcat on" onclick="filterPrompt(this,'all')">全部</div>
-    <div class="pcat" onclick="filterPrompt(this,'doc')">公文計畫</div>
+    <div class="pcat" onclick="filterPrompt(this,'doc')">公文留辦</div>
     <div class="pcat" onclick="filterPrompt(this,'sch')">獎助學金</div>
     <div class="pcat" onclick="filterPrompt(this,'case')">學生輔導</div>
     <div class="pcat" onclick="filterPrompt(this,'report')">統計報表</div>
@@ -602,6 +602,11 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <input class="journal-search-input" id="journal-search" type="text" placeholder="搜尋日誌內容..." oninput="debouncedJournalSearch(this)">
         <button class="journal-search-clear" id="journal-search-clear" onclick="clearJournalSearch()"><i class="ti ti-x"></i></button>
       </div>
+      <div class="journal-vt" id="journal-filter-type" style="margin-right:4px">
+        <button class="jvt on" id="jft-all" onclick="setJournalTypeFilter('all',this)">全部</button>
+        <button class="jvt" id="jft-journal" onclick="setJournalTypeFilter('journal',this)">日誌</button>
+        <button class="jvt" id="jft-memo" onclick="setJournalTypeFilter('memo',this)">備忘</button>
+      </div>
       <div class="journal-vt" id="journal-vt">
         <button class="jvt on" id="jvt-month" onclick="setJournalView('month')">本月</button>
         <button class="jvt" id="jvt-week" onclick="setJournalView('week')">本週</button>
@@ -612,6 +617,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
   <div class="journal-months" id="journal-months"></div>
   <div class="journal-form" id="journal-form">
+    <div style="display:flex;gap:6px;margin-bottom:7px">
+      <button class="jvt on" id="jf-type-journal" onclick="setJournalInputType('journal',this)" style="font-size:11px;padding:3px 12px;border-radius:20px">日誌</button>
+      <button class="jvt" id="jf-type-memo" onclick="setJournalInputType('memo',this)" style="font-size:11px;padding:3px 12px;border-radius:20px">備忘</button>
+    </div>
     <textarea id="j-content" placeholder="記錄今日業務內容...（Shift+Enter 換行）"></textarea>
     <div class="journal-form-row">
       <input type="date" id="j-date">
@@ -729,7 +738,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <input type="text" id="sem-tpl-new-name" placeholder="任務名稱..." style="flex:1;min-width:140px;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)">
       <select id="sem-tpl-new-mod" style="height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface-2)">
-        <option value="doc">公文計畫</option>
+        <option value="doc">公文留辦</option>
         <option value="sch">獎助學金</option>
         <option value="case">學生輔導</option>
         <option value="urg">要事備查</option>
@@ -933,6 +942,12 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <span style="font-size:11px;color:var(--t3)">（印在週一及週四標題列）</span>
       </div>
       <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">取消勾選可排除不需印出的記錄。每格上限 9 行（每行約 20 字），超過標紅提示。</div>
+      <div style="margin-bottom:10px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer">
+          <input type="checkbox" id="export-include-memo" style="width:14px;height:14px;accent-color:var(--a3)">
+          包含備忘記錄（預設不勾選，備忘屬私人筆記）
+        </label>
+      </div>
       <div id="export-preview"></div>
     </div>
     <div class="modal-ftr">
@@ -1011,7 +1026,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 </nav>
 <script>
 const META={
-  doc:{label:'公文計畫',icon:'ti-file-text',ico:'ico-a',color:'#C47C2A'},
+  doc:{label:'公文留辦',icon:'ti-file-text',ico:'ico-a',color:'#C47C2A'},
   sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#6A9A52'},
   case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#4A6080'},
   urg:{label:'要事備查',icon:'ti-alert-triangle',ico:'ico-r',color:'#B84444'},
@@ -1038,7 +1053,7 @@ const ASSIGN_SRCS=[
 ];
 const LINKS={
   doc:[
-    {i:'ti-forms',   l:'Google 啟動表',    url:'https://docs.google.com/forms/d/e/1FAIpQLSd52jixThDQ6PnDvLStM43C-ZH5t-I-ZkOimvcj0VFX0FbCFQ/viewform'},
+    {i:'ti-file-export', l:'匯出公文留辦清單', url:'#', onclick:'exportDocList()'},
     {i:'ti-table',   l:'總追蹤 Sheet',     url:'https://docs.google.com/spreadsheets/d/1pfVkt_XKLPsylyw9ncu6FMnIXolsn6mSzjeEbDj0aV4/edit'},
     {i:'ti-folder',  l:'Drive 資料夾',     url:'https://drive.google.com/drive/folders/1iC54xVxm6l6H8_lNMNYLxmTYKNG0TKP4'},
     {i:'ti-template',l:'公文 Prompt 模板', prompt:'doc'},
@@ -1215,6 +1230,12 @@ function taskHTML(t,key,ri){
     <button class="drive-save-btn" onclick="saveDriveUrl('${key}',${ri})">儲存</button>
     ${t.driveUrl?`<button class="drive-clear-btn" onclick="clearDriveUrl('${key}',${ri})">清除</button>`:''}
   </div>`:'';
+  const docMetaRow=key==='doc'&&(t.docno||t.docorg||t.docsubj)?`
+  <div style="display:flex;flex-wrap:wrap;gap:4px 10px;padding:4px 6px 4px 28px;font-size:11px;color:var(--t2);background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px">
+    ${t.docno?`<span><i class="ti ti-file-text" style="font-size:11px;margin-right:2px"></i>${t.docno}</span>`:''}
+    ${t.docorg?`<span><i class="ti ti-building" style="font-size:11px;margin-right:2px"></i>${t.docorg}</span>`:''}
+    ${t.docsubj?`<span style="color:var(--t1)">${t.docsubj}</span>`:''}
+  </div>`:'';
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
     <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
@@ -1228,6 +1249,7 @@ function taskHTML(t,key,ri){
       <button class="t-act-btn" onclick="deleteTask('${key}',${ri})"><i class="ti ti-x"></i></button>
     </div>
   </div>
+  ${docMetaRow}
   <div class="t-note-row${t.note?' show':''}" id="note-row-${t.id}">
     <textarea class="t-note-input" placeholder="備註（Tab 或點擊其他地方儲存）..." onblur="saveNote('${key}',${ri},this.value)">${t.note||''}</textarea>
   </div>
@@ -1282,7 +1304,21 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
       <input type="date" id="new-task-date-${id}" style="flex:1;min-width:0">
       <button type="button" class="atf-special-btn" onclick="setSpecialDate('${id}','待定')">待定</button>
     </div>
-    ${id==='doc'?`<div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`:''}
+    ${id==='doc'?`
+    <div class="atf-row" style="align-items:center;gap:6px">
+      <span class="atf-field-lbl">公文字號</span>
+      <input type="text" id="new-task-docno-${id}" placeholder="例：嘉市教字第1140012345號" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+    </div>
+    <div class="atf-row" style="align-items:center;gap:6px">
+      <span class="atf-field-lbl">發文機關</span>
+      <input type="text" id="new-task-docorg-${id}" placeholder="例：嘉義市政府教育處" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+    </div>
+    <div class="atf-row" style="align-items:center;gap:6px">
+      <span class="atf-field-lbl">公文主旨</span>
+      <input type="text" id="new-task-docsubj-${id}" placeholder="公文主旨摘要..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+    </div>
+    <div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`
+    :(id==='assign'?`<div class="atf-row"><div style="display:flex;gap:6px;flex-wrap:wrap"><label style="font-size:12px;color:var(--t2)">來源：</label>${['boss','cross','ext'].map(v=>`<label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--t2);cursor:pointer"><input type="radio" name="new-task-asrc-${id}" value="${v}" style="accent-color:var(--p3)">${v==='boss'?'長官交辦':v==='cross'?'跨處室':'外界來的'}</label>`).join('')}</div></div>`:'')}
     ${['doc','sch','urg'].includes(id)?`<div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-${id}" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>`:''}
     ${extraRow}
     <div class="atf-row">
@@ -1294,7 +1330,7 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
 }
 
 function buildStdPanel(key){
-  const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
+  const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.onclick?l.onclick:(l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`)}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
   return `
     <div class="p-sec" style="overflow-y:auto;flex:1">
       <div class="p-sec-lbl">任務清單</div>
@@ -1605,6 +1641,14 @@ async function confirmAdd(key){
   const src=key==='doc'?(document.getElementById('new-task-src-'+key)?.checked?'cross':''):'';
   const wantDrive=document.getElementById('new-task-drive-'+key)?.checked||false;
   const task={id:Date.now(),t:txt,d:date,createdAt,u:false,done:false,src:src};
+  if(key==='doc'){
+    const docno=document.getElementById('new-task-docno-doc')?.value.trim();
+    const docorg=document.getElementById('new-task-docorg-doc')?.value.trim();
+    const docsubj=document.getElementById('new-task-docsubj-doc')?.value.trim();
+    if(docno)task.docno=docno;
+    if(docorg)task.docorg=docorg;
+    if(docsubj)task.docsubj=docsubj;
+  }
   tasks[key].unshift(task);
   addAutoJournalEntry(`受理：${txt}`);
   save();updateStats();updatePanel(key);showToast('任務已新增');
@@ -1855,7 +1899,21 @@ function showToast(msg,type){
 
 
 /* ══ JOURNAL ══ */
-let journal=[],curJournalView='month',curJournalMonth='';
+let journal=[],curJournalView='month',curJournalMonth='',curJournalTypeFilter='all';
+
+function setJournalTypeFilter(type,btn){
+  curJournalTypeFilter=type;
+  document.querySelectorAll('#journal-filter-type .jvt').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderJournal();
+}
+
+function setJournalInputType(type,btn){
+  document.querySelectorAll('#journal-form .jvt').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  const ta=document.getElementById('j-content');
+  if(ta)ta.placeholder=type==='memo'?'記錄備忘（長官說的、來電摘要、待確認事項...）':'記錄今日業務內容...（Shift+Enter 換行）';
+}
 
 function initJournal(){
   const s=localStorage.getItem('wp_journal_v1');
@@ -1903,7 +1961,8 @@ function confirmAddJournal(){
   const dateStr=`${d.getMonth()+1}/${d.getDate()}`;
   const now=new Date();
   const timeStr=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  journal.unshift({id:Date.now(),date:dateStr,isoDate:dateVal,time:timeStr,content:txt,auto:false});
+  const entryType=document.getElementById('jf-type-memo')?.classList.contains('on')?'memo':'journal';
+  journal.unshift({id:Date.now(),date:dateStr,isoDate:dateVal,time:timeStr,content:txt,auto:false,type:entryType});
   saveJournal();
   document.getElementById('j-content').value='';
   toggleJournalForm(true);
@@ -1983,10 +2042,10 @@ function renderJournal(){
   const el=document.getElementById('journal-list');if(!el)return;
   const kw=(document.getElementById('journal-search')?.value||'').trim();
   const isSearch=kw.length>0;
+  const typeFilter=curJournalTypeFilter||'all';
 
   let filtered;
   if(isSearch){
-    // 搜尋模式：跨所有月份，不受月份/週切換限制
     filtered=journal.filter(e=>e.content&&e.content.toLowerCase().includes(kw.toLowerCase()));
   } else {
     filtered=journal.filter(e=>e.isoDate&&e.isoDate.slice(0,7)===curJournalMonth);
@@ -1995,9 +2054,12 @@ function renderJournal(){
       filtered=filtered.filter(e=>{const d=new Date(e.isoDate+'T12:00:00');return d>=from&&d<=to;});
     }
   }
+  // 類型篩選
+  if(typeFilter==='journal') filtered=filtered.filter(e=>!e.type||e.type==='journal');
+  else if(typeFilter==='memo') filtered=filtered.filter(e=>e.type==='memo');
 
   if(!filtered.length){
-    const msg=isSearch?`找不到包含「${kw}」的記錄`:curJournalView==='week'?'本週尚無日誌記錄':'本月尚無日誌記錄，點「新增記錄」開始';
+    const msg=isSearch?`找不到包含「${kw}」的記錄`:typeFilter==='memo'?'本期尚無備忘記錄':curJournalView==='week'?'本週尚無日誌記錄':'本月尚無日誌記錄，點「新增記錄」開始';
     el.innerHTML=`<div class="empty-state"><i class="ti ti-notebook"></i><p>${msg}</p></div>`;
     return;
   }
@@ -2013,7 +2075,6 @@ function renderJournal(){
     return suffix?`${yearPfx}${mm}/${dd} 週${days[d.getDay()]}（${suffix}）`:`${yearPfx}${mm}/${dd} 週${days[d.getDay()]}`;
   };
 
-  // 關鍵字高亮
   const highlight=txt=>{
     if(!kw)return txt.replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const safe=txt.replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -2028,8 +2089,8 @@ function renderJournal(){
     const entries=filtered.filter(e=>e.isoDate===iso);
     return `<div class="journal-group">
       <div class="journal-group-date">${fmtDate(iso)}<span style="font-size:10px;color:var(--t3);font-weight:400;margin-left:6px">${entries.length} 則</span></div>
-      ${entries.map(e=>`<div class="journal-entry ${e.auto?'je-auto-entry':''}">
-        ${e.auto?'<i class="ti ti-check" style="font-size:11px;color:var(--g3);flex-shrink:0;margin-top:3px"></i>':''}
+      ${entries.map(e=>`<div class="journal-entry ${e.auto?'je-auto-entry':''}${e.type==='memo'?' je-memo-entry':''}">
+        ${e.type==='memo'?'<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;background:#FAEEDA;color:#854F0B;flex-shrink:0;margin-top:2px">備忘</span>':e.auto?'<i class="ti ti-check" style="font-size:11px;color:var(--g3);flex-shrink:0;margin-top:3px"></i>':''}
         <span class="je-content" id="je-content-${e.id}">${highlight(e.content)}</span>
         <span class="je-time">${e.time}</span>
         <div class="je-actions">
@@ -2060,6 +2121,58 @@ function clearJournalSearch(){
   if(vt)vt.style.opacity='1';
   renderJournal();
   document.getElementById('journal-search')?.focus();
+}
+
+/* ══ 公文留辦匯出 ══ */
+function exportDocList(){
+  const all=tasks.doc||[];
+  if(!all.length){showToast('目前沒有公文留辦記錄');return;}
+  const now=new Date();
+  const dateStr=`${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
+  let html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+  <title>公文留辦清單</title>
+  <style>
+    body{font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:24px;color:#222}
+    h2{font-size:16px;margin-bottom:4px}
+    .meta{font-size:11px;color:#888;margin-bottom:18px}
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    th{background:#f5f5f0;padding:6px 10px;text-align:left;border:1px solid #ddd;font-weight:600;font-size:11px}
+    td{padding:6px 10px;border:1px solid #ddd;vertical-align:top}
+    tr:nth-child(even) td{background:#fafafa}
+    .done-row td{color:#aaa;text-decoration:line-through}
+    @media print{body{padding:8px}}
+  </style></head><body>
+  <h2>公文留辦清單</h2>
+  <div class="meta">匯出時間：${dateStr}　共 ${all.length} 筆（待辦 ${all.filter(t=>!t.done).length} 筆）</div>
+  <table>
+    <thead><tr>
+      <th style="width:5%">#</th>
+      <th style="width:18%">公文字號</th>
+      <th style="width:16%">發文機關</th>
+      <th style="width:26%">公文主旨／任務名稱</th>
+      <th style="width:10%">建立日</th>
+      <th style="width:10%">結案日</th>
+      <th style="width:8%">狀態</th>
+      <th style="width:7%">備註</th>
+    </tr></thead>
+    <tbody>
+    ${all.map((t,i)=>`<tr class="${t.done?'done-row':''}">
+      <td>${i+1}</td>
+      <td>${t.docno||'—'}</td>
+      <td>${t.docorg||'—'}</td>
+      <td>${t.docsubj||t.t}${t.docsubj&&t.docsubj!==t.t?`<br><span style="color:#888;font-size:11px">${t.t}</span>`:''}</td>
+      <td>${t.createdAt||'—'}</td>
+      <td>${t.d||'—'}</td>
+      <td>${t.done?'✓ 結案':'追蹤中'}${t.u&&!t.done?' ★':''}</td>
+      <td>${t.note||''}</td>
+    </tr>`).join('')}
+    </tbody>
+  </table>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  const w=window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
 }
 
 function exportJournal(){
@@ -2240,12 +2353,13 @@ function doExport(){
   const w=exportWeeks[exportSelIdx];
   if(!w){showToast('請先選擇週次');return;}
   const weekNum=document.getElementById('export-week-num')?.value.trim()||'';
+  const includeMemo=document.getElementById('export-include-memo')?.checked||false;
   const dayNames=['一','二','三','四','五'];
   const rocY=y=>y-1911;
   const days=Array.from({length:5},(_,i)=>{
     const d=new Date(w.mon);d.setDate(w.mon.getDate()+i);
     const iso=localISO(d);
-    const entries=journal.filter(e=>e.isoDate===iso&&exportCheckState[e.id]!==false);
+    const entries=journal.filter(e=>e.isoDate===iso&&exportCheckState[e.id]!==false&&(includeMemo||e.type!=='memo'));
     return{d,entries};
   });
   function dayHdr(i,showWk){

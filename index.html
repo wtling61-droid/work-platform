@@ -26,14 +26,14 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:15px;line-height:1.6;min-height:100vh}
-.layout{display:grid;grid-template-columns:var(--sw) 2fr 1fr;grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
+.layout{display:grid;grid-template-columns:var(--sw) 1fr;grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
 .hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:var(--t1);cursor:pointer}
 .logo-mark{width:32px;height:32px;background:var(--g3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px}
 .hdr-date{font-size:13px;color:var(--t3);margin-left:auto}
 .hdr-user{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--t2);margin-left:12px}
 .av{width:30px;height:30px;border-radius:50%;background:var(--g5);border:1.5px solid var(--g4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--g1)}
-.stats{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw)+18px);overflow-x:auto}
+.stats{grid-column:1/-1;grid-row:2;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px 0 calc(var(--sw)+18px);overflow-x:auto}
 .st{display:flex;align-items:center;gap:8px;padding:0 18px 0 0;margin-right:18px;border-right:1px solid var(--border);white-space:nowrap}
 .st:first-child{padding-left:4px}
 .st:last-child{border-right:none}
@@ -49,8 +49,17 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .ni i{font-size:18px;width:19px;flex-shrink:0}
 .ni-badge{margin-left:auto;background:var(--r3);color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px}
 .ndiv{height:1px;background:var(--border);margin:7px 10px}
-.page{grid-column:2;grid-row:3;display:none;padding:18px;overflow-y:auto;height:calc(100vh - var(--hh) - var(--sh))}
-.page.active{display:block}
+.page{grid-column:2;grid-row:3;display:none;overflow-y:auto;height:calc(100vh - var(--hh) - var(--sh))}
+.page.active{display:flex;flex-direction:column}
+.page-pad{padding:18px;overflow-y:auto;flex:1}
+/* MODULE PAGE — full height flex layout */
+.mod-page{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--surface)}
+.mod-page-hdr{padding:13px 20px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mod-page-body{display:grid;grid-template-columns:1fr 220px;align-items:start;overflow-y:auto;overflow-x:hidden;flex:1;min-height:0}
+.mod-col-main{border-right:1px solid var(--border);min-width:0}
+.mod-col-side{position:sticky;top:0;background:var(--surface-2);display:flex;flex-direction:column;overflow:hidden;min-width:0;width:220px}
+/* PANEL — kept for legacy reference but hidden */
+.panel{display:none}
 .sec-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:11px}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:22px}
@@ -82,6 +91,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .rec-date{font-size:11px;color:var(--t3);white-space:nowrap}
 /* PANEL */
 .panel{grid-column:3;grid-row:3;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow:hidden}
+/* DASH MOD CHIPS */
+.dash-mod-chip{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad);padding:8px 12px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:10px}
+.dash-mod-chip:hover{border-color:var(--g3);background:var(--g5)}
+.dmc-ico{width:28px;height:28px;border-radius:var(--rad-s);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.dmc-label{font-size:12px;color:var(--t2);font-weight:500;flex:1}
+.dmc-count{font-size:18px;font-weight:700;color:var(--t1);line-height:1;min-width:24px;text-align:right}
+.dmc-unit{font-size:10px;color:var(--t3);min-width:18px}
 .p-hdr{padding:13px 16px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
 .p-ico{width:27px;height:27px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
 .p-title{font-size:14px;font-weight:600;color:var(--t1);flex:1}
@@ -92,7 +108,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .p-tab-content{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0}
 .p-tab-content.on{display:flex}
 /* TASKS */
-.p-sec{padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-y:auto;max-height:230px}
+.p-sec{padding:10px 14px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-y:auto}
+.p-sec-task{padding:10px 14px;border-bottom:1px solid var(--border)}
 .p-sec-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:7px}
 .task-list{display:flex;flex-direction:column;gap:1px}
 .task{display:flex;align-items:center;gap:5px;padding:6px 3px;border-radius:4px;position:relative}
@@ -131,7 +148,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .qlinks{display:flex;flex-direction:column;gap:3px}
 .qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
 .qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:16px;color:var(--t3);width:17px}
-.doc-fields-row{padding:5px 6px 6px 28px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--t2)}
+.doc-fields-row{padding:3px 6px 4px 22px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;display:flex;flex-wrap:nowrap;overflow:hidden;gap:3px 12px;font-size:13px;color:var(--t2);align-items:center}
 .doc-field-item{display:flex;align-items:center;gap:4px}
 .doc-field-item i{font-size:11px;color:var(--t3)}
 .doc-field-val{color:var(--t1);cursor:pointer;border-bottom:1px dashed var(--border);padding-bottom:1px}
@@ -278,6 +295,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .je-action-btn{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 4px;border-radius:3px}
 .je-action-btn:hover{color:var(--t1);background:var(--surface-2)}
 .je-action-btn.del:hover{color:var(--r3);background:var(--r5)}
+.je-action-btn.restore{color:var(--g2)}.je-action-btn.restore:hover{background:var(--g5);color:var(--g1)}
 .je-edit-area{flex:1;min-height:52px;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;resize:vertical;outline:none;background:var(--surface);line-height:1.55}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -335,6 +353,23 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .exp-empty-day{font-size:11px;color:var(--t3);font-style:italic;padding:2px 4px}
 /* NAV BADGE FIX */
 .ni-badge{margin-left:auto;margin-right:2px}
+/* SCHEDULE */
+.sch-group{margin-bottom:20px}
+.sch-group-lbl{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;gap:6px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.sch-item{display:flex;align-items:stretch;gap:0;border:1px solid var(--border);border-radius:var(--rad);overflow:hidden;margin-bottom:7px;background:var(--surface);transition:.12s}
+.sch-item:hover{border-color:#185FA5;box-shadow:0 2px 8px rgba(24,95,165,.08)}
+.sch-item.past{opacity:.55}
+.sch-date-block{background:#E6F1FB;border-right:1px solid #B8D8F5;padding:10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px;flex-shrink:0}
+.sch-day-num{font-size:22px;font-weight:700;color:#185FA5;line-height:1}
+.sch-day-wd{font-size:11px;color:#4A7DAA;font-weight:500;margin-top:1px}
+.sch-item-main{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.sch-item-name{font-size:14px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sch-item-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sch-item-time{font-size:12px;color:#185FA5;display:flex;align-items:center;gap:3px}
+.sch-item-loc{font-size:12px;color:var(--t3);display:flex;align-items:center;gap:3px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sch-item-actions{display:flex;align-items:center;padding:0 10px;gap:3px;flex-shrink:0}
+.sch-act-btn{border:none;background:none;cursor:pointer;color:var(--t3);font-size:14px;padding:4px 5px;border-radius:4px;transition:.12s;line-height:1}
+.sch-act-btn:hover{color:var(--r3);background:var(--r5)}
 /* SETTINGS PAGE */
 .settings-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:18px 20px;margin-bottom:16px}
 .settings-section-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:14px;display:flex;align-items:center;gap:7px}
@@ -485,98 +520,93 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <button class="google-btn" id="google-btn" onclick="googleSignIn()"><i class="ti ti-brand-google-drive"></i>登入同步</button>
 </header>
 <!-- 未登入警示橫條 -->
-<div id="login-warn-bar" style="display:none;background:#C47C2A;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 16px;letter-spacing:.03em;cursor:pointer;z-index:100;flex-shrink:0" onclick="googleSignIn()">
+<div id="login-warn-bar" style="display:none;position:fixed;top:var(--hh);left:0;right:0;background:#C47C2A;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 16px;letter-spacing:.03em;cursor:pointer;z-index:150" onclick="googleSignIn()">
   ⚠ 尚未登入 Google，資料僅存本機，點此登入同步
 </div>
 <div class="stats">
-  <div class="st"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文留辦</span><span class="tag tag-warn">待辦</span></div></div>
-  <div class="st"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
-  <div class="st"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
-  <div class="st"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">要事備查</span><span class="tag tag-urg">★</span></div></div>
-  <div class="st"><span class="st-n" id="s-assign">0</span><div class="st-info"><span class="st-l">交辦追蹤</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-doc'),'doc')" style="cursor:pointer"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文留辦</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-sch'),'sch')" style="cursor:pointer"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-case'),'case')" style="cursor:pointer"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-urg'),'urg')" style="cursor:pointer"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">要事備查</span><span class="tag tag-urg">★</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-assign'),'assign')" style="cursor:pointer"><span class="st-n" id="s-assign">0</span><div class="st-info"><span class="st-l">交辦追蹤</span><span class="tag tag-warn">待辦</span></div></div>
 </div>
 <nav class="nav">
   <div style="margin-bottom:4px">
-    <div class="nav-lbl">主要</div>
-    <button class="ni on" onclick="navTo(this,'dashboard')"><i class="ti ti-layout-grid"></i>主控台</button>
-    <button class="ni" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務總覽<span class="ni-badge" id="badge-all">0</span></button>
-    <button class="ni" onclick="navTo(this,'archive')"><i class="ti ti-archive"></i>存檔紀錄</button>
-    <button class="ni" onclick="navTo(this,'journal')"><i class="ti ti-notebook"></i>工作日誌</button>
-    <button class="ni" onclick="navTo(this,'teaching')"><i class="ti ti-school"></i>教學日誌</button>
+    <div class="nav-lbl">業務</div>
+    <button class="ni on" id="ni-doc" onclick="switchModule(this,'doc')"><i class="ti ti-file-text"></i>公文留辦<span class="ni-badge" id="badge-doc">0</span></button>
+    <button class="ni" id="ni-sch" onclick="switchModule(this,'sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge" id="badge-sch">0</span></button>
+    <button class="ni" id="ni-case" onclick="switchModule(this,'case')"><i class="ti ti-heart-handshake"></i>學生輔導<span class="ni-badge" id="badge-case">0</span></button>
+    <button class="ni" id="ni-urg" onclick="switchModule(this,'urg')"><i class="ti ti-alert-triangle"></i>要事備查<span class="ni-badge" id="badge-urg-nav">0</span></button>
+    <button class="ni" id="ni-assign" onclick="switchModule(this,'assign')"><i class="ti ti-clipboard-list"></i>交辦追蹤<span class="ni-badge" id="badge-assign-nav">0</span></button>
   </div>
   <div class="ndiv"></div>
   <div style="margin-bottom:4px">
-    <div class="nav-lbl">業務</div>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('doc')"><i class="ti ti-file-text"></i>公文留辦<span class="ni-badge" id="badge-doc">0</span></button>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge" id="badge-sch">0</span></button>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('case')"><i class="ti ti-heart-handshake"></i>學生輔導<span class="ni-badge" id="badge-case">0</span></button>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('urg')"><i class="ti ti-alert-triangle"></i>要事備查<span class="ni-badge" id="badge-urg-nav">0</span></button>
-    <button class="ni" onclick="navTo(this,'dashboard');selectCard('assign')"><i class="ti ti-clipboard-list"></i>交辦追蹤<span class="ni-badge" id="badge-assign-nav">0</span></button>
+    <div class="nav-lbl">記錄</div>
+    <button class="ni" id="ni-tasks" onclick="navTo(this,'tasks')"><i class="ti ti-checklist"></i>任務總覽<span class="ni-badge" id="badge-all">0</span></button>
+    <button class="ni" id="ni-schedule" onclick="navTo(this,'schedule')"><i class="ti ti-calendar-event"></i>行程<span class="ni-badge" id="badge-schedule">0</span></button>
+    <button class="ni" id="ni-journal" onclick="navTo(this,'journal')"><i class="ti ti-notebook"></i>工作日誌</button>
+    <button class="ni" id="ni-teaching" onclick="navTo(this,'teaching')"><i class="ti ti-school"></i>教學日誌</button>
+    <button class="ni" id="ni-archive" onclick="navTo(this,'archive')"><i class="ti ti-archive"></i>存檔紀錄</button>
   </div>
   <div class="ndiv"></div>
   <div>
     <div class="nav-lbl">工具</div>
-    <button class="ni" onclick="navTo(this,'stats')"><i class="ti ti-chart-bar"></i>統計報表</button>
-    <button class="ni" onclick="navTo(this,'prompts')"><i class="ti ti-template"></i>Prompt 模板庫</button>
-    <button class="ni" onclick="navTo(this,'settings')"><i class="ti ti-settings"></i>設定</button>
+    <button class="ni" id="ni-stats" onclick="navTo(this,'stats')"><i class="ti ti-chart-bar"></i>統計報表</button>
+    <button class="ni" id="ni-prompts" onclick="navTo(this,'prompts')"><i class="ti ti-template"></i>Prompt 模板庫</button>
+    <button class="ni" id="ni-settings" onclick="navTo(this,'settings')"><i class="ti ti-settings"></i>設定</button>
   </div>
 </nav>
 
 <!-- PAGES -->
-<main class="page active" id="page-dashboard">
-  <div class="sec-lbl">助理模組 — 點選卡片切換右側工作區</div>
-  <div class="grid">
-    <div class="card" id="card-doc" onclick="selectCard('doc')">
-      <div class="c-hdr"><div class="c-ico ico-a"><i class="ti ti-file-text"></i></div><div class="cdot d-pd"></div></div>
-      <div class="c-title">公文留辦</div><div class="c-desc">重要公文、計畫案、限期填報留辦</div>
-      <div class="prog-meta"><span>待辦</span><span id="prog-doc-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-a" id="prog-doc" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-pd" id="bdg-doc">● 待辦</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/forms/d/e/1FAIpQLSd52jixThDQ6PnDvLStM43C-ZH5t-I-ZkOimvcj0VFX0FbCFQ/viewform')"><i class="ti ti-external-link"></i>啟動表</button></div>
+<div class="page" id="page-schedule">
+  <div class="mod-page">
+    <div class="mod-page-hdr" style="background:#E6F1FB;border-bottom:2px solid #185FA5;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="p-ico ico-b" style="background:#E6F1FB;color:#185FA5"><i class="ti ti-calendar-event"></i></div>
+        <span class="p-title">行程</span>
+      </div>
+      <button onclick="openScheduleForm()" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s" onmouseover="this.style.background='#0F3E75'" onmouseout="this.style.background='#185FA5'">
+        <i class="ti ti-plus"></i>新增行程
+      </button>
     </div>
-    <div class="card" id="card-sch" onclick="selectCard('sch')">
-      <div class="c-hdr"><div class="c-ico ico-g"><i class="ti ti-report-money"></i></div><div class="cdot d-on"></div></div>
-      <div class="c-title">獎助學金</div><div class="c-desc">收件、通知信、追蹤撥款</div>
-      <div class="prog-meta"><span>待辦</span><span id="prog-sch-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-g" id="prog-sch" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-on" id="bdg-sch">● 進行中</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();openLink('https://docs.google.com/spreadsheets/d/1_qKbFw-MQvyael_pD14lPSqxhqnTdone/')"><i class="ti ti-table"></i>彙整表</button></div>
+    <!-- 新增表單 -->
+    <div id="schedule-form" style="display:none;padding:14px 20px;border-bottom:2px solid #B8D8F5;background:#F0F7FF">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div>
+          <div style="font-size:11px;color:var(--t2);margin-bottom:3px">行程名稱 <span style="color:var(--r3)">*</span></div>
+          <input id="sch-name" type="text" placeholder="會議、研習、出差..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--t2);margin-bottom:3px">地點</div>
+          <input id="sch-location" type="text" placeholder="輸入地點..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div>
+          <div style="font-size:11px;color:var(--t2);margin-bottom:3px">日期 <span style="color:var(--r3)">*</span></div>
+          <input id="sch-date" type="date" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--t2);margin-bottom:3px">開始時間</div>
+          <input id="sch-time-start" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--t2);margin-bottom:3px">結束時間</div>
+          <input id="sch-time-end" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button id="sch-form-ok" onclick="confirmScheduleForm()" style="height:28px;padding:0 14px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif">確認新增</button>
+        <button onclick="closeScheduleForm()" style="height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif">取消</button>
+      </div>
     </div>
-    <div class="card" id="card-case" onclick="selectCard('case')">
-      <div class="c-hdr"><div class="c-ico ico-b"><i class="ti ti-heart-handshake"></i></div><div class="cdot d-on"></div></div>
-      <div class="c-title">學生輔導</div><div class="c-desc">個案晤談、非個案、學生異動</div>
-      <div class="prog-meta"><span>待辦</span><span id="prog-case-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-b" id="prog-case" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-on" id="bdg-case">● 追蹤中</span>
-        <button class="c-qbtn" onclick="event.stopPropagation()"><i class="ti ti-plus"></i>新增</button></div>
+    <!-- 行程列表 -->
+    <div id="schedule-list-wrap" style="flex:1;overflow-y:auto;padding:16px 20px">
+      <div id="schedule-list"></div>
     </div>
   </div>
-  <div class="grid-2">
-    <div class="card" id="card-assign" onclick="selectCard('assign')">
-      <div class="c-hdr"><div class="c-ico ico-p"><i class="ti ti-clipboard-list"></i></div><div class="cdot d-asgn"></div></div>
-      <div class="c-title">交辦追蹤</div><div class="c-desc">長官交辦、跨處室協調、外界來的</div>
-      <div class="prog-meta"><span>待辦</span><span id="prog-assign-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-p" id="prog-assign" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-asgn" id="bdg-assign">● 追蹤中</span>
-        <button class="c-qbtn" onclick="event.stopPropagation();showForm('assign')"><i class="ti ti-plus"></i>新增</button></div>
-    </div>
-    <div class="card urg-card" id="card-urg" onclick="selectCard('urg')">
-      <div class="c-hdr"><div class="c-ico ico-r"><i class="ti ti-alert-triangle"></i></div><div class="cdot d-urg"></div></div>
-      <div class="c-title">要事備查</div><div class="c-desc">重要事項與處理歷程</div>
-      <div class="prog-meta"><span>要事待辦</span><span id="prog-urg-txt">0 件</span></div>
-      <div class="prog-track"><div class="prog-fill pf-r" id="prog-urg" style="width:0%"></div></div>
-      <div class="c-foot"><span class="badge bdg-urg">★ 要事</span><span style="font-size:11px;color:var(--t3)">各模組 ★ 標記要事</span></div>
-    </div>
-  </div>
-  <div id="dash-custom-links" style="display:none;margin-bottom:16px">
-    <div class="sec-lbl" style="margin-bottom:8px">快速連結</div>
-    <div id="dash-custom-links-body" style="display:flex;flex-wrap:wrap;gap:6px"></div>
-  </div>
-  <div class="sec-lbl">最近存檔</div>
-  <div class="rec-list" id="rec-list">
-  </div>
-</main>
-<div class="page" id="page-tasks"><div class="sec-lbl" style="margin-bottom:16px">任務總覽 — 全部待辦</div><div id="task-page-content"></div></div>
+</div>
+<div class="page" id="page-tasks"><div class="page-pad"><div class="sec-lbl" style="margin-bottom:16px">任務總覽 — 全部待辦</div><div id="task-page-content"></div></div></div>
 <div class="page" id="page-archive">
   <div class="sec-lbl" style="margin-bottom:14px">已完成任務</div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
@@ -927,13 +957,51 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
   </div>
 </div>
-<aside class="panel">
-  <div class="p-hdr">
-    <div class="p-ico ico-g" id="p-ico"><i class="ti ti-report-money"></i></div>
-    <span class="p-title" id="p-title">獎助學金</span>
+<div class="page" id="page-doc">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-doc">
+      <div class="p-ico ico-a" id="p-ico-doc"><i class="ti ti-file-text"></i></div>
+      <span class="p-title" id="p-title-doc">公文留辦</span>
+    </div>
+    <div class="mod-page-body" id="panel-body-doc"></div>
   </div>
-  <div id="panel-body" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0"></div>
-</aside>
+</div>
+<div class="page" id="page-sch">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-sch">
+      <div class="p-ico ico-g" id="p-ico-sch"><i class="ti ti-report-money"></i></div>
+      <span class="p-title" id="p-title-sch">獎助學金</span>
+    </div>
+    <div class="mod-page-body" id="panel-body-sch"></div>
+  </div>
+</div>
+<div class="page" id="page-case">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-case">
+      <div class="p-ico ico-b" id="p-ico-case"><i class="ti ti-heart-handshake"></i></div>
+      <span class="p-title" id="p-title-case">學生輔導</span>
+    </div>
+    <div class="mod-page-body" id="panel-body-case"></div>
+  </div>
+</div>
+<div class="page" id="page-urg">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-urg">
+      <div class="p-ico ico-r" id="p-ico-urg"><i class="ti ti-alert-triangle"></i></div>
+      <span class="p-title" id="p-title-urg">要事備查</span>
+    </div>
+    <div class="mod-page-body" id="panel-body-urg"></div>
+  </div>
+</div>
+<div class="page" id="page-assign">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-assign">
+      <div class="p-ico ico-p" id="p-ico-assign"><i class="ti ti-clipboard-list"></i></div>
+      <span class="p-title" id="p-title-assign">交辦追蹤</span>
+    </div>
+    <div class="mod-page-body" id="panel-body-assign"></div>
+  </div>
+</div>
 </div>
 <div id="export-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeExportModal()">
   <div class="modal-box">
@@ -1118,15 +1186,16 @@ const MODULE_HDR={
 };
 
 /* ══ STATE ══ */
-let curKey='sch', curCaseTab='formal', tasks={};
+let curKey='doc', curCaseTab='formal', tasks={};
 
 /* ══ INIT ══ */
 function init(){
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
   if(!tasks.assign)tasks.assign=[];
-  initSettings(); initStats(); initTeaching();
-  updateDate(); updateStats(); renderRecentArchive(); selectCard('doc'); renderPrompts('all'); initJournal(); renderJournalMonths();
+  if(!tasks.urg)tasks.urg=[];
+  initSettings(); initStats(); initTeaching(); initSchedule();
+  updateDate(); updateStats(); renderRecentArchive(); switchModule(document.getElementById('ni-doc'),'doc'); renderPrompts('all'); initJournal(); renderJournalMonths();
   // Google 初始化（等 GIS 腳本載入後執行）
   if(window.google?.accounts?.oauth2)initGoogle();
   else window.addEventListener('load',()=>{setTimeout(initGoogle,500);});
@@ -1144,9 +1213,9 @@ function save(){
 }
 function clearAllData(){
   if(!confirm('確定要重置所有資料嗎？任務、日誌、個案、服務記錄、教學日誌都會清除。此動作不可復原。'))return;
-  ['wp_tasks_v3','wp_journal_v1','wp_cases_v1','wp_services_v1','wp_teaching_v1'].forEach(k=>localStorage.removeItem(k));
+  ['wp_tasks_v3','wp_journal_v1','wp_cases_v1','wp_services_v1','wp_teaching_v1','wp_schedule_v1'].forEach(k=>localStorage.removeItem(k));
   tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  journal=[];caseRecords=[];serviceRecords=[];teachingRecords=[];
+  journal=[];caseRecords=[];serviceRecords=[];teachingRecords=[];scheduleItems=[];
   save();saveJournal();saveCases();saveServices();saveTeaching();
   updateStats();updatePanel(curKey);showToast('所有資料已重置');
 }
@@ -1170,13 +1239,15 @@ function updateStats(){
     const pending=(tasks[k]||[]).filter(t=>!t.done).length;
     const el=document.getElementById('s-'+k);if(el)el.textContent=pending;
     const b=document.getElementById('badge-'+k);if(b){b.textContent=pending;b.style.display=pending?'flex':'none';}
+    const dmc=document.getElementById('dmc-'+k);if(dmc)dmc.textContent=pending;
     const total=(tasks[k]||[]).length,pct=total?Math.round((total-pending)/total*100):0;
     const pEl=document.getElementById('prog-'+k);if(pEl)pEl.style.width=pct+'%';
     const pTxt=document.getElementById('prog-'+k+'-txt');if(pTxt)pTxt.textContent=pending+' 件';
   });
-  const urgCount=getUrgentAll().length;
-  document.getElementById('s-urg').textContent=urgCount;
-  document.getElementById('prog-urg-txt').textContent=urgCount+' 件';
+  const urgCount=(tasks.urg||[]).filter(t=>!t.done).length;
+  const sUrg=document.getElementById('s-urg');if(sUrg)sUrg.textContent=urgCount;
+  const dmcUrg=document.getElementById('dmc-urg');if(dmcUrg)dmcUrg.textContent=urgCount;
+  const pUrgTxt=document.getElementById('prog-urg-txt');if(pUrgTxt)pUrgTxt.textContent=urgCount+' 件';
   const pUrg=document.getElementById('prog-urg');if(pUrg)pUrg.style.width=urgCount?'100%':'0%';
   const bn=document.getElementById('badge-urg-nav');if(bn){bn.textContent=urgCount;bn.style.display=urgCount?'flex':'none';}
   const assignPending=(tasks.assign||[]).filter(t=>!t.done).length;
@@ -1184,9 +1255,29 @@ function updateStats(){
   const allP=['doc','sch','case','assign'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done).length,0);
   const ba=document.getElementById('badge-all');if(ba){ba.textContent=allP;ba.style.display=allP?'flex':'none';}
   syncMobBadge();
+  // 本週行程 badge
+  const _now=new Date();const _dow=_now.getDay();
+  const _mon=new Date(_now);_mon.setDate(_now.getDate()-(_dow===0?6:_dow-1));_mon.setHours(0,0,0,0);
+  const _sun=new Date(_mon);_sun.setDate(_mon.getDate()+6);_sun.setHours(23,59,59,999);
+  const _monISO=localISO(_mon),_sunISO=localISO(_sun);
+  const weekSchCount=(scheduleItems||[]).filter(s=>s.date>=_monISO&&s.date<=_sunISO).length;
+  const bsch=document.getElementById('badge-schedule');
+  if(bsch){bsch.textContent=weekSchCount;bsch.style.display=weekSchCount?'flex':'none';}
 }
 
-/* ══ RECENT ARCHIVE ══ */
+function renderModRecent(key){
+  const el=document.getElementById('mod-recent-'+key);if(!el)return;
+  const done=(tasks[key]||[]).filter(t=>t.done&&t.completedAt).sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||'')).slice(0,3);
+  if(!done.length){el.style.display='none';return;}
+  el.style.display='block';
+  el.innerHTML=`<div class="p-sec-lbl" style="margin-bottom:6px;opacity:.7">最近完成</div>`+
+    done.map(t=>`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--t3)">
+      <i class="ti ti-check" style="font-size:11px;color:var(--g3);flex-shrink:0"></i>
+      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.t}</span>
+      <span style="font-size:11px;flex-shrink:0">${t.completedAt}</span>
+      <button onclick="restoreTask('${key}',${t.id})" style="font-size:10px;color:var(--t3);background:none;border:none;cursor:pointer;padding:0 2px" title="還原為待辦"><i class="ti ti-arrow-back-up"></i></button>
+    </div>`).join('');
+}
 function renderRecentArchive(){
   const el=document.getElementById('rec-list');if(!el)return;
   let items=[];
@@ -1206,27 +1297,37 @@ function renderRecentArchive(){
 
 function selectCard(key){
   curKey=key;
-  document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
-  const c=document.getElementById('card-'+key);if(c)c.classList.add('sel');
   updatePanel(key);
 }
 
 /* ══ PANEL ══ */
 function updatePanel(key){
   const meta=META[key];if(!meta)return;
-  document.getElementById('p-title').textContent=meta.label;
-  document.getElementById('p-ico').className='p-ico '+meta.ico;
-  document.getElementById('p-ico').innerHTML=`<i class="ti ${meta.icon}"></i>`;
-  const ph=document.querySelector('.p-hdr');
-  if(ph&&MODULE_HDR[key]){
-    ph.style.background=MODULE_HDR[key].bg;
-    ph.style.borderBottom=`2px solid ${MODULE_HDR[key].bd}`;
+  const pb=document.getElementById('panel-body-'+key);
+  if(!pb)return;
+  const hdr=document.getElementById('mod-hdr-'+key);
+  if(hdr&&MODULE_HDR[key]){
+    hdr.style.background=MODULE_HDR[key].bg;
+    hdr.style.borderBottom=`2px solid ${MODULE_HDR[key].bd}`;
   }
-  const pb=document.getElementById('panel-body');
   if(key==='urg')       pb.innerHTML=buildUrgPanel();
   else if(key==='case') {pb.innerHTML=buildCasePanel(); renderCaseTab(curCaseTab);}
   else if(key==='assign'){pb.innerHTML=buildAssignPanel(); renderAssignTasks();}
   else                  {pb.innerHTML=buildStdPanel(key); renderTaskList(key);}
+}
+
+/* ══ 清除已完成任務 ══ */
+function clearDoneTasks(key){
+  const done=(tasks[key]||[]).filter(t=>t.done);
+  if(!done.length){showToast('沒有已完成的任務');return;}
+  tasks[key]=tasks[key].filter(t=>!t.done);
+  save();updatePanel(key);updateStats();renderRecentArchive();
+  showToast(`已歸檔 ${done.length} 筆完成任務`);
+}
+function syncClearDoneBtn(key){
+  const hasDone=(tasks[key]||[]).some(t=>t.done);
+  const btn=document.getElementById('clear-done-'+key);
+  if(btn)btn.style.display=hasDone?'inline-flex':'none';
 }
 
 function taskHTML(t,key,ri){
@@ -1240,22 +1341,12 @@ function taskHTML(t,key,ri){
     ${t.driveUrl?`<button class="drive-clear-btn" onclick="clearDriveUrl('${key}',${ri})">清除</button>`:''}
   </div>`:'';
   const docMetaRow=key==='doc'?`
-  <div class="doc-fields-row" id="doc-fields-${t.id}">
-    <div class="doc-field-item"><i class="ti ti-file-text" aria-hidden="true"></i>
-      <span class="doc-field-val ${t.docno?'':'doc-field-empty'}" onclick="editDocField('doc','docno',${ri},'公文字號')">${t.docno||'點擊填入公文字號'}</span>
-    </div>
-    <div class="doc-field-item"><i class="ti ti-building" aria-hidden="true"></i>
-      <span class="doc-field-val ${t.docorg?'':'doc-field-empty'}" onclick="editDocField('doc','docorg',${ri},'發文機關')">${t.docorg||'點擊填入發文機關'}</span>
-    </div>
-    <div class="doc-field-item" style="width:100%"><i class="ti ti-align-left" aria-hidden="true"></i>
-      <span class="doc-field-val ${t.docsubj?'':'doc-field-empty'}" onclick="editDocField('doc','docsubj',${ri},'公文主旨')">${t.docsubj||'點擊填入公文主旨'}</span>
-    </div>
-    <div class="doc-field-item"><i class="ti ti-calendar-plus" aria-hidden="true"></i>建立日：
-      <span class="doc-field-val" onclick="editDocField('doc','createdAt',${ri},'建立日')">${t.createdAt||'—'}</span>
-    </div>
-    <div class="doc-field-item"><i class="ti ti-arrows-exchange" aria-hidden="true"></i>
-      <label style="cursor:pointer;color:var(--t2)"><input type="checkbox" ${t.src==='cross'?'checked':''} style="width:12px;height:12px;accent-color:var(--a3);cursor:pointer" onchange="toggleDocSrc('doc',${ri},this.checked)">跨處室</label>
-    </div>
+  <div class="doc-fields-row" id="doc-fields-${t.id}" style="flex-wrap:nowrap;overflow-x:auto;gap:3px 12px;padding:3px 6px 4px 22px">
+    <div class="doc-field-item"><i class="ti ti-file-text" aria-hidden="true"></i><span class="doc-field-val ${t.docno?'':'doc-field-empty'}" onclick="editDocField('doc','docno',${ri},'公文字號')" style="white-space:nowrap">${t.docno||'字號'}</span></div>
+    <div class="doc-field-item"><i class="ti ti-building" aria-hidden="true"></i><span class="doc-field-val ${t.docorg?'':'doc-field-empty'}" onclick="editDocField('doc','docorg',${ri},'發文機關')" style="white-space:nowrap">${t.docorg||'機關'}</span></div>
+    <div class="doc-field-item" style="flex:1;min-width:0"><i class="ti ti-align-left" aria-hidden="true"></i><span class="doc-field-val ${t.docsubj?'':'doc-field-empty'}" onclick="editDocField('doc','docsubj',${ri},'公文主旨')" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px;display:inline-block;vertical-align:bottom">${t.docsubj||'主旨'}</span></div>
+    <div class="doc-field-item" style="flex-shrink:0"><i class="ti ti-calendar" aria-hidden="true"></i><span class="doc-field-val" onclick="editDocField('doc','createdAt',${ri},'建立日')" style="white-space:nowrap">${t.createdAt||'—'}</span></div>
+    <label style="cursor:pointer;color:var(--t2);font-size:11px;display:flex;align-items:center;gap:3px;flex-shrink:0"><input type="checkbox" ${t.src==='cross'?'checked':''} style="width:12px;height:12px;accent-color:var(--a3)" onchange="toggleDocSrc('doc',${ri},this.checked)">跨</label>
   </div>`:'';
   const createdAtRow=key!=='doc'&&t.createdAt?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${fmtTaskDate(t.createdAt,false,null)}</span>`:`${key!=='doc'?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${t.createdAt||''}</span>`:''}`;
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
@@ -1279,12 +1370,17 @@ function taskHTML(t,key,ri){
 }
 
 function renderTaskList(key,subType){
-  const listId=subType?`task-list-${subType}`:'task-list';
+  const listId=subType?`task-list-${subType}`:`task-list-${key}`;
   const el=document.getElementById(listId);if(!el)return;
   const all=tasks[key]||[];
   const filtered=subType?all.filter(t=>t.type===subType):all;
-  const pending=filtered.filter(t=>!t.done), done=filtered.filter(t=>t.done);
-  el.innerHTML=[...pending,...done].map(t=>taskHTML(t,key,all.indexOf(t))).join('');
+  const pending=filtered.filter(t=>!t.done);
+  if(!pending.length){
+    el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
+    return;
+  }
+  el.innerHTML=pending.map(t=>taskHTML(t,key,all.indexOf(t))).join('');
+  renderModRecent(key);
 }
 
 function renderTransferTasks(){
@@ -1354,17 +1450,22 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
 function buildStdPanel(key){
   const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.onclick?l.onclick:(l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`)}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
   return `
-    <div class="p-sec" style="overflow-y:auto;flex:1">
-      <div class="p-sec-lbl">任務清單</div>
-      <div class="task-list" id="task-list"></div>
-      ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
+    <div class="mod-col-main">
+      <div class="p-sec-task" id="task-sec-${key}">
+        <div class="p-sec-lbl">任務清單</div>
+        <div class="task-list" id="task-list-${key}"></div>
+        ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
+      </div>
+      <div id="mod-recent-${key}" style="padding:10px 14px;border-top:1px solid var(--border)"></div>
     </div>
-    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${links}</div></div>
-    <div class="p-sec" style="flex-shrink:0;padding:8px 14px">
-      <div class="p-sec-lbl">日誌快記</div>
-      <div style="display:flex;gap:6px">
-        <input type="text" id="quick-journal-inp-${key}" placeholder="快速記錄到工作日誌..." style="flex:1;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s" onfocus="this.style.borderColor='var(--g3)';this.style.background='var(--surface)'" onblur="this.style.borderColor='var(--border)';this.style.background='var(--surface-2)'" onkeydown="if(event.key==='Enter')quickJournal('${key}')">
-        <button style="width:30px;height:30px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" onclick="quickJournal('${key}')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+    <div class="mod-col-side">
+      <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${links}</div></div>
+      <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
+        <div class="p-sec-lbl">日誌快記</div>
+        <div style="display:flex;gap:5px;min-width:0">
+          <input type="text" id="quick-journal-inp-${key}" placeholder="快速記錄..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('${key}')">
+          <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('${key}')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+        </div>
       </div>
     </div>`;
 }
@@ -1374,74 +1475,90 @@ function buildCasePanel(){
   const caseLinks=(LINKS.case||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
   const stdTabs=CASE_TABS.filter(t=>t.key!=='transfer').map(t=>`
     <div class="p-tab-content ${t.key===curCaseTab?'on':''}" id="tab-${t.key}">
-      <div class="p-sec" style="overflow-y:auto;flex:1">
+      <div class="p-sec-task">
+        <div class="p-sec-lbl">${t.label}</div>
         <div class="task-list" id="task-list-${t.key}"></div>
         ${addFormHTML(t.key,`confirmAddCase('${t.key}')`,`hideForm('${t.key}')`, t.label+'任務名稱...')}
       </div>
     </div>`).join('');
   return `
-    <div class="p-tabs">${tabsHtml}</div>
-    ${stdTabs}
-    <div class="p-tab-content ${curCaseTab==='transfer'?'on':''}" id="tab-transfer">
-      <div class="transfer-scroll">
-        <div id="transfer-groups"></div>
-        <div class="add-task-form" id="add-task-form-transfer">
-          <input type="text" id="new-task-txt-transfer" placeholder="學生姓名 + 動作..." onkeydown="if(event.key==='Enter')confirmAddTransfer()">
-          <div class="atf-row" style="align-items:center;gap:6px">
-            <span class="atf-field-lbl">建立日</span>
-            <input type="date" id="new-task-created-transfer" style="flex:1;min-width:0">
+    <div class="mod-col-main">
+      <div class="p-tabs">${tabsHtml}</div>
+      ${stdTabs}
+      <div class="p-tab-content ${curCaseTab==='transfer'?'on':''}" id="tab-transfer">
+        <div class="transfer-scroll">
+          <div id="transfer-groups"></div>
+          <div class="add-task-form" id="add-task-form-transfer">
+            <input type="text" id="new-task-txt-transfer" placeholder="學生姓名 + 動作..." onkeydown="if(event.key==='Enter')confirmAddTransfer()">
+            <div class="atf-row" style="align-items:center;gap:6px">
+              <span class="atf-field-lbl">建立日</span>
+              <input type="date" id="new-task-created-transfer" style="flex:1;min-width:0">
+            </div>
+            <div class="atf-row">
+              <select id="new-task-tt" style="flex:1">
+                ${TRANSFER_TYPES.map(t=>`<option value="${t.key}">${t.label}</option>`).join('')}
+              </select>
+              <input type="date" id="new-task-date-transfer" style="flex:1;min-width:0"><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待辦')">待辦</button><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待定')">待定</button>
+            </div>
+            <div class="atf-row">
+              <button class="atf-ok" onclick="confirmAddTransfer()">確認新增</button>
+              <button class="atf-cancel" onclick="hideForm('transfer')">取消</button>
+            </div>
           </div>
-          <div class="atf-row">
-            <select id="new-task-tt" style="flex:1">
-              ${TRANSFER_TYPES.map(t=>`<option value="${t.key}">${t.label}</option>`).join('')}
-            </select>
-            <input type="date" id="new-task-date-transfer" style="flex:1;min-width:0"><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待辦')">待辦</button><button type="button" class="atf-special-btn" onclick="setSpecialDate('transfer','待定')">待定</button>
-          </div>
-          <div class="atf-row">
-            <button class="atf-ok" onclick="confirmAddTransfer()">確認新增</button>
-            <button class="atf-cancel" onclick="hideForm('transfer')">取消</button>
-          </div>
+          <button class="add-task-btn" id="add-task-btn-transfer" onclick="showForm('transfer')"><i class="ti ti-plus"></i>新增異動任務</button>
         </div>
-        <button class="add-task-btn" id="add-task-btn-transfer" onclick="showForm('transfer')"><i class="ti ti-plus"></i>新增異動任務</button>
       </div>
     </div>
-    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${caseLinks}</div></div>`;
+    <div class="mod-col-side">
+      <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${caseLinks}</div></div>
+      <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
+        <div class="p-sec-lbl">日誌快記</div>
+        <div style="display:flex;gap:5px">
+          <input type="text" id="quick-journal-inp-case" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('case')">
+          <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('case')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+        </div>
+      </div>
+    </div>`;
 }
 
 function buildAssignPanel(){
   const srcOpts=ASSIGN_SRCS.map(s=>`<option value="${s.key}">${s.label}</option>`).join('');
   return `
-    <div class="p-sec" style="overflow-y:auto;flex:1">
-      <div class="p-sec-lbl">交辦任務</div>
-      <div class="task-list" id="task-list-assign"></div>
-      <div class="add-task-form" id="add-task-form-assign">
-        <input type="text" id="new-task-txt-assign" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddAssign()">
-        <div class="atf-row">
-          <select id="new-task-asrc" style="flex:1">${srcOpts}</select>
+    <div class="mod-col-main">
+      <div class="p-sec-task">
+        <div class="p-sec-lbl">交辦任務</div>
+        <div class="task-list" id="task-list-assign"></div>
+        <div class="add-task-form" id="add-task-form-assign">
+          <input type="text" id="new-task-txt-assign" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddAssign()">
+          <div class="atf-row">
+            <select id="new-task-asrc" style="flex:1">${srcOpts}</select>
+          </div>
+          <div class="atf-row" style="align-items:center;gap:6px">
+            <span class="atf-field-lbl">建立日</span>
+            <input type="date" id="new-task-created-assign" style="flex:1;min-width:0">
+          </div>
+          <div class="atf-row" style="align-items:center;gap:6px">
+            <span class="atf-field-lbl">結案日</span>
+            <input type="date" id="new-task-date-assign" style="flex:1;min-width:0">
+            <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','待定')">待定</button>
+          </div>
+          <div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-assign" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>
+          <div class="atf-row">
+            <button class="atf-ok" onclick="confirmAddAssign()">確認新增</button>
+            <button class="atf-cancel" onclick="hideForm('assign')">取消</button>
+          </div>
         </div>
-        <div class="atf-row" style="align-items:center;gap:6px">
-          <span class="atf-field-lbl">建立日</span>
-          <input type="date" id="new-task-created-assign" style="flex:1;min-width:0">
-        </div>
-        <div class="atf-row" style="align-items:center;gap:6px">
-          <span class="atf-field-lbl">結案日</span>
-          <input type="date" id="new-task-date-assign" style="flex:1;min-width:0">
-          <button type="button" class="atf-special-btn" onclick="setSpecialDate('assign','待定')">待定</button>
-        </div>
-        <div class="atf-drive-row"><label class="atf-drive-lbl"><input type="checkbox" id="new-task-drive-assign" style="width:14px;height:14px;accent-color:var(--g3)"><i class="ti ti-brand-google-drive" style="color:var(--g2);font-size:14px"></i>自動建立 Drive 資料夾</label></div>
-        <div class="atf-row">
-          <button class="atf-ok" onclick="confirmAddAssign()">確認新增</button>
-          <button class="atf-cancel" onclick="hideForm('assign')">取消</button>
-        </div>
+        <button class="add-task-btn" id="add-task-btn-assign" onclick="showForm('assign')"><i class="ti ti-plus"></i>新增交辦任務</button>
       </div>
-      <button class="add-task-btn" id="add-task-btn-assign" onclick="showForm('assign')"><i class="ti ti-plus"></i>新增交辦任務</button>
     </div>
-    <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${(LINKS.assign||[]).map(l=>`<button class="qlink" onclick=" openLink('${l.url||'#'}')"><i class="ti ${l.i}"></i>${l.l}</button>`).join('')}</div></div>
-    <div class="p-sec" style="flex-shrink:0;padding:8px 14px">
-      <div class="p-sec-lbl">日誌快記</div>
-      <div style="display:flex;gap:6px">
-        <input type="text" id="quick-journal-inp-assign" placeholder="快速記錄到工作日誌..." style="flex:1;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 10px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;transition:.12s" onfocus="this.style.borderColor='var(--g3)';this.style.background='var(--surface)'" onblur="this.style.borderColor='var(--border)';this.style.background='var(--surface-2)'" onkeydown="if(event.key==='Enter')quickJournal('assign')">
-        <button style="width:30px;height:30px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" onclick="quickJournal('assign')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+    <div class="mod-col-side">
+      <div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${(LINKS.assign||[]).map(l=>`<button class="qlink" onclick=" openLink('${l.url||'#'}')"><i class="ti ${l.i}"></i>${l.l}</button>`).join('')}</div></div>
+      <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
+        <div class="p-sec-lbl">日誌快記</div>
+        <div style="display:flex;gap:5px">
+          <input type="text" id="quick-journal-inp-assign" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('assign')">
+          <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('assign')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+        </div>
       </div>
     </div>`;
 }
@@ -1449,8 +1566,13 @@ function buildAssignPanel(){
 function renderAssignTasks(){
   const el=document.getElementById('task-list-assign');if(!el)return;
   const all=tasks.assign||[];
-  const pending=all.filter(t=>!t.done), done=all.filter(t=>t.done);
-  el.innerHTML=[...pending,...done].map(t=>{
+  const pending=all.filter(t=>!t.done);
+  if(!pending.length){
+    el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
+    syncClearDoneBtn('assign');
+    return;
+  }
+  el.innerHTML=pending.map(t=>{
     const s=ASSIGN_SRCS.find(s=>s.key===t.asrc)||ASSIGN_SRCS[0];
     const srcTag=`<span class="assign-src-tag" style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;background:${s.bg};color:${s.color};flex-shrink:0;cursor:pointer" onclick="toggleAssignSrcEdit('${t.id}')" title="點擊修改來源">${s.label}</span>`;
     const dateUrgClass=!t.done&&(t.u||isDateUrgentDisplay(t.d))?'urg':'';
@@ -1484,7 +1606,6 @@ function renderAssignTasks(){
     ${driveRow}`;
   }).join('');
 }
-
 async function confirmAddAssign(){
   const txt=document.getElementById('new-task-txt-assign')?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
@@ -1573,6 +1694,7 @@ function deleteHistory(key,idx,hIdx){
   showToast('記錄已刪除');
 }
 async function confirmAddUrg(){
+  if(!tasks.urg)tasks.urg=[];
   const txt=document.getElementById('new-task-txt-urg')?.value.trim();
   if(!txt){showToast('請輸入任務名稱');return;}
   const date=getTaskDate('urg');
@@ -1581,21 +1703,22 @@ async function confirmAddUrg(){
   const task={id:Date.now(),t:txt,d:date,createdAt,u:true,done:false,src:''};
   tasks.urg.unshift(task);
   addAutoJournalEntry(`受理：${txt}`);
+  hideForm('urg');
   save();updateStats();updatePanel('urg');showToast('要事已新增');
   if(wantDrive&&gToken){
     showToast('正在建立 Drive 資料夾...');
-    const result=await createDriveFolder(txt,'urg');
-    if(result){task.driveUrl=result.url;save();updatePanel('urg');showToast('Drive 資料夾已建立 ✓');}
-    else showToast('Drive 資料夾建立失敗，可手動貼上連結');
+    try{
+      const result=await createDriveFolder(txt,'urg');
+      if(result){task.driveUrl=result.url;save();updatePanel('urg');showToast('Drive 資料夾已建立 ✓');}
+      else showToast('Drive 資料夾建立失敗，可手動貼上連結');
+    }catch(e){showToast('Drive 建立失敗：'+e.message);}
   } else if(wantDrive&&!gToken){
     showToast('請先登入 Google 才能建立 Drive 資料夾');
   }
 }
 function buildUrgPanel(){
   const urgLinks=(LINKS.urg||[]).map(l=>`<button class="qlink" onclick=" openLink('${l.url||'#'}')"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
-  const urgLinksHtml=urgLinks?`<div style="padding:8px 14px 0;flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${urgLinks}</div></div>`:'';
 
-  // 原生要事任務（tasks.urg）- 使用真實 index 避免 filter 後 index 錯位
   const nativeTasks=(tasks.urg||[]).map((t,ri)=>({...t,ri})).filter(t=>!t.done);
   const nativeHtml=nativeTasks.map(t=>`
     <div class="urg-item">
@@ -1611,22 +1734,22 @@ function buildUrgPanel(){
     </div>`).join('');
 
   const addForm=addFormHTML('urg',"confirmAddUrg()","hideForm('urg')",'要事名稱...');
-  const nativeSection=`<div style="padding:8px 14px;border-bottom:1px solid var(--border);flex-shrink:0">
-    <div class="p-sec-lbl">直接建立要事</div>
-    <div class="task-list">${nativeHtml}</div>
-    ${addForm}
-  </div>`;
 
-  // ★ 聚合（其他模組標記）
   const groups={doc:[],sch:[],case:[],assign:[]};
   ['doc','sch','case','assign'].forEach(k=>(tasks[k]||[]).forEach((t,i)=>{if(!t.done&&t.u)groups[k].push({...t,key:k,idx:i});}));
   const hasAggregated=Object.values(groups).some(a=>a.length);
 
-  let html=urgLinksHtml+nativeSection+'<div class="urg-scroll">';
+  let mainContent=`
+    <div style="padding:8px 14px;border-bottom:1px solid var(--border)">
+      <div class="p-sec-lbl">直接建立要事</div>
+      <div class="task-list">${nativeHtml}</div>
+      ${addForm}
+    </div>
+    <div class="urg-scroll">`;
   if(hasAggregated){
     Object.entries(groups).forEach(([k,items])=>{
       if(!items.length)return;
-      html+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
+      mainContent+=`<div class="urg-group"><div class="urg-group-lbl"><i class="ti ${META[k].icon}" style="color:${META[k].color}"></i>${META[k].label}</div>
       ${items.map(t=>`<div class="urg-item">
         <div class="urg-item-row">
           <span style="font-size:13px;color:var(--r3);flex-shrink:0">★</span>
@@ -1639,10 +1762,22 @@ function buildUrgPanel(){
       </div>`).join('')}</div>`;
     });
   } else if(!nativeTasks.length){
-    html+=`<div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有要事備查</p></div>`;
+    mainContent+=`<div class="empty-state"><i class="ti ti-circle-check" style="color:var(--g3)"></i><p>目前沒有要事備查</p></div>`;
   }
-  html+=`<div style="margin-top:8px;font-size:11px;color:var(--t3);text-align:center">在各模組任務列 hover 後按 ★ 標記要事</div></div>`;
-  return html;
+  mainContent+=`<div style="margin-top:8px;font-size:11px;color:var(--t3);text-align:center">在各模組任務列 hover 後按 ★ 標記要事</div></div>`;
+
+  return `
+    <div class="mod-col-main">${mainContent}</div>
+    <div class="mod-col-side">
+      ${urgLinks?`<div class="p-sec" style="flex-shrink:0"><div class="p-sec-lbl">快速連結</div><div class="qlinks">${urgLinks}</div></div>`:''}
+      <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
+        <div class="p-sec-lbl">日誌快記</div>
+        <div style="display:flex;gap:5px">
+          <input type="text" id="quick-journal-inp-urg" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('urg')">
+          <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('urg')" title="存入日誌"><i class="ti ti-notebook"></i></button>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* ══ FORM HELPERS ══ */
@@ -1714,7 +1849,11 @@ function toggleTask(key,idx){
   const t=tasks[key][idx];t.done=!t.done;
   if(t.done){
     const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;
-    addAutoJournalEntry(`結案：${t.t}`);
+    addAutoJournalEntry(`結案：${t.t}`,t.id,key);
+  } else {
+    journal=journal.filter(e=>!(e.taskId===t.id&&e.content&&e.content.startsWith('結案：')));
+    delete t.completedAt;
+    saveJournal();
   }
   save();updateStats();updatePanel(key===curKey?key:curKey);
   if(curKey==='urg')updatePanel('urg');
@@ -1729,7 +1868,7 @@ function toggleUrgent(key,idx){
 function resolveUrgent(key,idx){
   const t=tasks[key][idx];t.done=true;t.u=false;
   const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
-  addAutoJournalEntry(`結案：${t.t}`);
+  addAutoJournalEntry(`結案：${t.t}`,t.id,key);
   save();updateStats();updatePanel('urg');showToast('已完成');
 }
 function deleteTask(key,idx){
@@ -1883,7 +2022,11 @@ function restoreTask(key,id){
   const t=arr.find(t=>t.id===id);
   if(!t)return;
   t.done=false;delete t.completedAt;
+  // 同步移除對應的結案日誌
+  journal=journal.filter(e=>!(e.taskId===id&&e.content&&e.content.startsWith('結案：')));
+  saveJournal();
   save();updateStats();renderArchivePage();
+  if(document.getElementById('page-journal')?.classList.contains('active'))renderJournal();
   showToast('已還原為待辦');
 }
 
@@ -1898,15 +2041,27 @@ function deleteArchivedTask(key,id){
 function navTo(el,page){
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const map={dashboard:'page-dashboard',tasks:'page-tasks',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats'};
-  document.getElementById(map[page]||'page-dashboard').classList.add('active');
-  if(page==='tasks')renderTaskPage();
+  const map={tasks:'page-tasks',schedule:'page-schedule',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats',doc:'page-doc',sch:'page-sch',case:'page-case',urg:'page-urg',assign:'page-assign'};
+  document.getElementById(map[page]||'page-doc').classList.add('active');
+  if(page==='schedule')renderSchedulePage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');
   if(page==='journal')renderJournal();
   if(page==='teaching')renderTeachingPage();
   if(page==='settings')renderSettingsPage();
   if(page==='stats')renderStatsPage();
+  document.querySelectorAll('.mob-ni').forEach(n=>n.classList.remove('on'));
+  const mobMap={dashboard:'mob-ni-dashboard',tasks:'mob-ni-tasks',journal:'mob-ni-journal',stats:'mob-ni-stats',settings:'mob-ni-settings'};
+  const mobEl=document.getElementById(mobMap[page]);
+  if(mobEl)mobEl.classList.add('on');
+}
+function switchModule(btn,key){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  curKey=key;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+key).classList.add('active');
+  updatePanel(key);
 }
 
 /* ══ PROMPTS ══ */
@@ -2005,12 +2160,15 @@ function initJournal(){
 function saveJournal(){localStorage.setItem('wp_journal_v1',JSON.stringify(journal));}
 
 /* called automatically when a task is toggled done */
-function addAutoJournalEntry(text){
+function addAutoJournalEntry(text,taskId,taskKey){
   const n=new Date();
   const dateStr=`${n.getMonth()+1}/${n.getDate()}`;
   const isoDate=localISO(n);
   const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
-  journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:text,auto:true});
+  const entry={id:Date.now(),date:dateStr,isoDate,time:timeStr,content:text,auto:true};
+  if(taskId)entry.taskId=taskId;
+  if(taskKey)entry.taskKey=taskKey;
+  journal.unshift(entry);
   saveJournal();
 }
 
@@ -2049,10 +2207,26 @@ function confirmAddJournal(){
 }
 
 function deleteJournalEntry(id){
-  if(!confirm('確定刪除這則記錄？'))return;
+  const entry=journal.find(e=>e.id===id);
+  // 若刪除的是結案日誌，同步還原任務
+  if(entry&&entry.taskId&&entry.taskKey&&entry.content&&entry.content.startsWith('結案：')){
+    const key=entry.taskKey;
+    const t=(tasks[key]||[]).find(t=>t.id===entry.taskId);
+    if(t&&t.done){
+      t.done=false;delete t.completedAt;
+      save();updateStats();
+      if(curKey===key)updatePanel(key);
+      renderRecentArchive();
+      showToast('已還原任務並刪除結案記錄');
+    } else {
+      showToast('已刪除記錄');
+    }
+  } else {
+    if(!confirm('確定刪除這則記錄？'))return;
+    showToast('記錄已刪除');
+  }
   journal=journal.filter(e=>e.id!==id);
   saveJournal();renderJournalMonths();renderJournal();
-  showToast('記錄已刪除');
 }
 
 function editJournalEntry(id){
@@ -2167,7 +2341,7 @@ function renderJournal(){
         <span class="je-time">${e.time}</span>
         <div class="je-actions">
           ${!e.auto?`<button class="je-action-btn" onclick="editJournalEntry(${e.id})" title="編輯"><i class="ti ti-pencil"></i></button>`:''}
-          <button class="je-action-btn del" onclick="deleteJournalEntry(${e.id})" title="刪除"><i class="ti ti-x"></i></button>
+          <button class="je-action-btn ${e.taskId&&e.content&&e.content.startsWith('結案：')?'restore':'del'}" onclick="deleteJournalEntry(${e.id})" title="${e.taskId&&e.content&&e.content.startsWith('結案：')?'還原任務並刪除此記錄':'刪除'}"><i class="ti ti-${e.taskId&&e.content&&e.content.startsWith('結案：')?'arrow-back-up':'x'}"></i></button>
         </div>
       </div>`).join('')}
     </div>`;
@@ -3175,7 +3349,7 @@ function exportAllData(){
     version:'v7',exportedAt:new Date().toISOString(),
     wp_tasks_v3:tasks,wp_journal_v1:journal,
     wp_settings_v1:settings,wp_cases_v1:caseRecords,wp_services_v1:serviceRecords,
-    wp_teaching_v1:teachingRecords,
+    wp_teaching_v1:teachingRecords,wp_schedule_v1:scheduleItems,
   };
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
@@ -3196,6 +3370,7 @@ function importAllData(input){
       if(data.wp_cases_v1){caseRecords=data.wp_cases_v1;saveCases();}
       if(data.wp_services_v1){serviceRecords=data.wp_services_v1;saveServices();}
       if(data.wp_teaching_v1){teachingRecords=data.wp_teaching_v1;saveTeaching();}
+      if(data.wp_schedule_v1){scheduleItems=data.wp_schedule_v1;saveSchedule();}
       updateStats();updatePanel(curKey);
       showToast('備份匯入成功！');input.value='';
     }catch(err){showToast('匯入失敗：JSON 格式錯誤');input.value='';}
@@ -3427,6 +3602,7 @@ async function syncToSheets(){
       ['cases',     JSON.stringify(caseRecords)],
       ['services',  JSON.stringify(serviceRecords)],
       ['teaching',  JSON.stringify(teachingRecords)],
+      ['schedule',  JSON.stringify(scheduleItems)],
       ['syncedAt',  new Date().toISOString()],
     ];
     const resp=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${settings.sheetsId}/values/sync!A1:B${rows.length}?valueInputOption=RAW`,{
@@ -3481,6 +3657,7 @@ async function loadFromSheets(){
     if(map.cases){caseRecords=map.cases;saveCases();changed=true;}
     if(map.services){serviceRecords=map.services;saveServices();changed=true;}
     if(map.teaching){teachingRecords=map.teaching;saveTeaching();changed=true;}
+    if(map.schedule){scheduleItems=map.schedule;saveSchedule();}
     if(changed){updateStats();updatePanel(curKey);renderJournalMonths();}
     showToast('✓ 雲端資料同步完成');
   }catch(e){console.warn('loadFromSheets error:',e);showToast('雲端載入失敗，請確認試算表 ID');}
@@ -3744,6 +3921,142 @@ function checkSemReminder(){
 function dismissSemRemind(){
   document.getElementById('sem-remind-banner').classList.remove('show');
   settings.semRemindDismissed=true;saveSettings();
+}
+
+/* ══ SCHEDULE MODULE ══ */
+let scheduleItems=[];
+let scheduleEditId=null;
+
+function initSchedule(){
+  const saved=localStorage.getItem('wp_schedule_v1');
+  scheduleItems=saved?JSON.parse(saved):[];
+}
+function saveSchedule(){
+  localStorage.setItem('wp_schedule_v1',JSON.stringify(scheduleItems));
+  updateStats();
+  debouncedSheetsSync();
+}
+
+function openScheduleForm(){
+  scheduleEditId=null;
+  const f=document.getElementById('schedule-form');
+  if(!f)return;
+  f.style.display='block';
+  const d=document.getElementById('sch-date');
+  if(d&&!d.value)d.value=localISO();
+  const ok=document.getElementById('sch-form-ok');
+  if(ok)ok.textContent='確認新增';
+  document.getElementById('sch-name')?.focus();
+}
+function openEditSchedule(id){
+  const s=scheduleItems.find(x=>x.id===id);
+  if(!s)return;
+  scheduleEditId=id;
+  const f=document.getElementById('schedule-form');
+  if(!f)return;
+  document.getElementById('sch-name').value=s.name||'';
+  document.getElementById('sch-location').value=s.location||'';
+  document.getElementById('sch-date').value=s.date||'';
+  document.getElementById('sch-time-start').value=s.timeStart||'';
+  document.getElementById('sch-time-end').value=s.timeEnd||'';
+  f.style.display='block';
+  const ok=document.getElementById('sch-form-ok');
+  if(ok)ok.textContent='儲存修改';
+  document.getElementById('sch-name')?.focus();
+  f.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function closeScheduleForm(){
+  scheduleEditId=null;
+  const f=document.getElementById('schedule-form');
+  if(f)f.style.display='none';
+  ['sch-name','sch-location','sch-date','sch-time-start','sch-time-end'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  const ok=document.getElementById('sch-form-ok');
+  if(ok)ok.textContent='確認新增';
+}
+
+function confirmScheduleForm(){
+  const name=document.getElementById('sch-name')?.value.trim();
+  const date=document.getElementById('sch-date')?.value;
+  if(!name){showToast('請輸入行程名稱');return;}
+  if(!date){showToast('請選擇日期');return;}
+  const location=document.getElementById('sch-location')?.value.trim()||'';
+  const timeStart=document.getElementById('sch-time-start')?.value||'';
+  const timeEnd=document.getElementById('sch-time-end')?.value||'';
+  if(scheduleEditId){
+    const idx=scheduleItems.findIndex(x=>x.id===scheduleEditId);
+    if(idx!==-1)scheduleItems[idx]={...scheduleItems[idx],name,location,date,timeStart,timeEnd};
+    showToast('行程已更新');
+  }else{
+    scheduleItems.push({id:Date.now(),name,location,date,timeStart,timeEnd});
+    showToast('行程已新增');
+  }
+  scheduleItems.sort((a,b)=>a.date.localeCompare(b.date)||(a.timeStart||'').localeCompare(b.timeStart||''));
+  saveSchedule();
+  closeScheduleForm();
+  renderSchedulePage();
+}
+
+// 保留舊名稱避免任何殘留 onclick 呼叫
+function confirmAddSchedule(){confirmScheduleForm();}
+
+function deleteScheduleItem(id){
+  scheduleItems=scheduleItems.filter(s=>s.id!==id);
+  saveSchedule();
+  renderSchedulePage();
+  showToast('行程已刪除');
+}
+
+function renderSchedulePage(){
+  const el=document.getElementById('schedule-list');
+  if(!el)return;
+  if(!scheduleItems.length){
+    el.innerHTML=`<div style="text-align:center;color:var(--t3);padding:60px 20px">
+      <i class="ti ti-calendar-event" style="font-size:40px;display:block;margin-bottom:12px;opacity:.3"></i>
+      <div style="font-size:14px;margin-bottom:6px">尚無行程</div>
+      <div style="font-size:12px">點右上角「新增行程」開始建立</div>
+    </div>`;
+    return;
+  }
+  const today=new Date();today.setHours(0,0,0,0);
+  const todayISO=localISO(today);
+  const days=['日','一','二','三','四','五','六'];
+  const upcoming=scheduleItems.filter(s=>s.date>=todayISO);
+  const past=[...scheduleItems.filter(s=>s.date<todayISO)].reverse();
+  let html='';
+  function renderGroup(label,items,isPast){
+    if(!items.length)return'';
+    let g=`<div class="sch-group"><div class="sch-group-lbl"><i class="ti ti-${isPast?'history':'calendar-event'}" style="font-size:13px"></i>${label}　<span style="font-weight:400;letter-spacing:0;text-transform:none">${items.length} 筆</span></div>`;
+    items.forEach(s=>{
+      const d=new Date(s.date+'T12:00:00');
+      const isToday=s.date===todayISO;
+      const mm=d.getMonth()+1,dd=d.getDate(),wd=days[d.getDay()];
+      const timeStr=s.timeStart?(s.timeEnd?`${s.timeStart} – ${s.timeEnd}`:s.timeStart):'';
+      g+=`<div class="sch-item${isPast?' past':''}">
+        <div class="sch-date-block" ${isToday?'style="background:#185FA5"':''}>
+          <span class="sch-day-num" ${isToday?'style="color:#fff"':''}>${dd}</span>
+          <span class="sch-day-wd" ${isToday?'style="color:#B8D8F5"':''}>${mm}/${dd} 週${wd}</span>
+        </div>
+        <div class="sch-item-main">
+          <div class="sch-item-name">${escHtml(s.name)}${isToday?'<span style="font-size:10px;font-weight:600;margin-left:6px;padding:1px 6px;border-radius:4px;background:#185FA5;color:#fff">今天</span>':''}</div>
+          <div class="sch-item-meta">
+            ${timeStr?`<span class="sch-item-time"><i class="ti ti-clock" style="font-size:11px"></i>${timeStr}</span>`:''}
+            ${s.location?`<span class="sch-item-loc"><i class="ti ti-map-pin" style="font-size:11px"></i>${escHtml(s.location)}</span>`:''}
+          </div>
+        </div>
+        <div class="sch-item-actions">
+          <button class="sch-act-btn" onclick="openEditSchedule(${s.id})" title="編輯" style="color:var(--t3)" onmouseover="this.style.color='#185FA5';this.style.background='#E6F1FB'" onmouseout="this.style.color='var(--t3)';this.style.background='none'"><i class="ti ti-pencil"></i></button>
+          <button class="sch-act-btn" onclick="deleteScheduleItem(${s.id})" title="刪除"><i class="ti ti-trash"></i></button>
+        </div>
+      </div>`;
+    });
+    g+=`</div>`;
+    return g;
+  }
+  html+=renderGroup('即將到來',upcoming,false);
+  if(past.length)html+=renderGroup('過去行程',past,true);
+  el.innerHTML=html;
 }
 
 init();

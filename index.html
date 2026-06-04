@@ -2043,6 +2043,7 @@ function navTo(el,page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const map={tasks:'page-tasks',schedule:'page-schedule',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats',doc:'page-doc',sch:'page-sch',case:'page-case',urg:'page-urg',assign:'page-assign'};
   document.getElementById(map[page]||'page-doc').classList.add('active');
+  if(page==='tasks')renderTaskPage();
   if(page==='schedule')renderSchedulePage();
   if(page==='archive')renderArchivePage();
   if(page==='prompts')renderPrompts('all');

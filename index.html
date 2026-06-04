@@ -148,7 +148,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .qlinks{display:flex;flex-direction:column;gap:3px}
 .qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
 .qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:16px;color:var(--t3);width:17px}
-.doc-fields-row{padding:3px 6px 4px 22px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;display:flex;flex-wrap:nowrap;overflow:hidden;gap:3px 12px;font-size:13px;color:var(--t2);align-items:center}
+.doc-fields-row{padding:3px 6px 4px 22px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;display:flex;flex-wrap:wrap;gap:3px 12px;font-size:13px;color:var(--t2);align-items:center}
 .doc-field-item{display:flex;align-items:center;gap:4px}
 .doc-field-item i{font-size:11px;color:var(--t3)}
 .doc-field-val{color:var(--t1);cursor:pointer;border-bottom:1px dashed var(--border);padding-bottom:1px}
@@ -1341,12 +1341,12 @@ function taskHTML(t,key,ri){
     ${t.driveUrl?`<button class="drive-clear-btn" onclick="clearDriveUrl('${key}',${ri})">清除</button>`:''}
   </div>`:'';
   const docMetaRow=key==='doc'?`
-  <div class="doc-fields-row" id="doc-fields-${t.id}" style="flex-wrap:nowrap;overflow-x:auto;gap:3px 12px;padding:3px 6px 4px 22px">
-    <div class="doc-field-item"><i class="ti ti-file-text" aria-hidden="true"></i><span class="doc-field-val ${t.docno?'':'doc-field-empty'}" onclick="editDocField('doc','docno',${ri},'公文字號')" style="white-space:nowrap">${t.docno||'字號'}</span></div>
-    <div class="doc-field-item"><i class="ti ti-building" aria-hidden="true"></i><span class="doc-field-val ${t.docorg?'':'doc-field-empty'}" onclick="editDocField('doc','docorg',${ri},'發文機關')" style="white-space:nowrap">${t.docorg||'機關'}</span></div>
-    <div class="doc-field-item" style="flex:1;min-width:0"><i class="ti ti-align-left" aria-hidden="true"></i><span class="doc-field-val ${t.docsubj?'':'doc-field-empty'}" onclick="editDocField('doc','docsubj',${ri},'公文主旨')" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px;display:inline-block;vertical-align:bottom">${t.docsubj||'主旨'}</span></div>
+  <div class="doc-fields-row" id="doc-fields-${t.id}">
+    <div class="doc-field-item" style="flex-shrink:0;max-width:180px;overflow:hidden"><i class="ti ti-file-text" aria-hidden="true" style="flex-shrink:0"></i><span class="doc-field-val ${t.docno?'':'doc-field-empty'}" onclick="editDocField('doc','docno',${ri},'公文字號')" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:155px;vertical-align:bottom">${t.docno||'字號'}</span></div>
+    <div class="doc-field-item" style="flex-shrink:0;max-width:150px;overflow:hidden"><i class="ti ti-building" aria-hidden="true" style="flex-shrink:0"></i><span class="doc-field-val ${t.docorg?'':'doc-field-empty'}" onclick="editDocField('doc','docorg',${ri},'發文機關')" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:125px;vertical-align:bottom">${t.docorg||'機關'}</span></div>
     <div class="doc-field-item" style="flex-shrink:0"><i class="ti ti-calendar" aria-hidden="true"></i><span class="doc-field-val" onclick="editDocField('doc','createdAt',${ri},'建立日')" style="white-space:nowrap">${t.createdAt||'—'}</span></div>
     <label style="cursor:pointer;color:var(--t2);font-size:11px;display:flex;align-items:center;gap:3px;flex-shrink:0"><input type="checkbox" ${t.src==='cross'?'checked':''} style="width:12px;height:12px;accent-color:var(--a3)" onchange="toggleDocSrc('doc',${ri},this.checked)">跨</label>
+    ${t.docsubj?`<div class="doc-field-item" style="width:100%;margin-top:2px;align-items:flex-start"><i class="ti ti-align-left" aria-hidden="true" style="margin-top:2px;flex-shrink:0"></i><span class="doc-field-val" onclick="editDocField('doc','docsubj',${ri},'公文主旨')" style="white-space:normal;word-break:break-all;line-height:1.5">${t.docsubj}</span></div>`:`<div class="doc-field-item"><i class="ti ti-align-left" aria-hidden="true"></i><span class="doc-field-empty" onclick="editDocField('doc','docsubj',${ri},'公文主旨')">主旨</span></div>`}
   </div>`:'';
   const createdAtRow=key!=='doc'&&t.createdAt?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${fmtTaskDate(t.createdAt,false,null)}</span>`:`${key!=='doc'?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${t.createdAt||''}</span>`:''}`;
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
@@ -1395,7 +1395,7 @@ function renderTransferTasks(){
         ${tt.label}
         ${pending.length?`<span class="tr-count" style="background:${tt.color}22;color:${tt.color}">${pending.length}</span>`:''}
       </div>
-      ${ordered.length?ordered.map(t=>taskHTML(t,'case',all.indexOf(t))).join(''):`<div class="tr-empty">目前無${tt.label}案件</div>`}
+      ${pending.length?pending.map(t=>taskHTML(t,'case',all.indexOf(t))).join(''):`<div class="tr-empty">目前無${tt.label}案件</div>`}
     </div>`;
   }).join('');
 }

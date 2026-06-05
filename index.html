@@ -470,6 +470,19 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .data-table tbody tr:hover td{background:var(--surface-2)}
 .dt-del{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:0 2px;border-radius:3px;transition:.12s}
 .dt-del:hover{color:var(--r3);background:var(--r5)}
+.stats-filter-bar{display:flex;align-items:center;gap:8px;padding:8px 0 10px;border-bottom:1px solid var(--border);margin-bottom:12px;flex-wrap:wrap}
+.sft-btn{height:26px;padding:0 12px;border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);cursor:pointer;transition:.12s}
+.sft-btn.on{background:var(--a3);border-color:var(--a2);color:var(--a1);font-weight:600}
+.sft-lbl{font-size:11px;color:var(--t3);white-space:nowrap}
+.sft-select{height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);cursor:pointer;outline:none}
+.dt-inc{border:none;background:var(--g5);cursor:pointer;color:var(--g1);font-size:11px;font-weight:600;padding:2px 7px;border-radius:3px;transition:.12s;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
+.dt-inc:hover{background:var(--g3);color:#fff}
+.dt-edit{border:none;background:var(--a3);cursor:pointer;color:var(--a1);font-size:13px;padding:3px 5px;border-radius:3px;transition:.12s}
+.dt-edit:hover{background:var(--a2);color:#fff}
+.dt-save{border:none;background:var(--g3);cursor:pointer;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
+.dt-cancel-btn{border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--t2);font-size:11px;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
+.edit-input{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none;width:100%}
+.edit-select{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 4px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none}
 .prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
 .stats-sub-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
 /* SEMESTER SWITCH */
@@ -879,6 +892,22 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <button class="stats-page-tab on" onclick="switchStatsTab('cases',this)">個案統計</button>
     <button class="stats-page-tab" onclick="switchStatsTab('services',this)">相關服務統計</button>
   </div>
+  <div class="stats-filter-bar" id="stats-filter-bar">
+    <button class="sft-btn on" id="sft-btn-all" onclick="setStatsFilter('all',null)">全部</button>
+    <div style="display:flex;align-items:center;gap:5px">
+      <span class="sft-lbl">學年</span>
+      <select class="sft-select" id="sft-year" onchange="if(this.value)setStatsFilter('year',this.value)">
+        <option value="">選擇學年</option>
+      </select>
+    </div>
+    <div style="display:flex;align-items:center;gap:5px">
+      <span class="sft-lbl">學期</span>
+      <select class="sft-select" id="sft-sem" onchange="if(this.value)setStatsFilter('semester',this.value)">
+        <option value="">選擇學期</option>
+      </select>
+    </div>
+    <span id="sft-label" style="font-size:11px;color:var(--t3);margin-left:4px"></span>
+  </div>
 
   <!-- 個案統計 -->
   <div class="stats-content on" id="stats-cases">
@@ -902,6 +931,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         </div>
         <div><span class="sf-label">輔導次數</span><input type="number" id="cf-sessions" min="1" value="1"></div>
         <div><span class="sf-label">結案狀態</span><select id="cf-status"><option>輔導進行中</option><option>已結案</option></select></div>
+        <div><span class="sf-label">學期</span><input type="text" id="cf-semester" placeholder="例：114下" style="width:80px"></div>
       </div>
       <div class="stats-sub-lbl">個案問題（可複選）</div>
       <div class="prob-grid" id="prob-checkboxes"></div>
@@ -914,7 +944,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-sub-lbl">個案清單</div>
     <div class="data-table-wrap">
       <table class="data-table">
-        <thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th><th></th></tr></thead>
+        <thead><tr><th>學期</th><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th><th></th></tr></thead>
         <tbody id="case-table-body"></tbody>
       </table>
     </div>
@@ -1855,8 +1885,9 @@ function toggleTask(key,idx){
     delete t.completedAt;
     saveJournal();
   }
-  save();updateStats();updatePanel(key===curKey?key:curKey);
-  if(curKey==='urg')updatePanel('urg');
+  save();updateStats();
+  updatePanel(curKey);
+  if(key!==curKey)updatePanel(key);
 }
 function toggleUrgent(key,idx){
   tasks[key][idx].u=!tasks[key][idx].u;
@@ -2098,6 +2129,7 @@ function quickJournal(key){
   const timeStr=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
   journal.unshift({id:Date.now(),date:dateStr,isoDate,time:timeStr,content:txt,auto:false});
   saveJournal();
+  debouncedSheetsSync();
   inp.value='';
   showToast('已存入工作日誌');
 }
@@ -2903,12 +2935,78 @@ const CASE_GRADES=['高一','高二','高三','國一','國二','國三'];
 const PROBLEM_CATS=['人際困擾','師生關係','家庭困擾','自我探索','情緒困擾','生活壓力','創傷反應','自我傷害','性別議題','脆弱家庭','兒少保護議題','學習困擾','生涯輔導','偏差行為','網路沉迷','中輟／拒學','藥物濫用','精神疾患','其他'];
 
 let caseRecords=[], serviceRecords=[], chartInstances={};
+let curStatsFilter={type:'all',value:null};
 
+/* ── 學期工具函式 ── */
+function getSemesterFromDate(d){
+  const date=(typeof d==='string')?new Date(d.includes('T')?d:d+'T12:00:00'):d;
+  const m=date.getMonth()+1, y=date.getFullYear();
+  if(m>=8)return `${y-1911}上`;
+  if(m===1)return `${y-1-1911}上`;
+  return `${y-1-1911}下`;
+}
+function getCurrentSemester(){return getSemesterFromDate(new Date());}
+function semToYear(sem){return sem?sem.replace(/[上下]$/,''):'?';}
+function getAvailableSemesters(){
+  const s=new Set();
+  caseRecords.forEach(c=>{if(c.semester)s.add(c.semester);});
+  serviceRecords.forEach(r=>{if(r.date)s.add(getSemesterFromDate(r.date));});
+  return [...s].sort((a,b)=>b.localeCompare(a));
+}
+function getAvailableYears(){
+  return [...new Set(getAvailableSemesters().map(s=>semToYear(s)))].sort((a,b)=>b.localeCompare(a));
+}
+function getFilteredCases(){
+  if(curStatsFilter.type==='all')return caseRecords;
+  if(curStatsFilter.type==='semester')return caseRecords.filter(c=>c.semester===curStatsFilter.value);
+  if(curStatsFilter.type==='year')return caseRecords.filter(c=>semToYear(c.semester||'')===curStatsFilter.value);
+  return caseRecords;
+}
+function getFilteredServices(){
+  if(curStatsFilter.type==='all')return serviceRecords;
+  return serviceRecords.filter(s=>{
+    if(!s.date)return false;
+    const sem=getSemesterFromDate(s.date);
+    if(curStatsFilter.type==='semester')return sem===curStatsFilter.value;
+    if(curStatsFilter.type==='year')return semToYear(sem)===curStatsFilter.value;
+    return true;
+  });
+}
+function setStatsFilter(type,value){
+  curStatsFilter={type,value};
+  // 更新 UI
+  document.getElementById('sft-btn-all')?.classList.toggle('on',type==='all');
+  const lbl=document.getElementById('sft-label');
+  if(lbl){
+    if(type==='all')lbl.textContent='（全部資料）';
+    else if(type==='year')lbl.textContent=`（${value}學年度）`;
+    else if(type==='semester')lbl.textContent=`（${value}學期）`;
+  }
+  if(type!=='year'){const s=document.getElementById('sft-year');if(s)s.value='';}
+  if(type!=='semester'){const s=document.getElementById('sft-sem');if(s)s.value='';}
+  renderCaseStatsContent();renderServiceStatsContent();
+}
+function updateStatsFilterOptions(){
+  const years=getAvailableYears();
+  const sems=getAvailableSemesters();
+  const yel=document.getElementById('sft-year');
+  const sel=document.getElementById('sft-sem');
+  if(yel)yel.innerHTML='<option value="">選擇學年</option>'+years.map(y=>`<option value="${y}">${y}學年度</option>`).join('');
+  if(sel)sel.innerHTML='<option value="">選擇學期</option>'+sems.map(s=>`<option value="${s}">${s}學期</option>`).join('');
+}
+
+/* ── 初始化 ── */
 function initStats(){
   const sc=localStorage.getItem('wp_cases_v1');
   const ss=localStorage.getItem('wp_services_v1');
   caseRecords=sc?JSON.parse(sc):[];
   serviceRecords=ss?JSON.parse(ss):[];
+  // 遷移舊資料：補 semester
+  let migrated=false;
+  caseRecords.forEach(c=>{
+    if(!c.semester){c.semester=getSemesterFromDate(new Date(c.id));migrated=true;}
+  });
+  if(migrated)saveCases();
 }
 function saveCases(){localStorage.setItem('wp_cases_v1',JSON.stringify(caseRecords));}
 function saveServices(){localStorage.setItem('wp_services_v1',JSON.stringify(serviceRecords));}
@@ -2917,6 +3015,12 @@ function renderStatsPage(){
   renderProbCheckboxes();
   const sfDate=document.getElementById('sf-date');
   if(sfDate&&!sfDate.value)sfDate.value=localISO();
+  // 初始化學期選擇器
+  const cfSem=document.getElementById('cf-semester');
+  if(cfSem&&!cfSem.value)cfSem.value=getCurrentSemester();
+  updateStatsFilterOptions();
+  const lbl=document.getElementById('sft-label');
+  if(lbl&&curStatsFilter.type==='all')lbl.textContent='（全部資料）';
   if(!window.Chart){
     const s=document.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
@@ -2961,13 +3065,15 @@ function addCaseRecord(){
   const sessions=parseInt(document.getElementById('cf-sessions')?.value)||1;
   const status=document.getElementById('cf-status')?.value;
   const problems=Array.from(document.querySelectorAll('#prob-checkboxes input:checked')).map(c=>parseInt(c.value));
-  caseRecords.push({id:Date.now(),no,gender,grade,source,sessions,problems,status});
+  const semester=document.getElementById('cf-semester')?.value.trim()||getCurrentSemester();
+  caseRecords.push({id:Date.now(),no,gender,grade,source,sessions,problems,status,semester});
   saveCases();
   document.getElementById('case-form').classList.remove('show');
   document.getElementById('cf-no').value='';
   document.getElementById('cf-sessions').value='1';
   document.querySelectorAll('#prob-checkboxes input').forEach(c=>c.checked=false);
   showToast('個案已新增');
+  updateStatsFilterOptions();
   renderCaseStatsContent();
 }
 
@@ -2975,6 +3081,85 @@ function deleteCaseRecord(id){
   if(!confirm('確定刪除此個案記錄？'))return;
   caseRecords=caseRecords.filter(c=>c.id!==id);
   saveCases();renderCaseStatsContent();showToast('已刪除');
+}
+
+function incrementCaseSessions(id){
+  const c=caseRecords.find(x=>x.id===id);if(!c)return;
+  c.sessions=(c.sessions||0)+1;
+  saveCases();renderCaseStatsContent();
+  showToast(`${c.no} 晤談次數 +1，累計 ${c.sessions} 次`);
+}
+
+function openEditCase(id){
+  const c=caseRecords.find(x=>x.id===id);if(!c)return;
+  const GRADES=['高一','高二','高三','國一','國二','國三'];
+  const SOURCES=['學生主動求助','家長轉介','教師轉介','同儕轉介','輔導老師約談','線上預約管道','其他'];
+  const probHtml=PROBLEM_CATS.map((p,i)=>`<label style="font-size:11px;white-space:nowrap"><input type="checkbox" value="${i+1}" ${(c.problems||[]).includes(i+1)?'checked':''}> ${i+1}.${p}</label>`).join('');
+  const tr=document.querySelector(`tr[data-case-id="${id}"]`);if(!tr)return;
+  tr.innerHTML=`
+    <td><input class="edit-input" id="ec-sem" value="${c.semester||''}" style="width:60px"></td>
+    <td><input class="edit-input" id="ec-no" value="${c.no||''}" style="width:70px"></td>
+    <td><select class="edit-select" id="ec-gender">${['男','女'].map(g=>`<option ${c.gender===g?'selected':''}>${g}</option>`).join('')}</select></td>
+    <td><select class="edit-select" id="ec-grade">${GRADES.map(g=>`<option ${c.grade===g?'selected':''}>${g}</option>`).join('')}</select></td>
+    <td><select class="edit-select" id="ec-source" style="max-width:120px">${SOURCES.map(s=>`<option ${c.source===s?'selected':''}>${s}</option>`).join('')}</select></td>
+    <td style="max-width:200px"><div style="display:flex;flex-wrap:wrap;gap:3px">${probHtml}</div></td>
+    <td><input class="edit-input" id="ec-sessions" type="number" min="0" value="${c.sessions||0}" style="width:50px"></td>
+    <td><select class="edit-select" id="ec-status">${['輔導進行中','已結案'].map(s=>`<option ${c.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
+    <td style="white-space:nowrap">
+      <button class="dt-save" onclick="saveEditCase(${id})">儲存</button>
+      <button class="dt-cancel-btn" onclick="renderCaseTable()" style="margin-left:3px">取消</button>
+    </td>`;
+}
+
+function saveEditCase(id){
+  const idx=caseRecords.findIndex(x=>x.id===id);if(idx===-1)return;
+  const no=document.getElementById('ec-no')?.value.trim();
+  if(!no){showToast('個案編號不能為空');return;}
+  caseRecords[idx]={
+    ...caseRecords[idx],
+    semester:document.getElementById('ec-sem')?.value.trim()||caseRecords[idx].semester,
+    no,
+    gender:document.getElementById('ec-gender')?.value,
+    grade:document.getElementById('ec-grade')?.value,
+    source:document.getElementById('ec-source')?.value,
+    sessions:parseInt(document.getElementById('ec-sessions')?.value)||0,
+    status:document.getElementById('ec-status')?.value,
+    problems:Array.from(document.querySelectorAll('tr[data-case-id="'+id+'"] input[type=checkbox]:checked')).map(x=>parseInt(x.value)),
+  };
+  saveCases();updateStatsFilterOptions();renderCaseStatsContent();showToast('個案資料已更新');
+}
+
+function openEditService(id){
+  const s=serviceRecords.find(x=>x.id===id);if(!s)return;
+  const TYPES=['團體輔導','入班輔導','家長諮詢','教師諮詢','個案會議','心理測驗','安心服務','家庭處遇','資源連結','系統會談','學生諮詢','臨案協處','方案計畫','各項宣講','危機處理','轉銜輔導','其他'];
+  const TARGETS=['國一','國二','國三','高一','高二','高三','教職員','家長','專業人員'];
+  const tr=document.querySelector(`tr[data-svc-id="${id}"]`);if(!tr)return;
+  tr.innerHTML=`
+    <td><input class="edit-input" id="es-date" type="date" value="${s.date||''}" style="width:130px"></td>
+    <td><select class="edit-select" id="es-type">${TYPES.map(t=>`<option ${s.type===t?'selected':''}>${t}</option>`).join('')}</select></td>
+    <td><select class="edit-select" id="es-target">${TARGETS.map(t=>`<option ${s.target===t?'selected':''}>${t}</option>`).join('')}</select></td>
+    <td><input class="edit-input" id="es-male" type="number" min="0" value="${s.male||0}" style="width:50px"></td>
+    <td><input class="edit-input" id="es-female" type="number" min="0" value="${s.female||0}" style="width:50px"></td>
+    <td>${(s.male||0)+(s.female||0)}</td>
+    <td style="white-space:nowrap">
+      <button class="dt-save" onclick="saveEditService(${id})">儲存</button>
+      <button class="dt-cancel-btn" onclick="renderServiceTable()" style="margin-left:3px">取消</button>
+    </td>`;
+}
+
+function saveEditService(id){
+  const idx=serviceRecords.findIndex(x=>x.id===id);if(idx===-1)return;
+  const date=document.getElementById('es-date')?.value;
+  if(!date){showToast('請選擇日期');return;}
+  const male=parseInt(document.getElementById('es-male')?.value)||0;
+  const female=parseInt(document.getElementById('es-female')?.value)||0;
+  serviceRecords[idx]={...serviceRecords[idx],
+    date,
+    type:document.getElementById('es-type')?.value,
+    target:document.getElementById('es-target')?.value,
+    male,female
+  };
+  saveServices();renderServiceStatsContent();showToast('服務記錄已更新');
 }
 
 function addServiceRecord(){
@@ -2991,13 +3176,14 @@ function addServiceRecord(){
   document.getElementById('sf-male').value='0';
   document.getElementById('sf-female').value='0';
   showToast('服務記錄已新增');
+  updateStatsFilterOptions();
   renderServiceStatsContent();
 }
 
 function deleteServiceRecord(id){
   if(!confirm('確定刪除此服務記錄？'))return;
   serviceRecords=serviceRecords.filter(s=>s.id!==id);
-  saveServices();renderServiceStatsContent();showToast('已刪除');
+  saveServices();updateStatsFilterOptions();renderServiceStatsContent();showToast('已刪除');
 }
 
 function renderCaseStatsContent(){
@@ -3015,32 +3201,44 @@ function renderServiceStatsContent(){
 
 function renderCaseTable(){
   const el=document.getElementById('case-table-body');if(!el)return;
-  if(!caseRecords.length){el.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:20px">尚無個案記錄，點上方「新增個案」開始建檔</td></tr>`;return;}
-  el.innerHTML=caseRecords.map(c=>`<tr>
-    <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
+  const filtered=getFilteredCases();
+  if(!filtered.length){el.innerHTML=`<tr><td colspan="9" style="text-align:center;color:var(--t3);padding:20px">${caseRecords.length?'此篩選條件沒有個案記錄':'尚無個案記錄，點上方「新增個案」開始建檔'}</td></tr>`;return;}
+  el.innerHTML=filtered.map(c=>`<tr data-case-id="${c.id}">
+    <td style="white-space:nowrap">${c.semester||'—'}</td>
+    <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td style="font-size:11px">${c.source}</td>
     <td>${(c.problems||[]).map(p=>`<span class="prob-badge">${PROBLEM_CATS[p-1]||p}</span>`).join('')}</td>
-    <td style="text-align:center">${c.sessions}</td>
+    <td style="text-align:center">
+      <span style="font-weight:600;margin-right:4px">${c.sessions}</span>
+      <button class="dt-inc" onclick="incrementCaseSessions(${c.id})" title="新增一次晤談">+1</button>
+    </td>
     <td><span style="font-size:11px;padding:2px 7px;border-radius:3px;background:${c.status==='已結案'?'var(--surface-2)':'var(--g5)'};color:${c.status==='已結案'?'var(--t3)':'var(--g1)'}">${c.status}</span></td>
-    <td><button class="dt-del" onclick="deleteCaseRecord(${c.id})"><i class="ti ti-trash"></i></button></td>
+    <td style="white-space:nowrap">
+      <button class="dt-edit" onclick="openEditCase(${c.id})" title="編輯"><i class="ti ti-pencil"></i></button>
+      <button class="dt-del" onclick="deleteCaseRecord(${c.id})" title="刪除" style="margin-left:2px"><i class="ti ti-trash"></i></button>
+    </td>
   </tr>`).join('');
 }
 
 function renderServiceTable(){
   const el=document.getElementById('service-table-body');if(!el)return;
-  if(!serviceRecords.length){el.innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--t3);padding:20px">尚無服務記錄</td></tr>`;return;}
-  const sorted=[...serviceRecords].sort((a,b)=>b.date.localeCompare(a.date));
-  el.innerHTML=sorted.map(s=>`<tr>
+  const filtered=getFilteredServices();
+  if(!filtered.length){el.innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--t3);padding:20px">${serviceRecords.length?'此篩選條件沒有服務記錄':'尚無服務記錄'}</td></tr>`;return;}
+  const sorted=[...filtered].sort((a,b)=>b.date.localeCompare(a.date));
+  el.innerHTML=sorted.map(s=>`<tr data-svc-id="${s.id}">
     <td>${s.date}</td><td>${s.type}</td><td>${s.target}</td>
     <td style="text-align:center">${s.male}</td><td style="text-align:center">${s.female}</td>
     <td style="text-align:center;font-weight:500">${s.male+s.female}</td>
-    <td><button class="dt-del" onclick="deleteServiceRecord(${s.id})"><i class="ti ti-trash"></i></button></td>
+    <td style="white-space:nowrap">
+      <button class="dt-edit" onclick="openEditService(${s.id})" title="編輯"><i class="ti ti-pencil"></i></button>
+      <button class="dt-del" onclick="deleteServiceRecord(${s.id})" title="刪除" style="margin-left:2px"><i class="ti ti-trash"></i></button>
+    </td>
   </tr>`).join('');
 }
 
 function renderServiceSummary(){
   const el=document.getElementById('service-summary-table');if(!el)return;
   const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
-  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  getFilteredServices().forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
   const rows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
   if(!rows.length){el.innerHTML='';return;}
   const gM=rows.reduce((s,r)=>s+r.male,0),gF=rows.reduce((s,r)=>s+r.female,0);
@@ -3065,8 +3263,9 @@ function getChartTextColor(){
 
 function renderCaseCharts(){
   const el=document.getElementById('case-charts');if(!el)return;
-  if(!caseRecords.length){
-    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">新增個案後自動顯示圖表</div>`;
+  const filteredCases=getFilteredCases();
+  if(!filteredCases.length){
+    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">${caseRecords.length?'此篩選條件無個案資料':'新增個案後自動顯示圖表'}</div>`;
     return;
   }
   const tc=getChartTextColor();
@@ -3079,21 +3278,21 @@ function renderCaseCharts(){
     <div class="chart-box wide"><div class="chart-box-title">問題類別頻率（可複選）</div><canvas id="ch-problems"></canvas></div>`;
 
   // 性別
-  const gc={'男':0,'女':0};caseRecords.forEach(c=>{if(gc[c.gender]!==undefined)gc[c.gender]++;});
+  const gc={'男':0,'女':0};filteredCases.forEach(c=>{if(gc[c.gender]!==undefined)gc[c.gender]++;});
   destroyChart('gender');
   chartInstances.gender=new Chart(document.getElementById('ch-gender'),{type:'doughnut',
     data:{labels:['男','女'],datasets:[{data:[gc['男'],gc['女']],backgroundColor:['#1870CC','#D4840A'],borderWidth:0}]},
     options:{responsive:true,plugins:{legend:{labels:{color:tc,font:{size:11}}}}}});
 
   // 年段
-  const grC={};CASE_GRADES.forEach(g=>{grC[g]=0;});caseRecords.forEach(c=>{if(grC[c.grade]!==undefined)grC[c.grade]++;});
+  const grC={};CASE_GRADES.forEach(g=>{grC[g]=0;});filteredCases.forEach(c=>{if(grC[c.grade]!==undefined)grC[c.grade]++;});
   destroyChart('grade');
   chartInstances.grade=new Chart(document.getElementById('ch-grade'),{type:'bar',
     data:{labels:CASE_GRADES,datasets:[{data:CASE_GRADES.map(g=>grC[g]),backgroundColor:'#5A9A1A',borderRadius:4}]},
     options:{responsive:true,plugins:{legend:{display:false}},scales:scaleOpts}});
 
   // 個案來源
-  const srcC={};CASE_SOURCES.forEach(s=>{srcC[s]=0;});caseRecords.forEach(c=>{if(srcC[c.source]!==undefined)srcC[c.source]++;});
+  const srcC={};CASE_SOURCES.forEach(s=>{srcC[s]=0;});filteredCases.forEach(c=>{if(srcC[c.source]!==undefined)srcC[c.source]++;});
   destroyChart('source');
   chartInstances.source=new Chart(document.getElementById('ch-source'),{type:'bar',
     data:{labels:CASE_SOURCES,datasets:[{data:CASE_SOURCES.map(s=>srcC[s]),backgroundColor:'#6A52D0',borderRadius:4}]},
@@ -3101,7 +3300,7 @@ function renderCaseCharts(){
       scales:{y:{ticks:{color:tc,font:{size:10}},grid:{display:false}},x:{ticks:{stepSize:1,color:tc},grid:{color:'rgba(0,0,0,.06)'}}}}});
 
   // 結案狀態
-  const stC={'輔導進行中':0,'已結案':0};caseRecords.forEach(c=>{if(stC[c.status]!==undefined)stC[c.status]++;});
+  const stC={'輔導進行中':0,'已結案':0};filteredCases.forEach(c=>{if(stC[c.status]!==undefined)stC[c.status]++;});
   destroyChart('status');
   chartInstances.status=new Chart(document.getElementById('ch-status'),{type:'doughnut',
     data:{labels:['輔導進行中','已結案'],datasets:[{data:[stC['輔導進行中'],stC['已結案']],backgroundColor:['#3A7022','#9A9890'],borderWidth:0}]},
@@ -3109,7 +3308,7 @@ function renderCaseCharts(){
 
   // 問題類別
   const pC=Array(19).fill(0);
-  caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{if(p>=1&&p<=19)pC[p-1]++;}));
+  filteredCases.forEach(c=>(c.problems||[]).forEach(p=>{if(p>=1&&p<=19)pC[p-1]++;}));
   destroyChart('problems');
   chartInstances.problems=new Chart(document.getElementById('ch-problems'),{type:'bar',
     data:{labels:PROBLEM_CATS,datasets:[{data:pC,backgroundColor:'#1870CC',borderRadius:4}]},
@@ -3119,21 +3318,22 @@ function renderCaseCharts(){
 
 function renderServiceCharts(){
   const el=document.getElementById('service-charts');if(!el)return;
-  if(!serviceRecords.length){
-    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">新增服務記錄後自動顯示圖表</div>`;
+  const filteredSvcs=getFilteredServices();
+  if(!filteredSvcs.length){
+    el.innerHTML=`<div style="color:var(--t3);font-size:12px;padding:4px 0 12px">${serviceRecords.length?'此篩選條件無服務記錄':'新增服務記錄後自動顯示圖表'}</div>`;
     return;
   }
   const tc=getChartTextColor();
   const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
-  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  filteredSvcs.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
   const activeSvcs=SERVICE_TYPES.filter(t=>sum[t].male+sum[t].female>0);
 
   const tgtSum={};SERVICE_TARGETS.forEach(t=>{tgtSum[t]=0;});
-  serviceRecords.forEach(s=>{if(tgtSum[s.target]!==undefined)tgtSum[s.target]+=(s.male+s.female);});
+  filteredSvcs.forEach(s=>{if(tgtSum[s.target]!==undefined)tgtSum[s.target]+=(s.male+s.female);});
   const activeTgts=SERVICE_TARGETS.filter(t=>tgtSum[t]>0);
 
-  const totalM=serviceRecords.reduce((s,r)=>s+r.male,0);
-  const totalF=serviceRecords.reduce((s,r)=>s+r.female,0);
+  const totalM=filteredSvcs.reduce((s,r)=>s+r.male,0);
+  const totalF=filteredSvcs.reduce((s,r)=>s+r.female,0);
 
   el.innerHTML=`
     <div class="chart-box wide"><div class="chart-box-title">各服務項目人次（男／女）</div><canvas id="ch-svc-type"></canvas></div>
@@ -3163,11 +3363,13 @@ function renderServiceCharts(){
 
 /* ══ STATS EXPORT ══ */
 function exportCasesCSV(){
-  if(!caseRecords.length){showToast('尚無個案資料');return;}
-  const headers=['個案編號','性別','年段','個案來源','個案問題','輔導次數','結案狀態'];
-  const rows=caseRecords.map(c=>[c.no,c.gender,c.grade,c.source,
+  const filtered=getFilteredCases();
+  if(!filtered.length){showToast('尚無個案資料');return;}
+  const headers=['學期','個案編號','性別','年段','個案來源','個案問題','輔導次數','結案狀態'];
+  const rows=filtered.map(c=>[c.semester||'',c.no,c.gender,c.grade,c.source,
     (c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('；'),c.sessions,c.status]);
-  downloadCSV([headers,...rows],'個案統計');
+  const label=curStatsFilter.type==='all'?'全部':curStatsFilter.value||'';
+  downloadCSV([headers,...rows],`個案統計${label?'_'+label:''}`);
 }
 
 function exportServicesCSV(){
@@ -3372,7 +3574,8 @@ function importAllData(input){
       if(data.wp_services_v1){serviceRecords=data.wp_services_v1;saveServices();}
       if(data.wp_teaching_v1){teachingRecords=data.wp_teaching_v1;saveTeaching();}
       if(data.wp_schedule_v1){scheduleItems=data.wp_schedule_v1;saveSchedule();}
-      updateStats();updatePanel(curKey);
+      updateStats();updatePanel(curKey);renderJournalMonths();
+      if(document.getElementById('page-schedule')?.classList.contains('active'))renderSchedulePage();
       showToast('備份匯入成功！');input.value='';
     }catch(err){showToast('匯入失敗：JSON 格式錯誤');input.value='';}
   };
@@ -3659,7 +3862,13 @@ async function loadFromSheets(){
     if(map.services){serviceRecords=map.services;saveServices();changed=true;}
     if(map.teaching){teachingRecords=map.teaching;saveTeaching();changed=true;}
     if(map.schedule){scheduleItems=map.schedule;saveSchedule();}
+    // 遷移從雲端來的舊個案（補 semester）
+    let semMigrated=false;
+    caseRecords.forEach(r=>{if(!r.semester){r.semester=getSemesterFromDate(new Date(r.id));semMigrated=true;}});
+    if(semMigrated)saveCases();
     if(changed){updateStats();updatePanel(curKey);renderJournalMonths();}
+    // schedule 頁面若開著則刷新
+    if(document.getElementById('page-schedule')?.classList.contains('active'))renderSchedulePage();
     showToast('✓ 雲端資料同步完成');
   }catch(e){console.warn('loadFromSheets error:',e);showToast('雲端載入失敗，請確認試算表 ID');}
 }

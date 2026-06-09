@@ -211,7 +211,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tpi-del{opacity:0;transition:.12s;border:none;background:none;cursor:pointer;color:var(--t3);font-size:14px;padding:0 3px}
 .tpi-del:hover{color:var(--r3)}
 /* ARCHIVE */
-.archive-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:4px}
+.archive-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);margin-bottom:0}
+.archive-item-wrap{margin-bottom:4px}
+.archive-item-wrap .archive-item{border-radius:var(--rad-s) var(--rad-s) 0 0}
+.archive-item-wrap.no-detail .archive-item{border-radius:var(--rad-s);margin-bottom:0}
+.archive-detail{display:none;padding:6px 12px 8px 36px;background:var(--surface-2);border:1px solid var(--border);border-top:1px dashed var(--border-s);border-radius:0 0 var(--rad-s) var(--rad-s);font-size:12px;color:var(--t2);line-height:1.8}
+.archive-detail.show{display:block}
+.arc-expand-btn{background:none;border:none;cursor:pointer;color:var(--t3);font-size:12px;padding:0 3px;transition:.12s;border-radius:3px;flex-shrink:0}
+.arc-expand-btn:hover{color:var(--t1);background:var(--surface-2)}
 .archive-txt{font-size:14px;color:var(--t2);flex:1}
 .archive-mod{font-size:11px;padding:1px 6px;border-radius:3px;flex-shrink:0}
 .archive-meta{font-size:12px;color:var(--t3)}
@@ -435,6 +442,42 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tj-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 0;color:var(--t3);gap:8px}
 .tj-empty i{font-size:28px}
 .tj-empty p{font-size:13px}
+/* TJ VIEW TABS */
+.tj-view-tabs{display:flex;border:1px solid var(--border);border-radius:var(--rad-s);overflow:hidden}
+.tj-view-tab{height:28px;padding:0 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s;display:flex;align-items:center;gap:3px}
+.tj-view-tab:hover{background:var(--surface-2)}
+.tj-view-tab.on{background:var(--g5);color:var(--g1);font-weight:500}
+.tj-log-filters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+/* TJ KANBAN */
+.tj-kanban-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px;margin-bottom:14px}
+.tj-cls-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:11px 13px;cursor:pointer;transition:.15s}
+.tj-cls-card:hover{border-color:var(--g3);background:var(--g5)}
+.tj-cls-card.active{border:1.5px solid var(--g3);background:var(--g5)}
+.tj-cls-card.late{border-color:var(--a3)}
+.tj-cls-card.late:hover{background:var(--a5)}
+.tj-cls-card.late.active{border:1.5px solid var(--a3);background:var(--a5)}
+.tj-cls-name{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:5px}
+.tj-cls-last{font-size:11px;color:var(--t3);margin-bottom:2px}
+.tj-cls-topic{font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.tj-cls-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.tj-cls-cnt{font-size:11px;padding:1px 7px;border-radius:12px;background:var(--g5);color:var(--g1)}
+.tj-cls-late{font-size:10px;padding:1px 6px;border-radius:12px;background:var(--a5);color:var(--a1)}
+/* TJ CLASS DETAIL */
+.tj-cls-detail{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px 16px;margin-bottom:14px}
+.tj-cls-detail-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.tj-cls-detail-name{font-size:15px;font-weight:600;color:var(--t1)}
+.tj-cls-detail-cnt{font-size:12px;color:var(--t3)}
+/* TJ TIMELINE */
+.tj-timeline{display:flex;flex-direction:column}
+.tj-tl-item{display:flex;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border)}
+.tj-tl-item:last-child{border-bottom:none}
+.tj-tl-dot{width:8px;height:8px;border-radius:50%;background:var(--g3);flex-shrink:0;margin-top:5px}
+.tj-tl-date{font-size:11px;color:var(--t3);min-width:36px;flex-shrink:0;margin-top:3px}
+.tj-tl-period{font-size:11px;padding:1px 5px;border-radius:3px;background:var(--surface-2);color:var(--t3);flex-shrink:0;height:18px;margin-top:2px;white-space:nowrap}
+.tj-tl-body{flex:1;min-width:0}
+.tj-tl-topic{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.tj-tl-prog{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:2px;white-space:pre-wrap}
+.tj-tl-sit{font-size:12px;color:var(--t3);line-height:1.55;white-space:pre-wrap}
 .stats-page-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
 .stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:'Noto Sans TC',sans-serif}
 .stats-page-tab:hover{color:var(--t1)}.stats-page-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
@@ -537,20 +580,18 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   ⚠ 尚未登入 Google，資料僅存本機，點此登入同步
 </div>
 <div class="stats">
-  <div class="st" onclick="switchModule(document.getElementById('ni-doc'),'doc')" style="cursor:pointer"><span class="st-n" id="s-doc">0</span><div class="st-info"><span class="st-l">公文留辦</span><span class="tag tag-warn">待辦</span></div></div>
-  <div class="st" onclick="switchModule(document.getElementById('ni-sch'),'sch')" style="cursor:pointer"><span class="st-n" id="s-sch">0</span><div class="st-info"><span class="st-l">獎助學金</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-admin'),'admin')" style="cursor:pointer"><span class="st-n" id="s-admin">0</span><div class="st-info"><span class="st-l">行政業務</span><span class="tag tag-warn">待辦</span></div></div>
   <div class="st" onclick="switchModule(document.getElementById('ni-case'),'case')" style="cursor:pointer"><span class="st-n" id="s-case">0</span><div class="st-info"><span class="st-l">學生輔導</span><span class="tag tag-ok">待辦</span></div></div>
-  <div class="st" onclick="switchModule(document.getElementById('ni-urg'),'urg')" style="cursor:pointer"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">要事備查</span><span class="tag tag-urg">★</span></div></div>
   <div class="st" onclick="switchModule(document.getElementById('ni-assign'),'assign')" style="cursor:pointer"><span class="st-n" id="s-assign">0</span><div class="st-info"><span class="st-l">交辦追蹤</span><span class="tag tag-warn">待辦</span></div></div>
+  <div class="st" onclick="switchModule(document.getElementById('ni-urg'),'urg')" style="cursor:pointer"><span class="st-n" id="s-urg">0</span><div class="st-info"><span class="st-l">要事備查</span><span class="tag tag-urg">★</span></div></div>
 </div>
 <nav class="nav">
   <div style="margin-bottom:4px">
     <div class="nav-lbl">業務</div>
-    <button class="ni on" id="ni-doc" onclick="switchModule(this,'doc')"><i class="ti ti-file-text"></i>公文留辦<span class="ni-badge" id="badge-doc">0</span></button>
-    <button class="ni" id="ni-sch" onclick="switchModule(this,'sch')"><i class="ti ti-report-money"></i>獎助學金<span class="ni-badge" id="badge-sch">0</span></button>
+    <button class="ni on" id="ni-admin" onclick="switchModule(this,'admin')"><i class="ti ti-building"></i>行政業務<span class="ni-badge" id="badge-admin">0</span></button>
     <button class="ni" id="ni-case" onclick="switchModule(this,'case')"><i class="ti ti-heart-handshake"></i>學生輔導<span class="ni-badge" id="badge-case">0</span></button>
-    <button class="ni" id="ni-urg" onclick="switchModule(this,'urg')"><i class="ti ti-alert-triangle"></i>要事備查<span class="ni-badge" id="badge-urg-nav">0</span></button>
     <button class="ni" id="ni-assign" onclick="switchModule(this,'assign')"><i class="ti ti-clipboard-list"></i>交辦追蹤<span class="ni-badge" id="badge-assign-nav">0</span></button>
+    <button class="ni" id="ni-urg" onclick="switchModule(this,'urg')"><i class="ti ti-alert-triangle"></i>要事備查<span class="ni-badge" id="badge-urg-nav">0</span></button>
   </div>
   <div class="ndiv"></div>
   <div style="margin-bottom:4px">
@@ -621,17 +662,25 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 </div>
 <div class="page" id="page-tasks"><div class="page-pad"><div class="sec-lbl" style="margin-bottom:16px">任務總覽 — 全部待辦</div><div id="task-page-content"></div></div></div>
 <div class="page" id="page-archive">
-  <div class="sec-lbl" style="margin-bottom:14px">已完成任務</div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
     <div style="display:flex;gap:5px;flex-wrap:wrap" id="archive-filter-grp">
       <button class="archive-filter-btn on" onclick="setArchiveFilter('all',this)">全部</button>
-      <button class="archive-filter-btn" onclick="setArchiveFilter('doc',this)">公文留辦</button>
-      <button class="archive-filter-btn" onclick="setArchiveFilter('sch',this)">獎助學金</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('admin',this)">行政業務</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('case',this)">學生輔導</button>
-      <button class="archive-filter-btn" onclick="setArchiveFilter('urg',this)">要事備查</button>
       <button class="archive-filter-btn" onclick="setArchiveFilter('assign',this)">交辦追蹤</button>
+      <button class="archive-filter-btn" onclick="setArchiveFilter('urg',this)">要事備查</button>
     </div>
-    <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
+      <select id="archive-export-sel" style="height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);outline:none;cursor:pointer">
+        <option value="all">全部</option>
+        <option value="admin">行政業務</option>
+        <option value="case">學生輔導</option>
+        <option value="assign">交辦追蹤</option>
+        <option value="urg">要事備查</option>
+      </select>
+      <button onclick="exportArchiveCSV()" style="display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s;white-space:nowrap" onmouseover="this.style.background='var(--g5)';this.style.borderColor='var(--g3)';this.style.color='var(--g1)'" onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)';this.style.color='var(--t2)'"><i class="ti ti-download" style="font-size:13px"></i>匯出 CSV</button>
+    </div>
   </div>
   <div id="archive-content"></div>
 </div>
@@ -814,11 +863,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 
 <!-- TEACHING JOURNAL PAGE -->
 <div class="page" id="page-teaching">
-  <div class="sec-lbl" style="margin-bottom:14px">教學日誌</div>
   <div class="tj-toolbar">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <button class="tj-add-btn" onclick="toggleTJForm()"><i class="ti ti-plus"></i>新增記錄</button>
-      <div class="tj-filter-wrap">
+      <div class="tj-view-tabs">
+        <button class="tj-view-tab on" id="tjv-kanban" onclick="switchTJView('kanban')"><i class="ti ti-layout-grid" style="font-size:12px"></i> 班級看板</button>
+        <button class="tj-view-tab" id="tjv-log" onclick="switchTJView('log')"><i class="ti ti-list" style="font-size:12px"></i> 日期記錄</button>
+      </div>
+      <div class="tj-log-filters" id="tj-log-filters" style="display:none">
         <span style="font-size:12px;color:var(--t2)">年段</span>
         <select class="tj-filter-select" id="tj-grade-filter" onchange="renderTeachingPage()">
           <option value="">全部</option>
@@ -839,7 +891,6 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <button class="tj-export-btn" onclick="printTeachingJournal()"><i class="ti ti-printer"></i>列印</button>
     </div>
   </div>
-
   <!-- 新增表單 -->
   <div class="tj-form" id="tj-form">
     <div class="tj-form-grid">
@@ -881,8 +932,23 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <button class="tj-cancel" onclick="toggleTJForm()">取消</button>
     </div>
   </div>
-
-  <div class="tj-list" id="tj-list"></div>
+  <!-- 班級看板 view -->
+  <div id="tj-view-kanban">
+    <div class="tj-kanban-grid" id="tj-kanban-grid"></div>
+    <div class="tj-cls-detail" id="tj-cls-detail-wrap" style="display:none">
+      <div class="tj-cls-detail-hdr">
+        <i class="ti ti-school" style="font-size:17px;color:var(--g2)"></i>
+        <span class="tj-cls-detail-name" id="tj-detail-name"></span>
+        <span class="tj-cls-detail-cnt" id="tj-detail-cnt"></span>
+        <button onclick="curTJClass=null;document.getElementById('tj-cls-detail-wrap').style.display='none';document.querySelectorAll('.tj-cls-card').forEach(c=>c.classList.remove('active'))" style="margin-left:auto;border:none;background:none;cursor:pointer;color:var(--t3);font-size:14px;border-radius:3px;padding:2px 5px;transition:.12s" onmouseover="this.style.background='var(--surface-2)'" onmouseout="this.style.background='none'" title="關閉"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="tj-timeline" id="tj-detail-timeline"></div>
+    </div>
+  </div>
+  <!-- 日期記錄 view -->
+  <div id="tj-view-log" style="display:none">
+    <div class="tj-list" id="tj-list"></div>
+  </div>
 </div>
 
 <!-- STATS PAGE -->
@@ -1032,6 +1098,25 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="mod-page-body" id="panel-body-assign"></div>
   </div>
 </div>
+<div class="page" id="page-admin">
+  <div class="mod-page">
+    <div class="mod-page-hdr" id="mod-hdr-admin" style="justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="p-ico ico-a" id="p-ico-admin"><i class="ti ti-building"></i></div>
+        <span class="p-title" id="p-title-admin">行政業務</span>
+      </div>
+    </div>
+    <div class="p-tabs" id="admin-sub-tabs" style="flex-shrink:0">
+      <button class="p-tab on" id="admin-tab-doc" onclick="switchAdminTab('doc')">
+        <i class="ti ti-file-text" style="font-size:13px;margin-right:3px"></i>公文留辦<span id="admin-tab-doc-cnt" style="font-size:10px;color:var(--t3);margin-left:4px">(0)</span>
+      </button>
+      <button class="p-tab" id="admin-tab-sch" onclick="switchAdminTab('sch')">
+        <i class="ti ti-report-money" style="font-size:13px;margin-right:3px"></i>獎助學金<span id="admin-tab-sch-cnt" style="font-size:10px;color:var(--t3);margin-left:4px">(0)</span>
+      </button>
+    </div>
+    <div class="mod-page-body" id="panel-body-admin"></div>
+  </div>
+</div>
 </div>
 <div id="export-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeExportModal()">
   <div class="modal-box">
@@ -1139,6 +1224,7 @@ const META={
   case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#4A6080'},
   urg:{label:'要事備查',icon:'ti-alert-triangle',ico:'ico-r',color:'#B84444'},
   assign:{label:'交辦追蹤',icon:'ti-clipboard-list',ico:'ico-p',color:'#6A52D0'},
+  admin:{label:'行政業務',icon:'ti-building',ico:'ico-a',color:'#C47C2A'},
 };
 const CASE_TABS=[
   {key:'formal',label:'個案晤談'},
@@ -1216,7 +1302,7 @@ const MODULE_HDR={
 };
 
 /* ══ STATE ══ */
-let curKey='doc', curCaseTab='formal', tasks={};
+let curKey='admin', curCaseTab='formal', curAdminTab='doc', tasks={};
 
 /* ══ INIT ══ */
 function init(){
@@ -1225,7 +1311,7 @@ function init(){
   if(!tasks.assign)tasks.assign=[];
   if(!tasks.urg)tasks.urg=[];
   initSettings(); initStats(); initTeaching(); initSchedule();
-  updateDate(); updateStats(); renderRecentArchive(); switchModule(document.getElementById('ni-doc'),'doc'); renderPrompts('all'); initJournal(); renderJournalMonths();
+  updateDate(); updateStats(); renderRecentArchive(); switchModule(document.getElementById('ni-admin'),'admin'); renderPrompts('all'); initJournal(); renderJournalMonths();
   // Google 初始化（等 GIS 腳本載入後執行）
   if(window.google?.accounts?.oauth2)initGoogle();
   else window.addEventListener('load',()=>{setTimeout(initGoogle,500);});
@@ -1265,7 +1351,27 @@ function updateDate(){
 /* ══ STATS ══ */
 function getUrgentAll(){return ['doc','sch','case','assign'].flatMap(k=>(tasks[k]||[]).filter(t=>!t.done&&t.u));}
 function updateStats(){
-  ['doc','sch','case','assign'].forEach(k=>{
+  // 行政業務（doc + sch 合計）
+  const docP=(tasks.doc||[]).filter(t=>!t.done).length;
+  const schP=(tasks.sch||[]).filter(t=>!t.done).length;
+  const adminP=docP+schP;
+  const sAdmin=document.getElementById('s-admin');if(sAdmin)sAdmin.textContent=adminP;
+  const bAdmin=document.getElementById('badge-admin');if(bAdmin){bAdmin.textContent=adminP;bAdmin.style.display=adminP?'flex':'none';}
+  // 子分頁計數
+  const dcnt=document.getElementById('admin-tab-doc-cnt');if(dcnt)dcnt.textContent=`(${docP})`;
+  const scnt=document.getElementById('admin-tab-sch-cnt');if(scnt)scnt.textContent=`(${schP})`;
+  // 相容舊 dmc- 元素（dashboard 區塊，若存在）
+  const dmcDoc=document.getElementById('dmc-doc');if(dmcDoc)dmcDoc.textContent=docP;
+  const dmcSch=document.getElementById('dmc-sch');if(dmcSch)dmcSch.textContent=schP;
+  // 進度條相容
+  ['doc','sch'].forEach(k=>{
+    const pending=k==='doc'?docP:schP;
+    const total=(tasks[k]||[]).length,pct=total?Math.round((total-pending)/total*100):0;
+    const pEl=document.getElementById('prog-'+k);if(pEl)pEl.style.width=pct+'%';
+    const pTxt=document.getElementById('prog-'+k+'-txt');if(pTxt)pTxt.textContent=pending+' 件';
+  });
+  // 其他模組
+  ['case','assign'].forEach(k=>{
     const pending=(tasks[k]||[]).filter(t=>!t.done).length;
     const el=document.getElementById('s-'+k);if(el)el.textContent=pending;
     const b=document.getElementById('badge-'+k);if(b){b.textContent=pending;b.style.display=pending?'flex':'none';}
@@ -1274,7 +1380,9 @@ function updateStats(){
     const pEl=document.getElementById('prog-'+k);if(pEl)pEl.style.width=pct+'%';
     const pTxt=document.getElementById('prog-'+k+'-txt');if(pTxt)pTxt.textContent=pending+' 件';
   });
-  const urgCount=(tasks.urg||[]).filter(t=>!t.done).length;
+  // Bug #1 修正：urgCount 要含跨模組 ★ 任務
+  const urgCount=(tasks.urg||[]).filter(t=>!t.done).length +
+    ['doc','sch','case','assign'].reduce((s,k)=>s+(tasks[k]||[]).filter(t=>!t.done&&t.u).length,0);
   const sUrg=document.getElementById('s-urg');if(sUrg)sUrg.textContent=urgCount;
   const dmcUrg=document.getElementById('dmc-urg');if(dmcUrg)dmcUrg.textContent=urgCount;
   const pUrgTxt=document.getElementById('prog-urg-txt');if(pUrgTxt)pUrgTxt.textContent=urgCount+' 件';
@@ -1332,6 +1440,19 @@ function selectCard(key){
 
 /* ══ PANEL ══ */
 function updatePanel(key){
+  // doc / sch 更新 → 路由到 admin 面板
+  if(key==='doc'||key==='sch'){
+    const pb=document.getElementById('panel-body-admin');
+    if(pb&&document.getElementById('page-admin')?.classList.contains('active')){
+      _renderAdminContent();
+      return;
+    }
+    return; // admin 頁不在前台時靜默略過
+  }
+  if(key==='admin'){
+    _renderAdminContent();
+    return;
+  }
   const meta=META[key];if(!meta)return;
   const pb=document.getElementById('panel-body-'+key);
   if(!pb)return;
@@ -1344,6 +1465,26 @@ function updatePanel(key){
   else if(key==='case') {pb.innerHTML=buildCasePanel(); renderCaseTab(curCaseTab);}
   else if(key==='assign'){pb.innerHTML=buildAssignPanel(); renderAssignTasks();}
   else                  {pb.innerHTML=buildStdPanel(key); renderTaskList(key);}
+}
+function _renderAdminContent(){
+  const pb=document.getElementById('panel-body-admin');if(!pb)return;
+  const hdr=document.getElementById('mod-hdr-admin');
+  if(hdr&&MODULE_HDR[curAdminTab]){
+    hdr.style.background=MODULE_HDR[curAdminTab].bg;
+    hdr.style.borderBottom=`2px solid ${MODULE_HDR[curAdminTab].bd}`;
+  }
+  pb.innerHTML=buildStdPanel(curAdminTab);
+  renderTaskList(curAdminTab);
+  renderModRecent(curAdminTab);
+  // 同步子分頁 active 樣式
+  ['doc','sch'].forEach(k=>{
+    const tb=document.getElementById('admin-tab-'+k);
+    if(tb)tb.classList.toggle('on',k===curAdminTab);
+  });
+}
+function switchAdminTab(key){
+  curAdminTab=key;
+  _renderAdminContent();
 }
 
 /* ══ 清除已完成任務 ══ */
@@ -1685,7 +1826,8 @@ function toggleHistory(key,idx){
   if(!panel)return;
   const isOpen=panel.classList.toggle('open');
   if(btn)btn.classList.toggle('open',isOpen);
-  if(btn)btn.innerHTML=`<i class="ti ti-${isOpen?'chevron-up':'history'}"></i> 歷程${(tasks[key][idx].history||[]).length?'('+tasks[key][idx].history.length+')':''}`;
+  const t=tasks[key]?.[idx];
+  if(btn&&t)btn.innerHTML=`<i class="ti ti-${isOpen?'chevron-up':'history'}"></i> 歷程${(t.history||[]).length?'('+t.history.length+')':''}`;
   if(isOpen){const inp=document.getElementById(`htxt-${key}-${idx}`);if(inp)setTimeout(()=>inp.focus(),50);}
 }
 function addHistory(key,idx){
@@ -1878,9 +2020,11 @@ function confirmAddTransfer(){
 function toggleTask(key,idx){
   const t=tasks[key][idx];t.done=!t.done;
   if(t.done){
+    if(t.u)t.resolvedAsUrg=true;
     const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;
     addAutoJournalEntry(`結案：${t.t}`,t.id,key);
   } else {
+    delete t.resolvedAsUrg;
     journal=journal.filter(e=>!(e.taskId===t.id&&e.content&&e.content.startsWith('結案：')));
     delete t.completedAt;
     saveJournal();
@@ -1897,7 +2041,7 @@ function toggleUrgent(key,idx){
   showToast(tasks[key][idx].u?'已標記要事':'已取消要事');
 }
 function resolveUrgent(key,idx){
-  const t=tasks[key][idx];t.done=true;t.u=false;
+  const t=tasks[key][idx];t.resolvedAsUrg=true;t.done=true;t.u=false;
   const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
   addAutoJournalEntry(`結案：${t.t}`,t.id,key);
   save();updateStats();updatePanel('urg');showToast('已完成');
@@ -2016,8 +2160,36 @@ function tpDelete(key,idx){tasks[key].splice(idx,1);save();renderTaskPage();upda
 /* ══ ARCHIVE ══ */
 let curArchiveFilter='all';
 
+function exportArchiveCSV(){
+  const sel=document.getElementById('archive-export-sel');
+  const exportKey=sel?sel.value:'all';
+  let items=[];
+  ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
+  items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
+  const filtered=exportKey==='all'?items:
+    exportKey==='urg'?items.filter(i=>i.key==='urg'||i.resolvedAsUrg):
+    exportKey==='admin'?items.filter(i=>i.key==='doc'||i.key==='sch'):
+    items.filter(i=>i.key===exportKey);
+  if(!filtered.length){showToast('此範圍沒有已完成的任務');return;}
+  const modLabel={doc:'公文留辦',sch:'獎助學金',case:'學生輔導',urg:'要事備查',assign:'交辦追蹤'};
+  const filterLabel={all:'全部',admin:'行政業務',case:'學生輔導',urg:'要事備查',assign:'交辦追蹤'}[exportKey]||exportKey;
+  const headers=['任務名稱','模組','完成日','建立日','備註','公文字號','發文機關','公文主旨','歷程記錄'];
+  const rows=filtered.map(t=>[
+    t.t,
+    modLabel[t.key]||t.key,
+    t.completedAt||'',
+    t.createdAt||'',
+    t.note||'',
+    t.docno||'',
+    t.docorg||'',
+    t.docsubj||'',
+    (t.history||[]).map(h=>`${h.date}: ${h.content}`).join('；'),
+  ]);
+  downloadCSV([headers,...rows],`存檔紀錄_${filterLabel}`);
+  showToast(`已匯出「${filterLabel}」${filtered.length} 筆`);
+}
+
 function setArchiveFilter(key,btn){
-  curArchiveFilter=key;
   document.querySelectorAll('.archive-filter-btn').forEach(b=>b.classList.remove('on'));
   if(btn)btn.classList.add('on');
   renderArchivePage();
@@ -2027,7 +2199,10 @@ function renderArchivePage(){
   let items=[];
   ['doc','sch','case','urg','assign'].forEach(k=>(tasks[k]||[]).filter(t=>t.done).forEach(t=>items.push({...t,key:k})));
   items.sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
-  const filtered=curArchiveFilter==='all'?items:items.filter(i=>i.key===curArchiveFilter);
+  const filtered=curArchiveFilter==='all'?items:
+    curArchiveFilter==='urg'?items.filter(i=>i.key==='urg'||i.resolvedAsUrg):
+    curArchiveFilter==='admin'?items.filter(i=>i.key==='doc'||i.key==='sch'):
+    items.filter(i=>i.key===curArchiveFilter);
   const countEl=document.getElementById('archive-count');
   if(countEl)countEl.textContent=`共 ${filtered.length} 件`;
   const el=document.getElementById('archive-content');
@@ -2036,23 +2211,61 @@ function renderArchivePage(){
     el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>${curArchiveFilter==='all'?'還沒有已完成的任務':'此分類沒有已完成的任務'}</p></div>`;
     return;
   }
-  el.innerHTML=filtered.map(t=>`<div class="archive-item">
+  el.innerHTML=filtered.map(t=>{
+    // 基本資訊行
+    const metaRows=[];
+    if(t.createdAt)metaRows.push(`<span style="color:var(--t3)">建立日</span> ${t.createdAt}`);
+    if(t.d&&t.d!==t.completedAt)metaRows.push(`<span style="color:var(--t3)">結案日</span> ${t.d}`);
+    // 公文留辦欄位
+    if(t.key==='doc'){
+      if(t.docno)metaRows.push(`<span style="color:var(--t3)">公文字號</span> ${escHtml(t.docno)}`);
+      if(t.docorg)metaRows.push(`<span style="color:var(--t3)">發文機關</span> ${escHtml(t.docorg)}`);
+    }
+    // 交辦來源
+    if(t.key==='assign'&&t.asrc){
+      const s=ASSIGN_SRCS.find(s=>s.key===t.asrc);
+      if(s)metaRows.push(`<span style="color:var(--t3)">來源</span> <span style="padding:1px 5px;border-radius:3px;background:${s.bg};color:${s.color};font-size:11px">${s.label}</span>`);
+    }
+    const metaLine=metaRows.length?`<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:5px;font-size:12px">${metaRows.join('')}</div>`:'';
+    // 公文主旨
+    const docSubjLine=t.key==='doc'&&t.docsubj?`<div style="margin-bottom:5px;font-size:12px"><span style="color:var(--t3)">主旨</span> ${escHtml(t.docsubj)}</div>`:'';
+    // 備註（永遠顯示）
+    const noteLine=`<div style="font-size:12px"><span style="color:var(--t3)">備註</span> ${t.note?`<span style="background:var(--surface);padding:2px 6px;border-radius:4px;border-left:2px solid var(--border-s)">${escHtml(t.note)}</span>`:'<span style="color:var(--border-s);font-style:italic">（無）</span>'}</div>`;
+    // 要事歷程
+    let histLine='';
+    if(t.history&&t.history.length){
+      const entries=t.history.map(h=>`<div style="display:flex;gap:8px;padding:1px 0"><span style="color:var(--r3);font-size:10px;white-space:nowrap;min-width:46px">${h.date}</span><span style="font-size:12px">${escHtml(h.content)}</span></div>`).join('');
+      histLine=`<div style="margin-top:5px;font-size:12px"><span style="color:var(--t3)">歷程（${t.history.length}）</span><div style="margin-top:3px;padding:4px 8px;background:var(--surface);border-radius:4px;border-left:2px solid #FFCDD2">${entries}</div></div>`;
+    }
+    const detailHTML=`<div class="archive-detail" id="arc-detail-${t.id}">${metaLine}${docSubjLine}${noteLine}${histLine}</div>`;
+    return `<div class="archive-item-wrap">
+  <div class="archive-item">
     <i class="ti ti-circle-check" style="color:var(--g3);font-size:16px;flex-shrink:0"></i>
-    <span class="archive-txt">${t.t}</span>
+    <span class="archive-txt">${escHtml(t.t)}</span>
     <span class="archive-mod ${META[t.key].ico}" style="background:${META[t.key].color}22;color:${META[t.key].color};flex-shrink:0">${META[t.key].label}</span>
     <span class="archive-meta" style="flex-shrink:0">${t.completedAt||t.d}</span>
     <div class="archive-actions">
+      <button class="arc-expand-btn" id="arc-expand-${t.id}" onclick="toggleArchiveDetail('${t.id}')" title="查看細項"><i class="ti ti-chevron-down"></i></button>
       <button class="arc-btn restore" onclick="restoreTask('${t.key}',${t.id})" title="還原為待辦"><i class="ti ti-arrow-back-up"></i>還原</button>
       <button class="arc-btn del" onclick="deleteArchivedTask('${t.key}',${t.id})" title="永久刪除"><i class="ti ti-trash"></i>刪除</button>
     </div>
-  </div>`).join('');
+  </div>
+  ${detailHTML}
+</div>`;
+  }).join('');
+}
+function toggleArchiveDetail(id){
+  const el=document.getElementById('arc-detail-'+id);if(!el)return;
+  const btn=document.getElementById('arc-expand-'+id);
+  const show=el.classList.toggle('show');
+  if(btn)btn.innerHTML=`<i class="ti ti-chevron-${show?'up':'down'}"></i>`;
 }
 
 function restoreTask(key,id){
   const arr=tasks[key]||[];
   const t=arr.find(t=>t.id===id);
   if(!t)return;
-  t.done=false;delete t.completedAt;
+  t.done=false;delete t.completedAt;delete t.resolvedAsUrg;
   // 同步移除對應的結案日誌
   journal=journal.filter(e=>!(e.taskId===id&&e.content&&e.content.startsWith('結案：')));
   saveJournal();
@@ -2072,7 +2285,7 @@ function deleteArchivedTask(key,id){
 function navTo(el,page){
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const map={tasks:'page-tasks',schedule:'page-schedule',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats',doc:'page-doc',sch:'page-sch',case:'page-case',urg:'page-urg',assign:'page-assign'};
+  const map={tasks:'page-tasks',schedule:'page-schedule',archive:'page-archive',prompts:'page-prompts',journal:'page-journal',teaching:'page-teaching',settings:'page-settings',stats:'page-stats',doc:'page-admin',sch:'page-admin',admin:'page-admin',dashboard:'page-admin',case:'page-case',urg:'page-urg',assign:'page-assign'};
   document.getElementById(map[page]||'page-doc').classList.add('active');
   if(page==='tasks')renderTaskPage();
   if(page==='schedule')renderSchedulePage();
@@ -2092,8 +2305,14 @@ function switchModule(btn,key){
   if(btn)btn.classList.add('on');
   curKey=key;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+key).classList.add('active');
-  updatePanel(key);
+  if(key==='doc'||key==='sch'){
+    curAdminTab=key;
+    document.getElementById('page-admin').classList.add('active');
+    _renderAdminContent();
+  } else {
+    document.getElementById('page-'+key).classList.add('active');
+    updatePanel(key);
+  }
 }
 
 /* ══ PROMPTS ══ */
@@ -2698,7 +2917,7 @@ table{width:100%;border-collapse:collapse;table-layout:fixed}
 
 
 /* ══ TEACHING JOURNAL ══ */
-let teachingRecords=[];
+let teachingRecords=[], curTJView='kanban', curTJClass=null;
 
 function initTeaching(){
   const s=localStorage.getItem('wp_teaching_v1');
@@ -2740,6 +2959,85 @@ function confirmAddTeaching(){
 }
 
 function renderTeachingPage(){
+  if(curTJView==='kanban')renderTJKanban();
+  else renderTJLog();
+}
+
+function switchTJView(view){
+  curTJView=view;
+  document.getElementById('tjv-kanban')?.classList.toggle('on',view==='kanban');
+  document.getElementById('tjv-log')?.classList.toggle('on',view==='log');
+  const lf=document.getElementById('tj-log-filters');
+  if(lf)lf.style.display=view==='log'?'flex':'none';
+  document.getElementById('tj-view-kanban').style.display=view==='kanban'?'block':'none';
+  document.getElementById('tj-view-log').style.display=view==='log'?'block':'none';
+  renderTeachingPage();
+}
+
+function renderTJKanban(){
+  const grid=document.getElementById('tj-kanban-grid');if(!grid)return;
+  if(!teachingRecords.length){
+    grid.innerHTML=`<div class="tj-empty" style="grid-column:1/-1"><i class="ti ti-school"></i><p>尚無教學記錄，點「新增記錄」開始</p></div>`;
+    const det=document.getElementById('tj-cls-detail-wrap');if(det)det.style.display='none';
+    return;
+  }
+  const today=localISO();
+  const classMap={};
+  teachingRecords.forEach(r=>{if(!classMap[r.className])classMap[r.className]=[];classMap[r.className].push(r);});
+  Object.values(classMap).forEach(arr=>arr.sort((a,b)=>b.date.localeCompare(a.date)));
+  const sorted=Object.entries(classMap).sort(([,a],[,b])=>b[0].date.localeCompare(a[0].date));
+  const daysSince=d=>{if(!d)return999;const diff=new Date(today+'T12:00:00')-new Date(d+'T12:00:00');return Math.floor(diff/(1000*60*60*24));};
+  const fmtShort=d=>{if(!d)return'';const dt=new Date(d+'T12:00:00');return`${dt.getMonth()+1}/${dt.getDate()}`;};
+  grid.innerHTML=sorted.map(([cls,recs])=>{
+    const latest=recs[0];
+    const days=daysSince(latest.date);
+    const late=days>=7;
+    const active=curTJClass===cls;
+    return`<div class="tj-cls-card${late?' late':''}${active?' active':''}" onclick="showTJClassDetail('${cls.replace(/'/g,"\\'")}')">
+      <div class="tj-cls-name">${cls}</div>
+      <div class="tj-cls-last"><i class="ti ti-calendar" style="font-size:11px"></i> ${fmtShort(latest.date)}${latest.period?' '+latest.period:''}</div>
+      <div class="tj-cls-topic">${(latest.topic||'（無主題）').replace(/</g,'&lt;')}</div>
+      <div class="tj-cls-meta">
+        <span class="tj-cls-cnt">${recs.length} 節</span>
+        ${late?`<span class="tj-cls-late"><i class="ti ti-clock" style="font-size:10px"></i> ${days}天前</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  if(curTJClass&&classMap[curTJClass])_renderTJClassDetail(classMap[curTJClass]);
+  else{const det=document.getElementById('tj-cls-detail-wrap');if(det)det.style.display='none';}
+}
+
+function showTJClassDetail(cls){
+  curTJClass=cls;
+  renderTJKanban();
+}
+
+function _renderTJClassDetail(recs){
+  const wrap=document.getElementById('tj-cls-detail-wrap');if(!wrap)return;
+  wrap.style.display='block';
+  const nameEl=document.getElementById('tj-detail-name');if(nameEl)nameEl.textContent=curTJClass;
+  const cntEl=document.getElementById('tj-detail-cnt');if(cntEl)cntEl.textContent=`共 ${recs.length} 節記錄`;
+  const tl=document.getElementById('tj-detail-timeline');if(!tl)return;
+  const fmtShort=d=>{if(!d)return'';const dt=new Date(d+'T12:00:00');return`${dt.getMonth()+1}/${dt.getDate()}`;};
+  tl.innerHTML=recs.map(r=>{
+    const safeP=(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const safeS=(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return`<div class="tj-tl-item">
+      <div class="tj-tl-dot"></div>
+      <div class="tj-tl-date">${fmtShort(r.date)}</div>
+      ${r.period?`<div class="tj-tl-period">${r.period}</div>`:''}
+      <div class="tj-tl-body">
+        ${r.topic?`<div class="tj-tl-topic">${r.topic.replace(/</g,'&lt;')}</div>`:''}
+        ${safeP?`<div class="tj-tl-prog">${safeP}</div>`:''}
+        ${safeS?`<div class="tj-tl-sit">${safeS}</div>`:''}
+        ${!r.topic&&!safeP&&!safeS?`<div class="tj-tl-prog" style="font-style:italic;color:var(--t3)">（尚無記錄內容）</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderTJLog(){
   const filterGrade=document.getElementById('tj-grade-filter')?.value||'';
   const filterClass=document.getElementById('tj-class-filter')?.value||'';
   const SORT_PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
@@ -2757,7 +3055,6 @@ function renderTeachingPage(){
     el.innerHTML=`<div class="tj-empty"><i class="ti ti-school"></i><p>${emptyMsg}</p></div>`;
     return;
   }
-  const PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
   const GRADES=['高一','高二','高三','國一','國二','國三'];
   const CLASSES=['忠','孝','仁','愛','信','義','和','平'];
 
@@ -3574,7 +3871,7 @@ function importAllData(input){
       if(data.wp_services_v1){serviceRecords=data.wp_services_v1;saveServices();}
       if(data.wp_teaching_v1){teachingRecords=data.wp_teaching_v1;saveTeaching();}
       if(data.wp_schedule_v1){scheduleItems=data.wp_schedule_v1;saveSchedule();}
-      updateStats();updatePanel(curKey);renderJournalMonths();
+      updateStats();updatePanel(curKey==='doc'||curKey==='sch'?'admin':curKey);renderJournalMonths();
       if(document.getElementById('page-schedule')?.classList.contains('active'))renderSchedulePage();
       showToast('備份匯入成功！');input.value='';
     }catch(err){showToast('匯入失敗：JSON 格式錯誤');input.value='';}

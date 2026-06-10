@@ -980,7 +980,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('case-form')"><i class="ti ti-plus"></i>新增個案</button>
       <div class="stats-export-grp">
-        <button class="stats-export-btn" onclick="aiCaseSummary()"><i class="ti ti-robot"></i>AI 摘要</button>
+        <button class="stats-export-btn" onclick="aiCaseSummary(this)"><i class="ti ti-robot"></i>AI 摘要</button>
         <button class="stats-export-btn" onclick="exportCasesCSV()"><i class="ti ti-download"></i>CSV</button>
         <button class="stats-export-btn" onclick="printCaseStats()"><i class="ti ti-printer"></i>列印報表</button>
       </div>
@@ -1021,7 +1021,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('service-form')"><i class="ti ti-plus"></i>新增服務記錄</button>
       <div class="stats-export-grp">
-        <button class="stats-export-btn" onclick="aiServiceSummary()"><i class="ti ti-robot"></i>AI 摘要</button>
+        <button class="stats-export-btn" onclick="aiServiceSummary(this)"><i class="ti ti-robot"></i>AI 摘要</button>
         <button class="stats-export-btn" onclick="exportServicesCSV()"><i class="ti ti-download"></i>CSV</button>
         <button class="stats-export-btn" onclick="printServiceStats()"><i class="ti ti-printer"></i>列印報表</button>
       </div>
@@ -2021,7 +2021,7 @@ function toggleTask(key,idx){
   const t=tasks[key][idx];t.done=!t.done;
   if(t.done){
     if(t.u)t.resolvedAsUrg=true;
-    const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;t.u=false;
+    const n=new Date();t.completedAt=localISO(n);t.u=false;
     addAutoJournalEntry(`結案：${t.t}`,t.id,key);
   } else {
     delete t.resolvedAsUrg;
@@ -2042,9 +2042,11 @@ function toggleUrgent(key,idx){
 }
 function resolveUrgent(key,idx){
   const t=tasks[key][idx];t.resolvedAsUrg=true;t.done=true;t.u=false;
-  const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  t.completedAt=localISO();
   addAutoJournalEntry(`結案：${t.t}`,t.id,key);
-  save();updateStats();updatePanel('urg');showToast('已完成');
+  save();updateStats();updatePanel('urg');
+  if(key!=='urg')updatePanel(key);
+  showToast('已完成');
 }
 function deleteTask(key,idx){
   tasks[key].splice(idx,1);
@@ -2151,7 +2153,7 @@ function renderTaskPage(){
 }
 function tpToggle(key,idx){
   const t=tasks[key][idx];t.done=true;t.u=false;
-  const n=new Date();t.completedAt=`${n.getMonth()+1}/${n.getDate()}`;
+  t.completedAt=localISO();
   addAutoJournalEntry(`結案：${t.t}`);
   save();renderTaskPage();updateStats();showToast('已完成');
 }
@@ -2693,7 +2695,14 @@ function getTaskDate(id){
   return el.dataset.special||'待定';
 }
 function fmtTaskDate(d,done,completedAt){
-  if(done&&completedAt)return completedAt;
+  if(done&&completedAt){
+    // 新格式：YYYY-MM-DD → 顯示 M/D
+    if(/^\d{4}-\d{2}-\d{2}$/.test(completedAt)){
+      const dt=new Date(completedAt+'T12:00:00');
+      return`${dt.getMonth()+1}/${dt.getDate()}`;
+    }
+    return completedAt; // 舊格式 M/D 直接顯示
+  }
   if(!d)return'待定';
   if(/^\d{4}-\d{2}-\d{2}$/.test(d)){const dt=new Date(d+'T12:00:00');return`${dt.getMonth()+1}/${dt.getDate()}`;}
   return d;
@@ -3346,8 +3355,14 @@ function initStats(){
   });
   if(migrated)saveCases();
 }
-function saveCases(){localStorage.setItem('wp_cases_v1',JSON.stringify(caseRecords));}
-function saveServices(){localStorage.setItem('wp_services_v1',JSON.stringify(serviceRecords));}
+function saveCases(){
+  localStorage.setItem('wp_cases_v1',JSON.stringify(caseRecords));
+  if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
+}
+function saveServices(){
+  localStorage.setItem('wp_services_v1',JSON.stringify(serviceRecords));
+  if(isTokenValid&&isTokenValid()&&settings.sheetsId)debouncedSheetsSync();
+}
 
 function renderStatsPage(){
   renderProbCheckboxes();
@@ -3727,12 +3742,16 @@ function downloadCSV(rows,name){
 }
 
 function printCaseStats(){
-  if(!caseRecords.length){showToast('尚無個案資料');return;}
-  const total=caseRecords.length;
-  const m=caseRecords.filter(c=>c.gender==='男').length;
-  const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
-  const rows=caseRecords.map(c=>`<tr>
-    <td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
+  const filtered=getFilteredCases();
+  if(!filtered.length){showToast('尚無個案資料');return;}
+  const filterLabel=curStatsFilter.type==='all'?'全部資料':
+    curStatsFilter.type==='year'?`${curStatsFilter.value}學年度`:
+    `${curStatsFilter.value}學期`;
+  const total=filtered.length;
+  const m=filtered.filter(c=>c.gender==='男').length;
+  const ongoing=filtered.filter(c=>c.status==='輔導進行中').length;
+  const rows=filtered.map(c=>`<tr>
+    <td>${c.semester||'—'}</td><td>${c.no}</td><td>${c.gender}</td><td>${c.grade}</td><td>${c.source}</td>
     <td>${(c.problems||[]).map(p=>PROBLEM_CATS[p-1]||p).join('、')}</td>
     <td style="text-align:center">${c.sessions}</td>
     <td>${c.status}</td>
@@ -3749,18 +3768,22 @@ function printCaseStats(){
   @media print{.bar{display:none}}</style></head><body>
   <div class="bar"><button onclick="window.print()" style="padding:6px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">🖨 列印</button></div>
   <h2>輔導個案統計報表</h2>
-  <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
+  <div class="meta">統計範圍：${filterLabel}　匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
   <div class="summary"><span>總個案：${total} 人</span><span>男：${m} 人</span><span>女：${total-m} 人</span><span>輔導中：${ongoing}</span><span>已結案：${total-ongoing}</span></div>
-  <table><thead><tr><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th></tr></thead>
+  <table><thead><tr><th>學期</th><th>個案編號</th><th>性別</th><th>年段</th><th>個案來源</th><th>個案問題</th><th>輔導次數</th><th>結案狀態</th></tr></thead>
   <tbody>${rows}</tbody></table></body></html>`;
   const win=window.open('','_blank','width=1000,height=700');
   if(win){win.document.write(html);win.document.close();}
 }
 
 function printServiceStats(){
-  if(!serviceRecords.length){showToast('尚無服務記錄');return;}
+  const filtered=getFilteredServices();
+  if(!filtered.length){showToast('尚無服務記錄');return;}
+  const filterLabel=curStatsFilter.type==='all'?'全部資料':
+    curStatsFilter.type==='year'?`${curStatsFilter.value}學年度`:
+    `${curStatsFilter.value}學期`;
   const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
-  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  filtered.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
   const rows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
   const gM=rows.reduce((s,r)=>s+r.male,0),gF=rows.reduce((s,r)=>s+r.female,0);
   const html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>相關服務統計報表</title>
@@ -3774,7 +3797,7 @@ function printServiceStats(){
   @media print{.bar{display:none}}</style></head><body>
   <div class="bar"><button onclick="window.print()" style="padding:6px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">🖨 列印</button></div>
   <h2>相關服務統計報表</h2>
-  <div class="meta">匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
+  <div class="meta">統計範圍：${filterLabel}　匯出時間：${new Date().toLocaleDateString('zh-TW')}</div>
   <table><thead><tr><th>服務項目</th><th>男性人次</th><th>女性人次</th><th>合計人次</th></tr></thead>
   <tbody>
     ${rows.map(r=>`<tr><td>${r.type}</td><td>${r.male}</td><td>${r.female}</td><td>${r.total}</td></tr>`).join('')}
@@ -3963,75 +3986,70 @@ function showAIResult(title,text){
   win.document.close();
 }
 
-async function aiCaseSummary(){
-  if(!caseRecords.length){showToast('尚無個案資料');return;}
+async function aiCaseSummary(btn){
+  const filtered=getFilteredCases();
+  if(!filtered.length){showToast('尚無個案資料');return;}
+  const filterLabel=curStatsFilter.type==='all'?'':
+    curStatsFilter.type==='year'?`（${curStatsFilter.value}學年度）`:
+    `（${curStatsFilter.value}學期）`;
+  const total=filtered.length;
+  const m=filtered.filter(c=>c.gender==='男').length;
+  const ongoing=filtered.filter(c=>c.status==='輔導進行中').length;
+  const gradeMap={};filtered.forEach(c=>{gradeMap[c.grade]=(gradeMap[c.grade]||0)+1;});
+  const gradeStr=Object.entries(gradeMap).map(([g,n])=>`${g} ${n}人`).join('、');
+  const probCount={};filtered.forEach(c=>(c.problems||[]).forEach(p=>{const name=PROBLEM_CATS[p-1];if(name)probCount[name]=(probCount[name]||0)+1;}));
+  const topProbs=Object.entries(probCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>`${n}(${c})`).join('、');
   if(!settings.aiEnabled||!settings.apiKey){
-    // 非 API 路徑：帶資料開 Claude.ai
-    const total=caseRecords.length;
-    const m=caseRecords.filter(c=>c.gender==='男').length;
-    const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
-    const gradeMap={};caseRecords.forEach(c=>{gradeMap[c.grade]=(gradeMap[c.grade]||0)+1;});
-    const gradeStr=Object.entries(gradeMap).map(([g,n])=>`${g} ${n}人`).join('、');
-    const probCount={};caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{const name=PROBLEM_CATS[p-1];if(name)probCount[name]=(probCount[name]||0)+1;}));
-    const topProbs=Object.entries(probCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>`${n}(${c})`).join('、');
-    const prompt=`請根據以下數據產出個案輔導統計報表摘要（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n請用繁體中文，語氣正式，適合作為報告摘要。`;
+    const prompt=`請根據以下數據產出個案輔導統計報表摘要${filterLabel}（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n請用繁體中文，語氣正式，適合作為報告摘要。`;
     navigator.clipboard.writeText(prompt).catch(()=>{});
     showToast('Prompt 已複製，正在開啟 Claude.ai...');
     setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);
     return;
   }
-  // API 路徑
-  const btn=event.currentTarget;
-  const origHTML=btn.innerHTML;
-  btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';
-  btn.disabled=true;
+  const origHTML=btn?btn.innerHTML:'';
+  if(btn){btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';btn.disabled=true;}
   try{
-    const total=caseRecords.length;
-    const m=caseRecords.filter(c=>c.gender==='男').length;
-    const ongoing=caseRecords.filter(c=>c.status==='輔導進行中').length;
-    const gradeMap={};caseRecords.forEach(c=>{gradeMap[c.grade]=(gradeMap[c.grade]||0)+1;});
-    const gradeStr=Object.entries(gradeMap).map(([g,n])=>`${g} ${n}人`).join('、');
-    const probCount={};caseRecords.forEach(c=>(c.problems||[]).forEach(p=>{const name=PROBLEM_CATS[p-1];if(name)probCount[name]=(probCount[name]||0)+1;}));
-    const topProbs=Object.entries(probCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>`${n}(${c})`).join('、');
     const sys='你是學校心輔組的行政助理，擅長產出正式的統計摘要文字，用繁體中文回答。';
-    const msg=`請根據以下數據產出個案輔導統計報表摘要（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n語氣正式，適合作為對上呈報的摘要段落。`;
+    const msg=`請根據以下數據產出個案輔導統計報表摘要${filterLabel}（約200字）：\n\n個案總數：${total}人\n性別：男${m}人 女${total-m}人\n年段分布：${gradeStr}\n輔導進行中：${ongoing}人 / 已結案：${total-ongoing}人\n主要問題類別：${topProbs||'（無資料）'}\n\n語氣正式，適合作為對上呈報的摘要段落。`;
     const result=await callAI(sys,msg);
     showAIResult('個案統計摘要',result);
   }catch(err){
     showToast('AI 呼叫失敗：'+err.message);
   }finally{
-    btn.innerHTML=origHTML;btn.disabled=false;
+    if(btn){btn.innerHTML=origHTML;btn.disabled=false;}
   }
 }
 
-async function aiServiceSummary(){
-  if(!serviceRecords.length){showToast('尚無服務記錄');return;}
+async function aiServiceSummary(btn){
+  const filtered=getFilteredServices();
+  if(!filtered.length){showToast('尚無服務記錄');return;}
+  const filterLabel=curStatsFilter.type==='all'?'':
+    curStatsFilter.type==='year'?`（${curStatsFilter.value}學年度）`:
+    `（${curStatsFilter.value}學期）`;
   const sum={};SERVICE_TYPES.forEach(t=>{sum[t]={male:0,female:0};});
-  serviceRecords.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
+  filtered.forEach(s=>{if(sum[s.type]){sum[s.type].male+=s.male;sum[s.type].female+=s.female;}});
   const activeRows=SERVICE_TYPES.map(t=>({type:t,...sum[t],total:sum[t].male+sum[t].female})).filter(r=>r.total>0);
   const gM=activeRows.reduce((s,r)=>s+r.male,0),gF=activeRows.reduce((s,r)=>s+r.female,0);
   const dataStr=activeRows.map(r=>`${r.type}：男${r.male}人次 女${r.female}人次 共${r.total}人次`).join('\n');
 
   if(!settings.aiEnabled||!settings.apiKey){
-    const prompt=`請根據以下相關服務統計資料，產出約150字的服務統計摘要（繁體中文，正式語氣）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
+    const prompt=`請根據以下相關服務統計資料${filterLabel}，產出約150字的服務統計摘要（繁體中文，正式語氣）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
     navigator.clipboard.writeText(prompt).catch(()=>{});
     showToast('Prompt 已複製，正在開啟 Claude.ai...');
     setTimeout(()=>window.open('https://claude.ai/new','_blank'),400);
     return;
   }
-  const btn=event.currentTarget;
-  const origHTML=btn.innerHTML;
-  btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';
-  btn.disabled=true;
+  const origHTML=btn?btn.innerHTML:'';
+  if(btn){btn.innerHTML='<i class="ti ti-loader-2"></i> 產出中...';btn.disabled=true;}
   try{
     const sys='你是學校心輔組的行政助理，擅長產出正式的統計摘要文字，用繁體中文回答。';
-    const msg=`請根據以下相關服務統計資料，產出約150字的服務統計摘要（繁體中文，正式語氣，適合呈報）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
+    const msg=`請根據以下相關服務統計資料${filterLabel}，產出約150字的服務統計摘要（繁體中文，正式語氣，適合呈報）：\n\n${dataStr}\n\n合計：男${gM}人次 女${gF}人次 共${gM+gF}人次`;
     const result=await callAI(sys,msg);
     showAIResult('相關服務統計摘要',result);
   }catch(err){
     showToast('AI 呼叫失敗：'+err.message);
   }finally{
-    btn.innerHTML=origHTML;btn.disabled=false;
+    if(btn){btn.innerHTML=origHTML;btn.disabled=false;}
   }
 }
 
@@ -4072,6 +4090,7 @@ function onGoogleToken(resp){
     showToast('Google 登入失敗：'+resp.error);
     return;
   }
+  const wasLoggedIn=!!gToken;
   gToken=resp;
   gToken.expiry=Date.now()+3500*1000;
   try{localStorage.setItem('wp_gtoken',JSON.stringify({access_token:gToken.access_token,expiry:gToken.expiry}));}catch(e){}
@@ -4079,7 +4098,7 @@ function onGoogleToken(resp){
   // 在 token 到期前 5 分鐘自動靜默續期
   scheduleTokenRefresh();
   showToast('Google 登入成功！正在同步資料...');
-  loadFromSheets();
+  if(!wasLoggedIn)loadFromSheets();
 }
 
 function scheduleTokenRefresh(){
@@ -4194,7 +4213,23 @@ async function loadFromSheets(){
     if(!data.values||!data.values.length){await syncToSheets();showToast('✓ 首次同步完成');return;}
     const map={};data.values.forEach(([k,v])=>{try{map[k]=JSON.parse(v);}catch(e){map[k]=v;}});
     let changed=false, needsPush=false;
-    if(map.tasks){tasks=map.tasks;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));changed=true;}
+    // tasks：合併策略（保留本機有但雲端沒有的）
+    if(Array.isArray(map.tasks)){
+      const localTasks=JSON.parse(localStorage.getItem('wp_tasks_v3')||'{}');
+      let tasksMerged=false;
+      Object.keys({...localTasks,...map.tasks}).forEach(k=>{
+        const local=(localTasks[k]||[]);
+        const cloud=(map.tasks[k]||[]);
+        const cloudIds=new Set(cloud.map(t=>t.id));
+        const localOnly=local.filter(t=>!cloudIds.has(t.id));
+        if(localOnly.length>0){map.tasks[k]=[...cloud,...localOnly];tasksMerged=true;}
+      });
+      tasks=map.tasks;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));
+      if(tasksMerged)needsPush=true;
+      changed=true;
+    } else if(map.tasks&&typeof map.tasks==='object'){
+      tasks=map.tasks;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));changed=true;
+    }
     if(map.journal){
       // 合併策略：雲端有的保留，本機有但雲端沒有的也保留，避免手動新增記錄被覆蓋
       const localJournal=JSON.parse(localStorage.getItem('wp_journal_v1')||'[]');
@@ -4211,8 +4246,39 @@ async function loadFromSheets(){
       }
       saveJournal();changed=true;
     }
-    if(map.cases){caseRecords=map.cases;saveCases();changed=true;}
-    if(map.services){serviceRecords=map.services;saveServices();changed=true;}
+    // cases / services：本機有資料時不被空陣列覆蓋
+    if(Array.isArray(map.cases)){
+      const localCases=JSON.parse(localStorage.getItem('wp_cases_v1')||'[]');
+      if(map.cases.length>0){
+        // 雲端有資料：以 id 合併（雲端為主，補入本機獨有）
+        const cloudCaseIds=new Set(map.cases.map(c=>c.id));
+        const localOnlyCases=localCases.filter(c=>!cloudCaseIds.has(c.id));
+        caseRecords=localOnlyCases.length>0?[...map.cases,...localOnlyCases]:map.cases;
+        if(localOnlyCases.length>0)needsPush=true;
+      } else if(localCases.length>0){
+        // 雲端是空的，但本機有資料 → 保留本機並回推
+        caseRecords=localCases;
+        needsPush=true;
+      } else {
+        caseRecords=[];
+      }
+      localStorage.setItem('wp_cases_v1',JSON.stringify(caseRecords));changed=true;
+    }
+    if(Array.isArray(map.services)){
+      const localSvcs=JSON.parse(localStorage.getItem('wp_services_v1')||'[]');
+      if(map.services.length>0){
+        const cloudSvcIds=new Set(map.services.map(s=>s.id));
+        const localOnlySvcs=localSvcs.filter(s=>!cloudSvcIds.has(s.id));
+        serviceRecords=localOnlySvcs.length>0?[...map.services,...localOnlySvcs]:map.services;
+        if(localOnlySvcs.length>0)needsPush=true;
+      } else if(localSvcs.length>0){
+        serviceRecords=localSvcs;
+        needsPush=true;
+      } else {
+        serviceRecords=[];
+      }
+      localStorage.setItem('wp_services_v1',JSON.stringify(serviceRecords));changed=true;
+    }
     if(map.teaching){teachingRecords=map.teaching;saveTeaching();changed=true;}
     if(map.schedule){scheduleItems=map.schedule;saveSchedule();}
     // 遷移從雲端來的舊個案（補 semester）
@@ -4488,7 +4554,7 @@ function checkSemReminder(){
 }
 function dismissSemRemind(){
   document.getElementById('sem-remind-banner').classList.remove('show');
-  settings.semRemindDismissed=true;saveSettings();
+  // 不設 semRemindDismissed，semRemindShown 已防同一學期重複顯示
 }
 
 /* ══ SCHEDULE MODULE ══ */

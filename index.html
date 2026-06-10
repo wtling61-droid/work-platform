@@ -3019,22 +3019,62 @@ function _renderTJClassDetail(recs){
   const cntEl=document.getElementById('tj-detail-cnt');if(cntEl)cntEl.textContent=`共 ${recs.length} 節記錄`;
   const tl=document.getElementById('tj-detail-timeline');if(!tl)return;
   const fmtShort=d=>{if(!d)return'';const dt=new Date(d+'T12:00:00');return`${dt.getMonth()+1}/${dt.getDate()}`;};
+  const PERIODS=['早自習','第1節','第2節','第3節','第4節','午休','第5節','第6節','第7節','第8節'];
   tl.innerHTML=recs.map(r=>{
     const safeP=(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const safeS=(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    return`<div class="tj-tl-item">
+    const periodOpts=PERIODS.map(p=>`<option${p===r.period?' selected':''}>${p}</option>`).join('');
+    return`<div class="tj-tl-item" id="tjt-item-${r.id}">
       <div class="tj-tl-dot"></div>
       <div class="tj-tl-date">${fmtShort(r.date)}</div>
       ${r.period?`<div class="tj-tl-period">${r.period}</div>`:''}
       <div class="tj-tl-body">
-        ${r.topic?`<div class="tj-tl-topic">${r.topic.replace(/</g,'&lt;')}</div>`:''}
-        ${safeP?`<div class="tj-tl-prog">${safeP}</div>`:''}
-        ${safeS?`<div class="tj-tl-sit">${safeS}</div>`:''}
-        ${!r.topic&&!safeP&&!safeS?`<div class="tj-tl-prog" style="font-style:italic;color:var(--t3)">（尚無記錄內容）</div>`:''}
+        <div id="tjt-view-${r.id}">
+          ${r.topic?`<div class="tj-tl-topic">${r.topic.replace(/</g,'&lt;')}</div>`:''}
+          ${safeP?`<div class="tj-tl-prog">${safeP}</div>`:''}
+          ${safeS?`<div class="tj-tl-sit">${safeS}</div>`:''}
+          ${!r.topic&&!safeP&&!safeS?`<div class="tj-tl-prog" style="font-style:italic;color:var(--t3)">（尚無記錄內容）</div>`:''}
+        </div>
+        <div id="tjt-edit-${r.id}" style="display:none;margin-top:8px;display:none">
+          <div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap">
+            <input type="date" id="tjt-date-${r.id}" value="${r.date||''}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">
+            <select id="tjt-period-${r.id}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">${periodOpts}</select>
+            <input type="text" id="tjt-topic-${r.id}" value="${(r.topic||'').replace(/"/g,'&quot;')}" placeholder="課程主題" style="flex:1;min-width:120px;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">
+          </div>
+          <textarea id="tjt-prog-${r.id}" placeholder="教學進度..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:4px">${r.progress||''}</textarea>
+          <textarea id="tjt-sit-${r.id}" placeholder="課堂狀況..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:6px">${r.situation||''}</textarea>
+          <div style="display:flex;gap:6px">
+            <button onclick="saveTJTimelineEdit(${r.id})" style="height:26px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;border:none;background:var(--g3);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif">儲存</button>
+            <button onclick="cancelTJTimelineEdit(${r.id})" style="height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif">取消</button>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:2px;flex-shrink:0;margin-left:6px;align-self:flex-start;margin-top:2px">
+        <button class="tj-action-btn" onclick="toggleTJTimelineEdit(${r.id})" title="編輯"><i class="ti ti-pencil"></i></button>
+        <button class="tj-action-btn del" onclick="deleteTJRecord(${r.id})" title="刪除"><i class="ti ti-trash"></i></button>
       </div>
     </div>`;
   }).join('');
   wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function toggleTJTimelineEdit(id){
+  const v=document.getElementById('tjt-view-'+id);
+  const e=document.getElementById('tjt-edit-'+id);
+  if(!v||!e)return;
+  const show=e.style.display==='none'||!e.style.display;
+  v.style.display=show?'none':'block';
+  e.style.display=show?'block':'none';
+}
+function cancelTJTimelineEdit(id){toggleTJTimelineEdit(id);}
+function saveTJTimelineEdit(id){
+  const idx=teachingRecords.findIndex(r=>r.id===id);if(idx<0)return;
+  const r=teachingRecords[idx];
+  r.date=document.getElementById('tjt-date-'+id)?.value||r.date;
+  r.period=document.getElementById('tjt-period-'+id)?.value||r.period;
+  r.topic=document.getElementById('tjt-topic-'+id)?.value||'';
+  r.progress=document.getElementById('tjt-prog-'+id)?.value||'';
+  r.situation=document.getElementById('tjt-sit-'+id)?.value||'';
+  saveTeaching();renderTeachingPage();showToast('已更新');
 }
 
 function renderTJLog(){

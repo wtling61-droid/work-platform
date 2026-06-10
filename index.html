@@ -2190,6 +2190,7 @@ function exportArchiveCSV(){
 }
 
 function setArchiveFilter(key,btn){
+  curArchiveFilter=key;
   document.querySelectorAll('.archive-filter-btn').forEach(b=>b.classList.remove('on'));
   if(btn)btn.classList.add('on');
   renderArchivePage();
@@ -4192,9 +4193,24 @@ async function loadFromSheets(){
     const data=await dataResp.json();
     if(!data.values||!data.values.length){await syncToSheets();showToast('✓ 首次同步完成');return;}
     const map={};data.values.forEach(([k,v])=>{try{map[k]=JSON.parse(v);}catch(e){map[k]=v;}});
-    let changed=false;
+    let changed=false, needsPush=false;
     if(map.tasks){tasks=map.tasks;localStorage.setItem('wp_tasks_v3',JSON.stringify(tasks));changed=true;}
-    if(map.journal){journal=map.journal;saveJournal();changed=true;}
+    if(map.journal){
+      // 合併策略：雲端有的保留，本機有但雲端沒有的也保留，避免手動新增記錄被覆蓋
+      const localJournal=JSON.parse(localStorage.getItem('wp_journal_v1')||'[]');
+      const cloudIds=new Set(map.journal.map(e=>e.id));
+      const localOnly=localJournal.filter(e=>!cloudIds.has(e.id));
+      if(localOnly.length>0){
+        // 本機有雲端沒有的 entry，合併後回推
+        const merged=[...map.journal,...localOnly];
+        merged.sort((a,b)=>(b.date||'').localeCompare(a.date||'')||((b.id||0)-(a.id||0)));
+        journal=merged;
+        needsPush=true;
+      } else {
+        journal=map.journal;
+      }
+      saveJournal();changed=true;
+    }
     if(map.cases){caseRecords=map.cases;saveCases();changed=true;}
     if(map.services){serviceRecords=map.services;saveServices();changed=true;}
     if(map.teaching){teachingRecords=map.teaching;saveTeaching();changed=true;}
@@ -4206,7 +4222,12 @@ async function loadFromSheets(){
     if(changed){updateStats();updatePanel(curKey);renderJournalMonths();}
     // schedule 頁面若開著則刷新
     if(document.getElementById('page-schedule')?.classList.contains('active'))renderSchedulePage();
-    showToast('✓ 雲端資料同步完成');
+    if(needsPush){
+      showToast('✓ 同步完成（本機新記錄已合併並上傳）');
+      syncToSheets();
+    } else {
+      showToast('✓ 雲端資料同步完成');
+    }
   }catch(e){console.warn('loadFromSheets error:',e);showToast('雲端載入失敗，請確認試算表 ID');}
 }
 

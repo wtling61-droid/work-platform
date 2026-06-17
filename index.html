@@ -10,22 +10,23 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 :root{
-  --bg:#EEF0EA;--surface:#F4F6F0;--surface-2:#E4E8DE;
-  --border:#CDD3C4;--border-s:#B0BAA8;
-  --t1:#252B20;--t2:#6A7560;--t3:#92A082;
-  --g1:#2D5A27;--g2:#4A7C3F;--g3:#6A9A52;--g4:#A8C898;--g5:#E4EED8;
-  --a1:#7A4E18;--a3:#C47C2A;--a5:#F5E8CC;
-  --b1:#2A3D5A;--b3:#4A6080;--b5:#DCE8F5;
-  --p1:#3A2890;--p3:#6A52D0;--p5:#EEEAFF;
-  --r1:#6B2A2A;--r3:#B84444;--r5:#F5E0DC;
+  --font-main:'Noto Sans TC',sans-serif;
+  --bg:#E6EAEC;--surface:#F4F7F8;--surface-2:#DCE3E6;
+  --border:#C0C9CD;--border-s:#9DA8AE;
+  --t1:#1C2A2E;--t2:#54626A;--t3:#7C8A92;
+  --g1:#0E5C50;--g2:#1C7A68;--g3:#3C9C86;--g4:#8FC6B8;--g5:#D8EEE6;
+  --a1:#6A4A14;--a3:#C0843A;--a5:#F0E0C0;
+  --b1:#1C3850;--b3:#365E7E;--b5:#CEE0EC;
+  --p1:#2C2470;--p3:#5446A8;--p5:#E2DCF8;
+  --r1:#622828;--r3:#B03E3C;--r5:#F0DCD8;
   --sw:206px;--hh:54px;--sh:46px;--rad:11px;--rad-s:7px;
-  --doc-hbg:#F5E8CC;--doc-hbd:#C47C2A;
-  --sch-hbg:#E4EED8;--sch-hbd:#4A7C3F;
-  --case-hbg:#DCE8F5;--case-hbd:#4A6080;
-  --urg-hbg:#F5E0DC;--urg-hbd:#B84444;
+  --doc-hbg:#F0E0C0;--doc-hbd:#C0843A;
+  --sch-hbg:#D8EEE6;--sch-hbd:#3C9C86;
+  --case-hbg:#CEE0EC;--case-hbd:#365E7E;
+  --urg-hbg:#F0DCD8;--urg-hbd:#B03E3C;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);font-size:15px;line-height:1.6;min-height:100vh}
+body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size:15px;line-height:1.6;min-height:100vh}
 .layout{display:grid;grid-template-columns:var(--sw) 1fr;grid-template-rows:var(--hh) var(--sh) 1fr;min-height:100vh}
 .hdr{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:var(--t1);cursor:pointer}
@@ -44,7 +45,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tag-warn{background:var(--a5);color:var(--a1)}.tag-ok{background:var(--g5);color:var(--g1)}.tag-urg{background:var(--r5);color:var(--r1)}
 .nav{grid-column:1;grid-row:3;background:var(--surface);border-right:1px solid var(--border);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--sh));height:calc(100vh - var(--hh) - var(--sh));overflow-y:auto}
 .nav-lbl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);padding:5px 18px 3px}
-.ni{display:flex;align-items:center;gap:8px;padding:8px 11px;margin:0 8px;border-radius:var(--rad-s);font-size:14px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left;font-family:'Noto Sans TC',sans-serif}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 11px;margin:0 8px;border-radius:var(--rad-s);font-size:14px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:calc(100% - 16px);text-align:left;font-family:var(--font-main)}
 .ni:hover{background:var(--surface-2);color:var(--t1)}.ni.on{background:var(--g5);color:var(--g1);font-weight:500}
 .ni i{font-size:18px;width:19px;flex-shrink:0}
 .ni-badge{margin-left:auto;background:var(--r3);color:#fff;font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 4px}
@@ -81,7 +82,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .c-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
 .badge{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:500;padding:2px 8px;border-radius:4px}
 .bdg-on{background:var(--g5);color:var(--g1)}.bdg-pd{background:var(--a5);color:var(--a1)}.bdg-id{background:var(--surface-2);color:var(--t3)}.bdg-urg{background:var(--r5);color:var(--r1)}.bdg-asgn{background:var(--p5);color:var(--p1)}
-.c-qbtn{font-size:12px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px;font-family:'Noto Sans TC',sans-serif}
+.c-qbtn{font-size:12px;color:var(--t3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:3px;font-family:var(--font-main)}
 .c-qbtn:hover{color:var(--g1);background:var(--g5)}
 .rec-list{display:flex;flex-direction:column}
 .rec-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--rad-s);cursor:pointer;transition:.12s}
@@ -105,9 +106,24 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .dash-stat-chip:hover{border-color:var(--a3);background:var(--a5,#f0f7ff)}
 .dash-stat-chip-lbl{font-size:10px;color:var(--t3)}
 .dash-stat-chip-val{font-size:13px;font-weight:700;color:var(--t1)}
+/* 停滯任務提醒 */
+#stale-wrap{padding:10px 14px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.stale-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.stale-title{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:5px}
+.stale-thresh-select{font-size:10px;border:1px solid var(--border);border-radius:4px;background:var(--surface-2);color:var(--t2);padding:1px 4px;outline:none;font-family:var(--font-main)}
+.stale-empty{font-size:12px;color:var(--t3);padding:4px 0}
+.stale-list{display:flex;flex-direction:column;gap:4px;max-height:120px;overflow-y:auto}
+.stale-item{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:var(--rad-s);background:var(--surface-2);cursor:pointer;transition:.1s}
+.stale-item:hover{background:var(--r5,#fee2e2)}
+.stale-item-mod{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0;font-weight:600}
+.stale-item-txt{flex:1;font-size:12px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stale-item-days{font-size:11px;font-weight:700;flex-shrink:0}
+.stale-item-days.lv1{color:var(--y2,#d97706)}
+.stale-item-days.lv2{color:var(--r3)}
+.stale-item-days.lv3{color:var(--r1,#991b1b)}
 /* TABS */
 .p-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
-.p-tab{padding:9px 7px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
+.p-tab{padding:9px 7px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:var(--font-main)}
 .p-tab:hover{color:var(--t1)}.p-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
 .p-tab-content{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0}
 .p-tab-content.on{display:flex}
@@ -140,28 +156,28 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .t-act-btn{border:none;background:none;cursor:pointer;color:var(--t3);font-size:12px;padding:1px 3px;border-radius:3px;line-height:1}
 .t-act-btn:hover{color:var(--r3);background:var(--r5)}.t-act-btn.urg-btn:hover{color:var(--a3);background:var(--a5)}
 .task.urgent:not(.done) .urg-active{color:var(--r3)}
-.t-edit-input{flex:1;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface);min-width:0}
-.t-date-input{width:58px;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 4px;font-size:11px;font-family:'Noto Sans TC',sans-serif;outline:none;background:var(--surface)}
+.t-edit-input{flex:1;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:var(--font-main);outline:none;background:var(--surface);min-width:0}
+.t-date-input{width:58px;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 4px;font-size:11px;font-family:var(--font-main);outline:none;background:var(--surface)}
 /* ADD TASK */
-.add-task-btn{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:6px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.add-task-btn{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:6px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:var(--font-main)}
 .add-task-btn:hover{color:var(--g1);border-color:var(--g3);background:var(--g5)}
 .add-task-form{display:none;margin-top:6px;gap:4px;flex-direction:column}
 .add-task-form.show{display:flex}
-.add-task-form input,.add-task-form select{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.add-task-form input,.add-task-form select{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .add-task-form input:focus,.add-task-form select:focus{border-color:var(--g3);background:var(--surface)}
 .atf-row{display:flex;gap:4px}
-.atf-ok{flex:1;height:26px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
-.atf-cancel{height:26px;padding:0 8px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.atf-ok{flex:1;height:26px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:var(--font-main)}
+.atf-cancel{height:26px;padding:0 8px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--font-main)}
 /* QUICK LINKS */
 .qlinks{display:flex;flex-direction:column;gap:3px}
-.qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans TC',sans-serif}
+.qlink{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:var(--rad-s);font-size:13px;color:var(--t2);cursor:pointer;transition:.12s;border:none;background:none;width:100%;text-align:left;font-family:var(--font-main)}
 .qlink:hover{background:var(--surface-2);color:var(--t1)}.qlink i{font-size:16px;color:var(--t3);width:17px}
 .doc-fields-row{padding:3px 6px 4px 22px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;display:flex;flex-wrap:wrap;gap:3px 12px;font-size:13px;color:var(--t2);align-items:center}
 .doc-field-item{display:flex;align-items:center;gap:4px}
 .doc-field-item i{font-size:11px;color:var(--t3)}
 .doc-field-val{color:var(--t1);cursor:pointer;border-bottom:1px dashed var(--border);padding-bottom:1px}
 .doc-field-val:hover{color:var(--g1);border-bottom-color:var(--g3)}
-.doc-field-inp{height:22px;border:1px solid var(--g3);border-radius:3px;background:var(--surface);padding:0 5px;font-size:11px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;min-width:120px}
+.doc-field-inp{height:22px;border:1px solid var(--g3);border-radius:3px;background:var(--surface);padding:0 5px;font-size:11px;font-family:var(--font-main);color:var(--t1);outline:none;min-width:120px}
 .doc-field-empty{color:var(--t3);cursor:pointer;font-style:italic}
 .doc-field-empty:hover{color:var(--g1)}
 .asrc-edit-row{display:flex;gap:6px;padding:4px 6px 5px 28px;background:var(--surface-2);border-radius:0 0 var(--rad-s) var(--rad-s);margin-top:-2px;font-size:11px}
@@ -183,7 +199,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .urg-item-row{display:flex;align-items:center;gap:7px}
 .urg-item-txt{font-size:12px;color:var(--r1);flex:1}
 .urg-item-date{font-size:10px;color:var(--r3);font-weight:500}
-.urg-hist-btn{border:none;background:none;cursor:pointer;color:var(--r3);font-size:11px;padding:1px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:2px;font-family:'Noto Sans TC',sans-serif}
+.urg-hist-btn{border:none;background:none;cursor:pointer;color:var(--r3);font-size:11px;padding:1px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:2px;font-family:var(--font-main)}
 .urg-hist-btn:hover{background:var(--r5);color:var(--r1)}
 .urg-hist-btn.open{color:var(--r1)}
 .hist-panel{display:none;margin-top:6px;padding-top:6px;border-top:1px solid #FFCDD2}
@@ -200,10 +216,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .hist-entry:hover .hist-del{opacity:1}
 .hist-del:hover{color:var(--r3)}
 .hist-add-row{display:flex;gap:4px;margin-top:6px}
-.hist-add-date{width:100px;font-size:11px;padding:3px 6px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:'Noto Sans TC',sans-serif}
-.hist-add-txt{flex:1;font-size:11px;padding:3px 7px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:'Noto Sans TC',sans-serif}
+.hist-add-date{width:100px;font-size:11px;padding:3px 6px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main)}
+.hist-add-txt{flex:1;font-size:11px;padding:3px 7px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main)}
 .hist-add-txt:focus,.hist-add-date:focus{outline:none;border-color:var(--r3)}
-.hist-add-btn{border:none;background:var(--r3);color:#fff;font-size:11px;padding:3px 8px;border-radius:var(--rad-s);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s;white-space:nowrap}
+.hist-add-btn{border:none;background:var(--r3);color:#fff;font-size:11px;padding:3px 8px;border-radius:var(--rad-s);cursor:pointer;font-family:var(--font-main);transition:.12s;white-space:nowrap}
 .hist-add-btn:hover{background:var(--r1)}
 /* TASK PAGE */
 .task-page-group{margin-bottom:16px}
@@ -230,18 +246,18 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .archive-txt{font-size:14px;color:var(--t2);flex:1}
 .archive-mod{font-size:11px;padding:1px 6px;border-radius:3px;flex-shrink:0}
 .archive-meta{font-size:12px;color:var(--t3)}
-.archive-filter-btn{height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.archive-filter-btn{height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s}
 .archive-filter-btn:hover{background:var(--surface-2);color:var(--t1)}
 .archive-filter-btn.on{background:var(--g3);border-color:var(--g3);color:#fff}
 /* 存檔搜尋框 */
 .arc-search-wrap{position:relative;display:flex;align-items:center}
-.arc-search-input{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 26px 0 28px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);transition:.15s;width:160px}
+.arc-search-input{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 26px 0 28px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2);transition:.15s;width:160px}
 .arc-search-input:focus{border-color:var(--g3);background:var(--surface);width:200px}
 .arc-search-ico{position:absolute;left:8px;font-size:13px;color:var(--t3);pointer-events:none}
 .arc-search-clear{position:absolute;right:5px;border:none;background:none;cursor:pointer;color:var(--t3);font-size:12px;padding:0 2px;display:none;line-height:1;transition:.12s}
 .arc-search-clear:hover{color:var(--t1)}
 .archive-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
-.arc-btn{height:24px;padding:0 8px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:3px;transition:.12s;color:var(--t2)}
+.arc-btn{height:24px;padding:0 8px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:var(--font-main);display:inline-flex;align-items:center;gap:3px;transition:.12s;color:var(--t2)}
 .arc-btn:hover{background:var(--surface-2);color:var(--t1)}
 .arc-btn.restore:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
 .arc-btn.del:hover{background:var(--r5);border-color:#FFCDD2;color:var(--r1)}
@@ -254,7 +270,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .p-card-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px}
 .p-card-desc{font-size:11px;color:var(--t3);margin-bottom:10px;line-height:1.4}
 .p-card-btns{display:flex;gap:6px}
-.pbtn{font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:4px;font-family:'Noto Sans TC',sans-serif}
+.pbtn{font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:4px;font-family:var(--font-main)}
 .pbtn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
 .pbtn.primary{background:var(--g3);border-color:var(--g3);color:#fff}.pbtn.primary:hover{background:var(--g1)}
 .empty-state{text-align:center;padding:40px 20px;color:var(--t3)}
@@ -268,7 +284,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 /* ── 手機底部導覽列 ── */
 .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:58px;background:var(--surface);border-top:1px solid var(--border);z-index:200;padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0px)}
 .mob-nav-inner{display:flex;align-items:stretch;height:100%;gap:2px}
-.mob-ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;cursor:pointer;font-size:10px;color:var(--t3);padding:4px 2px;border-radius:6px;transition:.12s;font-family:'Noto Sans TC',sans-serif;position:relative}
+.mob-ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;cursor:pointer;font-size:10px;color:var(--t3);padding:4px 2px;border-radius:6px;transition:.12s;font-family:var(--font-main);position:relative}
 .mob-ni:active{background:var(--surface-2)}
 .mob-ni.on{color:var(--g1)}
 .mob-ni i{font-size:20px;display:block}
@@ -278,17 +294,17 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .journal-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
 .journal-topbar-right{display:flex;align-items:center;gap:7px}
 .journal-vt{display:flex;border:1px solid var(--border);border-radius:var(--rad-s);overflow:hidden}
-.jvt{padding:4px 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.jvt{padding:4px 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s}
 .jvt:hover{background:var(--surface-2)}.jvt.on{background:var(--g5);color:var(--g1);font-weight:500}
 .journal-months{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
-.jmonth{padding:3px 10px;border-radius:14px;font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.jmonth{padding:3px 10px;border-radius:14px;font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:var(--font-main)}
 .jmonth:hover{background:var(--surface-2)}.jmonth.on{background:var(--g5);border-color:var(--g3);color:var(--g1);font-weight:500}
-.journal-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.journal-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:var(--font-main);transition:.12s}
 .journal-add-btn:hover{background:var(--g1)}
-.journal-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.journal-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s}
 .journal-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
 .journal-search-wrap{position:relative;display:flex;align-items:center}
-.journal-search-input{height:30px;width:180px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 28px 0 28px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);transition:.15s}
+.journal-search-input{height:30px;width:180px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 28px 0 28px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2);transition:.15s}
 .journal-search-input:focus{border-color:var(--g3);background:var(--surface);width:220px}
 .journal-search-ico{position:absolute;left:8px;font-size:13px;color:var(--t3);pointer-events:none}
 .journal-search-clear{position:absolute;right:6px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;display:none;padding:0 2px;line-height:1}
@@ -296,14 +312,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .journal-search-highlight{background:#FFF176;border-radius:2px;padding:0 1px}
 .journal-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px;margin-bottom:14px;display:none}
 .journal-form.show{display:block}
-.journal-form textarea{width:100%;min-height:80px;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);resize:vertical;outline:none;background:var(--surface-2);line-height:1.6}
+.journal-form textarea{width:100%;min-height:80px;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px 10px;font-size:13px;font-family:var(--font-main);color:var(--t1);resize:vertical;outline:none;background:var(--surface-2);line-height:1.6}
 .journal-form textarea:focus{border-color:var(--g3);background:var(--surface)}
 .journal-form-row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
-.journal-form input[type=date]{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.journal-form input[type=date]{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .journal-form input[type=date]:focus{border-color:var(--g3)}
-.jf-ok{flex:1;height:30px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.jf-ok{flex:1;height:30px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:var(--font-main)}
 .jf-ok:hover{background:var(--g1)}
-.jf-cancel{height:30px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.jf-cancel{height:30px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--font-main)}
 .journal-group{margin-bottom:18px}
 .journal-group-date{font-size:11px;font-weight:600;color:var(--t3);letter-spacing:.04em;margin-bottom:7px;display:flex;align-items:center;gap:8px}
 .journal-group-date::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -318,11 +334,11 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .je-action-btn:hover{color:var(--t1);background:var(--surface-2)}
 .je-action-btn.del:hover{color:var(--r3);background:var(--r5)}
 .je-action-btn.restore{color:var(--g2)}.je-action-btn.restore:hover{background:var(--g5);color:var(--g1)}
-.je-edit-area{flex:1;min-height:52px;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;resize:vertical;outline:none;background:var(--surface);line-height:1.55}
+.je-edit-area{flex:1;min-height:52px;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:var(--font-main);resize:vertical;outline:none;background:var(--surface);line-height:1.55}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* DATE SPECIAL BTNS */
-.atf-special-btn{height:26px;padding:0 8px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);color:var(--t2);font-size:11px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap;transition:.12s;flex-shrink:0}
+.atf-special-btn{height:26px;padding:0 8px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);color:var(--t2);font-size:11px;cursor:pointer;font-family:var(--font-main);white-space:nowrap;transition:.12s;flex-shrink:0}
 .atf-special-btn:hover{background:var(--g5);border-color:var(--g3);color:var(--g1)}
 /* TASK NOTES */
 .t-drive-btn{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:12px;padding:1px 3px;border-radius:3px;transition:.12s;flex-shrink:0;opacity:0}
@@ -330,8 +346,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .t-drive-btn.has-drive{color:var(--b3)}
 .t-drive-btn:hover{color:var(--b3)!important;background:var(--b5)}
 .drive-input-row{display:flex;gap:4px;margin-top:3px;padding:4px 6px;background:var(--b5);border-radius:var(--rad-s)}
-.drive-input-row input{flex:1;height:26px;border:1px solid var(--border);border-radius:4px;padding:0 7px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface)}
-.drive-input-row button{height:26px;padding:0 9px;border-radius:4px;border:none;cursor:pointer;font-size:12px;font-family:'Noto Sans TC',sans-serif}
+.drive-input-row input{flex:1;height:26px;border:1px solid var(--border);border-radius:4px;padding:0 7px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface)}
+.drive-input-row button{height:26px;padding:0 9px;border-radius:4px;border:none;cursor:pointer;font-size:12px;font-family:var(--font-main)}
 .drive-save-btn{background:var(--b3);color:#fff}
 .drive-clear-btn{background:var(--surface-2);color:var(--t2)}
 .task:hover .t-note-btn,.t-note-btn.has-note{opacity:1}
@@ -339,7 +355,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .t-note-btn:hover{color:var(--a3)!important;background:var(--a5)}
 .t-note-row{padding:2px 3px 4px 23px;display:none}
 .t-note-row.show{display:block}
-.t-note-input{width:100%;min-height:38px;border:1px solid var(--border);border-radius:3px;padding:4px 7px;font-size:11px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);resize:vertical;outline:none;background:var(--surface-2);line-height:1.4}
+.t-note-input{width:100%;min-height:38px;border:1px solid var(--border);border-radius:3px;padding:4px 7px;font-size:11px;font-family:var(--font-main);color:var(--t2);resize:vertical;outline:none;background:var(--surface-2);line-height:1.4}
 .t-note-input:focus{border-color:var(--g3);background:var(--surface)}
 /* EXPORT MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -351,15 +367,15 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .modal-body{flex:1;overflow-y:auto;padding:16px 18px}
 .modal-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .modal-lbl{font-size:12px;color:var(--t2);white-space:nowrap;min-width:44px}
-.modal-inp{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 9px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.modal-inp{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 9px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .modal-inp:focus{border-color:var(--g3)}
 .modal-ftr{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
-.mftr-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
+.mftr-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:var(--font-main);border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
 .mftr-btn:hover{background:var(--border)}
 .mftr-btn.primary{background:var(--g3);color:#fff;border-color:var(--g3)}
 .mftr-btn.primary:hover{background:var(--g1)}
 .week-btns{display:flex;gap:6px;flex-wrap:wrap}
-.week-btn{padding:4px 10px;border-radius:14px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.week-btn{padding:4px 10px;border-radius:14px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:.12s;font-family:var(--font-main)}
 .week-btn:hover{background:var(--surface-2)}.week-btn.on{background:var(--g5);border-color:var(--g3);color:var(--g1);font-weight:500}
 .exp-day{margin-bottom:12px;background:var(--surface-2);border-radius:var(--rad-s);padding:8px 10px}
 .exp-day-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
@@ -397,9 +413,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .settings-section-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:14px;display:flex;align-items:center;gap:7px}
 .settings-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .settings-label{font-size:12px;color:var(--t2);min-width:80px;flex-shrink:0}
-.settings-input{height:32px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);flex:1;min-width:0}
+.settings-input{height:32px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 10px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2);flex:1;min-width:0}
+.fsize-btn-grp{display:flex;gap:6px}
+.fsize-btn{flex:1;padding:10px 0;border:1.5px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);cursor:pointer;font-family:var(--font-main);color:var(--t2);transition:.12s}
+.fsize-btn:hover{border-color:var(--border-s)}
+.fsize-btn.on{border-color:var(--g3);background:var(--g5);color:var(--t1);font-weight:600}
 .settings-input:focus{border-color:var(--g3);background:var(--surface)}
-.settings-btn{height:32px;padding:0 14px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:5px;transition:.12s}
+.settings-btn{height:32px;padding:0 14px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:var(--font-main);display:inline-flex;align-items:center;gap:5px;transition:.12s}
 .settings-btn.primary{background:var(--g3);border:none;color:#fff}.settings-btn.primary:hover{background:var(--g1)}
 .settings-btn.ghost{background:var(--surface-2);border:1px solid var(--border);color:var(--t2)}.settings-btn.ghost:hover{background:var(--border);color:var(--t1)}
 .settings-btn.danger{background:var(--r5);border:1px solid #FFCDD2;color:var(--r1)}.settings-btn.danger:hover{background:#FFCDD2}
@@ -411,30 +431,30 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .ql-manage-del{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:1px 3px;border-radius:3px;transition:.12s}
 .ql-manage-del:hover{color:var(--r3);background:var(--r5)}
 .ql-add-row{display:flex;gap:6px;flex-wrap:wrap}
-.ql-add-row input{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.ql-add-row input{height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .ql-add-row input:focus{border-color:var(--g3);background:var(--surface)}
 /* TEACHING JOURNAL */
 .tj-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.tj-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.tj-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:var(--font-main);transition:.12s}
 .tj-add-btn:hover{background:var(--g1)}
 .tj-export-grp{display:flex;gap:6px}
-.tj-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.tj-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s}
 .tj-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
 .tj-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px 16px;margin-bottom:16px;display:none}
 .tj-form.show{display:block}
 .tj-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:8px}
 .tj-form-full{margin-bottom:8px}
 .tj-label{font-size:11px;color:var(--t2);margin-bottom:3px;display:block}
-.tj-form input,.tj-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.tj-form input,.tj-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .tj-form input:focus,.tj-form select:focus{border-color:var(--g3);background:var(--surface)}
-.tj-form textarea{width:100%;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);resize:vertical;min-height:64px;line-height:1.6;box-sizing:border-box}
+.tj-form textarea{width:100%;border:1px solid var(--border);border-radius:var(--rad-s);padding:8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2);resize:vertical;min-height:64px;line-height:1.6;box-sizing:border-box}
 .tj-form textarea:focus{border-color:var(--g3);background:var(--surface)}
 .tj-form-actions{display:flex;gap:6px;margin-top:4px}
-.tj-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.tj-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:var(--font-main)}
 .tj-ok:hover{background:var(--g1)}
-.tj-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.tj-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--font-main)}
 .tj-filter-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.tj-filter-select{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);outline:none;cursor:pointer}
+.tj-filter-select{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t2);background:var(--surface);outline:none;cursor:pointer}
 .tj-filter-select:focus{border-color:var(--g3)}
 .tj-list{display:flex;flex-direction:column;gap:8px}
 .tj-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px 16px;transition:.12s}
@@ -447,19 +467,19 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tj-card-pending{font-size:10px;padding:1px 7px;border-radius:3px;background:#FFF3CD;color:#856404;font-weight:500;border:1px solid #FFE08A}
 .tj-card-topic{font-size:11px;padding:1px 7px;border-radius:3px;background:var(--b5);color:var(--b2);border:1px solid var(--b4)}
 .tj-card-actions{margin-left:auto;display:flex;gap:4px}
-.tj-action-btn{border:none;background:none;cursor:pointer;font-size:13px;color:var(--t3);padding:2px 4px;border-radius:3px;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.tj-action-btn{border:none;background:none;cursor:pointer;font-size:13px;color:var(--t3);padding:2px 4px;border-radius:3px;transition:.12s;font-family:var(--font-main)}
 .tj-action-btn:hover{color:var(--t1);background:var(--surface-2)}
 .tj-action-btn.del:hover{color:var(--r3);background:var(--r5)}
 .tj-field{margin-bottom:6px}
 .tj-field-label{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
 .tj-field-content{font-size:13px;color:var(--t1);line-height:1.65;white-space:pre-wrap}
-.tj-edit-area{width:100%;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface);resize:vertical;line-height:1.6;box-sizing:border-box}
+.tj-edit-area{width:100%;border:1px solid var(--g3);border-radius:var(--rad-s);padding:6px 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface);resize:vertical;line-height:1.6;box-sizing:border-box}
 .tj-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 0;color:var(--t3);gap:8px}
 .tj-empty i{font-size:28px}
 .tj-empty p{font-size:13px}
 /* TJ VIEW TABS */
 .tj-view-tabs{display:flex;border:1px solid var(--border);border-radius:var(--rad-s);overflow:hidden}
-.tj-view-tab{height:28px;padding:0 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s;display:flex;align-items:center;gap:3px}
+.tj-view-tab{height:28px;padding:0 11px;font-size:12px;border:none;background:var(--surface);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s;display:flex;align-items:center;gap:3px}
 .tj-view-tab:hover{background:var(--surface-2)}
 .tj-view-tab.on{background:var(--g5);color:var(--g1);font-weight:500}
 .tj-log-filters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -494,7 +514,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .tj-tl-prog{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:2px;white-space:pre-wrap}
 .tj-tl-sit{font-size:12px;color:var(--t3);line-height:1.55;white-space:pre-wrap}
 .stats-page-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
-.stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:'Noto Sans TC',sans-serif}
+.stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:var(--font-main)}
 .stats-page-tab:hover{color:var(--t1)}.stats-page-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
 .stats-content{display:none}.stats-content.on{display:block}
 /* 統計摘要卡片 */
@@ -504,24 +524,24 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .ssb-label{font-size:11px;color:var(--t3)}
 .ssb-sep{width:1px;background:var(--border);align-self:stretch;flex-shrink:0;margin:8px 0}
 .stats-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.stats-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.stats-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:var(--font-main);transition:.12s}
 .stats-add-btn:hover{background:var(--g1)}
 .stats-export-grp{display:flex;gap:6px}
-.stats-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
+.stats-export-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-s);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s}
 .stats-export-btn:hover{background:var(--surface-2);border-color:var(--border-s)}
 .stats-form{background:var(--surface);border:1px solid var(--g3);border-radius:var(--rad);padding:14px 16px;margin-bottom:16px;display:none}
 .stats-form.show{display:block}
 .stats-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:10px}
 .stats-form .sf-label{font-size:11px;color:var(--t2);margin-bottom:3px;display:block}
-.stats-form input,.stats-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)}
+.stats-form input,.stats-form select{width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)}
 .stats-form input:focus,.stats-form select:focus{border-color:var(--g3);background:var(--surface)}
 .prob-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:4px;margin-bottom:10px}
 .prob-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t2);cursor:pointer;padding:2px 0}
 .prob-item input[type=checkbox]{width:13px;height:13px;accent-color:var(--g3);flex-shrink:0;margin:0;cursor:pointer}
 .sf-actions{display:flex;gap:6px;margin-top:4px}
-.sf-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.sf-ok{height:28px;padding:0 14px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:var(--font-main)}
 .sf-ok:hover{background:var(--g1)}
-.sf-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif}
+.sf-cancel{height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--font-main)}
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:20px}
 .chart-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px}
 .chart-box.wide{grid-column:1/-1}
@@ -535,26 +555,26 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .dt-del{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:0 2px;border-radius:3px;transition:.12s}
 .dt-del:hover{color:var(--r3);background:var(--r5)}
 .stats-filter-bar{display:flex;align-items:center;gap:8px;padding:8px 0 10px;border-bottom:1px solid var(--border);margin-bottom:12px;flex-wrap:wrap}
-.sft-btn{height:26px;padding:0 12px;border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);cursor:pointer;transition:.12s}
+.sft-btn{height:26px;padding:0 12px;border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;font-family:var(--font-main);color:var(--t2);background:var(--surface);cursor:pointer;transition:.12s}
 .sft-btn.on{background:var(--a3);border-color:var(--a2);color:var(--a1);font-weight:600}
 .sft-lbl{font-size:11px;color:var(--t3);white-space:nowrap}
-.sft-select{height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);cursor:pointer;outline:none}
-.dt-inc{border:none;background:var(--g5);cursor:pointer;color:var(--g1);font-size:11px;font-weight:600;padding:2px 7px;border-radius:3px;transition:.12s;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
+.sft-select{height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);color:var(--t1);background:var(--surface);cursor:pointer;outline:none}
+.dt-inc{border:none;background:var(--g5);cursor:pointer;color:var(--g1);font-size:11px;font-weight:600;padding:2px 7px;border-radius:3px;transition:.12s;font-family:var(--font-main);white-space:nowrap}
 .dt-inc:hover{background:var(--g3);color:#fff}
 .dt-edit{border:none;background:var(--a3);cursor:pointer;color:var(--a1);font-size:13px;padding:3px 5px;border-radius:3px;transition:.12s}
 .dt-edit:hover{background:var(--a2);color:#fff}
-.dt-save{border:none;background:var(--g3);cursor:pointer;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
-.dt-cancel-btn{border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--t2);font-size:11px;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
+.dt-save{border:none;background:var(--g3);cursor:pointer;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:var(--font-main)}
+.dt-cancel-btn{border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--t2);font-size:11px;padding:2px 8px;border-radius:3px;font-family:var(--font-main)}
 .dt-memo{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:0 2px;border-radius:3px;transition:.12s}
 .dt-memo:hover{color:var(--b3,#3b82f6);background:var(--b5,#eff6ff)}
 .dt-memo.has-memo{color:var(--b2,#2563eb)}
 .case-memo-row{display:none}
 .case-memo-row.show{display:table-row}
 .case-memo-row td{padding:2px 10px 8px;background:var(--surface-2)}
-.case-memo-textarea{width:100%;min-height:56px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;resize:vertical;line-height:1.6}
+.case-memo-textarea{width:100%;min-height:56px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:6px 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;resize:vertical;line-height:1.6}
 .case-memo-textarea:focus{border-color:var(--g3)}
-.edit-input{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none;width:100%}
-.edit-select{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 4px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none}
+.edit-input{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 5px;font-size:12px;font-family:var(--font-main);color:var(--t1);background:var(--surface);outline:none;width:100%}
+.edit-select{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 4px;font-size:12px;font-family:var(--font-main);color:var(--t1);background:var(--surface);outline:none}
 .prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
 .stats-sub-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
 /* SEMESTER SWITCH */
@@ -574,7 +594,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .sem-tpl-tag{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
 .sem-notice-box{background:var(--a5);border-left:3px solid var(--a3);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--a1);margin-bottom:12px}
 .sem-step-ftr{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0}
-.sem-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
+.sem-btn{height:32px;padding:0 16px;border-radius:var(--rad-s);font-size:13px;cursor:pointer;font-family:var(--font-main);border:1px solid var(--border);background:var(--surface-2);color:var(--t2);transition:.12s}
 .sem-btn:hover{background:var(--border)}
 .sem-btn.primary{background:var(--g3);color:#fff;border-color:var(--g3)}.sem-btn.primary:hover{background:var(--g1)}
 .sem-tag-g{background:var(--g5);color:var(--g1)}.sem-tag-a{background:var(--a5);color:var(--a1)}.sem-tag-b{background:var(--b5);color:var(--b1)}.sem-tag-r{background:var(--r5);color:var(--r1)}.sem-tag-p{background:var(--p5);color:var(--p1)}
@@ -583,7 +603,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 #cmdk-panel{width:100%;max-width:500px;background:var(--surface);border-radius:var(--rad);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;margin:0 16px}
 #cmdk-search-wrap{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
 #cmdk-ico{font-size:16px;color:var(--t3);flex-shrink:0}
-#cmdk-input{flex:1;border:none;background:none;outline:none;font-size:15px;color:var(--t1);font-family:'Noto Sans TC',sans-serif}
+#cmdk-input{flex:1;border:none;background:none;outline:none;font-size:15px;color:var(--t1);font-family:var(--font-main)}
 #cmdk-input::placeholder{color:var(--t3)}
 #cmdk-esc{font-size:10px;padding:2px 5px;border:1px solid var(--border);border-radius:4px;color:var(--t3);background:var(--surface-2);font-family:monospace;flex-shrink:0}
 #cmdk-results{max-height:340px;overflow-y:auto;padding-bottom:6px}
@@ -600,10 +620,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .sem-remind-title{font-size:13px;font-weight:600;color:var(--a1);margin-bottom:4px}
 .sem-remind-desc{font-size:12px;color:var(--a1);margin-bottom:10px;line-height:1.5}
 .sem-remind-btns{display:flex;gap:6px}
-.sem-remind-btn{height:28px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;border:none}
+.sem-remind-btn{height:28px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;cursor:pointer;font-family:var(--font-main);border:none}
 .sem-remind-btn.primary{background:var(--a3);color:#fff}
 .sem-remind-btn.ghost{background:var(--surface);border:1px solid var(--border);color:var(--t2)}
-.google-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;border:1.5px solid var(--border-s);background:var(--surface);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;transition:.15s;font-family:'Noto Sans TC',sans-serif;margin-left:8px;white-space:nowrap}
+.google-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;border:1.5px solid var(--border-s);background:var(--surface);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;transition:.15s;font-family:var(--font-main);margin-left:8px;white-space:nowrap}
 .google-btn:hover{border-color:var(--g3);color:var(--g1)}
 .google-btn.connected{background:var(--g5);border-color:var(--g3);color:var(--g1)}
 .google-btn.syncing{opacity:.7;cursor:wait}
@@ -622,7 +642,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   <button class="google-btn" id="google-btn" onclick="googleSignIn()"><i class="ti ti-brand-google-drive"></i>登入同步</button>
 </header>
 <!-- 未登入警示橫條 -->
-<div id="login-warn-bar" style="display:none;position:fixed;top:var(--hh);left:0;right:0;background:#C47C2A;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 16px;letter-spacing:.03em;cursor:pointer;z-index:150" onclick="googleSignIn()">
+<div id="login-warn-bar" style="display:none;position:fixed;top:var(--hh);left:0;right:0;background:#C0843A;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 16px;letter-spacing:.03em;cursor:pointer;z-index:150" onclick="googleSignIn()">
   ⚠ 尚未登入 Google，資料僅存本機，點此登入同步
 </div>
 <div class="stats">
@@ -665,7 +685,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <div class="p-ico ico-b" style="background:#E6F1FB;color:#185FA5"><i class="ti ti-calendar-event"></i></div>
         <span class="p-title">行程</span>
       </div>
-      <button onclick="openScheduleForm()" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s" onmouseover="this.style.background='#0F3E75'" onmouseout="this.style.background='#185FA5'">
+      <button onclick="openScheduleForm()" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:var(--font-main);transition:.12s" onmouseover="this.style.background='#0F3E75'" onmouseout="this.style.background='#185FA5'">
         <i class="ti ti-plus"></i>新增行程
       </button>
     </div>
@@ -674,30 +694,30 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
         <div>
           <div style="font-size:11px;color:var(--t2);margin-bottom:3px">行程名稱 <span style="color:var(--r3)">*</span></div>
-          <input id="sch-name" type="text" placeholder="會議、研習、出差..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+          <input id="sch-name" type="text" placeholder="會議、研習、出差..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
         </div>
         <div>
           <div style="font-size:11px;color:var(--t2);margin-bottom:3px">地點</div>
-          <input id="sch-location" type="text" placeholder="輸入地點..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+          <input id="sch-location" type="text" placeholder="輸入地點..." style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
         <div>
           <div style="font-size:11px;color:var(--t2);margin-bottom:3px">日期 <span style="color:var(--r3)">*</span></div>
-          <input id="sch-date" type="date" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+          <input id="sch-date" type="date" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
         </div>
         <div>
           <div style="font-size:11px;color:var(--t2);margin-bottom:3px">開始時間</div>
-          <input id="sch-time-start" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+          <input id="sch-time-start" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
         </div>
         <div>
           <div style="font-size:11px;color:var(--t2);margin-bottom:3px">結束時間</div>
-          <input id="sch-time-end" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
+          <input id="sch-time-end" type="time" style="width:100%;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)" onfocus="this.style.borderColor='#185FA5'" onblur="this.style.borderColor='var(--border)'">
         </div>
       </div>
       <div style="display:flex;gap:6px">
-        <button id="sch-form-ok" onclick="confirmScheduleForm()" style="height:28px;padding:0 14px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif">確認新增</button>
-        <button onclick="closeScheduleForm()" style="height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:'Noto Sans TC',sans-serif">取消</button>
+        <button id="sch-form-ok" onclick="confirmScheduleForm()" style="height:28px;padding:0 14px;background:#185FA5;border:none;border-radius:var(--rad-s);color:#fff;font-size:12px;cursor:pointer;font-family:var(--font-main)">確認新增</button>
+        <button onclick="closeScheduleForm()" style="height:28px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--rad-s);font-size:12px;cursor:pointer;color:var(--t2);font-family:var(--font-main)">取消</button>
       </div>
     </div>
     <!-- 行程列表 -->
@@ -723,14 +743,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <button class="arc-search-clear" id="arc-search-clear" onclick="clearArchiveSearch()" title="清除搜尋"><i class="ti ti-x"></i></button>
       </div>
       <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
-      <select id="archive-export-sel" style="height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);outline:none;cursor:pointer">
+      <select id="archive-export-sel" style="height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);color:var(--t2);background:var(--surface);outline:none;cursor:pointer">
         <option value="all">全部</option>
         <option value="admin">行政業務</option>
         <option value="case">學生輔導</option>
         <option value="assign">交辦追蹤</option>
         <option value="urg">要事備查</option>
       </select>
-      <button onclick="exportArchiveCSV()" style="display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s;white-space:nowrap" onmouseover="this.style.background='var(--g5)';this.style.borderColor='var(--g3)';this.style.color='var(--g1)'" onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)';this.style.color='var(--t2)'"><i class="ti ti-download" style="font-size:13px"></i>匯出 CSV</button>
+      <button onclick="exportArchiveCSV()" style="display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:var(--font-main);transition:.12s;white-space:nowrap" onmouseover="this.style.background='var(--g5)';this.style.borderColor='var(--g3)';this.style.color='var(--g1)'" onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)';this.style.color='var(--t2)'"><i class="ti ti-download" style="font-size:13px"></i>匯出 CSV</button>
     </div>
   </div>
   <div id="archive-content"></div>
@@ -802,6 +822,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div class="settings-row" style="margin-top:4px">
       <button class="settings-btn primary" onclick="saveUserSettings()"><i class="ti ti-device-floppy"></i>儲存</button>
     </div>
+  </div>
+
+  <!-- 外觀設定 -->
+  <div class="settings-section">
+    <div class="settings-section-title"><i class="ti ti-typography"></i>外觀設定</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:8px">字級大小</div>
+    <div class="fsize-btn-grp" id="fsize-btn-grp"></div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px">選擇後立即套用，下次開啟會記住設定。</div>
   </div>
 
   <!-- 快速連結管理 -->
@@ -890,8 +918,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div style="font-size:11px;color:var(--t3);margin-bottom:10px">切換學期時可勾選載入的預設任務，在此管理（新增或刪除）</div>
     <div id="sem-tpl-manage-list" style="margin-bottom:10px"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <input type="text" id="sem-tpl-new-name" placeholder="任務名稱..." style="flex:1;min-width:140px;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)">
-      <select id="sem-tpl-new-mod" style="height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface-2)">
+      <input type="text" id="sem-tpl-new-name" placeholder="任務名稱..." style="flex:1;min-width:140px;height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)">
+      <select id="sem-tpl-new-mod" style="height:30px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);color:var(--t2);background:var(--surface-2)">
         <option value="doc">公文留辦</option>
         <option value="sch">獎助學金</option>
         <option value="case">學生輔導</option>
@@ -969,7 +997,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     </div>
     <div class="tj-form-full">
       <span class="tj-label">課程主題 <span style="color:var(--t3);font-weight:400">（選填）</span></span>
-      <input type="text" id="tj-topic" placeholder="例：生涯探索、人際關係、情緒管理..." style="width:100%;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2)">
+      <input type="text" id="tj-topic" placeholder="例：生涯探索、人際關係、情緒管理..." style="width:100%;height:32px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 8px;font-size:13px;font-family:var(--font-main);color:var(--t1);outline:none;background:var(--surface-2)">
     </div>
     <div class="tj-form-full">
       <span class="tj-label">教學進度 <span style="color:var(--t3);font-weight:400">（可課後填寫）</span></span>
@@ -1194,6 +1222,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
         <i class="ti ti-report-money" style="font-size:13px;margin-right:3px"></i>獎助學金<span id="admin-tab-sch-cnt" style="font-size:10px;color:var(--t3);margin-left:4px">(0)</span>
       </button>
     </div>
+    <div id="stale-wrap"></div>
     <div class="mod-page-body" id="panel-body-admin"></div>
   </div>
 </div>
@@ -1310,12 +1339,12 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 </nav>
 <script>
 const META={
-  doc:{label:'公文留辦',icon:'ti-file-text',ico:'ico-a',color:'#C47C2A'},
-  sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#6A9A52'},
-  case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#4A6080'},
-  urg:{label:'要事備查',icon:'ti-alert-triangle',ico:'ico-r',color:'#B84444'},
-  assign:{label:'交辦追蹤',icon:'ti-clipboard-list',ico:'ico-p',color:'#6A52D0'},
-  admin:{label:'行政業務',icon:'ti-building',ico:'ico-a',color:'#C47C2A'},
+  doc:{label:'公文留辦',icon:'ti-file-text',ico:'ico-a',color:'#C0843A'},
+  sch:{label:'獎助學金',icon:'ti-report-money',ico:'ico-g',color:'#3C9C86'},
+  case:{label:'學生輔導',icon:'ti-heart-handshake',ico:'ico-b',color:'#365E7E'},
+  urg:{label:'要事備查',icon:'ti-alert-triangle',ico:'ico-r',color:'#B03E3C'},
+  assign:{label:'交辦追蹤',icon:'ti-clipboard-list',ico:'ico-p',color:'#5446A8'},
+  admin:{label:'行政業務',icon:'ti-building',ico:'ico-a',color:'#C0843A'},
 };
 const CASE_TABS=[
   {key:'formal',label:'個案晤談'},
@@ -1331,10 +1360,10 @@ const TRANSFER_TYPES=[
 ];
 const SRC_LABELS={cross:'跨',external:'外'};
 const ASSIGN_SRCS=[
-  {key:'boss', label:'長官交辦', color:'#C47C2A', bg:'#F5E8CC'},
-  {key:'cross',label:'跨處室',   color:'#4A6080', bg:'#DCE8F5'},
-  {key:'ext',  label:'外界',     color:'#6A52D0', bg:'#EEEAFF'},
-  {key:'self', label:'自發',     color:'#4A7C3F', bg:'#E4EED8'},
+  {key:'boss', label:'長官交辦', color:'#C0843A', bg:'#F0E0C0'},
+  {key:'cross',label:'跨處室',   color:'#365E7E', bg:'#CEE0EC'},
+  {key:'ext',  label:'外界',     color:'#5446A8', bg:'#E2DCF8'},
+  {key:'self', label:'自發',     color:'#1C7A68', bg:'#D8EEE6'},
 ];
 const LINKS={
   doc:[
@@ -1385,11 +1414,11 @@ const PROMPTS=[
 ];
 
 const MODULE_HDR={
-  doc:{bg:'#F5E8CC',bd:'#C47C2A'},
-  sch:{bg:'#E4EED8',bd:'#4A7C3F'},
-  case:{bg:'#DCE8F5',bd:'#4A6080'},
-  urg:{bg:'#F5E0DC',bd:'#B84444'},
-  assign:{bg:'#EEEAFF',bd:'#6A52D0'},
+  doc:{bg:'#F0E0C0',bd:'#C0843A'},
+  sch:{bg:'#D8EEE6',bd:'#3C9C86'},
+  case:{bg:'#CEE0EC',bd:'#365E7E'},
+  urg:{bg:'#F0DCD8',bd:'#B03E3C'},
+  assign:{bg:'#E2DCF8',bd:'#5446A8'},
 };
 
 /* ══ STATE ══ */
@@ -1398,6 +1427,7 @@ let panelSearch={}; // ⑦ 各模組搜尋詞
 
 /* ══ INIT ══ */
 function init(){
+  applyAppearancePrefs();
   const saved=localStorage.getItem('wp_tasks_v3');
   tasks=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_TASKS));
   if(!tasks.assign)tasks.assign=[];
@@ -1495,6 +1525,7 @@ function updateStats(){
   if(bsch){bsch.textContent=weekSchCount;bsch.style.display=weekSchCount?'flex':'none';}
   // 儀表板個案+服務摘要 chips
   updateDashboardChips();
+  renderStaleAlert();
 }
 
 function updateDashboardChips(){
@@ -1508,6 +1539,63 @@ function updateDashboardChips(){
     const total=(serviceRecords||[]).reduce((sum,s)=>sum+(s.male||0)+(s.female||0),0);
     svcEl.textContent=total?total+'人次':'—';
   }
+}
+/* 停滯任務提醒：建立超過 N 天仍未結案的任務 */
+let staleThreshold=parseInt(localStorage.getItem('wp_stale_thresh')||'14');
+function setStaleThreshold(v){
+  staleThreshold=parseInt(v)||14;
+  localStorage.setItem('wp_stale_thresh',String(staleThreshold));
+  renderStaleAlert();
+}
+function renderStaleAlert(){
+  const wrap=document.getElementById('stale-wrap');if(!wrap)return;
+  const today=new Date();today.setHours(0,0,0,0);
+  const stale=[];
+  ['doc','sch','case','urg','assign'].forEach(k=>{
+    (tasks[k]||[]).forEach(t=>{
+      if(t.done||!t.createdAt)return;
+      const created=new Date(String(t.createdAt).slice(0,10)+'T00:00:00');
+      if(isNaN(created.getTime()))return;
+      const days=Math.floor((today-created)/86400000);
+      if(days>=staleThreshold)stale.push({t,key:k,days});
+    });
+  });
+  stale.sort((a,b)=>b.days-a.days);
+
+  const optHtml=[7,14,21,30].map(n=>`<option value="${n}" ${n===staleThreshold?'selected':''}>${n} 天</option>`).join('');
+
+  if(!stale.length){
+    wrap.innerHTML=`
+      <div class="stale-hdr">
+        <span class="stale-title"><i class="ti ti-clock-check" style="color:var(--g3)"></i>停滯任務提醒</span>
+        <select class="stale-thresh-select" onchange="setStaleThreshold(this.value)">${optHtml}</select>
+      </div>
+      <div class="stale-empty">目前沒有停滯超過 ${staleThreshold} 天的任務，狀況良好 ✓</div>`;
+    return;
+  }
+
+  function levelClass(days){
+    if(days>=staleThreshold*2)return 'lv3';
+    if(days>=Math.floor(staleThreshold*1.5))return 'lv2';
+    return 'lv1';
+  }
+
+  const itemsHtml=stale.slice(0,8).map(s=>{
+    const meta=META[s.key]||{label:s.key,color:'#999'};
+    return `<div class="stale-item" onclick="switchModule(null,'${s.key}')" title="點擊跳至該模組">
+      <span class="stale-item-mod" style="background:${meta.color}22;color:${meta.color}">${meta.label}</span>
+      <span class="stale-item-txt">${s.t.t}</span>
+      <span class="stale-item-days ${levelClass(s.days)}">${s.days} 天</span>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML=`
+    <div class="stale-hdr">
+      <span class="stale-title"><i class="ti ti-alert-circle" style="color:var(--r3)"></i>停滯任務提醒 · ${stale.length} 件超過 ${staleThreshold} 天</span>
+      <select class="stale-thresh-select" onchange="setStaleThreshold(this.value)">${optHtml}</select>
+    </div>
+    <div class="stale-list">${itemsHtml}</div>
+    ${stale.length>8?`<div style="font-size:11px;color:var(--t3);margin-top:4px;text-align:center">還有 ${stale.length-8} 件，前往各模組查看完整清單</div>`:''}`;
 }
 function renderModRecent(key){
   const el=document.getElementById('mod-recent-'+key);if(!el)return;
@@ -1714,15 +1802,15 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
     ${id==='doc'?`
     <div class="atf-row" style="align-items:center;gap:6px">
       <span class="atf-field-lbl">公文字號</span>
-      <input type="text" id="new-task-docno-${id}" placeholder="例：嘉市教字第1140012345號" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+      <input type="text" id="new-task-docno-${id}" placeholder="例：嘉市教字第1140012345號" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none">
     </div>
     <div class="atf-row" style="align-items:center;gap:6px">
       <span class="atf-field-lbl">發文機關</span>
-      <input type="text" id="new-task-docorg-${id}" placeholder="例：嘉義市政府教育處" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+      <input type="text" id="new-task-docorg-${id}" placeholder="例：嘉義市政府教育處" style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none">
     </div>
     <div class="atf-row" style="align-items:center;gap:6px">
       <span class="atf-field-lbl">公文主旨</span>
-      <input type="text" id="new-task-docsubj-${id}" placeholder="公文主旨摘要..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none">
+      <input type="text" id="new-task-docsubj-${id}" placeholder="公文主旨摘要..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none">
     </div>
     <div class="atf-row"><label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer"><input type="checkbox" id="new-task-src-${id}" style="width:14px;height:14px;accent-color:var(--a3)">跨處室</label></div>`
     :(id==='assign'?`<div class="atf-row"><div style="display:flex;gap:6px;flex-wrap:wrap"><label style="font-size:12px;color:var(--t2)">來源：</label>${['boss','cross','ext'].map(v=>`<label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--t2);cursor:pointer"><input type="radio" name="new-task-asrc-${id}" value="${v}" style="accent-color:var(--p3)">${v==='boss'?'長官交辦':v==='cross'?'跨處室':'外界來的'}</label>`).join('')}</div></div>`:'')}
@@ -1756,7 +1844,7 @@ function buildStdPanel(key){
       <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
         <div class="p-sec-lbl">日誌快記</div>
         <div style="display:flex;gap:5px;min-width:0">
-          <input type="text" id="quick-journal-inp-${key}" placeholder="快速記錄..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('${key}')">
+          <input type="text" id="quick-journal-inp-${key}" placeholder="快速記錄..." style="flex:1;min-width:0;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('${key}')">
           <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('${key}')" title="存入日誌"><i class="ti ti-notebook"></i></button>
         </div>
       </div>
@@ -1811,7 +1899,7 @@ function buildCasePanel(){
       <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
         <div class="p-sec-lbl">日誌快記</div>
         <div style="display:flex;gap:5px">
-          <input type="text" id="quick-journal-inp-case" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('case')">
+          <input type="text" id="quick-journal-inp-case" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('case')">
           <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('case')" title="存入日誌"><i class="ti ti-notebook"></i></button>
         </div>
       </div>
@@ -1857,7 +1945,7 @@ function buildAssignPanel(){
       <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
         <div class="p-sec-lbl">日誌快記</div>
         <div style="display:flex;gap:5px">
-          <input type="text" id="quick-journal-inp-assign" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('assign')">
+          <input type="text" id="quick-journal-inp-assign" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('assign')">
           <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('assign')" title="存入日誌"><i class="ti ti-notebook"></i></button>
         </div>
       </div>
@@ -2080,7 +2168,7 @@ function buildUrgPanel(){
       <div class="p-sec" style="flex-shrink:0;padding:8px 14px;border-bottom:none">
         <div class="p-sec-lbl">日誌快記</div>
         <div style="display:flex;gap:5px">
-          <input type="text" id="quick-journal-inp-urg" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('urg')">
+          <input type="text" id="quick-journal-inp-urg" placeholder="快速記錄..." style="flex:1;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:0 8px;font-size:12px;font-family:var(--font-main);color:var(--t1);outline:none" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')quickJournal('urg')">
           <button style="width:28px;height:28px;border-radius:var(--rad-s);background:var(--g3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0" onclick="quickJournal('urg')" title="存入日誌"><i class="ti ti-notebook"></i></button>
         </div>
       </div>
@@ -2543,7 +2631,7 @@ function openLink(url){if(!url||url==='#')return;window.open(url,'_blank');}
 function showToast(msg,type){
   const t=document.getElementById('toast');
   t.textContent=msg;
-  t.style.background=type==='warn'?'#C47C2A':'';
+  t.style.background=type==='warn'?'#C0843A':'';
   t.classList.add('show');
   setTimeout(()=>{t.classList.remove('show');t.style.background='';},2200);
 }
@@ -2802,7 +2890,7 @@ function exportDocList(){
   let html=`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
   <title>公文留辦清單</title>
   <style>
-    body{font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:24px;color:#222}
+    body{font-family:var(--font-main);font-size:13px;padding:24px;color:#222}
     h2{font-size:16px;margin-bottom:4px}
     .meta{font-size:11px;color:#888;margin-bottom:18px}
     table{width:100%;border-collapse:collapse;font-size:12px}
@@ -3216,15 +3304,15 @@ function _renderTJClassDetail(recs){
         </div>
         <div id="tjt-edit-${r.id}" style="display:none;margin-top:8px;display:none">
           <div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap">
-            <input type="date" id="tjt-date-${r.id}" value="${r.date||''}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">
-            <select id="tjt-period-${r.id}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">${periodOpts}</select>
-            <input type="text" id="tjt-topic-${r.id}" value="${(r.topic||'').replace(/"/g,'&quot;')}" placeholder="課程主題" style="flex:1;min-width:120px;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none">
+            <input type="date" id="tjt-date-${r.id}" value="${r.date||''}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);background:var(--surface);color:var(--t1);outline:none">
+            <select id="tjt-period-${r.id}" style="height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);background:var(--surface);color:var(--t1);outline:none">${periodOpts}</select>
+            <input type="text" id="tjt-topic-${r.id}" value="${(r.topic||'').replace(/"/g,'&quot;')}" placeholder="課程主題" style="flex:1;min-width:120px;height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);background:var(--surface);color:var(--t1);outline:none">
           </div>
-          <textarea id="tjt-prog-${r.id}" placeholder="教學進度..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:4px">${r.progress||''}</textarea>
-          <textarea id="tjt-sit-${r.id}" placeholder="課堂狀況..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:6px">${r.situation||''}</textarea>
+          <textarea id="tjt-prog-${r.id}" placeholder="教學進度..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:var(--font-main);background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:4px">${r.progress||''}</textarea>
+          <textarea id="tjt-sit-${r.id}" placeholder="課堂狀況..." style="width:100%;min-height:52px;border:1px solid var(--border);border-radius:var(--rad-s);padding:6px 8px;font-size:12px;font-family:var(--font-main);background:var(--surface);color:var(--t1);outline:none;resize:vertical;margin-bottom:6px">${r.situation||''}</textarea>
           <div style="display:flex;gap:6px">
-            <button onclick="saveTJTimelineEdit(${r.id})" style="height:26px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;border:none;background:var(--g3);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif">儲存</button>
-            <button onclick="cancelTJTimelineEdit(${r.id})" style="height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif">取消</button>
+            <button onclick="saveTJTimelineEdit(${r.id})" style="height:26px;padding:0 12px;border-radius:var(--rad-s);font-size:12px;border:none;background:var(--g3);color:#fff;cursor:pointer;font-family:var(--font-main)">儲存</button>
+            <button onclick="cancelTJTimelineEdit(${r.id})" style="height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:var(--font-main)">取消</button>
           </div>
         </div>
       </div>
@@ -3337,7 +3425,7 @@ function toggleTJEdit(id){
   const safeP=(r.progress||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const safeS=(r.situation||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const safeTopic=(r.topic||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const inputStyle='height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:\'Noto Sans TC\',sans-serif;width:100%;outline:none;background:var(--surface-2)';
+  const inputStyle='height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:var(--font-main);width:100%;outline:none;background:var(--surface-2)';
   editBox.innerHTML=
     '<div class="tj-form-grid" style="margin-bottom:8px">'
     +'<div><span class="tj-label">日期</span><input type="date" id="tje-date-'+id+'" value="'+r.date+'" style="'+inputStyle+'"></div>'
@@ -4085,7 +4173,7 @@ function renderDashboardLinks(){
   if(!links.length){container.style.display='none';return;}
   container.style.display='block';
   body.innerHTML=links.map(l=>`
-    <button onclick="openLink('${l.url||'#'}')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s" onmouseover="this.style.borderColor='var(--g3)';this.style.background='var(--g5)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--surface)'">
+    <button onclick="openLink('${l.url||'#'}')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-size:12px;cursor:pointer;font-family:var(--font-main);transition:.12s" onmouseover="this.style.borderColor='var(--g3)';this.style.background='var(--g5)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--surface)'">
       <i class="ti ti-link" style="color:var(--g3);font-size:13px"></i>${l.label}
     </button>`).join('');
 }
@@ -4147,6 +4235,34 @@ function renderSettingsPage(){
   renderCustomLinks();
   renderSemTplManage();
   renderSemSnapshotUI();
+  renderFontSettings();
+}
+
+/* ══ 外觀設定：字級大小 ══ */
+const FSIZE_OPTIONS=[
+  {key:'sm',label:'小',zoom:0.9},
+  {key:'md',label:'中',zoom:1},
+  {key:'lg',label:'大',zoom:1.15},
+];
+function renderFontSettings(){
+  const curSize=localStorage.getItem('wp_fsize_key')||'md';
+  const sGrp=document.getElementById('fsize-btn-grp');
+  if(sGrp){
+    sGrp.innerHTML=FSIZE_OPTIONS.map(s=>`
+      <button class="fsize-btn ${s.key===curSize?'on':''}" onclick="selectFsize('${s.key}')">${s.label}</button>`).join('');
+  }
+}
+function selectFsize(key){
+  const s=FSIZE_OPTIONS.find(x=>x.key===key);if(!s)return;
+  const layout=document.querySelector('.layout');
+  if(layout)layout.style.zoom=s.zoom;
+  localStorage.setItem('wp_fsize_key',key);
+  renderFontSettings();
+}
+function applyAppearancePrefs(){
+  const sizeKey=localStorage.getItem('wp_fsize_key')||'md';
+  const s=FSIZE_OPTIONS.find(x=>x.key===sizeKey);
+  if(s){const layout=document.querySelector('.layout');if(layout)layout.style.zoom=s.zoom;}
 }
 
 /* ══ DATA EXPORT / IMPORT ══ */
@@ -4212,11 +4328,11 @@ function showAIResult(title,text){
   if(!win)return;
   const safe=text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
   win.document.write(`<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>${title}</title>
-  <style>body{font-family:'Noto Sans TC',sans-serif;padding:28px 36px;line-height:1.8;color:#1A1A17;font-size:14px}
+  <style>body{font-family:var(--font-main);padding:28px 36px;line-height:1.8;color:#1A1A17;font-size:14px}
   h2{font-size:16px;margin-bottom:16px;color:#2A5218}
   .content{background:#f9f9f7;border:1px solid #e0ddd5;border-radius:8px;padding:18px 22px;margin-bottom:16px}
   .bar{margin-bottom:14px;display:flex;gap:8px}
-  button{padding:7px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:13px;font-family:'Noto Sans TC',sans-serif}
+  button{padding:7px 18px;background:#5A9A1A;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:13px;font-family:var(--font-main)}
   button.copy{background:#1870CC}</style></head><body>
   <h2><i>✨</i> ${title}</h2>
   <div class="bar">
@@ -4384,7 +4500,7 @@ function updateGoogleUI(){
       btn.innerHTML='<i class="ti ti-brand-google-drive"></i>登入同步';
       btn.className='google-btn';
       btn.onclick=googleSignIn;
-      btn.style.background='#C47C2A';btn.style.borderColor='#C47C2A';btn.style.color='#fff';
+      btn.style.background='#C0843A';btn.style.borderColor='#C0843A';btn.style.color='#fff';
     }
   }
   if(warnBar)warnBar.style.display=loggedIn?'none':'block';

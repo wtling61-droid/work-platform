@@ -101,6 +101,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .p-hdr{padding:13px 16px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
 .p-ico{width:27px;height:27px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
 .p-title{font-size:14px;font-weight:600;color:var(--t1);flex:1}
+.dash-stat-chip{display:flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;border:1px solid var(--border);background:var(--surface-2);cursor:pointer;transition:.12s}
+.dash-stat-chip:hover{border-color:var(--a3);background:var(--a5,#f0f7ff)}
+.dash-stat-chip-lbl{font-size:10px;color:var(--t3)}
+.dash-stat-chip-val{font-size:13px;font-weight:700;color:var(--t1)}
 /* TABS */
 .p-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
 .p-tab{padding:9px 7px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
@@ -117,6 +121,10 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .t-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s;cursor:pointer}
 .task.done .t-chk{background:var(--g3);border-color:var(--g3);color:#fff}
 .task.urgent:not(.done) .t-chk{border-color:var(--r3)}
+@keyframes checkBounce{0%{transform:scale(.5);opacity:.6}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+@keyframes taskOut{0%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(6px)}}
+.t-chk.bouncing{animation:checkBounce .22s ease forwards}
+.task.completing{animation:taskOut .28s ease forwards;pointer-events:none}
 .src-tag{font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;flex-shrink:0}
 .src-cross{background:var(--a5);color:var(--a1)}.src-external{background:var(--b5);color:var(--b1)}
 .t-txt{font-size:13px;color:var(--t1);flex:1;cursor:pointer;line-height:1.3}
@@ -225,6 +233,13 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .archive-filter-btn{height:26px;padding:0 10px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
 .archive-filter-btn:hover{background:var(--surface-2);color:var(--t1)}
 .archive-filter-btn.on{background:var(--g3);border-color:var(--g3);color:#fff}
+/* 存檔搜尋框 */
+.arc-search-wrap{position:relative;display:flex;align-items:center}
+.arc-search-input{height:28px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 26px 0 28px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;background:var(--surface-2);transition:.15s;width:160px}
+.arc-search-input:focus{border-color:var(--g3);background:var(--surface);width:200px}
+.arc-search-ico{position:absolute;left:8px;font-size:13px;color:var(--t3);pointer-events:none}
+.arc-search-clear{position:absolute;right:5px;border:none;background:none;cursor:pointer;color:var(--t3);font-size:12px;padding:0 2px;display:none;line-height:1;transition:.12s}
+.arc-search-clear:hover{color:var(--t1)}
 .archive-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
 .arc-btn{height:24px;padding:0 8px;border-radius:var(--rad-s);font-size:11px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:3px;transition:.12s;color:var(--t2)}
 .arc-btn:hover{background:var(--surface-2);color:var(--t1)}
@@ -482,6 +497,12 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .stats-page-tab{padding:8px 16px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:.12s;font-family:'Noto Sans TC',sans-serif}
 .stats-page-tab:hover{color:var(--t1)}.stats-page-tab.on{color:var(--g1);font-weight:500;border-bottom-color:var(--g3)}
 .stats-content{display:none}.stats-content.on{display:block}
+/* 統計摘要卡片 */
+.stats-summary-bar{display:none;gap:0;flex-wrap:wrap;margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);overflow:hidden}
+.ssb-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:13px 14px;flex:1;min-width:80px;gap:3px;text-align:center}
+.ssb-num{font-size:24px;font-weight:700;color:var(--t1);line-height:1;font-variant-numeric:tabular-nums}
+.ssb-label{font-size:11px;color:var(--t3)}
+.ssb-sep{width:1px;background:var(--border);align-self:stretch;flex-shrink:0;margin:8px 0}
 .stats-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .stats-add-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;background:var(--g3);border:none;border-radius:var(--rad-s);color:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:.12s}
 .stats-add-btn:hover{background:var(--g1)}
@@ -524,6 +545,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .dt-edit:hover{background:var(--a2);color:#fff}
 .dt-save{border:none;background:var(--g3);cursor:pointer;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
 .dt-cancel-btn{border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--t2);font-size:11px;padding:2px 8px;border-radius:3px;font-family:'Noto Sans TC',sans-serif}
+.dt-memo{border:none;background:none;cursor:pointer;color:var(--t3);font-size:13px;padding:0 2px;border-radius:3px;transition:.12s}
+.dt-memo:hover{color:var(--b3,#3b82f6);background:var(--b5,#eff6ff)}
+.dt-memo.has-memo{color:var(--b2,#2563eb)}
+.case-memo-row{display:none}
+.case-memo-row.show{display:table-row}
+.case-memo-row td{padding:2px 10px 8px;background:var(--surface-2)}
+.case-memo-textarea{width:100%;min-height:56px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);padding:6px 8px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);outline:none;resize:vertical;line-height:1.6}
+.case-memo-textarea:focus{border-color:var(--g3)}
 .edit-input{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 5px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none;width:100%}
 .edit-select{height:26px;border:1px solid var(--border);border-radius:3px;padding:0 4px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t1);background:var(--surface);outline:none}
 .prob-badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--b5);color:var(--b1);margin:1px 2px 1px 0;white-space:nowrap}
@@ -549,6 +578,23 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 .sem-btn:hover{background:var(--border)}
 .sem-btn.primary{background:var(--g3);color:#fff;border-color:var(--g3)}.sem-btn.primary:hover{background:var(--g1)}
 .sem-tag-g{background:var(--g5);color:var(--g1)}.sem-tag-a{background:var(--a5);color:var(--a1)}.sem-tag-b{background:var(--b5);color:var(--b1)}.sem-tag-r{background:var(--r5);color:var(--r1)}.sem-tag-p{background:var(--p5);color:var(--p1)}
+/* ⌘K 快速啟動列 */
+#cmdk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9000;display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+#cmdk-panel{width:100%;max-width:500px;background:var(--surface);border-radius:var(--rad);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;margin:0 16px}
+#cmdk-search-wrap{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+#cmdk-ico{font-size:16px;color:var(--t3);flex-shrink:0}
+#cmdk-input{flex:1;border:none;background:none;outline:none;font-size:15px;color:var(--t1);font-family:'Noto Sans TC',sans-serif}
+#cmdk-input::placeholder{color:var(--t3)}
+#cmdk-esc{font-size:10px;padding:2px 5px;border:1px solid var(--border);border-radius:4px;color:var(--t3);background:var(--surface-2);font-family:monospace;flex-shrink:0}
+#cmdk-results{max-height:340px;overflow-y:auto;padding-bottom:6px}
+.cmdk-section{font-size:10px;color:var(--t3);font-weight:600;padding:8px 16px 3px;text-transform:uppercase;letter-spacing:.06em}
+.cmdk-item{display:flex;align-items:center;gap:10px;padding:7px 16px;cursor:pointer;transition:.1s}
+.cmdk-item:hover,.cmdk-item.on{background:var(--surface-2)}
+.cmdk-item-ico{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.cmdk-item-title{font-size:13px;color:var(--t1);flex:1}
+.cmdk-item-sub{font-size:11px;color:var(--t3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmdk-item-tag{font-size:10px;padding:1px 6px;border-radius:3px;flex-shrink:0}
+.cmdk-empty{font-size:13px;color:var(--t3);padding:20px;text-align:center}
 .sem-remind-banner{position:fixed;top:calc(var(--hh)+var(--sh)+10px);right:16px;background:var(--a5);border:1.5px solid var(--a3);border-radius:var(--rad);padding:12px 16px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,.12);max-width:280px;display:none}
 .sem-remind-banner.show{display:block}
 .sem-remind-title{font-size:13px;font-weight:600;color:var(--a1);margin-bottom:4px}
@@ -671,6 +717,11 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <button class="archive-filter-btn" onclick="setArchiveFilter('urg',this)">要事備查</button>
     </div>
     <div style="display:flex;align-items:center;gap:6px">
+      <div class="arc-search-wrap">
+        <i class="ti ti-search arc-search-ico"></i>
+        <input class="arc-search-input" id="arc-search" type="text" placeholder="搜尋存檔..." oninput="onArchiveSearch(this)">
+        <button class="arc-search-clear" id="arc-search-clear" onclick="clearArchiveSearch()" title="清除搜尋"><i class="ti ti-x"></i></button>
+      </div>
       <span id="archive-count" style="font-size:11px;color:var(--t3)"></span>
       <select id="archive-export-sel" style="height:26px;border:1px solid var(--border);border-radius:var(--rad-s);padding:0 6px;font-size:12px;font-family:'Noto Sans TC',sans-serif;color:var(--t2);background:var(--surface);outline:none;cursor:pointer">
         <option value="all">全部</option>
@@ -834,6 +885,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
     <div style="margin-bottom:14px">
       <button class="settings-btn primary" onclick="openSemModal()"><i class="ti ti-calendar-stats"></i>開始學期切換精靈</button>
     </div>
+    <div id="sem-snapshot-status"></div>
     <div style="font-size:12px;font-weight:600;color:var(--t1);margin-bottom:8px">學期任務模板清單</div>
     <div style="font-size:11px;color:var(--t3);margin-bottom:10px">切換學期時可勾選載入的預設任務，在此管理（新增或刪除）</div>
     <div id="sem-tpl-manage-list" style="margin-bottom:10px"></div>
@@ -977,6 +1029,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 
   <!-- 個案統計 -->
   <div class="stats-content on" id="stats-cases">
+    <div class="stats-summary-bar" id="ssb-cases">
+      <div class="ssb-card"><span class="ssb-num" id="ssb-total">—</span><span class="ssb-label">總個案</span></div>
+      <div class="ssb-sep"></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-sessions">—</span><span class="ssb-label">晤談次數</span></div>
+      <div class="ssb-sep"></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-ongoing" style="color:var(--g1)">—</span><span class="ssb-label">進行中</span></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-closed">—</span><span class="ssb-label">已結案</span></div>
+    </div>
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('case-form')"><i class="ti ti-plus"></i>新增個案</button>
       <div class="stats-export-grp">
@@ -1018,6 +1078,14 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
 
   <!-- 相關服務統計 -->
   <div class="stats-content" id="stats-services">
+    <div class="stats-summary-bar" id="ssb-services">
+      <div class="ssb-card"><span class="ssb-num" id="ssb-svc-total">—</span><span class="ssb-label">服務總人次</span></div>
+      <div class="ssb-sep"></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-svc-male">—</span><span class="ssb-label">男性人次</span></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-svc-female">—</span><span class="ssb-label">女性人次</span></div>
+      <div class="ssb-sep"></div>
+      <div class="ssb-card"><span class="ssb-num" id="ssb-svc-types">—</span><span class="ssb-label">服務項目數</span></div>
+    </div>
     <div class="stats-toolbar">
       <button class="stats-add-btn" onclick="toggleStatsForm('service-form')"><i class="ti ti-plus"></i>新增服務記錄</button>
       <div class="stats-export-grp">
@@ -1104,6 +1172,18 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
       <div style="display:flex;align-items:center;gap:8px">
         <div class="p-ico ico-a" id="p-ico-admin"><i class="ti ti-building"></i></div>
         <span class="p-title" id="p-title-admin">行政業務</span>
+      </div>
+      <div style="display:flex;gap:6px" id="dashboard-case-chips">
+        <div class="dash-stat-chip" onclick="navTo(null,'stats')" title="點擊前往統計頁">
+          <i class="ti ti-users" style="font-size:12px;color:var(--b3,#3b82f6)"></i>
+          <span class="dash-stat-chip-lbl">在案</span>
+          <span class="dash-stat-chip-val" id="dsc-active">—</span>
+        </div>
+        <div class="dash-stat-chip" onclick="navTo(null,'stats')" title="點擊前往統計頁">
+          <i class="ti ti-chart-bar" style="font-size:12px;color:var(--g2)"></i>
+          <span class="dash-stat-chip-lbl">服務</span>
+          <span class="dash-stat-chip-val" id="dsc-svc">—</span>
+        </div>
       </div>
     </div>
     <div class="p-tabs" id="admin-sub-tabs" style="flex-shrink:0">
@@ -1195,6 +1275,17 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t1);
   </div>
 </div>
 <script id="sem-script"></script>
+<!-- ⌘K 快速啟動列 -->
+<div id="cmdk-overlay" onclick="if(event.target===this)closeCmdK()">
+  <div id="cmdk-panel">
+    <div id="cmdk-search-wrap">
+      <i class="ti ti-search" id="cmdk-ico"></i>
+      <input id="cmdk-input" type="text" autocomplete="off" placeholder="搜尋任務、跳模組、快速操作…" oninput="renderCmdKResults()" onkeydown="cmdKKeyNav(event)">
+      <kbd id="cmdk-esc">Esc</kbd>
+    </div>
+    <div id="cmdk-results"></div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 <!-- 手機底部導覽列 -->
 <nav class="mob-nav">
@@ -1303,6 +1394,7 @@ const MODULE_HDR={
 
 /* ══ STATE ══ */
 let curKey='admin', curCaseTab='formal', curAdminTab='doc', tasks={};
+let panelSearch={}; // ⑦ 各模組搜尋詞
 
 /* ══ INIT ══ */
 function init(){
@@ -1401,8 +1493,22 @@ function updateStats(){
   const weekSchCount=(scheduleItems||[]).filter(s=>s.date>=_monISO&&s.date<=_sunISO).length;
   const bsch=document.getElementById('badge-schedule');
   if(bsch){bsch.textContent=weekSchCount;bsch.style.display=weekSchCount?'flex':'none';}
+  // 儀表板個案+服務摘要 chips
+  updateDashboardChips();
 }
 
+function updateDashboardChips(){
+  const activeEl=document.getElementById('dsc-active');
+  const svcEl=document.getElementById('dsc-svc');
+  if(activeEl){
+    const active=(caseRecords||[]).filter(c=>c.status==='輔導進行中').length;
+    activeEl.textContent=active?active+'人':'—';
+  }
+  if(svcEl){
+    const total=(serviceRecords||[]).reduce((sum,s)=>sum+(s.male||0)+(s.female||0),0);
+    svcEl.textContent=total?total+'人次':'—';
+  }
+}
 function renderModRecent(key){
   const el=document.getElementById('mod-recent-'+key);if(!el)return;
   const done=(tasks[key]||[]).filter(t=>t.done&&t.completedAt).sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||'')).slice(0,3);
@@ -1500,6 +1606,13 @@ function syncClearDoneBtn(key){
   const btn=document.getElementById('clear-done-'+key);
   if(btn)btn.style.display=hasDone?'inline-flex':'none';
 }
+// ⑦ 任務搜尋
+function filterPanel(key,q){
+  panelSearch[key]=(q||'').trim().toLowerCase();
+  if(key==='assign')renderAssignTasks();
+  else if(key==='case')renderCaseTab(curCaseTab);
+  else renderTaskList(key);
+}
 
 function taskHTML(t,key,ri){
   const srcTag=t.src==='cross'?`<span class="src-tag src-cross">跨</span>`:'';
@@ -1521,7 +1634,7 @@ function taskHTML(t,key,ri){
   </div>`:'';
   const createdAtRow=key!=='doc'&&t.createdAt?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${fmtTaskDate(t.createdAt,false,null)}</span>`:`${key!=='doc'?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${t.createdAt||''}</span>`:''}`;
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
-    <div class="t-chk" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
+    <div class="t-chk" id="chk-${t.id}" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
     ${srcTag}
     ${t.createdAt&&key!=='doc'?`<span class="t-created" title="建立日（雙擊修改）" ondblclick="editCreatedAt('${key}',${ri})">${fmtTaskDate(t.createdAt,false,null)}</span>`:''}
@@ -1545,9 +1658,14 @@ function renderTaskList(key,subType){
   const el=document.getElementById(listId);if(!el)return;
   const all=tasks[key]||[];
   const filtered=subType?all.filter(t=>t.type===subType):all;
-  const pending=filtered.filter(t=>!t.done);
+  let pending=filtered.filter(t=>!t.done);
+  // ⑦ 搜尋過濾（只搜名稱）
+  const q=(panelSearch[key]||'').trim().toLowerCase();
+  if(q)pending=pending.filter(t=>(t.t||'').toLowerCase().includes(q));
   if(!pending.length){
-    el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
+    el.innerHTML=q
+      ?`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有符合「${q}」的任務</div>`
+      :`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
     return;
   }
   el.innerHTML=pending.map(t=>taskHTML(t,key,all.indexOf(t))).join('');
@@ -1620,10 +1738,14 @@ function addFormHTML(id,onConfirm,onCancel,placeholder,extraRow=''){
 
 function buildStdPanel(key){
   const links=(LINKS[key]||[]).map(l=>`<button class="qlink" onclick="${l.onclick?l.onclick:(l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`)}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
+  const searchQ=panelSearch[key]||'';
   return `
     <div class="mod-col-main">
       <div class="p-sec-task" id="task-sec-${key}">
-        <div class="p-sec-lbl">任務清單</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+          <div class="p-sec-lbl" style="margin-bottom:0">任務清單</div>
+          <input type="text" id="panel-search-${key}" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('${key}',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:110px;transition:.15s;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
+        </div>
         <div class="task-list" id="task-list-${key}"></div>
         ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
       </div>
@@ -1644,6 +1766,7 @@ function buildStdPanel(key){
 function buildCasePanel(){
   const tabsHtml=CASE_TABS.map(t=>`<button class="p-tab ${t.key===curCaseTab?'on':''}" data-key="${t.key}" onclick="renderCaseTab('${t.key}')">${t.label}</button>`).join('');
   const caseLinks=(LINKS.case||[]).map(l=>`<button class="qlink" onclick="${l.prompt?`openPromptCategory('${l.prompt}')`:` openLink('${l.url||'#'}')`}"><i class="ti ${l.i}"></i>${l.l}</button>`).join('');
+  const searchQ=panelSearch.case||'';
   const stdTabs=CASE_TABS.filter(t=>t.key!=='transfer').map(t=>`
     <div class="p-tab-content ${t.key===curCaseTab?'on':''}" id="tab-${t.key}">
       <div class="p-sec-task">
@@ -1654,7 +1777,10 @@ function buildCasePanel(){
     </div>`).join('');
   return `
     <div class="mod-col-main">
-      <div class="p-tabs">${tabsHtml}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 14px 0 0">
+        <div class="p-tabs" style="flex:1">${tabsHtml}</div>
+        <input type="text" id="panel-search-case" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('case',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:100px;transition:.15s;flex-shrink:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
+      </div>
       ${stdTabs}
       <div class="p-tab-content ${curCaseTab==='transfer'?'on':''}" id="tab-transfer">
         <div class="transfer-scroll">
@@ -1694,10 +1820,14 @@ function buildCasePanel(){
 
 function buildAssignPanel(){
   const srcOpts=ASSIGN_SRCS.map(s=>`<option value="${s.key}">${s.label}</option>`).join('');
+  const searchQ=panelSearch.assign||'';
   return `
     <div class="mod-col-main">
       <div class="p-sec-task">
-        <div class="p-sec-lbl">交辦任務</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+          <div class="p-sec-lbl" style="margin-bottom:0">交辦任務</div>
+          <input type="text" id="panel-search-assign" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('assign',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:110px;transition:.15s;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
+        </div>
         <div class="task-list" id="task-list-assign"></div>
         <div class="add-task-form" id="add-task-form-assign">
           <input type="text" id="new-task-txt-assign" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddAssign()">
@@ -1737,9 +1867,14 @@ function buildAssignPanel(){
 function renderAssignTasks(){
   const el=document.getElementById('task-list-assign');if(!el)return;
   const all=tasks.assign||[];
-  const pending=all.filter(t=>!t.done);
+  let pending=all.filter(t=>!t.done);
+  // ⑦ 搜尋過濾
+  const q=(panelSearch.assign||'').trim().toLowerCase();
+  if(q)pending=pending.filter(t=>(t.t||'').toLowerCase().includes(q));
   if(!pending.length){
-    el.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
+    el.innerHTML=q
+      ?`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有符合「${q}」的任務</div>`
+      :`<div style="font-size:12px;color:var(--t3);padding:8px 2px;text-align:center">沒有待辦任務 🎉</div>`;
     syncClearDoneBtn('assign');
     return;
   }
@@ -2020,18 +2155,30 @@ function confirmAddTransfer(){
 function toggleTask(key,idx){
   const t=tasks[key][idx];t.done=!t.done;
   if(t.done){
+    // 先對現有 DOM 加動畫，280ms 後才重新渲染
+    const chk=document.getElementById('chk-'+t.id);
+    if(chk){
+      chk.classList.add('bouncing');
+      const taskEl=chk.closest('.task');
+      if(taskEl)setTimeout(()=>taskEl.classList.add('completing'),30);
+    }
     if(t.u)t.resolvedAsUrg=true;
     const n=new Date();t.completedAt=localISO(n);t.u=false;
     addAutoJournalEntry(`結案：${t.t}`,t.id,key);
+    save();updateStats();
+    setTimeout(()=>{
+      updatePanel(curKey);
+      if(key!==curKey)updatePanel(key);
+    },300);
   } else {
     delete t.resolvedAsUrg;
     journal=journal.filter(e=>!(e.taskId===t.id&&e.content&&e.content.startsWith('結案：')));
     delete t.completedAt;
     saveJournal();
+    save();updateStats();
+    updatePanel(curKey);
+    if(key!==curKey)updatePanel(key);
   }
-  save();updateStats();
-  updatePanel(curKey);
-  if(key!==curKey)updatePanel(key);
 }
 function toggleUrgent(key,idx){
   tasks[key][idx].u=!tasks[key][idx].u;
@@ -2161,6 +2308,7 @@ function tpDelete(key,idx){tasks[key].splice(idx,1);save();renderTaskPage();upda
 
 /* ══ ARCHIVE ══ */
 let curArchiveFilter='all';
+let curArchiveSearch='';
 
 function exportArchiveCSV(){
   const sel=document.getElementById('archive-export-sel');
@@ -2197,6 +2345,18 @@ function setArchiveFilter(key,btn){
   if(btn)btn.classList.add('on');
   renderArchivePage();
 }
+function onArchiveSearch(input){
+  curArchiveSearch=input.value.trim().toLowerCase();
+  const clearBtn=document.getElementById('arc-search-clear');
+  if(clearBtn)clearBtn.style.display=curArchiveSearch?'flex':'none';
+  renderArchivePage();
+}
+function clearArchiveSearch(){
+  curArchiveSearch='';
+  const inp=document.getElementById('arc-search');if(inp)inp.value='';
+  const clearBtn=document.getElementById('arc-search-clear');if(clearBtn)clearBtn.style.display='none';
+  renderArchivePage();
+}
 
 function renderArchivePage(){
   let items=[];
@@ -2206,15 +2366,24 @@ function renderArchivePage(){
     curArchiveFilter==='urg'?items.filter(i=>i.key==='urg'||i.resolvedAsUrg):
     curArchiveFilter==='admin'?items.filter(i=>i.key==='doc'||i.key==='sch'):
     items.filter(i=>i.key===curArchiveFilter);
+  // 關鍵字搜尋
+  const searched=curArchiveSearch
+    ?filtered.filter(t=>{const q=curArchiveSearch;
+        return(t.t||'').toLowerCase().includes(q)||
+               (t.note||'').toLowerCase().includes(q)||
+               (t.docno||'').toLowerCase().includes(q)||
+               (t.docsubj||'').toLowerCase().includes(q)||
+               (t.completedAt||'').includes(q);})
+    :filtered;
   const countEl=document.getElementById('archive-count');
-  if(countEl)countEl.textContent=`共 ${filtered.length} 件`;
+  if(countEl)countEl.textContent=curArchiveSearch?`找到 ${searched.length} 件（共 ${filtered.length} 件）`:`共 ${filtered.length} 件`;
   const el=document.getElementById('archive-content');
   if(!el)return;
-  if(!filtered.length){
-    el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>${curArchiveFilter==='all'?'還沒有已完成的任務':'此分類沒有已完成的任務'}</p></div>`;
+  if(!searched.length){
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-archive"></i><p>${curArchiveSearch?`沒有符合「${curArchiveSearch}」的存檔`:curArchiveFilter==='all'?'還沒有已完成的任務':'此分類沒有已完成的任務'}</p></div>`;
     return;
   }
-  el.innerHTML=filtered.map(t=>{
+  el.innerHTML=searched.map(t=>{
     // 基本資訊行
     const metaRows=[];
     if(t.createdAt)metaRows.push(`<span style="color:var(--t3)">建立日</span> ${t.createdAt}`);
@@ -2468,7 +2637,7 @@ function deleteJournalEntry(id){
     const key=entry.taskKey;
     const t=(tasks[key]||[]).find(t=>t.id===entry.taskId);
     if(t&&t.done){
-      t.done=false;delete t.completedAt;
+      t.done=false;delete t.completedAt;delete t.resolvedAsUrg;
       save();updateStats();
       if(curKey===key)updatePanel(key);
       renderRecentArchive();
@@ -3397,8 +3566,57 @@ function switchStatsTab(tab,el){
   const tc=document.getElementById('stats-'+tab);if(tc)tc.classList.add('on');
 }
 
+function updateCaseSummary(){
+  const cases=getFilteredCases();
+  const total=cases.length;
+  const bar=document.getElementById('ssb-cases');
+  if(bar)bar.style.display=total?'flex':'none';
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('ssb-total',total);
+  set('ssb-sessions',cases.reduce((s,c)=>s+(c.sessions||0),0));
+  set('ssb-ongoing',cases.filter(c=>c.status==='輔導進行中').length);
+  set('ssb-closed',cases.filter(c=>c.status!=='輔導進行中').length);
+}
+
+function updateServiceSummary(){
+  const svcs=getFilteredServices();
+  const male=svcs.reduce((s,sv)=>s+(sv.male||0),0);
+  const female=svcs.reduce((s,sv)=>s+(sv.female||0),0);
+  const total=male+female;
+  const types=new Set(svcs.filter(sv=>(sv.male||0)+(sv.female||0)>0).map(sv=>sv.type)).size;
+  const bar=document.getElementById('ssb-services');
+  if(bar)bar.style.display=total?'flex':'none';
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('ssb-svc-total',total);
+  set('ssb-svc-male',male);
+  set('ssb-svc-female',female);
+  set('ssb-svc-types',types);
+}
+
 function toggleStatsForm(id){
-  const f=document.getElementById(id);if(f)f.classList.toggle('show');
+  const f=document.getElementById(id);if(!f)return;
+  const isOpening=!f.classList.contains('show');
+  f.classList.toggle('show');
+  if(!isOpening)return;
+  if(id==='case-form'){
+    // ① 學期自動帶入目前學期（若已有值則不覆蓋）
+    const cfSem=document.getElementById('cf-semester');
+    if(cfSem&&!cfSem.value)cfSem.value=getCurrentSemester();
+    // ③ 個案編號自動遞增建議（編號空白時才填入）
+    const cfNo=document.getElementById('cf-no');
+    if(cfNo&&!cfNo.value){
+      const nums=caseRecords.map(c=>parseInt((c.no||'').replace(/\D/g,''))).filter(n=>n>0);
+      if(nums.length){
+        const suggested=String(Math.max(...nums)+1);
+        cfNo.value=suggested;
+        cfNo.select();  // 選取，方便直接改
+      }
+    }
+  } else if(id==='service-form'){
+    // ② 服務日期自動填今天（若空白）
+    const sfDate=document.getElementById('sf-date');
+    if(sfDate&&!sfDate.value)sfDate.value=localISO();
+  }
 }
 
 function renderProbCheckboxes(){
@@ -3482,6 +3700,21 @@ function saveEditCase(id){
   saveCases();updateStatsFilterOptions();renderCaseStatsContent();showToast('個案資料已更新');
 }
 
+/* 晤談備忘 */
+function toggleCaseMemo(id){
+  const row=document.getElementById('case-memo-row-'+id);if(!row)return;
+  const show=row.classList.toggle('show');
+  if(show){const ta=document.getElementById('case-memo-ta-'+id);if(ta)ta.focus();}
+}
+function saveCaseMemo(id,text){
+  const c=caseRecords.find(x=>x.id===id);if(!c)return;
+  c.memo=text.trim();
+  // 即時更新備忘按鈕 has-memo 樣式
+  const btn=document.querySelector(`tr[data-case-id="${id}"] .dt-memo`);
+  if(btn){btn.classList.toggle('has-memo',!!c.memo);btn.title=c.memo?'查看/編輯備忘':'新增晤談備忘';}
+  saveCases();
+}
+
 function openEditService(id){
   const s=serviceRecords.find(x=>x.id===id);if(!s)return;
   const TYPES=['團體輔導','入班輔導','家長諮詢','教師諮詢','個案會議','心理測驗','安心服務','家庭處遇','資源連結','系統會談','學生諮詢','臨案協處','方案計畫','各項宣講','危機處理','轉銜輔導','其他'];
@@ -3543,6 +3776,7 @@ function renderCaseStatsContent(){
   renderCaseTable();
   if(window.Chart)renderCaseCharts();
   else document.getElementById('case-charts').innerHTML='';
+  updateCaseSummary();
 }
 
 function renderServiceStatsContent(){
@@ -3550,6 +3784,7 @@ function renderServiceStatsContent(){
   renderServiceSummary();
   if(window.Chart)renderServiceCharts();
   else document.getElementById('service-charts').innerHTML='';
+  updateServiceSummary();
 }
 
 function renderCaseTable(){
@@ -3566,8 +3801,14 @@ function renderCaseTable(){
     </td>
     <td><span style="font-size:11px;padding:2px 7px;border-radius:3px;background:${c.status==='已結案'?'var(--surface-2)':'var(--g5)'};color:${c.status==='已結案'?'var(--t3)':'var(--g1)'}">${c.status}</span></td>
     <td style="white-space:nowrap">
+      <button class="dt-memo ${c.memo?'has-memo':''}" onclick="toggleCaseMemo(${c.id})" title="${c.memo?'查看/編輯備忘':'新增晤談備忘'}"><i class="ti ti-notes"></i></button>
       <button class="dt-edit" onclick="openEditCase(${c.id})" title="編輯"><i class="ti ti-pencil"></i></button>
       <button class="dt-del" onclick="deleteCaseRecord(${c.id})" title="刪除" style="margin-left:2px"><i class="ti ti-trash"></i></button>
+    </td>
+  </tr>
+  <tr class="case-memo-row" id="case-memo-row-${c.id}">
+    <td colspan="9">
+      <textarea class="case-memo-textarea" id="case-memo-ta-${c.id}" placeholder="晤談重點備忘（自動儲存）…" onblur="saveCaseMemo(${c.id},this.value)">${c.memo||''}</textarea>
     </td>
   </tr>`).join('');
 }
@@ -3905,6 +4146,7 @@ function renderSettingsPage(){
   updateGoogleUI();
   renderCustomLinks();
   renderSemTplManage();
+  renderSemSnapshotUI();
 }
 
 /* ══ DATA EXPORT / IMPORT ══ */
@@ -4466,11 +4708,68 @@ function renderSemConfirm(){
     <div style="font-size:12px;color:var(--t3)">此操作<strong>不會</strong>清除工作日誌、個案統計、服務記錄、教學日誌。</div>`;
 }
 
+/* ══ 學期切換快照回復 ══ */
+const SEM_SNAP_KEY='wp_sem_snapshot';
+const SEM_SNAP_TTL=30*60*1000; // 30 分鐘
+
+function saveSemSnapshot(){
+  try{
+    localStorage.setItem(SEM_SNAP_KEY,JSON.stringify({
+      tasks:JSON.parse(JSON.stringify(tasks)),
+      snapshotAt:new Date().toISOString()
+    }));
+  }catch(e){console.warn('快照儲存失敗',e);}
+}
+
+function restoreSemSnapshot(){
+  try{
+    const raw=localStorage.getItem(SEM_SNAP_KEY);
+    if(!raw){showToast('找不到可用快照');return;}
+    const snap=JSON.parse(raw);
+    if(!confirm(`確定復原至 ${fmtSnapTime(snap.snapshotAt)} 的切換前狀態？\n目前的任務變更將被覆蓋，此操作無法再還原。`))return;
+    tasks=snap.tasks;
+    save();updateStats();updatePanel(curKey);renderRecentArchive();
+    localStorage.removeItem(SEM_SNAP_KEY);
+    renderSemSnapshotUI();
+    showToast('已成功復原至學期切換前狀態 ✓');
+  }catch(e){showToast('復原失敗：'+e.message);}
+}
+
+function renderSemSnapshotUI(){
+  const el=document.getElementById('sem-snapshot-status');if(!el)return;
+  try{
+    const raw=localStorage.getItem(SEM_SNAP_KEY);
+    if(!raw){el.innerHTML='';return;}
+    const snap=JSON.parse(raw);
+    const age=Date.now()-new Date(snap.snapshotAt).getTime();
+    if(age>SEM_SNAP_TTL){el.innerHTML='';return;}
+    const mins=Math.floor(age/60000);
+    const timeLabel=mins<1?'剛才切換':`${mins} 分鐘前切換`;
+    el.innerHTML=`
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--y5,#fefce8);border:1px solid var(--y3,#fbbf24);border-radius:var(--rad-s);margin-bottom:14px">
+        <i class="ti ti-clock-hour-4" style="color:var(--y2,#f59e0b);font-size:15px;flex-shrink:0"></i>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600;color:var(--t1)">可復原至切換前狀態</div>
+          <div style="font-size:11px;color:var(--t2)">${timeLabel}，快照 30 分鐘內有效</div>
+        </div>
+        <button class="settings-btn" onclick="restoreSemSnapshot()" style="background:var(--y3,#fbbf24);border-color:var(--y3,#fbbf24);color:#fff;flex-shrink:0">
+          <i class="ti ti-arrow-back-up"></i>復原
+        </button>
+      </div>`;
+  }catch(e){el.innerHTML='';}
+}
+
+function fmtSnapTime(iso){
+  try{const d=new Date(iso);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+  catch{return iso;}
+}
+
 function executeSemSwitch(){
+  saveSemSnapshot(); // 執行前備份
   // 1. 歸檔未勾選的待辦任務（mark done）
   let archivedCount=0;
   const now=new Date();
-  const dateStr=`${now.getMonth()+1}/${now.getDate()}`;
+  const dateStr=localISO(now);
   ['doc','sch','case','urg','assign'].forEach(k=>{
     (tasks[k]||[]).filter(t=>!t.done).forEach(t=>{
       if(!semKeepIds.has(t.id)){
@@ -4692,6 +4991,128 @@ function renderSchedulePage(){
   if(past.length)html+=renderGroup('過去行程',past,true);
   el.innerHTML=html;
 }
+
+/* ══ ⌘K 快速啟動列 ══ */
+const CMDK_GOTOS=[
+  {id:'g-admin',title:'行政業務',sub:'公文留辦 / 獎助學金',ico:'ti-building',bg:'var(--a4,#dbeafe)',c:'var(--a1)',action:()=>switchModule(null,'doc')},
+  {id:'g-case', title:'個案輔導',sub:'個案任務管理',ico:'ti-users',bg:'var(--b4,#dbeafe)',c:'var(--b1)',action:()=>switchModule(null,'case')},
+  {id:'g-urg',  title:'要事備查',sub:'重要任務聚合',ico:'ti-star',bg:'var(--r4,#fee2e2)',c:'var(--r1)',action:()=>switchModule(null,'urg')},
+  {id:'g-asgn', title:'交辦追蹤',sub:'長官交辦事項',ico:'ti-clipboard-list',bg:'var(--p4,#ede9fe)',c:'var(--p1)',action:()=>switchModule(null,'assign')},
+  {id:'g-stat', title:'統計分析',sub:'個案 · 服務記錄',ico:'ti-chart-bar',bg:'var(--g4,#dcfce7)',c:'var(--g1)',action:()=>navTo(null,'stats')},
+  {id:'g-jrnl', title:'工作日誌',sub:'每日活動記錄',ico:'ti-notebook',bg:'var(--g4,#dcfce7)',c:'var(--g1)',action:()=>navTo(null,'journal')},
+  {id:'g-sch',  title:'行程行事曆',sub:'未來行程安排',ico:'ti-calendar',bg:'var(--a4,#dbeafe)',c:'var(--a1)',action:()=>navTo(null,'schedule')},
+  {id:'g-arc',  title:'存檔查詢',sub:'已完成任務',ico:'ti-archive',bg:'var(--border)',c:'var(--t2)',action:()=>navTo(null,'archive')},
+  {id:'g-set',  title:'設定',sub:'帳號 / Google 同步',ico:'ti-settings',bg:'var(--border)',c:'var(--t2)',action:()=>navTo(null,'settings')},
+];
+const CMDK_ACTIONS=[
+  {id:'a-sem',  title:'學期切換精靈',ico:'ti-calendar-stats',bg:'var(--g5)',c:'var(--g2)',action:()=>openSemModal()},
+  {id:'a-exp',  title:'匯出完整備份',ico:'ti-download',bg:'var(--surface-2)',c:'var(--t2)',action:()=>exportAllData()},
+  {id:'a-stat', title:'前往統計 → 新增個案',ico:'ti-user-plus',bg:'var(--b5)',c:'var(--b2)',action:()=>{navTo(null,'stats');setTimeout(()=>{const f=document.getElementById('cf-no');if(f){f.scrollIntoView();f.focus();}},350);}},
+];
+let cmdkActive=0,cmdkList=[];
+
+function openCmdK(){
+  const ov=document.getElementById('cmdk-overlay');
+  if(!ov)return;
+  ov.style.display='flex';
+  const inp=document.getElementById('cmdk-input');
+  if(inp){inp.value='';inp.focus();}
+  cmdkActive=0;
+  renderCmdKResults();
+}
+function closeCmdK(){
+  const ov=document.getElementById('cmdk-overlay');
+  if(ov)ov.style.display='none';
+  cmdkList=[];cmdkActive=0;
+}
+function cmdKKeyNav(e){
+  if(e.key==='Escape'){closeCmdK();return;}
+  if(e.key==='ArrowDown'){e.preventDefault();cmdkActive=Math.min(cmdkActive+1,cmdkList.length-1);highlightCmdK();return;}
+  if(e.key==='ArrowUp'){e.preventDefault();cmdkActive=Math.max(cmdkActive-1,0);highlightCmdK();return;}
+  if(e.key==='Enter'){e.preventDefault();if(cmdkList[cmdkActive]){cmdkList[cmdkActive].action();closeCmdK();}return;}
+}
+function highlightCmdK(){
+  document.querySelectorAll('.cmdk-item').forEach((el,i)=>el.classList.toggle('on',i===cmdkActive));
+  const el=document.querySelectorAll('.cmdk-item')[cmdkActive];
+  if(el)el.scrollIntoView({block:'nearest'});
+}
+function renderCmdKResults(){
+  const q=(document.getElementById('cmdk-input')?.value||'').trim().toLowerCase();
+  const el=document.getElementById('cmdk-results');if(!el)return;
+  cmdkList=[];let html='';
+
+  if(!q){
+    // 空搜尋：顯示模組導覽
+    html+=`<div class="cmdk-section">跳到模組</div>`;
+    CMDK_GOTOS.forEach(item=>{
+      cmdkList.push(item);
+      html+=cmdkItemHTML(item,cmdkList.length-1);
+    });
+    html+=`<div class="cmdk-section">快速操作</div>`;
+    CMDK_ACTIONS.forEach(item=>{
+      cmdkList.push(item);
+      html+=cmdkItemHTML(item,cmdkList.length-1);
+    });
+  } else {
+    // 搜尋：模組
+    const gMatches=CMDK_GOTOS.filter(g=>g.title.toLowerCase().includes(q)||g.sub.toLowerCase().includes(q));
+    if(gMatches.length){
+      html+=`<div class="cmdk-section">模組</div>`;
+      gMatches.forEach(item=>{cmdkList.push(item);html+=cmdkItemHTML(item,cmdkList.length-1);});
+    }
+    // 搜尋：操作
+    const aMatches=CMDK_ACTIONS.filter(a=>a.title.toLowerCase().includes(q));
+    if(aMatches.length){
+      html+=`<div class="cmdk-section">操作</div>`;
+      aMatches.forEach(item=>{cmdkList.push(item);html+=cmdkItemHTML(item,cmdkList.length-1);});
+    }
+    // 搜尋：任務（最多 8 筆）
+    const taskMatches=[];
+    ['doc','sch','case','assign','urg'].forEach(k=>{
+      (tasks[k]||[]).filter(t=>!t.done&&(t.t||'').toLowerCase().includes(q)).forEach(t=>{
+        taskMatches.push({id:'t-'+t.id,title:t.t,sub:META[k]?.label||k,ico:META[k]?.icon||'ti-check',bg:'var(--surface-2)',c:'var(--t3)',
+          action:()=>{switchModule(null,k==='doc'||k==='sch'?k:k);
+            // 跳到對應模組後高亮（只做 module 切換，不做其他）
+          }
+        });
+      });
+    });
+    if(taskMatches.length){
+      html+=`<div class="cmdk-section">任務（${taskMatches.length} 筆）</div>`;
+      taskMatches.slice(0,8).forEach(item=>{cmdkList.push(item);html+=cmdkItemHTML(item,cmdkList.length-1);});
+    }
+    if(!cmdkList.length){
+      html=`<div class="cmdk-empty">找不到「${q}」相關結果</div>`;
+    }
+  }
+  el.innerHTML=html;
+  cmdkActive=0;
+  highlightCmdK();
+}
+function cmdkItemHTML(item,idx){
+  return `<div class="cmdk-item ${idx===cmdkActive?'on':''}" onclick="cmdkRun(${idx})">
+    <div class="cmdk-item-ico" style="background:${item.bg}"><i class="ti ${item.ico}" style="color:${item.c}"></i></div>
+    <div style="flex:1;min-width:0">
+      <div class="cmdk-item-title">${item.title}</div>
+      ${item.sub?`<div class="cmdk-item-sub">${item.sub}</div>`:''}
+    </div>
+  </div>`;
+}
+function cmdkRun(idx){
+  if(cmdkList[idx]){cmdkList[idx].action();closeCmdK();}
+}
+
+// 全域鍵盤監聽
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){
+    e.preventDefault();
+    const ov=document.getElementById('cmdk-overlay');
+    if(ov?.style.display==='flex')closeCmdK();else openCmdK();
+  }
+  if(e.key==='Escape'&&document.getElementById('cmdk-overlay')?.style.display==='flex'){
+    closeCmdK();
+  }
+});
 
 init();
 </script>

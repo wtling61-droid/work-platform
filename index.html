@@ -134,6 +134,10 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size
 .task-list{display:flex;flex-direction:column;gap:1px}
 .task{display:flex;align-items:center;gap:5px;padding:6px 3px;border-radius:4px;position:relative}
 .task:hover{background:var(--surface-2)}.task:hover .t-actions{opacity:1}
+.t-select{width:13px;height:13px;flex-shrink:0;cursor:pointer;accent-color:var(--g3);margin-right:1px}
+.batch-mode-btn{width:24px;height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:.12s}
+.batch-mode-btn:hover{border-color:var(--g3);color:var(--g2)}
+.batch-mode-btn.on{background:var(--g3);border-color:var(--g3);color:#fff}
 .t-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border-s);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.12s;cursor:pointer}
 .task.done .t-chk{background:var(--g3);border-color:var(--g3);color:#fff}
 .task.urgent:not(.done) .t-chk{border-color:var(--r3)}
@@ -148,7 +152,7 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size
 .task.done .t-txt{color:var(--t3);text-decoration:line-through}
 .t-date{font-size:11px;color:var(--t3);white-space:nowrap;cursor:pointer}
 .t-date:hover:not(.nodbl){text-decoration:underline dotted var(--t3)}
-.t-date.urg{color:var(--r3);font-weight:500}
+.t-date.urg{color:#fff;background:var(--r3);padding:2px 4px;border-radius:3px;font-weight:600;font-size:10px}
 .t-created{font-size:11px;color:var(--t3);white-space:nowrap;opacity:.7}
 .t-created::before{content:'建 ';font-size:10px;color:var(--t3);opacity:.6}
 .atf-field-lbl{font-size:11px;color:var(--t2);white-space:nowrap;min-width:28px;flex-shrink:0}
@@ -158,6 +162,14 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size
 .task.urgent:not(.done) .urg-active{color:var(--r3)}
 .t-edit-input{flex:1;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 5px;font-size:12px;font-family:var(--font-main);outline:none;background:var(--surface);min-width:0}
 .t-date-input{width:58px;height:20px;border:1px solid var(--g3);border-radius:3px;padding:0 4px;font-size:11px;font-family:var(--font-main);outline:none;background:var(--surface)}
+/* BATCH TOOLBAR */
+.batch-toolbar{display:none;align-items:center;justify-content:flex-start;gap:10px;padding:7px 10px;margin-bottom:7px;background:var(--g5);border:1px solid var(--g4);border-radius:var(--rad-s);font-size:12px}
+.batch-toolbar-count{color:var(--g1);font-weight:600;flex-shrink:0}
+.batch-toolbar-actions{display:flex;gap:5px;flex-wrap:wrap}
+.batch-toolbar-actions button{display:flex;align-items:center;gap:4px;border:1px solid var(--g4);background:var(--surface);color:var(--g1);font-size:11px;padding:4px 9px;border-radius:var(--rad-s);cursor:pointer;font-family:var(--font-main);transition:.12s}
+.batch-toolbar-actions button:hover{background:var(--g3);color:#fff;border-color:var(--g3)}
+.batch-toolbar-cancel{border:none!important;background:none!important;color:var(--t3)!important;padding:4px 6px!important}
+.batch-toolbar-cancel:hover{color:var(--r3)!important;background:var(--r5)!important}
 /* ADD TASK */
 .add-task-btn{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--t3);background:none;border:1px dashed var(--border);border-radius:var(--rad-s);padding:6px 10px;cursor:pointer;width:100%;margin-top:6px;transition:.12s;font-family:var(--font-main)}
 .add-task-btn:hover{color:var(--g1);border-color:var(--g3);background:var(--g5)}
@@ -202,25 +214,25 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size
 .urg-hist-btn{border:none;background:none;cursor:pointer;color:var(--r3);font-size:11px;padding:1px 5px;border-radius:3px;transition:.12s;display:flex;align-items:center;gap:2px;font-family:var(--font-main)}
 .urg-hist-btn:hover{background:var(--r5);color:var(--r1)}
 .urg-hist-btn.open{color:var(--r1)}
-.hist-panel{display:none;margin-top:6px;padding-top:6px;border-top:1px solid #FFCDD2}
+.hist-panel{display:none;margin-top:6px;padding:10px 0 8px;border-top:1px solid var(--border)}
 .hist-panel.open{display:block}
-.hist-empty{font-size:11px;color:var(--t3);padding:2px 0 4px;font-style:italic}
-.hist-timeline{display:flex;flex-direction:column;gap:0}
-.hist-entry{display:flex;gap:8px;padding:3px 0;position:relative}
-.hist-entry::before{content:'';position:absolute;left:32px;top:20px;bottom:-4px;width:1px;background:var(--border);z-index:0}
+.hist-empty{font-size:12px;color:var(--t3);padding:4px 0;font-style:italic;text-align:center}
+.hist-timeline{display:flex;flex-direction:column;gap:0;margin-bottom:8px;padding:2px 0}
+.hist-entry{display:flex;gap:10px;padding:5px 0;position:relative;align-items:flex-start;font-size:12px;min-height:24px}
+.hist-entry::before{content:'';position:absolute;left:32px;top:24px;bottom:-6px;width:1.5px;background:var(--g4);z-index:0}
 .hist-entry:last-child::before{display:none}
-.hist-dot{width:8px;height:8px;border-radius:50%;background:var(--r3);flex-shrink:0;margin-top:5px;z-index:1;position:relative;margin-left:29px}
-.hist-date{font-size:10px;color:var(--r3);font-weight:500;min-width:44px;margin-top:3px;flex-shrink:0}
-.hist-content{font-size:12px;color:var(--t1);flex:1;line-height:1.5}
-.hist-del{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:11px;padding:0 2px;transition:.12s;opacity:0}
+.hist-dot{width:9px;height:9px;border-radius:50%;background:var(--g3);flex-shrink:0;margin-top:3px;z-index:1;position:relative;margin-left:28px;border:1.5px solid var(--surface)}
+.hist-date{font-size:10px;color:var(--t3);font-weight:600;min-width:80px;margin-top:2px;flex-shrink:0}
+.hist-content{font-size:12px;color:var(--t2);flex:1;line-height:1.4;word-break:break-word}
+.hist-del{border:none;background:none;cursor:pointer;color:var(--border-s);font-size:10px;padding:2px 4px;transition:.12s;opacity:0}
 .hist-entry:hover .hist-del{opacity:1}
 .hist-del:hover{color:var(--r3)}
-.hist-add-row{display:flex;gap:4px;margin-top:6px}
-.hist-add-date{width:100px;font-size:11px;padding:3px 6px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main)}
-.hist-add-txt{flex:1;font-size:11px;padding:3px 7px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main)}
-.hist-add-txt:focus,.hist-add-date:focus{outline:none;border-color:var(--r3)}
-.hist-add-btn{border:none;background:var(--r3);color:#fff;font-size:11px;padding:3px 8px;border-radius:var(--rad-s);cursor:pointer;font-family:var(--font-main);transition:.12s;white-space:nowrap}
-.hist-add-btn:hover{background:var(--r1)}
+.hist-add-row{display:flex;gap:5px;margin-top:7px;padding-top:6px;border-top:1px solid var(--border)}
+.hist-add-date{width:95px;font-size:11px;padding:4px 6px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main);flex-shrink:0}
+.hist-add-txt{flex:1;font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);color:var(--t1);font-family:var(--font-main)}
+.hist-add-txt:focus,.hist-add-date:focus{outline:none;border-color:var(--g3);background:#fff}
+.hist-add-btn{border:none;background:var(--g3);color:#fff;font-size:11px;padding:4px 10px;border-radius:var(--rad-s);cursor:pointer;font-family:var(--font-main);transition:.12s;white-space:nowrap;font-weight:500}
+.hist-add-btn:hover{background:var(--g2)}
 /* TASK PAGE */
 .task-page-group{margin-bottom:16px}
 .tp-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -1212,6 +1224,16 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--t1);font-size
           <span class="dash-stat-chip-lbl">服務</span>
           <span class="dash-stat-chip-val" id="dsc-svc">—</span>
         </div>
+        <div class="dash-stat-chip" title="本周所有模組完成的任務數">
+          <i class="ti ti-calendar-check" style="font-size:12px;color:var(--g3)"></i>
+          <span class="dash-stat-chip-lbl">本周完成</span>
+          <span class="dash-stat-chip-val" id="dsc-week-done">—</span>
+        </div>
+        <div class="dash-stat-chip" title="所有已完成任務的平均結案天數">
+          <i class="ti ti-clock" style="font-size:12px;color:var(--a3)"></i>
+          <span class="dash-stat-chip-lbl">平均結案</span>
+          <span class="dash-stat-chip-val" id="dsc-avg-days">—</span>
+        </div>
       </div>
     </div>
     <div class="p-tabs" id="admin-sub-tabs" style="flex-shrink:0">
@@ -1420,10 +1442,13 @@ const MODULE_HDR={
   urg:{bg:'#F0DCD8',bd:'#B03E3C'},
   assign:{bg:'#E2DCF8',bd:'#5446A8'},
 };
+const MOD_LABELS={doc:'公文留辦',sch:'獎助學金',case:'學生輔導',urg:'要事備查',assign:'交辦追蹤'};
 
 /* ══ STATE ══ */
 let curKey='admin', curCaseTab='formal', curAdminTab='doc', tasks={};
 let panelSearch={}; // ⑦ 各模組搜尋詞
+let selectedTasks={}; // 批量操作：{key: Set(taskId)}
+let batchModeOn={}; // 批量選取模式開關：{key: bool}，預設關閉，避免與完成勾選混淆
 
 /* ══ INIT ══ */
 function init(){
@@ -1525,7 +1550,32 @@ function updateStats(){
   if(bsch){bsch.textContent=weekSchCount;bsch.style.display=weekSchCount?'flex':'none';}
   // 儀表板個案+服務摘要 chips
   updateDashboardChips();
+  calcWeeklyTaskStats();
   renderStaleAlert();
+}
+
+function calcWeeklyTaskStats(){
+  const now=new Date();const dow=now.getDay();
+  const mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1));mon.setHours(0,0,0,0);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);sun.setHours(23,59,59,999);
+  const monISO=localISO(mon),sunISO=localISO(sun);
+
+  let weekDone=0,totalDays=0,avgCount=0;
+  ['doc','sch','case','urg','assign'].forEach(k=>{
+    (tasks[k]||[]).forEach(t=>{
+      if(!t.done||!t.completedAt)return;
+      if(/^\d{4}-\d{2}-\d{2}$/.test(t.completedAt)&&t.completedAt>=monISO&&t.completedAt<=sunISO)weekDone++;
+      if(t.createdAt&&/^\d{4}-\d{2}-\d{2}$/.test(t.createdAt)&&/^\d{4}-\d{2}-\d{2}$/.test(t.completedAt)){
+        const diff=Math.round((new Date(t.completedAt+'T00:00:00')-new Date(t.createdAt+'T00:00:00'))/86400000);
+        if(diff>=0){totalDays+=diff;avgCount++;}
+      }
+    });
+  });
+
+  const weekEl=document.getElementById('dsc-week-done');
+  if(weekEl)weekEl.textContent=weekDone+'筆';
+  const avgEl=document.getElementById('dsc-avg-days');
+  if(avgEl)avgEl.textContent=avgCount?(Math.round(totalDays/avgCount*10)/10)+'天':'—';
 }
 
 function updateDashboardChips(){
@@ -1722,6 +1772,7 @@ function taskHTML(t,key,ri){
   </div>`:'';
   const createdAtRow=key!=='doc'&&t.createdAt?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${fmtTaskDate(t.createdAt,false,null)}</span>`:`${key!=='doc'?`<span class="t-created" title="建立日期 (雙擊修改)" ondblclick="editCreatedAt('${key}',${ri})">${t.createdAt||''}</span>`:''}`;
   return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
+    ${batchModeOn[key]?`<input type="checkbox" class="t-select" data-key="${key}" ${selectedTasks[key]&&selectedTasks[key].has(t.id)?'checked':''} onchange="toggleTaskSelect('${key}',${t.id},this.checked)">`:''}
     <div class="t-chk" id="chk-${t.id}" onclick="toggleTask('${key}',${ri})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
     <span class="t-txt" ondblclick="editTask(this,'${key}',${ri})">${t.t}</span>
     ${srcTag}
@@ -1730,6 +1781,7 @@ function taskHTML(t,key,ri){
     ${driveBtn}
     <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('${key}',${ri})" title="備註"><i class="ti ti-notes"></i></button>
     <div class="t-actions">
+      <button class="t-act-btn" onclick="duplicateTask('${key}',${ri})" title="複製"><i class="ti ti-copy"></i></button>
       <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('${key}',${ri})" title="標記要事">★</button>
       <button class="t-act-btn" onclick="deleteTask('${key}',${ri})"><i class="ti ti-x"></i></button>
     </div>
@@ -1831,9 +1883,13 @@ function buildStdPanel(key){
     <div class="mod-col-main">
       <div class="p-sec-task" id="task-sec-${key}">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
-          <div class="p-sec-lbl" style="margin-bottom:0">任務清單</div>
+          <div style="display:flex;align-items:center;gap:7px">
+            <div class="p-sec-lbl" style="margin-bottom:0">任務清單</div>
+            <button id="batch-mode-btn-${key}" class="batch-mode-btn ${batchModeOn[key]?'on':''}" onclick="toggleBatchMode('${key}')" title="批量選取"><i class="ti ti-checkbox"></i></button>
+          </div>
           <input type="text" id="panel-search-${key}" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('${key}',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:110px;transition:.15s;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
         </div>
+        ${buildBatchToolbar(key)}
         <div class="task-list" id="task-list-${key}"></div>
         ${addFormHTML(key,`confirmAdd('${key}')`,`hideForm('${key}')`, '任務名稱...')}
       </div>
@@ -1866,9 +1922,13 @@ function buildCasePanel(){
   return `
     <div class="mod-col-main">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 14px 0 0">
-        <div class="p-tabs" style="flex:1">${tabsHtml}</div>
+        <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0">
+          <button id="batch-mode-btn-case" class="batch-mode-btn ${batchModeOn.case?'on':''}" onclick="toggleBatchMode('case')" title="批量選取" style="flex-shrink:0"><i class="ti ti-checkbox"></i></button>
+          <div class="p-tabs" style="flex:1;min-width:0">${tabsHtml}</div>
+        </div>
         <input type="text" id="panel-search-case" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('case',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:100px;transition:.15s;flex-shrink:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
       </div>
+      <div style="padding:0 14px">${buildBatchToolbar('case')}</div>
       ${stdTabs}
       <div class="p-tab-content ${curCaseTab==='transfer'?'on':''}" id="tab-transfer">
         <div class="transfer-scroll">
@@ -1913,9 +1973,13 @@ function buildAssignPanel(){
     <div class="mod-col-main">
       <div class="p-sec-task">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
-          <div class="p-sec-lbl" style="margin-bottom:0">交辦任務</div>
+          <div style="display:flex;align-items:center;gap:7px">
+            <div class="p-sec-lbl" style="margin-bottom:0">交辦任務</div>
+            <button id="batch-mode-btn-assign" class="batch-mode-btn ${batchModeOn.assign?'on':''}" onclick="toggleBatchMode('assign')" title="批量選取"><i class="ti ti-checkbox"></i></button>
+          </div>
           <input type="text" id="panel-search-assign" value="${searchQ}" placeholder="搜尋任務…" oninput="filterPanel('assign',this.value)" onfocus="this.style.borderColor='var(--g3)'" onblur="this.style.borderColor='var(--border)'" style="height:24px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface-2);padding:0 7px 0 22px;font-size:11px;color:var(--t1);outline:none;width:110px;transition:.15s;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:6px center">
         </div>
+        ${buildBatchToolbar('assign')}
         <div class="task-list" id="task-list-assign"></div>
         <div class="add-task-form" id="add-task-form-assign">
           <input type="text" id="new-task-txt-assign" placeholder="任務名稱..." onkeydown="if(event.key==='Enter')confirmAddAssign()">
@@ -1981,6 +2045,7 @@ function renderAssignTasks(){
       ${ASSIGN_SRCS.map(src=>`<label><input type="radio" name="asrc-${t.id}" value="${src.key}" ${t.asrc===src.key?'checked':''} style="accent-color:var(--p3)" onchange="saveAssignSrc(${idx},this.value)">${src.label}</label>`).join('')}
     </div>`;
     return `<div class="task ${t.done?'done':''} ${t.u&&!t.done?'urgent':''}">
+      ${batchModeOn.assign?`<input type="checkbox" class="t-select" data-key="assign" ${selectedTasks.assign&&selectedTasks.assign.has(t.id)?'checked':''} onchange="toggleTaskSelect('assign',${t.id},this.checked)">`:''}
       <div class="t-chk" onclick="toggleTask('assign',${idx})">${t.done?'<i class="ti ti-check" style="font-size:9px"></i>':''}</div>
       <span class="t-txt" ondblclick="editTask(this,'assign',${idx})">${t.t}</span>
       ${srcTag}
@@ -1989,6 +2054,7 @@ function renderAssignTasks(){
       ${driveBtn}
       <button class="t-note-btn ${t.note?'has-note':''}" onclick="toggleNote('assign',${idx})" title="備註"><i class="ti ti-notes"></i></button>
       <div class="t-actions">
+        <button class="t-act-btn" onclick="duplicateTask('assign',${idx})" title="複製"><i class="ti ti-copy"></i></button>
         <button class="t-act-btn urg-btn ${t.u&&!t.done?'urg-active':''}" onclick="toggleUrgent('assign',${idx})" title="標記要事">★</button>
         <button class="t-act-btn" onclick="deleteTask('assign',${idx})"><i class="ti ti-x"></i></button>
       </div>
@@ -2088,6 +2154,182 @@ function deleteHistory(key,idx,hIdx){
   });
   showToast('記錄已刪除');
 }
+
+/* ═════════════════════════════════════════════════════════════
+   自動歷程記錄：系統自動追蹤任務狀態變化
+   ═════════════════════════════════════════════════════════════ */
+function autoAddHistory(key,idx,action,detail=''){
+  const t=tasks[key];
+  if(!t||!t[idx])return;
+  const task=t[idx];
+  if(!task.history)task.history=[];
+  
+  const date=localISO();
+  let content='';
+  
+  switch(action){
+    case 'create':
+      content=`[建立] 新增任務`;
+      break;
+    case 'toggle-done':
+      content=task.done?`[完成] 任務結案`:`[重啟] 取消完成`;
+      break;
+    case 'toggle-urgent':
+      content=task.u?`[標記] 升為要事`:`[取消] 取消要事`;
+      break;
+    case 'resolve-urgent':
+      content=`[結案] 完成要事`;
+      break;
+    case 'status-change':
+      content=`[狀態] ${detail}`;
+      break;
+    case 'assigned':
+      content=`[指派] ${detail}`;
+      break;
+    default:
+      content=`[操作] ${detail}`;
+  }
+  
+  task.history.push({date,content});
+}
+
+/* ═════════════════════════════════════════════════════════════
+   批量操作：多選任務 → 批量標記要事 / 移至其他模組 / 歸檔
+   ═════════════════════════════════════════════════════════════ */
+function toggleBatchMode(key){
+  batchModeOn[key]=!batchModeOn[key];
+  if(!batchModeOn[key])clearSelection(key);
+  rerenderModulePanel(key);
+  const btn=document.getElementById('batch-mode-btn-'+key);
+  if(btn)btn.classList.toggle('on',!!batchModeOn[key]);
+}
+function toggleTaskSelect(key,id,checked){
+  if(!selectedTasks[key])selectedTasks[key]=new Set();
+  if(checked)selectedTasks[key].add(id);
+  else selectedTasks[key].delete(id);
+  updateBatchToolbar(key);
+}
+function clearSelection(key){
+  selectedTasks[key]=new Set();
+  updateBatchToolbar(key);
+  document.querySelectorAll('.t-select').forEach(cb=>{if(cb.dataset.key===key)cb.checked=false;});
+}
+function updateBatchToolbar(key){
+  const bar=document.getElementById('batch-toolbar-'+key);
+  if(!bar)return;
+  const n=selectedTasks[key]?selectedTasks[key].size:0;
+  bar.style.display=n>0?'flex':'none';
+  const countEl=document.getElementById('batch-count-'+key);
+  if(countEl)countEl.textContent=`已選 ${n} 筆`;
+}
+function buildBatchToolbar(key){
+  const urgentBtn=key==='urg'?'':`<button onclick="batchMarkUrgent('${key}')"><i class="ti ti-star"></i>標記要事</button>`;
+  return `<div class="batch-toolbar" id="batch-toolbar-${key}">
+    <span class="batch-toolbar-count" id="batch-count-${key}">已選 0 筆</span>
+    <div class="batch-toolbar-actions">
+      ${urgentBtn}
+      <button onclick="openMoveDialog('${key}')"><i class="ti ti-arrow-right"></i>移至...</button>
+      <button onclick="batchArchive('${key}')"><i class="ti ti-archive"></i>歸檔</button>
+      <button class="batch-toolbar-cancel" onclick="clearSelection('${key}')"><i class="ti ti-x"></i></button>
+    </div>
+  </div>`;
+}
+function rerenderModulePanel(key){
+  if(key==='case'){
+    if(curCaseTab==='transfer')renderTransferTasks();
+    else renderTaskList('case',curCaseTab);
+  } else if(key==='assign'){
+    renderAssignTasks();
+  } else if(key==='urg'){
+    updatePanel('urg');
+  } else {
+    renderTaskList(key);
+  }
+  updateStats();
+}
+function batchMarkUrgent(key){
+  const ids=selectedTasks[key]?Array.from(selectedTasks[key]):[];
+  if(!ids.length)return;
+  let count=0;
+  ids.forEach(id=>{
+    const idx=(tasks[key]||[]).findIndex(t=>t.id===id);
+    if(idx===-1)return;
+    const t=tasks[key][idx];
+    if(!t.u){t.u=true;autoAddHistory(key,idx,'toggle-urgent');count++;}
+  });
+  save();
+  clearSelection(key);
+  rerenderModulePanel(key);
+  if(curKey==='urg'&&key!=='urg')updatePanel('urg');
+  showToast(`已標記 ${count} 筆為要事`);
+}
+function batchArchive(key){
+  const ids=selectedTasks[key]?Array.from(selectedTasks[key]):[];
+  if(!ids.length)return;
+  let count=0;
+  ids.forEach(id=>{
+    const idx=(tasks[key]||[]).findIndex(t=>t.id===id);
+    if(idx===-1)return;
+    const t=tasks[key][idx];
+    if(t.done)return;
+    if(t.u)t.resolvedAsUrg=true;
+    t.done=true;t.u=false;
+    t.completedAt=localISO();
+    autoAddHistory(key,idx,'toggle-done');
+    addAutoJournalEntry(`結案：${t.t}`,t.id,key);
+    count++;
+  });
+  saveJournal();save();
+  clearSelection(key);
+  rerenderModulePanel(key);
+  if(curKey==='urg'&&key!=='urg')updatePanel('urg');
+  showToast(`已歸檔 ${count} 筆任務`);
+}
+function openMoveDialog(key){
+  const ids=selectedTasks[key]?Array.from(selectedTasks[key]):[];
+  if(!ids.length)return;
+  const targets=Object.keys(MOD_LABELS).filter(k=>k!==key);
+  let html=`<div style="font-size:13px;margin-bottom:12px;color:var(--t2)">將 ${ids.length} 筆任務移至：</div>`;
+  html+=`<div style="display:flex;gap:8px;flex-wrap:wrap">`;
+  targets.forEach(k=>{
+    html+=`<button onclick="batchMoveToModule('${key}','${k}')" style="padding:6px 12px;border:1px solid var(--border);border-radius:var(--rad-s);background:var(--surface);cursor:pointer;font-size:12px;font-family:var(--font-main);transition:.12s">${MOD_LABELS[k]}</button>`;
+  });
+  html+=`</div>`;
+  const overlay=document.createElement('div');
+  overlay.id='move-dialog-overlay';
+  overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:1000;font-family:var(--font-main)';
+  overlay.innerHTML=`<div style="background:var(--surface);padding:16px;border-radius:var(--rad);box-shadow:0 8px 24px rgba(0,0,0,0.15);max-width:300px;border:1px solid var(--border)">${html}</div>`;
+  overlay.addEventListener('click',(e)=>{if(e.target===overlay)overlay.remove();});
+  document.body.appendChild(overlay);
+}
+function batchMoveToModule(key,targetKey){
+  const ids=selectedTasks[key]?Array.from(selectedTasks[key]):[];
+  if(!ids.length)return;
+  let count=0;
+  ids.forEach(id=>{
+    const idx=(tasks[key]||[]).findIndex(t=>t.id===id);
+    if(idx===-1)return;
+    const t=tasks[key][idx];
+    delete t.docno;delete t.docorg;delete t.docsubj;delete t.tt;
+    if(key==='case')delete t.type;
+    if(targetKey==='case')t.type='formal';
+    t.u=false;
+    tasks[key].splice(idx,1);
+    if(!tasks[targetKey])tasks[targetKey]=[];
+    tasks[targetKey].unshift(t);
+    autoAddHistory(targetKey,0,'status-change',`已從${MOD_LABELS[key]}移入`);
+    count++;
+  });
+  save();
+  clearSelection(key);
+  const overlay=document.getElementById('move-dialog-overlay');
+  if(overlay)overlay.remove();
+  rerenderModulePanel(key);
+  rerenderModulePanel(targetKey);
+  if(curKey==='urg'&&key!=='urg'&&targetKey!=='urg')updatePanel('urg');
+  showToast(`已移動 ${count} 筆任務至「${MOD_LABELS[targetKey]}」`);
+}
+
 async function confirmAddUrg(){
   if(!tasks.urg)tasks.urg=[];
   const txt=document.getElementById('new-task-txt-urg')?.value.trim();
@@ -2097,6 +2339,7 @@ async function confirmAddUrg(){
   const wantDrive=document.getElementById('new-task-drive-urg')?.checked||false;
   const task={id:Date.now(),t:txt,d:date,createdAt,u:true,done:false,src:''};
   tasks.urg.unshift(task);
+  autoAddHistory('urg',0,'create');
   addAutoJournalEntry(`受理：${txt}`);
   hideForm('urg');
   save();updateStats();updatePanel('urg');showToast('要事已新增');
@@ -2118,6 +2361,7 @@ function buildUrgPanel(){
   const nativeHtml=nativeTasks.map(t=>`
     <div class="urg-item">
       <div class="urg-item-row">
+        ${batchModeOn.urg?`<input type="checkbox" class="t-select" data-key="urg" ${selectedTasks.urg&&selectedTasks.urg.has(t.id)?'checked':''} onchange="toggleTaskSelect('urg',${t.id},this.checked)">`:''}
         <span style="font-size:13px;color:var(--r3);flex-shrink:0">★</span>
         <span class="urg-item-txt">${t.t}</span>
         <span class="urg-item-date">${t.d||''}</span>
@@ -2136,7 +2380,13 @@ function buildUrgPanel(){
 
   let mainContent=`
     <div style="padding:8px 14px;border-bottom:1px solid var(--border)">
-      <div class="p-sec-lbl">直接建立要事</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+        <div style="display:flex;align-items:center;gap:7px">
+          <div class="p-sec-lbl" style="margin-bottom:0">直接建立要事</div>
+          <button id="batch-mode-btn-urg" class="batch-mode-btn ${batchModeOn.urg?'on':''}" onclick="toggleBatchMode('urg')" title="批量選取"><i class="ti ti-checkbox"></i></button>
+        </div>
+      </div>
+      ${buildBatchToolbar('urg')}
       <div class="task-list">${nativeHtml}</div>
       ${addForm}
     </div>
@@ -2207,6 +2457,7 @@ async function confirmAdd(key){
     if(docsubj)task.docsubj=docsubj;
   }
   tasks[key].unshift(task);
+  autoAddHistory(key,0,'create');
   addAutoJournalEntry(`受理：${txt}`);
   save();updateStats();updatePanel(key);showToast('任務已新增');
   if(wantDrive&&gToken){
@@ -2252,6 +2503,7 @@ function toggleTask(key,idx){
     }
     if(t.u)t.resolvedAsUrg=true;
     const n=new Date();t.completedAt=localISO(n);t.u=false;
+    autoAddHistory(key,idx,'toggle-done');
     addAutoJournalEntry(`結案：${t.t}`,t.id,key);
     save();updateStats();
     setTimeout(()=>{
@@ -2262,6 +2514,7 @@ function toggleTask(key,idx){
     delete t.resolvedAsUrg;
     journal=journal.filter(e=>!(e.taskId===t.id&&e.content&&e.content.startsWith('結案：')));
     delete t.completedAt;
+    autoAddHistory(key,idx,'toggle-done');
     saveJournal();
     save();updateStats();
     updatePanel(curKey);
@@ -2270,6 +2523,7 @@ function toggleTask(key,idx){
 }
 function toggleUrgent(key,idx){
   tasks[key][idx].u=!tasks[key][idx].u;
+  autoAddHistory(key,idx,'toggle-urgent');
   save();updateStats();
   if(curKey===key)updatePanel(key);
   if(curKey==='urg')updatePanel('urg');
@@ -2278,6 +2532,7 @@ function toggleUrgent(key,idx){
 function resolveUrgent(key,idx){
   const t=tasks[key][idx];t.resolvedAsUrg=true;t.done=true;t.u=false;
   t.completedAt=localISO();
+  autoAddHistory(key,idx,'resolve-urgent');
   addAutoJournalEntry(`結案：${t.t}`,t.id,key);
   save();updateStats();updatePanel('urg');
   if(key!=='urg')updatePanel(key);
@@ -2288,6 +2543,29 @@ function deleteTask(key,idx){
   save();updateStats();
   if(curKey===key)updatePanel(key);
   showToast('任務已刪除');
+}
+function duplicateTask(key,idx){
+  const src=tasks[key][idx];
+  if(!src)return;
+  const newTask={
+    id:Date.now()+Math.floor(Math.random()*1000),
+    t:src.t,
+    d:src.d,
+    createdAt:localISO(),
+    u:false,
+    done:false,
+    src:src.src||''
+  };
+  // 複製 doc 模組的特殊字段
+  if(key==='doc'){
+    if(src.docno)newTask.docno=src.docno;
+    if(src.docorg)newTask.docorg=src.docorg;
+    if(src.docsubj)newTask.docsubj=src.docsubj;
+  }
+  tasks[key].unshift(newTask);
+  autoAddHistory(key,0,'create');
+  save();updateStats();updatePanel(key);
+  showToast(`已複製「${src.t}」`);
 }
 function editTask(el,key,idx){
   if(tasks[key][idx].done)return;
